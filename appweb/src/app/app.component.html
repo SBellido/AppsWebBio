@@ -8,8 +8,16 @@
 <button (click)="addItem()">ADD ITEM</button>
 
 <ul>
+  <li *ngIf="items.length == 0">La lista está vacía</li>
   <li *ngFor="let name of items; index as i">
     {{ name }} {{ i }}
     <button (click)="deleteItem(i)">DELETE</button>
   </li>
 </ul>
+
+<div *ngFor="let user of users">
+  <img [src]="user.image" alt="">
+  {{ user.name }} 
+  {{ user.age }}
+  {{ user.educationLevel }} 
+</div>
