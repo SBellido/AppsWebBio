@@ -14,7 +14,11 @@
 </div>
 
 <button (click)="addItem()">ADD ITEM</button>
+
 <app-user></app-user>
+<app-proposal></app-proposal>
+<app-element></app-element>
+
 <ul>
   <li *ngIf="items.length == 0">La lista está vacía</li>
   <li *ngFor="let name of items; index as i">
