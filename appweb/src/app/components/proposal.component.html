@@ -1,2 +1,7 @@
-<h3>{{ proposal.id }}</h3>
 <span>{{ proposal.description }}</span>
+<input type="text" [(ngModel)]="proposal.description" placeholder="Escribe tus propuetas"> <br> <br>
+<textarea>{{ proposal.description }}</textarea>
+
+<!-- output -->
+<button (click)="addProposal()">Agregar propuesta</button>
+

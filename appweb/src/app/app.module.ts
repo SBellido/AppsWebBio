@@ -8,14 +8,15 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './components/user.components';
 import { ProposalComponent } from './components/proposal.component';
 import { ElementComponent } from './components/element.component';
-
+import { TestComponent } from './components/test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     ProposalComponent,
-    ElementComponent
+    ElementComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

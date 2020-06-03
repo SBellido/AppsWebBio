@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Proposal } from '../proposal.module';
 
@@ -9,9 +9,12 @@ import { Proposal } from '../proposal.module';
 })
 
 export class ProposalComponent {
-    proposal: Proposal = {
-        id: 1,
-        description: 'Hacer un avión de papel'
-    };
+    @Input() proposal: Proposal;
+    // debo agregar el output en el componente padre
+    @Output() proposalAggregate: EventEmitter<string> = new EventEmitter();
 
+    addProposal() {
+        console.log('agregó propuesta');
+        this.proposalAggregate.emit(this.proposal.description);
+    }
 }
