@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { User } from '../../user.module';
 
@@ -9,6 +9,10 @@ import { User } from '../../user.module';
     styleUrls: ['user.component.scss']
 })
 
-export class UserComponent {
+export class UserComponent implements OnInit{
+    constructor() { }
+
+    ngOnInit(): void {
+    }
 
 }

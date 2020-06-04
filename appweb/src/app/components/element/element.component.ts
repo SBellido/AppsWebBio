@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Element } from '../../element.module';
 
@@ -9,12 +9,19 @@ import { Element } from '../../element.module';
     styleUrls: ['./element.component.scss']
 })
 
-export class ElementComponent {
+export class ElementComponent implements OnInit {
+
+    constructor() { }
+
     element: Element = {
         id: 1,
         name: 'Diario',
         image: 'assets/images/diario.jpg'
     };
+
+    ngOnInit(): void {
+
+    }
 
 }
 

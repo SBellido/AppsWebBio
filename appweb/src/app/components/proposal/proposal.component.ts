@@ -1,7 +1,8 @@
 import { Component,
     Input,
     Output,
-    EventEmitter
+    EventEmitter,
+    OnInit
 } from '@angular/core';
 
 import { Proposal } from '../../proposal.module';
@@ -13,13 +14,19 @@ import { Proposal } from '../../proposal.module';
     styleUrls: ['./proposal.component.scss']
 })
 
-export class ProposalComponent {
+export class ProposalComponent implements OnInit {
+
+    constructor() { }
+
     // declaramos nuestro componente de tipo input
     @Input() proposal: Proposal;
     // debo agregar el output en el componente padre
     @Output() proposalAggregate: EventEmitter<string> = new EventEmitter();
 
     proposals = [];
+
+    ngOnInit(): void {
+    }
 
     addProposal() {
         /*agrega propuesta al arreglo de propuestas*/

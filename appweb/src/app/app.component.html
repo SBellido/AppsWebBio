@@ -1,9 +1,12 @@
+<div  class="containTestCreativity">
+
+</div>
 <app-testcreativity></app-testcreativity>
 <app-element></app-element>
 
 <!-- muestra componente propuesta -->
 <!-- utiliza un output() y un input[]  -->
-<div class="contain-proposal">
+<div class="containProposal">
   <app-proposal 
     *ngFor="let proposal of proposals" 
     (proposalAggregate)="addProposal($event)"

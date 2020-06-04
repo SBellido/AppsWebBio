@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { TestCreativity } from '../../testCreativity.module';
 import { Proposal } from '../../proposal.module';
@@ -10,11 +10,16 @@ import { Proposal } from '../../proposal.module';
     styleUrls: ['testCreativity.component.scss']
 })
 
-export class TestCreativityComponent {
+export class TestCreativityComponent implements OnInit {
+
+    constructor() { }
 
     testCreativity: TestCreativity = {
         id: 1,
         name: 'Test de Creatividad'
     };
+
+    ngOnInit(): void {
+    }
 
 }

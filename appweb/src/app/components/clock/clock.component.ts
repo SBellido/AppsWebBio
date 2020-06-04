@@ -17,14 +17,15 @@ import { Clock } from '../../clock.module';
 })
 
 export class ClockComponent implements OnInit, DoCheck, OnDestroy {
-    clock: Clock = {
-        seconds: 0,
-        minutes: 0
-    };
 
     constructor() {
         console.log('constructor');
     }
+
+    clock: Clock = {
+        seconds: 0,
+        minutes: 0
+    };
 
     // ngOnChanges(changes: SimpleChanges) {
     //     console.log('ngOnChanges');
