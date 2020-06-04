@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.test-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-wdth:576px) {
+    .test-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

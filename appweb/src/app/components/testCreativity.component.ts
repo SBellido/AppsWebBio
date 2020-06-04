@@ -6,7 +6,8 @@ import { Proposal } from '../proposal.module';
 @Component({
     /*usaré ese selector como una etiqueta HTML en el template*/
     selector: 'app-testcreativity',
-    templateUrl: './testCreativity.component.html'
+    templateUrl: './testCreativity.component.html',
+    styleUrls: ['testCreativity.component.scss']
 })
 
 export class TestCreativityComponent {

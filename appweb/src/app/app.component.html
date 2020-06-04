@@ -2,8 +2,12 @@
 <app-element></app-element>
 
 <!-- muestra componente propuesta -->
-<div *ngFor="let proposal of proposals">
-  <!-- utiliza un output() y un input[]  -->
-  <app-proposal (proposalAggregate)="addProposal($event)" [proposal]="proposal"></app-proposal>
+<!-- utiliza un output() y un input[]  -->
+<div class="contain-proposal">
+  <app-proposal 
+    *ngFor="let proposal of proposals" 
+    (proposalAggregate)="addProposal($event)"
+    [proposal]="proposal">
+  </app-proposal>
 </div>
 <app-clock></app-clock>

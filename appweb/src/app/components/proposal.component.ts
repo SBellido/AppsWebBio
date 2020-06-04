@@ -1,11 +1,16 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component,
+    Input,
+    Output,
+    EventEmitter
+} from '@angular/core';
 
 import { Proposal } from '../proposal.module';
 
 @Component({
     /*usaré ese selector como una etiqueta HTML en el template*/
     selector: 'app-proposal',
-    templateUrl: './proposal.component.html'
+    templateUrl: './proposal.component.html',
+    styleUrls: ['./proposal.component.scss']
 })
 
 export class ProposalComponent {

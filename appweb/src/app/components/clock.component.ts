@@ -12,7 +12,8 @@ import { Clock } from '../clock.module';
 @Component({
     /*usaré ese selector como una etiqueta HTML en el template*/
     selector: 'app-clock',
-    templateUrl: './clock.component.html'
+    templateUrl: './clock.component.html',
+    styleUrls: ['./clock.component.scss']
 })
 
 export class ClockComponent implements OnInit, DoCheck, OnDestroy {
