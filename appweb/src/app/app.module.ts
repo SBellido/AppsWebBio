@@ -11,6 +11,8 @@ import { ElementComponent } from './components/element/element.component';
 import { TestCreativityComponent } from './components/testCreativity/testCreativity.component';
 import { ClockComponent } from './components/clock/clock.component';
 import { HomeComponent } from './components/home/home.component';
+import { InstructionsCreativityComponent } from './components/instructionsCreativity/instructionsCreativity.component';
+import { PuntuationCreativityComponent } from './components/puntuationCreativity/puntuationCreativity.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { HomeComponent } from './components/home/home.component';
     ElementComponent,
     TestCreativityComponent,
     ClockComponent,
-    HomeComponent
+    HomeComponent,
+    InstructionsCreativityComponent,
+    PuntuationCreativityComponent
   ],
   imports: [
     BrowserModule,
