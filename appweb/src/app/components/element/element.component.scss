@@ -1,0 +1,14 @@
+:host {
+    margin: 20px;
+    padding: 20px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    max-width: 50%;
+    border-radius: 10px;
+    border: 1px solid rgba($color: #000000, $alpha: 1.0);
+}
+

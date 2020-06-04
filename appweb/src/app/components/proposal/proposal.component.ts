@@ -4,7 +4,7 @@ import { Component,
     EventEmitter
 } from '@angular/core';
 
-import { Proposal } from '../proposal.module';
+import { Proposal } from '../../proposal.module';
 
 @Component({
     /*usaré ese selector como una etiqueta HTML en el template*/

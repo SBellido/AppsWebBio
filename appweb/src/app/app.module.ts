@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { UserComponent } from './components/user.components';
-import { ProposalComponent } from './components/proposal.component';
-import { ElementComponent } from './components/element.component';
-import { TestCreativityComponent } from './components/testCreativity.component';
-import { ClockComponent } from './components/clock.component';
+import { UserComponent } from './components/user/user.components';
+import { ProposalComponent } from './components/proposal/proposal.component';
+import { ElementComponent } from './components/element/element.component';
+import { TestCreativityComponent } from './components/testCreativity/testCreativity.component';
+import { ClockComponent } from './components/clock/clock.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ClockComponent } from './components/clock.component';
     ProposalComponent,
     ElementComponent,
     TestCreativityComponent,
-    ClockComponent
+    ClockComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
