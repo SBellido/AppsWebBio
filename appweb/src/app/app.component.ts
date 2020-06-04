@@ -12,11 +12,7 @@ export class AppComponent {
   proposals: Proposal[] = [
     {
         id: 1,
-        description: 'Hacer un avión de papel'
-    },
-    {
-        id: 2,
-        description: 'Envolver huevos'
+        description: ''
     }
   ];
 
