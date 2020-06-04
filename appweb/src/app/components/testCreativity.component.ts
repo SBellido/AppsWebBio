@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { TestCreativity } from '../testCreativity.module';
 import { Proposal } from '../proposal.module';
@@ -10,11 +10,6 @@ import { Proposal } from '../proposal.module';
 })
 
 export class TestCreativityComponent {
-
-    @Input() proposal: Proposal;
-
-    // debo agregar el output en el componente padre
-    @Output() proposalAggregate: EventEmitter<string> = new EventEmitter();
 
     testCreativity: TestCreativity = {
         id: 1,
