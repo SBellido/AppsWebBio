@@ -3,7 +3,8 @@ import {
     OnChanges,
     SimpleChanges,
     OnInit,
-    DoCheck
+    DoCheck,
+    OnDestroy
 } from '@angular/core';
 
 import { Clock } from '../clock.module';
@@ -14,7 +15,7 @@ import { Clock } from '../clock.module';
     templateUrl: './clock.component.html'
 })
 
-export class ClockComponent implements OnInit, DoCheck {
+export class ClockComponent implements OnInit, DoCheck, OnDestroy {
     clock: Clock = {
         seconds: 0,
         minutes: 0
@@ -37,6 +38,9 @@ export class ClockComponent implements OnInit, DoCheck {
         console.log('ngDoCheck');
     }
 
+    ngOnDestroy() {
+        console.log('ngOnDestroy');
+    }
 }
 
 
