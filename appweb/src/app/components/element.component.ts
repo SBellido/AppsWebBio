@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Element } from '../element.module'; 
+import { Element } from '../element.module';
 
 @Component({
     /*usaré ese selector como una etiqueta HTML en el template*/
