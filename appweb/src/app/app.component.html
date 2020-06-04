@@ -1,43 +1,8 @@
-<!-- <input type="text" [(ngModel)]="title">
-{{ title }}
-
-<div *ngIf="title === 'div'">
-  este es un div
-</div>
-
-<div [ngSwitch] = "title">
-  <p *ngSwitchCase = "'sebastian'||'Sebastian'">hola Sebastián</p>
-  <p *ngSwitchCase = "'mario'">hola Mario</p>
-  <p *ngSwitchCase = "'fabricio'">hola Fabricio</p>
-  <p *ngSwitchCase = "'cristian'">hola Cristian</p>
-  <p *ngSwitchDefault>Usuario no encontrado</p>
-</div> -->
-
-<app-test></app-test>
+<app-testcreativity></app-testcreativity>
 <app-element></app-element>
-<button (click)="addItem()">ADD ITEM</button>
 
 <!-- muestra componente propuesta -->
 <div *ngFor="let proposal of proposals">
   <!-- utiliza un output() y un input[]  -->
   <app-proposal (proposalAggregate)="addProposal($event)" [proposal]="proposal"></app-proposal>
 </div>
-
-
- <!-- muestra componente usuario -->
-<app-user></app-user>
-<ul>
-  <li *ngIf="items.length == 0">La lista está vacía</li>
-  <li *ngFor="let name of items; index as i">
-    {{ name }} {{ i }}
-    <button (click)="deleteItem(i)">DELETE</button>
-  </li>
-</ul>
-
-<!-- 
-<div *ngFor="let user of users">
-  <img [src]="user.image" alt="">
-  {{ user.name }} 
-  {{ user.age }}
-  {{ user.educationLevel }} 
-</div> -->

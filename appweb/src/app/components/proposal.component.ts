@@ -9,12 +9,19 @@ import { Proposal } from '../proposal.module';
 })
 
 export class ProposalComponent {
+    // declaramos nuestro componente de tipo input
     @Input() proposal: Proposal;
     // debo agregar el output en el componente padre
     @Output() proposalAggregate: EventEmitter<string> = new EventEmitter();
 
+    proposals = [];
+
     addProposal() {
+        /*agrega propuesta al arreglo de propuestas*/
         console.log('agregó propuesta');
         this.proposalAggregate.emit(this.proposal.description);
+        this.proposals.push(this.proposal.description);
+        console.log(this.proposals);
     }
+
 }
