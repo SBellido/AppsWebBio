@@ -9,18 +9,5 @@ import { Proposal } from './proposal.module';
 
 export class AppComponent {
 
-  proposals: Proposal[] = [
-    {
-        id: 1,
-        description: ''
-    }
-  ];
-
-  addProposal(description: string){
-    console.log('Propuesta');
-    console.log(description);
-
-  }
 
 }
-

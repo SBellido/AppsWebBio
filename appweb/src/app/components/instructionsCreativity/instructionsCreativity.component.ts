@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InstructionCreativity } from '../../instruccionCreativity.module';
+
 @Component({
   selector: 'app-instructions-creativity',
   templateUrl: './instructionsCreativity.component.html',

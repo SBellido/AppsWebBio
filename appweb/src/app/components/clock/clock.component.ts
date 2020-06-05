@@ -16,7 +16,7 @@ import { Clock } from '../../clock.module';
     styleUrls: ['./clock.component.scss']
 })
 
-export class ClockComponent implements OnInit, DoCheck, OnDestroy {
+export class ClockComponent implements OnInit, OnDestroy {
 
     constructor() {
         console.log('constructor');
@@ -26,7 +26,6 @@ export class ClockComponent implements OnInit, DoCheck, OnDestroy {
         seconds: 0,
         minutes: 0
     };
-
     // ngOnChanges(changes: SimpleChanges) {
     //     console.log('ngOnChanges');
     //     console.log(changes);
@@ -36,9 +35,9 @@ export class ClockComponent implements OnInit, DoCheck, OnDestroy {
         console.log('ngOnInit');
     }
 
-    ngDoCheck() {
-        console.log('ngDoCheck');
-    }
+    // ngDoCheck() {
+    //     console.log('ngDoCheck');
+    // }
 
     ngOnDestroy() {
         console.log('ngOnDestroy');
