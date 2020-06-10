@@ -13,6 +13,8 @@ import { ClockComponent } from './components/clock/clock.component';
 import { HomeComponent } from './components/home/home.component';
 import { InstructionsCreativityComponent } from './components/instructionsCreativity/instructionsCreativity.component';
 import { PuntuationCreativityComponent } from './components/puntuationCreativity/puntuationCreativity.component';
+import { HeaderComponent } from './components/header/header.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { PuntuationCreativityComponent } from './components/puntuationCreativity
     ClockComponent,
     HomeComponent,
     InstructionsCreativityComponent,
-    PuntuationCreativityComponent
+    PuntuationCreativityComponent,
+    HeaderComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

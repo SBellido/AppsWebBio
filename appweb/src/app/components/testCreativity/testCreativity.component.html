@@ -1,9 +1,12 @@
 <h3>{{ testCreativity.name | uppercase }}</h3>
+
+<app-element></app-element>
+
 <app-proposal 
   *ngFor="let proposal of proposals" 
   (proposalAggregate)="addProposalToTextarea($event)"
   [proposal]="proposal">
 </app-proposal>
-<app-element></app-element>
+
 <app-clock></app-clock>
 
