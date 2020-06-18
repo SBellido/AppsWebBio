@@ -3,11 +3,11 @@
 
 <app-element></app-element>
 
-<app-proposal 
+<app-user 
   *ngFor="let proposal of proposals" 
   (proposalAggregate)="addProposalToTextarea($event)"
   [proposal]="proposal">
-</app-proposal>
+</app-user>
 
 <app-clock></app-clock>
 

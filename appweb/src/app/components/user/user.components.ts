@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,
+    Input,
+    Output,
+    EventEmitter,
+    OnInit
+} from '@angular/core';
 
 import { User } from '../../user.module';
-// import { Proposal } from '../../proposal.module';
+import { Proposal } from '../../proposal.module';
 
 @Component({
      /*usaré ese selector como una etiqueta HTML en el template*/
@@ -12,14 +17,25 @@ import { User } from '../../user.module';
 
 export class UserComponent implements OnInit{
     constructor() { }
+    @Input() proposal: Proposal;
+    // debo agregar el output en el componente padre
+    @Output() proposalAggregate: EventEmitter<string> = new EventEmitter();
 
-    // proposals: Proposal[] = [
-    //     {
-    //         id: 1,
-    //         description: ''
-    //     }
-    // ];
+    proposals = [];
+
     ngOnInit(): void {
+        setTimeout(() => {
+            let arrayProposal: any;
+            arrayProposal = this.proposal.description.split('\n');
+            console.log(arrayProposal);
+        }, 10000);
     }
 
+    addProposal() {
+        /*agrega propuesta al arreglo de propuestas*/
+        console.log('agregó propuesta');
+        this.proposalAggregate.emit(this.proposal.description);
+        this.proposals.push(this.proposal.description);
+        console.log(this.proposals);
+    }
 }
