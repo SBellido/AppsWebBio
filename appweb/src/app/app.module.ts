@@ -1,6 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+// import { HttpClientModule } from '@angular/common/http';
+
+// import { AngularFireModule } from '@angular/fire';
+// import { AngularFireAuth } from '@angular/fire/auth';
+// import { AngularFireStorage } from '@angular/fire/storage';
+// import { AngularFireDatabase } from '@angular/fire/database'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,9 +18,9 @@ import { TestCreativityComponent } from './components/testCreativity/testCreativ
 import { ClockComponent } from './components/clock/clock.component';
 import { HomeComponent } from './components/home/home.component';
 import { InstructionsCreativityComponent } from './components/instructionsCreativity/instructionsCreativity.component';
-import { PuntuationCreativityComponent } from './components/puntuationCreativity/puntuationCreativity.component';
 import { HeaderComponent } from './components/header/header.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+
+// import { environment } from './../environments/environment';
 
 @NgModule({
   declarations: [
@@ -26,14 +32,17 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ClockComponent,
     HomeComponent,
     InstructionsCreativityComponent,
-    PuntuationCreativityComponent,
     HeaderComponent,
-    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    // AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireAuth,
+    // AngularFireStorage,
+    // HttpClientModule,
+    // AngularFireDatabase
   ],
   providers: [],
   bootstrap: [AppComponent]

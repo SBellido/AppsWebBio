@@ -26,6 +26,11 @@ export class ProposalComponent implements OnInit {
     proposals = [];
 
     ngOnInit(): void {
+        setTimeout(() => {
+            let arrayProposal: any;
+            arrayProposal = this.proposal.description.split('\n');
+            console.log(arrayProposal);
+        }, 10000);
     }
 
     addProposal() {
@@ -35,5 +40,14 @@ export class ProposalComponent implements OnInit {
         this.proposals.push(this.proposal.description);
         console.log(this.proposals);
     }
+    // enteredText debe ser el input del textarea
+    // var enteredText = document.getElementById("textArea").value;
 
+    // var numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
+    // var characterCount = enteredText.length + numberOfLineBreaks;
+
+    // alert('Number of breaks:  ' + numberOfLineBreaks);
+
+    // let aa = enteredText.split("\n");
+    // console.log(aa);
 }

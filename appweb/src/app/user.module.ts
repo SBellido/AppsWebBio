@@ -4,10 +4,10 @@ export interface User {
     name: string;
     age: number;
     educationLevel: string;
-    originality: number;
-    flexibility: number;
-    fluency: number;
-    elaboration: number;
-    ranking: number;
+    // originality: number;
+    // flexibility: number;
+    // fluency: number;
+    // elaboration: number;
+    // ranking: number;
     points: number;
 }
