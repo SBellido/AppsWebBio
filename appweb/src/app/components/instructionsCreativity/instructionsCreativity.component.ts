@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InstructionsCreativity } from '../../instructionsCreativity.module';
 
 @Component({
   selector: 'app-instructions-creativity',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InstructionsCreativityComponent implements OnInit {
 
-
-
   constructor() { }
+
+  instructionsCrativity: InstructionsCreativity = {
+    title: 'Instrucciones',
+    description: 'Test de Creatividad'
+  };
 
   ngOnInit(): void {
   }
