@@ -1,0 +1,15 @@
+<!-- <app-layout></app-layout> -->
+
+<h3>{{ testCreativity.name }}</h3>
+
+<app-element></app-element>
+
+<app-user 
+    *ngFor="let proposal of proposals" 
+    (proposalAggregate)="addProposalToTextarea($event)"
+    [proposal]="proposal">
+</app-user>
+
+<!-- <app-clock></app-clock> -->
+<router-outlet></router-outlet>
+

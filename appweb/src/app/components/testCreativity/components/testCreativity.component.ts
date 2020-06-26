@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TestCreativity } from '../../testCreativity.module';
-import { Proposal } from '../../proposal.module';
+import { TestCreativity } from '../../../testCreativity.module';
+import { Proposal } from './user/proposal.module';
+
 // import { Clock } from '../../clock.module';
 
 @Component({

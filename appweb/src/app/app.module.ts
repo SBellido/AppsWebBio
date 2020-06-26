@@ -11,10 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { UserComponent } from './components/user/user.components';
-import { ProposalComponent } from './components/proposal/proposal.component';
-import { ElementComponent } from './components/element/element.component';
-import { TestCreativityComponent } from './components/testCreativity/testCreativity.component';
 import { ClockComponent } from './components/clock/clock.component';
 import { HomeComponent } from './components/home/home.component';
 import { InstructionsCreativityComponent } from './components/instructionsCreativity/instructionsCreativity.component';
@@ -28,14 +24,9 @@ import { SelectTestComponent } from './components/select-test/select-test.compon
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
-    ProposalComponent,
-    ElementComponent,
-    TestCreativityComponent,
     ClockComponent,
     HomeComponent,
     InstructionsCreativityComponent,
-    TestCreativityComponent,
     HeaderComponent,
     LayoutComponent,
     PageNotFoundComponent,

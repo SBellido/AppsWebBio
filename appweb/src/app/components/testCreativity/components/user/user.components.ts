@@ -6,7 +6,7 @@ import { Component,
 } from '@angular/core';
 
 import { User } from '../../user.module';
-import { Proposal } from '../../proposal.module';
+import { Proposal } from './proposal.module';
 
 @Component({
      /*usaré ese selector como una etiqueta HTML en el template*/
