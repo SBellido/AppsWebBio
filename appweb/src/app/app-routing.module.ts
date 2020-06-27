@@ -1,13 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-
-// import { LayoutComponent } from './components/layout/layout.component';
-import { HomeComponent } from './home/components/home.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { InstructionsCreativityComponent } from './instructions-creativity/components/instructionsCreativity.component';
-import { TestCreativityComponent } from './testCreativity/components/testCreativity.component';
-import { SelectTestComponent } from './components/select-test/select-test.component';
+import { PageNotFoundComponent } from './page-not-found/components/page-not-found.component';
 
 
 const routes: Routes = [
@@ -24,7 +18,8 @@ const routes: Routes = [
   },
   {
     path: 'select-test',
-    component: SelectTestComponent,
+    loadChildren: () => import('./select-test/select-test.module')
+      .then(m => m.SelectTestModule)
   },
   {
     path: 'home',
@@ -38,7 +33,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: PageNotFoundComponent,
+    loadChildren: () => import('./page-not-found/page-not-found.module')
+      .then(m => m.PageNotFoundModule)
   }
 ];
 

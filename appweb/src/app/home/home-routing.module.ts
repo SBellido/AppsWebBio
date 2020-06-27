@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CompileDirectiveMetadata } from '@angular/compiler';
+
 import { HomeComponent } from './components/home.component';
 
 const routes: Routes = [
@@ -15,8 +15,7 @@ const routes: Routes = [
         RouterModule.forChild(routes)
     ],
     exports: [
-        RouterModule,
-        CompileDirectiveMetadata
+        RouterModule
     ]
 })
 
