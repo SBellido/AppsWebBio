@@ -13,7 +13,8 @@ import { SelectTestComponent } from './components/select-test/select-test.compon
 const routes: Routes = [
   {
     path: 'instructions-creativity',
-    component: InstructionsCreativityComponent,
+    loadChildren:  () => import('./instructions-creativity/instructions-creativity.module')
+      .then(m => m.InstructionsCreativityModule)
   },
   {
     path: 'test-creativity',
