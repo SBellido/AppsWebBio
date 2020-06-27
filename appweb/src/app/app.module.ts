@@ -13,11 +13,11 @@ import { AppComponent } from './app.component';
 
 import { HomeComponent } from './components/home/home.component';
 import { InstructionsCreativityComponent } from './components/instructionsCreativity/instructionsCreativity.component';
-import { HeaderComponent } from './components/header/header.component';
-import { LayoutComponent } from './components/layout/layout.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { SelectTestComponent } from './components/select-test/select-test.component';
-
+import { HeaderComponent } from './components/header/header.component';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 // import { environment } from './../environments/environment';
 
 @NgModule({
@@ -25,15 +25,16 @@ import { SelectTestComponent } from './components/select-test/select-test.compon
     AppComponent,
     HomeComponent,
     InstructionsCreativityComponent,
-    HeaderComponent,
-    LayoutComponent,
     PageNotFoundComponent,
-    SelectTestComponent
+    SelectTestComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule,
+    CoreModule
     // AngularFireModule.initializeApp(environment.firebase),
     // AngularFireAuth,
     // AngularFireStorage,

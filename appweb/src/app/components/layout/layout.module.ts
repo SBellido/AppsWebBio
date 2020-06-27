@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { HeaderComponent } from '../../shared/components/header/header.component';
+// import { HeaderComponent } from '../header/header.component';
 
 @NgModule({
-    declarations: [
-        HeaderComponent,
-    ]
+    declarations: []
 })
 export class LayoutModule {
 
