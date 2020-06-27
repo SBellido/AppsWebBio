@@ -5,7 +5,7 @@ import { Component,
     OnInit
 } from '@angular/core';
 
-import { User } from '../../user.module';
+import { User } from '../../../../core/models/user.module';
 import { Proposal } from './proposal.module';
 
 @Component({
