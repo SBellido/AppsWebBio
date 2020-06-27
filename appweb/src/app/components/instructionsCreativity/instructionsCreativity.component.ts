@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InstructionsCreativity } from '../../instructionsCreativity.module';
+import { InstructionsCreativity } from '../../core/models/instructionsCreativity.module';
 
 @Component({
   selector: 'app-instructions-creativity',
