@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ClockComponent } from './components/clock/clock.component';
 import { HomeComponent } from './components/home/home.component';
 import { InstructionsCreativityComponent } from './components/instructionsCreativity/instructionsCreativity.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -24,7 +23,6 @@ import { SelectTestComponent } from './components/select-test/select-test.compon
 @NgModule({
   declarations: [
     AppComponent,
-    ClockComponent,
     HomeComponent,
     InstructionsCreativityComponent,
     HeaderComponent,

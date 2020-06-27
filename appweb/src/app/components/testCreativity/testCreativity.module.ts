@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ElementComponent } from './components/element/element.component';
 import { TestCreativityComponent } from './components/testCreativity.component';
 import { UserComponent } from './components/user/user.components';
+import { ClockComponent } from './components/clock/clock.component';
 
 import { TestCreativityRoutingModule } from './testCreativity-routing.module';
 
@@ -13,6 +14,7 @@ import { TestCreativityRoutingModule } from './testCreativity-routing.module';
         ElementComponent,
         TestCreativityComponent,
         UserComponent,
+        ClockComponent
     ],
     imports: [
         CommonModule,

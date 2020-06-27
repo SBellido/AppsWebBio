@@ -1,6 +1,6 @@
 <!-- <app-layout></app-layout> -->
 
-<h3>{{ testCreativity.name }}</h3>
+<h3>{{ testCreativity.name | uppercase }}</h3>
 
 <app-element></app-element>
 
@@ -10,6 +10,6 @@
     [proposal]="proposal">
 </app-user>
 
-<!-- <app-clock></app-clock> -->
+<app-clock></app-clock>
 <router-outlet></router-outlet>
 
