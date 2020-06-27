@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HomeComponent } from './home/components/home.component';
 import { InstructionsCreativityComponent } from './instructions-creativity/components/instructionsCreativity.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SelectTestComponent } from './select-test/components/select-test.component';
@@ -23,7 +22,6 @@ import { CoreModule } from './core/core.module';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     InstructionsCreativityComponent,
     PageNotFoundComponent,
     SelectTestComponent,
