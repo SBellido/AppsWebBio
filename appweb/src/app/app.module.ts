@@ -11,11 +11,11 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HomeComponent } from './components/home/home.component';
-import { InstructionsCreativityComponent } from './components/instructionsCreativity/instructionsCreativity.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { SelectTestComponent } from './components/select-test/select-test.component';
-import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './home/components/home.component';
+import { InstructionsCreativityComponent } from './instructions-creativity/components/instructionsCreativity.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SelectTestComponent } from './select-test/components/select-test.component';
+import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 // import { environment } from './../environments/environment';

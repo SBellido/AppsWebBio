@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+
 
 // import { LayoutComponent } from './components/layout/layout.component';
-import { HomeComponent } from './components/home/home.component';
-import { InstructionsCreativityComponent } from './components/instructionsCreativity/instructionsCreativity.component';
+import { HomeComponent } from './home/components/home.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { InstructionsCreativityComponent } from './instructions-creativity/components/instructionsCreativity.component';
+import { TestCreativityComponent } from './testCreativity/components/testCreativity.component';
 import { SelectTestComponent } from './components/select-test/select-test.component';
 
 
@@ -16,7 +18,7 @@ const routes: Routes = [
   {
     path: 'test-creativity',
     // routea un modulo
-    loadChildren: () => import('./components/testCreativity/testCreativity.module')
+    loadChildren: () => import('./testCreativity/testCreativity.module')
       .then(m => m.TestCreativityModule)
   },
   {

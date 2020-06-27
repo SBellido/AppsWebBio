@@ -7,7 +7,7 @@ import {
     OnDestroy
 } from '@angular/core';
 
-import { Clock } from '../../../../core/models/clock.module';
+import { Clock } from '../../../core/models/clock.module';
 
 @Component({
     /*usaré ese selector como una etiqueta HTML en el template*/

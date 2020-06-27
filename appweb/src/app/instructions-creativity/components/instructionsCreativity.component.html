@@ -1,0 +1,31 @@
+<app-header></app-header>
+<section>
+    <div>
+        <h2>Instrucciones</h2>
+    </div>
+    <article>
+        <ul>
+            <li>
+                El objetivo de esta práctica es describir todos los usos posibles que se te ocurran para un objeto en particular.
+            </li>
+            <li>
+                Deberás escribir dentro del cuadro de diálogo tus propuestas y al presionar "Enter" en cada una, ésta será computada.
+            </li>
+            <li>
+                Usá tu creatividad para pensar tus propuestas, todas son válidas, no hay límites para tu imaginación.
+            </li>
+            <li>
+                Tu única limitación es el tiempo que marca el reloj en cuenta regresiva, disponés de 5 minutos para escribir tus propuestas.
+            </li>
+        </ul>
+    </article>
+    <div>
+        <button routerLink="/select-test" routerLinkActive="active">
+            <a>REGRESAR</a>
+        </button>
+        <button routerLink="/test-creativity" routerLinkActive="active">
+            <a>COMENZAR</a>
+        </button>
+    </div>
+</section>
+<router-outlet></router-outlet>
