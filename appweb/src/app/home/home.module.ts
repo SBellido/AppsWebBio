@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { HomeComponent } from './components/home.component';
+import { MaterialModule } from './../material/material.module';
 
 import { HomeRoutingModule } from './home-routing.module';
 
@@ -14,7 +15,8 @@ import { HomeRoutingModule } from './home-routing.module';
     imports: [
         CommonModule,
         HomeRoutingModule,
-        FormsModule
+        FormsModule,
+        MaterialModule
     ]
 })
 
