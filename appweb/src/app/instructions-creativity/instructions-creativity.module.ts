@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { HeaderComponent } from '../header/header.component';
 
 import { InstructionsCreativityRoutingModule } from './instructions-creativity-routing';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { InstructionsCreativityRoutingModule } from './instructions-creativity-r
         CommonModule,
         InstructionsCreativityRoutingModule,
         FormsModule,
-        SharedModule
+        SharedModule,
+        MatButtonModule
     ]
 })
 
