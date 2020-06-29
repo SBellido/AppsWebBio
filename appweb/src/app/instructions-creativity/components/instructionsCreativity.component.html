@@ -1,9 +1,9 @@
 <app-header></app-header>
-<section>
+<section class="container">
     <div>
-        <h2>Instrucciones</h2>
+        <h1 class="title">Instrucciones</h1>
     </div>
-    <article>
+    <article class="instructions">
         <ul>
             <li>
                 El objetivo de esta práctica es describir todos los usos posibles que se te ocurran para un objeto en particular.
@@ -21,9 +21,14 @@
     </article>
     <div>
         <button routerLink="/select-test" routerLinkActive="active"
-            class="buttonBack" mat-raised-button color="">REGRESAR</button>
+            class="buttonBack" mat-raised-button>
+            <span class="material-icons"><mat-icon>chevron_left</mat-icon></span>
+            <a>REGRESAR</a>
+        </button>
         <button routerLink="/test-creativity" routerLinkActive="active"
-            class="buttonGo" mat-raised-button color="">COMENZAR</button>
+            class="buttonGo" mat-raised-button>
+            <a>COMENZAR</a><span class="material-icons"><mat-icon>chevron_right</mat-icon></span>
+        </button>
     </div>
 </section>
 <router-outlet></router-outlet>

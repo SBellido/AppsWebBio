@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SelectTestComponent } from './components/select-test.component';
 
 import { SelectTestRoutingModule } from './select-test-routing';
+import { MaterialModule } from './../material/material.module';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { SelectTestRoutingModule } from './select-test-routing';
     imports: [
         CommonModule,
         SelectTestRoutingModule,
-        FormsModule
+        FormsModule,
+        MaterialModule
     ]
 })
 

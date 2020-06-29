@@ -1,8 +1,31 @@
 .buttonGo {
+    padding: 5px 10px 5px 30px;
     background-color: #4A4067;
     color: white;
+    margin: 15px;
 }
-button {
-    padding: 0px 60px;
-    margin: 8px;
+.buttonBack { padding: 5px 30px 5px 10px; }
+
+a { margin: 20px; }
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+li {
+    margin: 15px;
+}
+.title {
+    align-items: flex-start !important;
+    font-weight: 100;
+}
+.instructions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 40%;
 }

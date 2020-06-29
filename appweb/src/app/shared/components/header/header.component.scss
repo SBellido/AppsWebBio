@@ -1,0 +1,32 @@
+.nav_logo {
+    padding: 55px 50px 25px 50px;
+}
+.nav_logo:link {
+    border: none;
+}
+.navbar {
+    padding-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img:focus { outline: none; }
+
+mat-toolbar {
+    padding: 0px 0px !important;
+}
+mat-toolbar > mat-toolbar-row > hr.line {
+    border: 0.5px solid #f4c713;
+    width: 100%;
+    margin: 0px;
+}
+nav > a {
+    padding: 0px 30px;
+    text-decoration: none;
+    font-weight: 600;
+    color: rgba($color: #4a4067, $alpha: 1.0)
+}
+nav > a.active {  
+    border-bottom: 3px solid  #4a4067;  
+}
