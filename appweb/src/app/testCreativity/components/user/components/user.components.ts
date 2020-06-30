@@ -1,12 +1,12 @@
-import { Component,
+import {
+    Component,
     Input,
     Output,
     EventEmitter,
     OnInit
 } from '@angular/core';
 
-import { User } from '../../../../core/models/user.module';
-import { Proposal } from './proposal.module';
+import { Proposal } from '../../../../core/models/proposal.module';
 
 @Component({
      /*usaré ese selector como una etiqueta HTML en el template*/

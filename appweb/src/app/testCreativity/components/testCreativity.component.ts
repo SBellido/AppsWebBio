@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TestCreativity } from '../../core/models/testCreativity.module';
-import { Proposal } from '../components/user/components/proposal.module';
+import { Proposal } from '../../core/models/proposal.module';
 
 // import { Clock } from '../../clock.module';
 

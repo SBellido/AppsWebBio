@@ -1,12 +1,32 @@
-html {
-    margin: 0px;
-    width: 100%;
-    height: auto;
-    background-color: #4A4067;
+.container-all {
+    background: #4a4067 !important;
+    height: 100%;
+}
+
+.container-logoAndText {
+    padding-top: 100px;
+}
+
+.container-logos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 200px;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 400px;
+}
+.textHome {
+    color: white;
+    font-weight: lighter;
 }
 
 .buttonHome {
-    padding: 0px 60px;
+    padding: 10px 80px;
     font-weight: 600;
     color: #4A4067;
 }

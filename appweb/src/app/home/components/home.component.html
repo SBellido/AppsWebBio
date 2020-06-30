@@ -1,16 +1,21 @@
-<section>
-    <div>
-        <img src="assets/images/logo_home.png" alt="">
-        <h4 class="textHome">Plataforma Interactiva de Investigación en tiempos de cuarentena</h4>
-    </div>
+<section class="container-all">
+    <article class="container-logoAndText">
+        <div class="logo-container">
+            <img src="assets/images/logo_home.png" alt="">
+            <div>
+                <h2 class="textHome">Plataforma Interactiva de Investigación<br>en tiempos de cuarentena</h2>  
+                <button mat-raised-button class="buttonHome" routerLink="/select-test" routerLinkActive="active">INGRESAR</button>
+            </div>
+        </div>
+    </article>
+    <article>
+        <figure class="container-logos">
+            <img src="assets/images/logoConicet-small.png" alt="logo CONICET">
+            <img src="assets/images/Logo-UNICEN-small.png" alt="Logo UNICEN">
+            <img src="assets/images/Marca-ITBA-Color-small.png" alt="logo Instituto Tecnológico de Buenos Aires">
+            <img src="assets/images/pladema_media_lab-small.png" alt="logo Pladema y MediaLab">
+        </figure>
+    </article>
 </section>
-<section>
-    <figure>
-        <img src="assets/images/Marca-ITBA-Color-ALTA.png" alt="logo Instituto Tecnológico de Buenos Aires">
-        <img src="assets/images/Logo-UNICEN.png" alt="Logo UNICEN">
-        <img src="assets/images/pladema_media_lab.png" alt="logo Pladema y MediaLab">
-        <img src="assets/images/logoConicet.png" alt="logo CONICET">
-    </figure>
-    <button mat-raised-button class="buttonHome" routerLink="/select-test" routerLinkActive="active">INGRESAR</button>
-</section>
+
 <router-outlet></router-outlet>

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-import { ProposalComponent } from './components/proposal/proposal.component';
-import { UserComponent } from './user.components';
+import { ProposalComponent } from './components/proposal/components/proposal.component';
+import { UserComponent } from './components/user.components';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { UserComponent } from './user.components';
     ],
     imports: [
         CommonModule,
+        FormsModule
 
     ]
 })
