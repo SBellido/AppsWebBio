@@ -10,14 +10,16 @@
     justify-content: center;
     align-items: center;
 }
-
+mat-toolbar.container-header {
+    background-color: #f9f9f9;
+}
 img:focus { outline: none; }
 
 mat-toolbar {
     padding: 0px 0px !important;
 }
 mat-toolbar > mat-toolbar-row > hr.line {
-    border: 0.5px solid #f4c713;
+    border: 0.5px solid #FFCF02;
     width: 100%;
     margin: 0px;
 }

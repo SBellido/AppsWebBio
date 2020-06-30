@@ -9,19 +9,38 @@
 a { margin: 20px; }
 
 .container {
+    background-color: #f9f9f9;
+    width: 100%;
+    height: auto;
+    padding: 36px 0px;
+}
+
+.container-instructions {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-li {
-    margin: 15px;
+ul.instructions-items {
+    background-color: white;
+    color: #4A4067;
+    padding: 20px 30px 20px 30px;
+    margin: 50px 0px 40px 0px;
+    border-radius: 0% 5% 0% 5%;
+    width: 400px;
+    height: 450px;
+    -webkit-box-shadow: -1px 3px 30px -20px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 3px 30px -20px rgba(0,0,0,0.75);
+    box-shadow: -1px 3px 30px -20px rgba(0,0,0,0.75);
 }
-.title {
-    align-items: flex-start !important;
-    font-weight: 100;
-}
+
+hr { margin-bottom: 25px; }
+
+li { margin: 15px; }
+
+.title { font-weight: 100; font-size: 2em; }
+
 .instructions {
     display: flex;
     justify-content: center;

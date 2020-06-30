@@ -7,9 +7,8 @@
    padding-top: 0px;
 }
 
-.nav_logo {
-    padding: 55px 50px 25px 50px;
-}
+.nav_logo { padding: 55px 50px 25px 50px; }
+
 
 h2.title {
     margin-top: 75px;
@@ -33,7 +32,7 @@ div.row {
     margin: 0px !important;
 }
 
-div > .test-icon {
+.test-icon {
     text-align: center;
     flex-direction: row;
     margin: 15px 15px;
@@ -43,14 +42,25 @@ div > .test-icon {
     border-radius: 5%;
     align-content: center;
     background-color: white;
+    -webkit-box-shadow: -2px 0px 15px -1px rgba(0,0,0,0.51);
+    -moz-box-shadow: -2px 0px 15px -1px rgba(0,0,0,0.51);
+    box-shadow: -2px 0px 15px -1px rgba(0,0,0,0.51);
 }
+
+.test-icon:focus { 
+    outline: none; 
+    -webkit-box-shadow: inset -2px 0px 15px -1px rgba(0,0,0,0.51);
+    -moz-box-shadow: inset -2px 0px 15px -1px rgba(0,0,0,0.51);
+    box-shadow: inset -2px 0px 15px -1px rgba(0,0,0,0.51);   
+}
+
 figure.container {
     margin: 0px !important;
     width: 100%;
 }
-img.icon {
-    margin-top: 15px;
-}
+
+img.icon { margin-top: 15px; }
+
 
 h3.test {
     font-weight: lighter;

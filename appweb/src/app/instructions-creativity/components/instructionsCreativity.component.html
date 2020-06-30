@@ -1,34 +1,38 @@
 <app-header></app-header>
 <section class="container">
-    <div>
-        <h1 class="title">Instrucciones</h1>
-    </div>
-    <article class="instructions">
-        <ul>
-            <li>
-                El objetivo de esta práctica es describir todos los usos posibles que se te ocurran para un objeto en particular.
-            </li>
-            <li>
-                Deberás escribir dentro del cuadro de diálogo tus propuestas y al presionar "Enter" en cada una, ésta será computada.
-            </li>
-            <li>
-                Usá tu creatividad para pensar tus propuestas, todas son válidas, no hay límites para tu imaginación.
-            </li>
-            <li>
-                Tu única limitación es el tiempo que marca el reloj en cuenta regresiva, disponés de 5 minutos para escribir tus propuestas.
-            </li>
-        </ul>
-    </article>
-    <div>
-        <button routerLink="/select-test" routerLinkActive="active"
-            class="buttonBack" mat-raised-button>
-            <span class="material-icons"><mat-icon>chevron_left</mat-icon></span>
-            <a>REGRESAR</a>
-        </button>
-        <button routerLink="/test-creativity" routerLinkActive="active"
-            class="buttonGo" mat-raised-button>
-            <a>COMENZAR</a><span class="material-icons"><mat-icon>chevron_right</mat-icon></span>
-        </button>
+    <div class="container-instructions">
+        <div class="title-instructions">
+           
+        </div>
+        <article class="instructions">
+            <ul class="instructions-items">
+                <h1 class="title">Instrucciones</h1>
+                <hr>
+                <li>
+                    El objetivo de esta práctica es describir todos los usos posibles que se te ocurran para un objeto en particular.
+                </li>
+                <li>
+                    Deberás escribir dentro del cuadro de diálogo tus propuestas y al presionar "Enter" en cada una, ésta será computada.
+                </li>
+                <li>
+                    Usá tu creatividad para pensar tus propuestas, todas son válidas, no hay límites para tu imaginación.
+                </li>
+                <li>
+                    Tu única limitación es el tiempo que marca el reloj en cuenta regresiva, disponés de 5 minutos para escribir tus propuestas.
+                </li>
+            </ul>
+        </article>
+        <div>
+            <button routerLink="/select-test" routerLinkActive="active"
+                class="buttonBack" mat-raised-button>
+                <span class="material-icons"><mat-icon>chevron_left</mat-icon></span>
+                <a>REGRESAR</a>
+            </button>
+            <button routerLink="/test-creativity" routerLinkActive="active"
+                class="buttonGo" mat-raised-button>
+                <a>COMENZAR</a><span class="material-icons"><mat-icon>chevron_right</mat-icon></span>
+            </button>
+        </div>
     </div>
 </section>
 <router-outlet></router-outlet>
