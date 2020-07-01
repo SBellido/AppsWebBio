@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './components/page-not-found.component';
 
 import { PageNotFoundRoutingModule } from './page-not-found-routing';
+import { MaterialModule } from './../material/material.module';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { PageNotFoundRoutingModule } from './page-not-found-routing';
     imports: [
         CommonModule,
         PageNotFoundRoutingModule,
-        FormsModule
+        FormsModule,
+        MaterialModule
     ]
 })
 

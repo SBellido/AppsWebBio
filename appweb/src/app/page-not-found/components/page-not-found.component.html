@@ -1,4 +1,15 @@
-<h2>Esta actividad aún no está disponible</h2>
-<button  routerLink="/select-test" routerLinkActive="active">
-    <a>VOLVER A SELECCIONAR ACTIVIDAD</a>
-</button>
+<div class="container-all">
+    <mat-toolbar class="nav">
+        <mat-toolbar-row class="nav_logo">
+            <img src="assets/images/logo_nav_blanco.png" alt=""
+            routerLink="/home" routerLinkActive="active">    
+        </mat-toolbar-row>  
+    </mat-toolbar>
+    <section class="container">
+        <div class="contain-title">
+            <h1 class="title">Disculpas, la actividad aún no está disponible</h1>
+        </div>
+        <img class="image-calendar" src="assets/images/en-construccion.png" alt="">
+        <button mat-raised-button class="buttonHome" routerLink="/select-test" routerLinkActive="active">VOLVER</button>
+    </section>
+</div>
