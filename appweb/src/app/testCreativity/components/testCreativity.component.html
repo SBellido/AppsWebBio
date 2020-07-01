@@ -1,17 +1,25 @@
-<header>
-    <img src="assets/images/logo_nav.png" alt="">
-    <!-- <h1>ELEGÍ LA ACTIVIDAD QUE DESEAS HACER</h1> -->
-</header>
-<h3>{{ testCreativity.name | uppercase }}</h3>
+<mat-toolbar class="container-header">
+    <mat-toolbar-row class="nav_logo">
+        <img src="/assets/images/logo_nav.png" alt="" routerLink="/select-test" routerLinkActive="active">
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+        <hr class="line" id="line-nav">
+    </mat-toolbar-row>
+</mat-toolbar>
 
-<app-element></app-element>
-
-<app-user 
-    *ngFor="let proposal of proposals" 
-    (proposalAggregate)="addProposalToTextarea($event)"
-    [proposal]="proposal">
-</app-user>
-
-<app-clock></app-clock>
+<div class="container-tast-name">
+    <h3 class="test-name">Actividad: {{ testCreativity.name | uppercase }}</h3>
+</div>
+<section class="container">
+    <article class="container-element-textarea"> 
+        <app-element></app-element>   
+        <app-user 
+            *ngFor="let proposal of proposals" 
+            (proposalAggregate)="addProposalToTextarea($event)"
+            [proposal]="proposal">
+        </app-user>   
+    </article>
+    <app-clock></app-clock>
+</section>
 <router-outlet></router-outlet>
 

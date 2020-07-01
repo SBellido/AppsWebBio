@@ -18,7 +18,7 @@ export class TestCreativityComponent implements OnInit {
 
     testCreativity: TestCreativity = {
         id: 1,
-        name: 'Test de Creatividad'
+        name: 'Creatividad'
     };
 
     proposals: Proposal[] = [

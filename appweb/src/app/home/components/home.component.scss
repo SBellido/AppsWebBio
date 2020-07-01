@@ -18,7 +18,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 400px;
+    padding: 80px 350px 0px 150px;
+    margin-bottom: 150px;
 }
 .textHome {
     color: white;
@@ -26,6 +27,7 @@
 }
 
 .buttonHome {
+    font-size: larger;
     padding: 10px 80px;
     font-weight: 600;
     color: #4A4067;

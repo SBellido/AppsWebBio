@@ -18,11 +18,13 @@ img:focus { outline: none; }
 mat-toolbar {
     padding: 0px 0px !important;
 }
+
 mat-toolbar > mat-toolbar-row > hr.line {
     border: 0.5px solid #FFCF02;
     width: 100%;
     margin: 0px;
 }
+
 nav > a {
     padding: 0px 30px;
     text-decoration: none;

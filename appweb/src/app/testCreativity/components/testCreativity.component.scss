@@ -1,5 +1,68 @@
+.nav_logo {
+    padding: 55px 50px 25px 50px;
+}
+.nav_logo:link {
+    border: none;
+}
+.navbar {
+    padding-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+mat-toolbar.container-header {
+    background-color: #f9f9f9;
+}
+img:focus { outline: none; }
+
+mat-toolbar {
+    padding: 0px 0px !important;
+}
+
+mat-toolbar > mat-toolbar-row > hr.line {
+    border: 0.5px solid #FFCF02;
+    width: 100%;
+    margin: 0px;
+}
+
+nav > a {
+    padding: 0px 30px;
+    text-decoration: none;
+    font-weight: 600;
+    color: rgba($color: #4a4067, $alpha: 1.0)
+}
+
+nav > a.active {  
+    border-bottom: 3px solid  #4a4067;  
+}
+.test-name {
+    margin-left: 80px;
+    color: #4a4067;
+}
+.container-tast-name {
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+section.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    width: 100%;
+    height: auto;
+    padding: 0px;
+    flex-direction: column;
+    position: absolute;
+}
+
 .containProposal .containTestCreativity {
     margin: 20px;
     padding: 20px;
+}
+
+.container-element-textarea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
  
