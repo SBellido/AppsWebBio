@@ -12,7 +12,7 @@
 </div>
 <section class="container">
     <article class="container-element-textarea"> 
-        <app-element></app-element>   
+        <app-element class="container-element"></app-element>   
         <app-user 
             *ngFor="let proposal of proposals" 
             (proposalAggregate)="addProposalToTextarea($event)"

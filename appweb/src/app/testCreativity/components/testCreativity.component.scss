@@ -36,7 +36,7 @@ nav > a.active {
     border-bottom: 3px solid  #4a4067;  
 }
 .test-name {
-    margin-left: 80px;
+    margin-left: 70px;
     color: #4a4067;
 }
 .container-tast-name {
@@ -53,6 +53,10 @@ section.container {
     padding: 0px;
     flex-direction: column;
     position: absolute;
+}
+
+.container-element {
+    width: 75%;
 }
 
 .containProposal .containTestCreativity {
