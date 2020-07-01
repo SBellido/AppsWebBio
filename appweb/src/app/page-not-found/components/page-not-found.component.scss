@@ -21,14 +21,28 @@ h1.title {
     align-items: center;
     flex-direction: column;
     margin: 0px;
-    width: 100%;
+    width: auto;
+    height: auto;
 }
 .buttonHome {
+    margin-top: 25px;
     font-size: larger;
-    padding: 10px 80px;
+    padding: 10px 110px;
     font-weight: 600;
     color: #4A4067;
 }
 .image-calendar {
     margin-bottom: 100px;
+}
+.container-icon {
+    text-align: center;
+    flex-direction: row;
+    margin: 15px 15px;
+    width: 300px;
+    height: 320px;
+    border: 1px solid  #4a4067;
+    border-radius: 5%;
+    align-content: center;
+    background-color: #f9f9f9;
+    margin-top: 15px;
 }

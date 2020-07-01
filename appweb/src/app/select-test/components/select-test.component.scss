@@ -52,7 +52,9 @@ div.row {
     outline: none; 
     -webkit-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.51);
     -moz-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.51);
-    box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.51);   
+    box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.51);  
+    background-color: rgba($color: #FFFFFF, $alpha: 0.9);
+ 
 }
 
 figure.container {
