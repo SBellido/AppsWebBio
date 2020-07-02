@@ -11,13 +11,15 @@ export class UsersService {
     {
         id: 1,
         name: 'Rodolfo',
+        lastname: 'Chacón',
         age: 15,
         educationLevel: 'bla bla bla bla bla',
         points: 45
     },
     {
         id: 2,
-        name: 'Pedro',
+        name: 'Francisco',
+        lastname: 'Perez Esquivel',
         age: 11,
         educationLevel: 'bla bla bla bla bla',
         points: 30

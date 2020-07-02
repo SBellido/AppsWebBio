@@ -1,0 +1,30 @@
+.full-width {
+  width: 92%;
+}
+
+.shipping-card {
+  min-width: 300px;
+  margin: 50px auto;
+}
+
+.mat-radio-button {
+  display: block;
+  margin: 5px 0;
+}
+
+div.row {
+  display: flex;
+  flex-direction: row;
+  padding: 6px 20px;
+}
+
+.col {
+  flex: 1;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
+mat-label.label {
+  font-weight: 500;
+}
