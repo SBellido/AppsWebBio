@@ -6,6 +6,7 @@ import { SelectTestComponent } from './components/select-test.component';
 
 import { SelectTestRoutingModule } from './select-test-routing';
 import { MaterialModule } from './../material/material.module';
+import { SharedModule } from './../shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { MaterialModule } from './../material/material.module';
         CommonModule,
         SelectTestRoutingModule,
         FormsModule,
-        MaterialModule
+        MaterialModule,
+        SharedModule
     ]
 })
 

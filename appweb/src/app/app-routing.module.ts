@@ -30,6 +30,11 @@ const routes: Routes = [
       .then(m => m.SelectTestModule)
   },
   {
+    path: 'init-test',
+    loadChildren: () => import('./init-test/init-test.module')
+      .then(m => m.InitTestModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./page-not-found/page-not-found.module')
       .then(m => m.PageNotFoundModule)

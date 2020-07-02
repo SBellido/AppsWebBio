@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { PageNotFoundComponent } from './components/page-not-found.component';
+import { SharedModule } from './../shared/shared.module';
 
 import { PageNotFoundRoutingModule } from './page-not-found-routing';
 import { MaterialModule } from './../material/material.module';
+import { from } from 'rxjs';
 
 @NgModule({
     declarations: [
@@ -15,7 +17,8 @@ import { MaterialModule } from './../material/material.module';
         CommonModule,
         PageNotFoundRoutingModule,
         FormsModule,
-        MaterialModule
+        MaterialModule,
+        SharedModule
     ]
 })
 

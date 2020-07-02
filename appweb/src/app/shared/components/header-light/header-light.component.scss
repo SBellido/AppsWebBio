@@ -1,0 +1,23 @@
+.nav {
+    background-color: #F9F9F9; 
+    padding-top: 0px;
+    width: 100%;
+    height: 115px;
+ }
+ 
+.nav_logo { padding: 55px 50px 25px 50px; }
+
+hr.line {
+    margin: 0px;
+    border: 0.5px solid #FFCF02;
+}
+
+.nav_logo:link {
+    border: none;
+}
+
+mat-toolbar.container-header {
+    background-color: #F9F9F9;
+    width: 100%;
+    height: 115px;
+}

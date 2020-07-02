@@ -3,15 +3,21 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './components/header/header.component';
+import { HeaderDarkComponent } from './components/header-dark/header-dark.component';
+import { HeaderLightComponent } from './components/header-light/header-light.component';
 
 import { MaterialModule } from './../material/material.module';
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    HeaderDarkComponent,
+    HeaderLightComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    HeaderDarkComponent,
+    HeaderLightComponent
   ],
   imports: [
     CommonModule,
