@@ -1,12 +1,27 @@
 .buttonGo {
-    padding: 5px 10px 5px 30px;
-    background-color: #4A4067;
+    padding: 5px 15px 5px 25px;
+    background-color: #78AF6F;
     color: white;
     margin: 15px;
 }
-.buttonBack { padding: 5px 30px 5px 10px; }
+.buttonBack { 
+    color: #AF6F6F;
+    padding: 5px 25px 5px 15px; 
+    border: 0.5px solid #AF6F6F; 
+}
 
 a { margin: 20px; }
+
+.icon-back { 
+    background-color: #AF6F6F; 
+    color: white;
+    border-radius: 50%; 
+}
+.icon-go { 
+    background-color: white;
+    color: #78AF6F; 
+    border-radius: 50%; 
+}
 
 .container {
     background-color: #f9f9f9;

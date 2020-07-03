@@ -120,8 +120,11 @@
         </div>
       </div> -->
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
-    </mat-card-actions>
   </mat-card>
+  <mat-card-actions class="container-button"> 
+    <button routerLink="/test-creativity" routerLinkActive="active"
+      mat-raised-button class="buttonForm" type="submit">COMENZAR</button>
+  </mat-card-actions>
 </form>
+<router-outlet></router-outlet>
+

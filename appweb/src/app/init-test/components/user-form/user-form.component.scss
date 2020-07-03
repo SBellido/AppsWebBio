@@ -1,10 +1,11 @@
+
 .full-width {
   width: 92%;
 }
 
 .shipping-card {
   min-width: 300px;
-  margin: 50px auto;
+  margin: 75px auto 30px auto;
 }
 
 .mat-radio-button {
@@ -25,6 +26,21 @@ div.row {
 .col:last-child {
   margin-right: 0;
 }
+
 mat-label.label {
   font-weight: 500;
+}
+
+.buttonForm {
+  background-color: #806FAF;
+  color: white;
+  font-size: large;
+  padding: 15px 116px;
+  font-weight: 600;
+}
+
+.container-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
