@@ -15,8 +15,8 @@ export class ElementComponent implements OnInit {
 
     element: Element = {
         id: 1,
-        name: 'Diario',
-        image: 'assets/images/diario.jpg'
+        name: 'Clip',
+        image: 'assets/images/clip.jpg'
     };
 
     ngOnInit(): void {

@@ -15,8 +15,8 @@ import { UserComponent } from './components/user.components';
     imports: [
         CommonModule,
         FormsModule,
-        MaterialModule,
-    ],
+        MaterialModule
+    ]
 })
 
 export class UserModule {}

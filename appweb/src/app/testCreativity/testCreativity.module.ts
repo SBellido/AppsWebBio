@@ -4,19 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { TestCreativityRoutingModule } from './testCreativity-routing.module';
 import { MaterialModule } from './../material/material.module';
-import { SharedModule } from './../shared/shared.module'; 
+import { SharedModule } from './../shared/shared.module';
 
 import { TestCreativityComponent } from './components/testCreativity.component';
-import { ElementComponent } from './components/element/element.component';
 import { UserComponent } from './components/user/components/user.components';
 import { ClockComponent } from './components/clock/clock.component';
+import { ElementComponent } from './components/element/element.component';
 
 @NgModule({
     declarations: [
-        ElementComponent,
         TestCreativityComponent,
         UserComponent,
-        ClockComponent
+        ClockComponent,
+        ElementComponent
     ],
     imports: [
         CommonModule,

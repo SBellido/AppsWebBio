@@ -12,7 +12,7 @@ import { MaterialModule } from './../material/material.module';
   declarations: [
     HeaderComponent,
     HeaderDarkComponent,
-    HeaderLightComponent
+    HeaderLightComponent,
   ],
   exports: [
     HeaderComponent,
