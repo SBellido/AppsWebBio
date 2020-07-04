@@ -8,7 +8,7 @@
 }
 .container-test-name {
     background-color: #f9f9f9;
-    padding: 10px;
+    padding: 0px;
 }
 section.container {
     display: flex;
@@ -21,7 +21,11 @@ section.container {
     flex-direction: column;
     position: absolute;
 }
-
+.line-test {
+    margin-left: 70px;
+    color: #4a4067;
+    width: 20%;
+}
 .container-element {
     width: 75%;
 }
