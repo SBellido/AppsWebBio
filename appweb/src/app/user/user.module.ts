@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { MaterialModule } from './../../../material/material.module';
+import { MaterialModule } from './../material/material.module';
 
-import { ProposalComponent } from './components/proposal/components/proposal.component';
-import { UserComponent } from './components/user.components';
+import { ProposalComponent } from './../proposal/components/proposal.component';
+import { UserComponent } from './../user/components/user.components';
 
 @NgModule({
     declarations: [

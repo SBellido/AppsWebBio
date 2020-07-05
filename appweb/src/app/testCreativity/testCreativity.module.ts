@@ -7,16 +7,18 @@ import { MaterialModule } from './../material/material.module';
 import { SharedModule } from './../shared/shared.module';
 
 import { TestCreativityComponent } from './components/testCreativity.component';
-import { UserComponent } from './components/user/components/user.components';
+import { UserComponent } from './../user/components/user.components';
 import { ClockComponent } from './components/clock/clock.component';
 import { ElementComponent } from './components/element/element.component';
+import { ProposalComponent } from '../proposal/components/proposal.component';
 
 @NgModule({
     declarations: [
         TestCreativityComponent,
         UserComponent,
         ClockComponent,
-        ElementComponent
+        ElementComponent,
+        ProposalComponent
     ],
     imports: [
         CommonModule,

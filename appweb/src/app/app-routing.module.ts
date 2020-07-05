@@ -34,6 +34,11 @@ const routes: Routes = [
     loadChildren: () => import('./init-test/init-test.module')
       .then(m => m.InitTestModule)
   },
+  // {
+  //   path: 'user',
+  //   loadChildren: () => import('./user/user.module')
+  //     .then(m => m.UserModule)
+  // },
   {
     path: '**',
     loadChildren: () => import('./page-not-found/page-not-found.module')

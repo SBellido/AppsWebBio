@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 // import { AngularFireModule } from '@angular/fire';
 // import { AngularFireAuth } from '@angular/fire/auth';
@@ -19,11 +19,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
+import { UsersComponent } from './users/users.component';
 // import { environment } from './../environments/environment';
 
 @NgModule({
   declarations: [
     AppComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,11 +40,11 @@ import { MatCardModule } from '@angular/material/card';
     MatRadioModule,
     MatCardModule,
     ReactiveFormsModule,
-    InitTestModule
+    InitTestModule,
+    HttpClientModule,
     // AngularFireModule.initializeApp(environment.firebase),
     // AngularFireAuth,
     // AngularFireStorage,
-    // HttpClientModule,
     // AngularFireDatabase
   ],
   providers: [],

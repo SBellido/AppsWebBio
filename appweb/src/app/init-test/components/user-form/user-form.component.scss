@@ -22,7 +22,9 @@ div.row {
 .col {
   flex: 1;
 }
-
+div.col {
+  text-align: left;
+}
 .col:last-child {
   margin-right: 0;
 }

@@ -1,0 +1,13 @@
+<div *ngIf="user"> <!-- evita renderizar algo que no existe -->
+    <ul>
+        <li>ID: {{ user.id }}</li>
+        <li>Nombre: {{ user.name}}</li>
+        <li>Apellido: {{ user.lastName }}</li>
+        <li>Edad: {{ user.age }}</li>
+        <li>Educación formal: {{user.educationLevel}}</li>
+        <li>Puntos: {{ user.points }}</li>
+    </ul>
+    <button (click)="createUser()">CREAR</button>
+    <button (click)="updateUser()">EDITAR</button>
+    <button (click)="deleteUser()">ELIMINAR</button>
+</div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UsersService } from './services/user.service';
+import { UsersService } from './services/users/users.service';
 
 
 @NgModule({

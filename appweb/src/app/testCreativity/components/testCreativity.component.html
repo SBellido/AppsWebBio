@@ -7,11 +7,11 @@
     <section class="container">
         <article class="container-element-textarea"> 
             <app-element class="container-element"></app-element>   
-            <app-user 
+            <app-proposal
                 *ngFor="let proposal of proposals" 
                 (proposalAggregate)="addProposalToTextarea($event)"
                 [proposal]="proposal">
-            </app-user>   
+            </app-proposal>   
         </article>
         <app-clock></app-clock>
     </section>

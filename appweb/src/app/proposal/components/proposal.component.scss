@@ -1,0 +1,18 @@
+// .contain-proposal {
+//     display: grid;
+//     grid-template-columns: repeat(1, 1fr);
+// } 
+.textarea-test {
+    width: 350px;
+    height: 39em;
+    margin-top: 15px;
+}
+.container-textarea {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+}
+.label-test {
+    font-weight: 500;
+}
