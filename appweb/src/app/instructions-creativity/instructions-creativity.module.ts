@@ -4,14 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { InstructionsCreativityComponent } from './components/instructionsCreativity.component';
-import { SharedModule } from '../shared/shared.module';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
+import { SharedModule } from '../shared/shared.module';
 import { InstructionsCreativityRoutingModule } from './instructions-creativity-routing';
 import { MaterialModule } from './../material/material.module';
 
 @NgModule({
     declarations: [
         InstructionsCreativityComponent,
+        CarouselComponent
     ],
     imports: [
         CommonModule,
@@ -19,7 +21,7 @@ import { MaterialModule } from './../material/material.module';
         FormsModule,
         SharedModule,
         MaterialModule,
-        RouterModule
+        RouterModule,
     ]
 })
 

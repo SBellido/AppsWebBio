@@ -12,7 +12,13 @@ hr.line {
     border: 1px solid #FFCF02;
 }
 
-img:focus { outline: none; }
+.logo:focus { 
+    outline: none;    
+}
+
+.logo:hover {
+    cursor: pointer;
+} 
 
 mat-toolbar.container-header {
     background-color: #F9F9F9;

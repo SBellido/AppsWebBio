@@ -21,22 +21,30 @@ h1.title {
 .buttonHome {
     margin-top: 25px;
     font-size: larger;
-    padding: 10px 110px;
+    padding: 10px 116px;
     font-weight: 600;
-    color: #4A4067;
+    color: white;
+    background-color:#E33B88;
 }
 .image-calendar {
-    margin-bottom: 100px;
+    margin-top: 20px;
 }
 .container-icon {
     text-align: center;
     flex-direction: row;
-    margin: 15px 15px;
+    margin: 15px 15px 15px 15px;
     width: 300px;
-    height: 320px;
+    height: 300px;
     border: 1px solid  #4a4067;
     border-radius: 5%;
     align-content: center;
     background-color: #f9f9f9;
     margin-top: 15px;
+    padding-bottom: 25px;
+    border: 2px solid #E33B88;
+}
+
+h1.test {
+    font-weight: bold;
+    color: #E33B88;
 }

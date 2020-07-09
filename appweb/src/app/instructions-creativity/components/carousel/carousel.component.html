@@ -1,0 +1,26 @@
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide" *ngFor="let img of images">
+      <img [src]="img" alt="imagen del carousel">
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div *ngIf="img == 'assets/images/testCreatividad.png'">
+        <p>El objetivo de esta práctica es describir todos los usos posibles que se te ocurran para un objeto en particular.
+        Escribí tus propuestas y presioná "Enter", para que sea computada ésta será computada.</p>
+      </div>
+      <div *ngIf="img == 'assets/images/testInhibicion.png'">
+        <p> Usá tu creatividad para pensar tus propuestas, todas son válidas, no hay límites para tu imaginación.
+        Tu única limitación es el tiempo que marca el reloj en cuenta regresiva, disponés de 5 minutos.</p>
+      </div>
+      <div *ngIf="img == 'assets/images/testMemoria.png'">
+        <button routerLink="/init-test" routerLinkActive="active"
+            class="buttonGo" mat-raised-button>
+            <a>CONTINUAR</a><span class="material-icons icon-go"><mat-icon>chevron_right</mat-icon></span>
+        </button>
+      </div>
+    </div>
+    <!-- <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div> -->
+  </div>
+</div>

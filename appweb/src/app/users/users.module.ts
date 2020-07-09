@@ -2,23 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { UserRoutingModule } from './user-routing.module';
+import { UsersRoutingModule } from './users-routing.module';
 import { SharedModule } from './../shared/shared.module';
 import { MaterialModule } from './../material/material.module';
 
-import { UserComponent } from './../user/components/user.components';
+import { UsersComponent } from './components/users.component';
 
 @NgModule({
     declarations: [
-        UserComponent,
+        UsersComponent,
     ],
     imports: [
         CommonModule,
         FormsModule,
         MaterialModule,
         SharedModule,
-        UserRoutingModule
+        UsersRoutingModule
     ]
 })
 
-export class UserModule {}
+export class UsersModule {}

@@ -39,6 +39,16 @@ const routes: Routes = [
   //   loadChildren: () => import('./user/user.module')
   //     .then(m => m.UserModule)
   // },
+  // {
+  //   path: 'users',
+  //   loadChildren: () => import('./users/users.module')
+  //     .then(m => m.UsersModule)
+  // },
+  // {
+  //   path: 'login',
+  //   loadChildren: () => import('./auth/auth.module')
+  //     .then(m => m.AuthModule)
+  // },
   {
     path: '**',
     loadChildren: () => import('./page-not-found/page-not-found.module')

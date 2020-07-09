@@ -1,28 +1,24 @@
-.buttonGo {
-    padding: 5px 15px 5px 25px;
-    background-color: #78AF6F;
-    color: white;
-    margin: 15px;
-}
+
 .buttonBack { 
-    color: #AF6F6F;
+    color: #e33b88;
     padding: 5px 25px 5px 15px; 
-    border: 0.5px solid #AF6F6F; 
+    border: 0.5px solid #e33b88; 
 }
 
 a { margin: 20px; }
 
 .icon-back { 
-    background-color: #AF6F6F; 
+    // background-color: #AF6F6F; 
+    background-color: #e33b88; 
     color: white;
     border-radius: 50%; 
 }
-.icon-go { 
-    background-color: white;
-    color: #78AF6F; 
-    border-radius: 50%; 
+.container-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
 }
-
 .container {
     background-color: #f9f9f9;
     width: 100%;

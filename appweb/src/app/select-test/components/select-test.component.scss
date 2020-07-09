@@ -25,7 +25,19 @@ div.row {
     width: 100%;
     margin: 0px !important;
 }
+h3.test {
+    font-weight: bold;
+    color:#E33B88;
 
+}
+
+h3.test-off {
+    font-weight: bold;
+    color: #4A4067;
+}
+.icon-off { 
+    opacity: 0.5;
+}
 .test-icon {
     text-align: center;
     flex-direction: row;
@@ -50,17 +62,22 @@ div.row {
     border-radius: 5%;
     align-content: center;
     background-color: rgba($color: #FFFFFF, $alpha: 0.2);
-    -webkit-box-shadow: -2px 0px 15px -1px rgba(0,0,0,0.51);
-    -moz-box-shadow: -2px 0px 15px -1px rgba(0,0,0,0.51);
-    box-shadow: -2px 0px 15px -1px rgba(0,0,0,0.51);
 }
 .test-icon:focus { 
     outline: none; 
-    -webkit-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.51);
-    -moz-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.51);
-    box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.51);  
-    background-color: rgba($color: #FFFFFF, $alpha: 0.9);
- 
+    -webkit-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0);
+    -moz-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0);
+    box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0);  
+    background-color: rgba($color: #FFFFFF, $alpha: 0.5); 
+
+}
+img.icon, img.icon-off { margin-top: 15px; }
+
+.test-icon:hover {
+    cursor: pointer;
+    -webkit-box-shadow: inset 0 0 0 2px #f4c713;
+    -moz-box-shadow: inset 0 0 0 2px #f4c713;
+    box-shadow: inset 0px 0px 0px 2px #f4c713; 
 }
 
 figure.container {
@@ -68,13 +85,8 @@ figure.container {
     width: 100%;
 }
 
-img.icon { margin-top: 15px; }
 
 
-h3.test {
-    font-weight: lighter;
-    color: #f4c713;
-}
 
 
 hr.title-line {

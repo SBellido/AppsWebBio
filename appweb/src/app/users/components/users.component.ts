@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from './../core/models/user.module';
-import { UsersService } from './../core/services/users/users.service';
+import { User } from '../../core/models/user.module';
+import { UsersService } from '../../core/services/users/users.service';
 
 @Component({
   selector: 'app-users',
@@ -10,7 +10,9 @@ import { UsersService } from './../core/services/users/users.service';
 })
 export class UsersComponent implements OnInit {
 
-  users: User[] = [];
+  // users: User[] = [];
+  users = [];
+  displayedColumns: string[] = ['name', 'lastName', 'age', 'points'];
 
   constructor(
     private usersService: UsersService // inyecta dependencia
@@ -26,5 +28,13 @@ export class UsersComponent implements OnInit {
       this.users = users; // asigna a la variable el array que trae el service
     });
   }
+
+  deleteUser(id: number) {
+    this.usersService.deleteUser(3)
+    .subscribe(user => {
+      console.log(user);
+    });
+  }
+
 
 }

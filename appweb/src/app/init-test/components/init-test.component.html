@@ -1,61 +1,3 @@
-<!-- <app-header-light></app-header-light>
-<div class="container-all">
-    <div class="row">
-        <div class="col-xs-offset-3 col-xs-9">
-            <div class="box">
-                <h1 class="title">Ejemplo de la actividad</h1><hr>            
-                <img src="assets/images/ejemplo_diario.jpg" alt="">
-            </div>
-            <div class="col-lg-4">
-                <ul class="how-to-do-items">
-                    <h1 class="title">¿Cómo hacerla?</h1>
-                    <hr>
-                    <li>
-                        Mirá el ejemplo.
-                    </li>
-                    <li>
-                        Completá el formulario.                
-                    </li>
-                    <li>
-                        Presioná "COMENZAR".
-                    </li>
-                    <li>
-                        Escribí tus propuesta.                
-                    </li>
-                    <li>
-                        Disponés de 5 minutos.
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div> -->
-                <!-- <article class="how-to-do">
-                    <ul class="how-to-do-items">
-                    <h1 class="title">¿Cómo hacerla?</h1>
-                    <hr>
-                    <li>
-                        Mirá el ejemplo.
-                    </li>
-                    <li>
-                        Completá el formulario.                
-                    </li>
-                    <li>
-                        Presioná "COMENZAR".
-                    </li>
-                    <li>
-                        Escribí tus propuesta.                
-                    </li>
-                    <li>
-                        Disponés de 5 minutos.
-                    </li>
-                </ul>
-                </article>       
-                <article class="container-form">
-                    <app-user-form></app-user-form>
-                </article> -->
-     
-
 <div class="container-all">
     <app-header-light></app-header-light>
     <div class="container-title-ejemplo">
@@ -76,21 +18,25 @@
                 </div>
                 <h2 class="ready">¡Listo!</h2>
                 <p class="detail">A la cuenta de 3 empezá<br>a escribir tus propuestas.</p>
-                <!-- <li>
-                    Escribí tus propuesta.                
-                </li>
-                <li>
-                    Disponés de 5 minutos.
-                </li> -->
             </ul>
         </article>
         <article class="container-example">
             <h2 class="title">¿Qué usos le darías a un Diario?</h2>
             <img src="assets/images/diario.jpg" alt="">
             <h2 class="example"><span> Por ejemplo, hacer un avión de papel</span></h2>
-        </article>                    
+        </article>
+        <div></div>
+        <!-- <div class="container-form">
+
+        </div>                     -->
         <article class="container-form">
             <app-user-form container-form></app-user-form>
+        <!-- <input [formControl]="emailField" type="text">
+        {{ emailField.valid }}, {{ emailField.invalid }} 
+        <button routerLink="/test-creativity" routerLinkActive="active"
+            mat-raised-button class="buttonForm" type="submit"
+            *ngIf="emailField.valid" (click)="sendUserData()">ENVIAR</button>
+        <p *ngIf="emailField.invalid">Ingresá entre 3 y 15 letras</p> -->
         </article>    
     </section> 
 </div>

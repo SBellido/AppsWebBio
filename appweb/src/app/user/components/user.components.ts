@@ -37,12 +37,14 @@ export class UserComponent implements OnInit {
 
     createUser() {
     const newUser: User = {
-        id: 3,
+        id: '',
         name: 'Paco',
         lastName: 'Campos',
         age: 40,
         educationLevel: 'Secundaria',
-        points: 52,
+        points: 0,
+        email: 'example@gmail.com',
+        proposals: ['']
     };
     this.usersService.createUser(newUser)
     .subscribe(user => {
@@ -62,7 +64,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  deleteUser() {
+  deleteUser(id: number) {
     this.usersService.deleteUser(3)
     .subscribe(user => {
       console.log(user);

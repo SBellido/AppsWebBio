@@ -7,4 +7,9 @@
 
 .nav_logo { padding: 55px 50px 25px 50px; }
 
-img:focus { outline: none; }
+.logo:focus { 
+   outline: none;    
+}
+.logo:hover {
+   cursor: pointer;
+} 

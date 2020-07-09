@@ -2,20 +2,7 @@
     background: #F9F9F9 !important;
     height: 100%;
 }
-.textarea-test {
-    width: 350px;
-    height: 39em;
-    margin-top: 15px;
-}
-.container-textarea {
-    display: flex;
-    justify-content: center;
-    align-items: left;
-    flex-direction: column;
-}
-.label-test {
-    font-weight: 500;
-}
+
 .line-test {
     margin-left: 70px;
     color: #4a4067;
@@ -28,4 +15,14 @@
 .test-name {
     margin-left: 70px;
     color: #4a4067;
+}
+
+.container-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.users-table {
+    width: 50%;
 }

@@ -12,7 +12,7 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 @NgModule({
   declarations: [
     InitTestComponent,
-    UserFormComponent
+    UserFormComponent,
   ],
   imports: [
     CommonModule,

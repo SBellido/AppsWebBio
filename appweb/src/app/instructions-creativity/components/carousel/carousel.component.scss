@@ -1,0 +1,20 @@
+.swiper-container {
+    width: 33%;
+    height: 500px;
+}
+.buttonGo {
+    padding: 5px 15px 5px 25px;
+    background-color: #78AF6F;
+    color: white;
+    margin: 15px;
+}
+.icon-go { 
+    background-color: white;
+    color: #78AF6F; 
+    border-radius: 50%; 
+}
+a { margin: 20px; }
+
+.swiper-button-next .swiper-button-prev {
+    background-color: #78AF6F !important;
+}

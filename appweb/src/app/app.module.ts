@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-// import { AngularFireModule } from '@angular/fire';
-// import { AngularFireAuth } from '@angular/fire/auth';
-// import { AngularFireStorage } from '@angular/fire/storage';
-// import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from './../environments/environment';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { InitTestModule } from './init-test/init-test.module';
 import { CoreModule } from './core/core.module';
@@ -19,13 +20,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
-import { UsersComponent } from './users/users.component';
-// import { environment } from './../environments/environment';
+// import { LoginComponent } from './auth/components/login/login.component';
+// import { RegisterComponent } from './auth/components/register/register.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent,
+    // LoginComponent,
+    // RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,10 +45,10 @@ import { UsersComponent } from './users/users.component';
     ReactiveFormsModule,
     InitTestModule,
     HttpClientModule,
-    // AngularFireModule.initializeApp(environment.firebase),
-    // AngularFireAuth,
-    // AngularFireStorage,
-    // AngularFireDatabase
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

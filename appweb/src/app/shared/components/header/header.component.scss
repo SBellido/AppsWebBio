@@ -37,3 +37,10 @@ nav > a {
 nav > a.active {  
     border-bottom: 3px solid  #4a4067;  
 }
+
+.logo:focus { 
+    outline: none;    
+}
+.logo:hover {
+    cursor: pointer;
+} 
