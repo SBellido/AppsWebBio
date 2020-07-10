@@ -2,22 +2,57 @@
   <div class="swiper-wrapper">
     <div class="swiper-slide" *ngFor="let img of images">
       <img [src]="img" alt="imagen del carousel">
+      <div *ngIf="img == 'assets/images/instruction_c1.png'">
+        <div class="container-instructions">
+          <div class="container-title-intruction">
+            <h3 class="intruction">Instrucción 1 de 4</h3>
+          </div>
+          <ul class="container-items">
+            <li>
+              El objetivo de esta práctica es describir todos los usos que se te ocurran<br>para un objeto en particular.
+            </li>
+            <li>
+              Escribí tus propuestas y presioná<br>"Enter" al terminar cada una.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div *ngIf="img == 'assets/images/instruction_c2.png'">
+        <div class="container-instructions">
+          <div class="container-number">
+            <h3 class="intruction">Instrucción 2 de 4</h3>
+          </div>
+          <ul class="container-items">
+            <li>Usá tu imaginación y creatividad para generar tus propuestas, todas son válidas, no hay límites.</li>
+            <li>Tu única limitación es el tiempo,<br>vas a disponer de 5 minutos.</li>
+          </ul>
+        </div>
+      </div>
+      <div *ngIf="img == 'assets/images/instruction_c3.png'">
+        <div class="container-instructions">
+          <div class="container-number">
+            <h3 class="intruction">Instrucción 3 de 4</h3>
+          </div>
+          <ul class="container-items">
+            <li><h3>Te damos un ejemplo.</h3></li>
+            <li>¿Qué uso le darías a un diario?</li>
+            <li>"Hacer un avión de papel".</li>
+          </ul>
+        </div>       
+      </div>
+      <div *ngIf="img == 'assets/images/instruction_c4.png'">
+        <div class="container-instructions">
+          <div class="container-number">
+            <h3 class="intruction">Instrucción 4 de 4</h3>
+          </div>
+          <button routerLink="/init-test" routerLinkActive="active"
+            class="buttonGo" mat-raised-button>
+          <a>COMENZAR</a>
+          </button>
+        </div>       
+      </div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
-      <div *ngIf="img == 'assets/images/testCreatividad.png'">
-        <p>El objetivo de esta práctica es describir todos los usos posibles que se te ocurran para un objeto en particular.
-        Escribí tus propuestas y presioná "Enter", para que sea computada ésta será computada.</p>
-      </div>
-      <div *ngIf="img == 'assets/images/testInhibicion.png'">
-        <p> Usá tu creatividad para pensar tus propuestas, todas son válidas, no hay límites para tu imaginación.
-        Tu única limitación es el tiempo que marca el reloj en cuenta regresiva, disponés de 5 minutos.</p>
-      </div>
-      <div *ngIf="img == 'assets/images/testMemoria.png'">
-        <button routerLink="/init-test" routerLinkActive="active"
-            class="buttonGo" mat-raised-button>
-            <a>CONTINUAR</a><span class="material-icons icon-go"><mat-icon>chevron_right</mat-icon></span>
-        </button>
-      </div>
     </div>
     <!-- <div class="swiper-slide">Slide 1</div>
         <div class="swiper-slide">Slide 2</div>

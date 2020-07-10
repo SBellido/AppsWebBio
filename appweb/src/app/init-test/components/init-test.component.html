@@ -1,43 +1,20 @@
 <div class="container-all">
-    <app-header-light></app-header-light>
+    <app-header></app-header>
     <div class="container-title-ejemplo">
         <h3 class="test-name">Actividad seleccionada: CREATIVIDAD</h3>
         <hr class="line-test">
     </div>
     <section class="container">          
-        <article class="how-to-do">
-            <ul class="how-to-do-items">
-                <div class="container-title-how-to-do">
-                    <img src="assets/images/testCreatividad.png" alt="">
-                </div>
-                <h1 class="title-how-to-do">¿Cómo empezar?</h1>
-                <div class="list-how-do">
-                    <li>Mirá el ejemplo</li>
-                    <li>Completá el formulario</li>
-                    <li>Presioná "COMENZAR"</li>
-                </div>
-                <h2 class="ready">¡Listo!</h2>
-                <p class="detail">A la cuenta de 3 empezá<br>a escribir tus propuestas.</p>
-            </ul>
-        </article>
-        <article class="container-example">
-            <h2 class="title">¿Qué usos le darías a un Diario?</h2>
-            <img src="assets/images/diario.jpg" alt="">
-            <h2 class="example"><span> Por ejemplo, hacer un avión de papel</span></h2>
-        </article>
-        <div></div>
-        <!-- <div class="container-form">
-
-        </div>                     -->
         <article class="container-form">
             <app-user-form container-form></app-user-form>
-        <!-- <input [formControl]="emailField" type="text">
-        {{ emailField.valid }}, {{ emailField.invalid }} 
-        <button routerLink="/test-creativity" routerLinkActive="active"
-            mat-raised-button class="buttonForm" type="submit"
-            *ngIf="emailField.valid" (click)="sendUserData()">ENVIAR</button>
-        <p *ngIf="emailField.invalid">Ingresá entre 3 y 15 letras</p> -->
         </article>    
     </section> 
 </div>
 <router-outlet></router-outlet>
+
+<!-- <input [formControl]="emailField" type="text">
+{{ emailField.valid }}, {{ emailField.invalid }} 
+<button routerLink="/test-creativity" routerLinkActive="active"
+    mat-raised-button class="buttonForm" type="submit"
+    *ngIf="emailField.valid" (click)="sendUserData()">ENVIAR</button>
+<p *ngIf="emailField.invalid">Ingresá entre 3 y 15 letras</p> -->
