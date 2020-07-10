@@ -1,0 +1,78 @@
+<!-- <div class="form-container">
+    <h1>contact</h1>
+    <form [formGroup]="contactForm" (ngSubmit)="onSaveForm()">
+        <input type="text" matInput placeholder="Tu nombre" formControlName="name">
+        <input type="text" matInput placeholder="Tu apellido" formControlName="lastName"> 
+        <input type="number" matInput placeholder="Tu edad" formControlName="age">
+        <input type="email" matInput placeholder="Tu email" formControlName="email">
+        <input type="text" matInput placeholder="Educación formal" formControlName="educationLevel">
+    <button type="submit">Enviar</button>
+    </form>
+</div> -->
+
+<!-- <div class="form-container">
+    <h1>contact</h1>
+    <form [formGroup]="contactForm" (ngSubmit)="onSaveForm()">
+        <input type="text" matInput placeholder="Tu nombre" formControlName="name">
+        <input type="text" matInput placeholder="Tu apellido" formControlName="lastName"> 
+        <input type="number" matInput placeholder="Tu edad" formControlName="age">
+        <input type="email" matInput placeholder="Tu email" formControlName="email">
+        <input type="text" matInput placeholder="Educación formal" formControlName="educationlevel">
+    <button type="submit">Enviar</button>
+    </form>
+</div> -->
+
+<form [formGroup]="contactForm" (ngSubmit)="onSaveForm()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>Datos personales</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input type="text" matInput placeholder="Nombre" formControlName="name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+                <input type="text" matInput placeholder="Apellido" formControlName="lastName"> 
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+                <input type="number" matInput placeholder="Edad" formControlName="age">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <input type="email" matInput placeholder="Email" formControlName="email">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+            <mat-form-field class="full-width">
+                <input type="text" matInput placeholder="Educación formal" formControlName="educationLevel">
+            </mat-form-field>
+            </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card-actions class="container-button">
+        <button mat-raised-button class="buttonForm" type="submit">
+            ENVIAR
+        </button>   
+    </mat-card-actions>
+  </form>
+  <router-outlet></router-outlet>
+  
+  
+  
+  

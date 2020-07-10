@@ -4,14 +4,15 @@
 
 export const environment = {
   production: false,
-   firebase: {
-    apiKey: 'AIzaSyB9UAEpvxmQs7zRVT7GeMPE7mjX_997bCE',
-    authDomain: 'investigar-664cd.firebaseapp.com',
-    databaseURL: 'https://investigar-664cd.firebaseio.com',
-    projectId: 'investigar-664cd',
-    storageBucket: 'investigar-664cd.appspot.com',
-    messagingSenderId: '777580032337',
-    appId: '1:777580032337:web:8bca09ed563e416cb8e370'
+  firebaseConfig : {
+    apiKey: 'AIzaSyAzvJ5tF7OHEBGcTv9oB0B3Q2hlG8o2cVQ',
+    authDomain: 'investigapp-ec690.firebaseapp.com',
+    databaseURL: 'https://investigapp-ec690.firebaseio.com',
+    projectId: 'investigapp-ec690',
+    storageBucket: 'investigapp-ec690.appspot.com',
+    messagingSenderId: '928587026895',
+    appId: '1:928587026895:web:e134d071fd370d9fd7c2ba',
+    measurementId: 'G-214XGZYCLF'
   }
 };
 

@@ -1,11 +1,12 @@
-
 .full-width {
-  width: 92%;
+  width: 100%;
 }
 
 .shipping-card {
   min-width: 300px;
-  margin: 0px auto 30px auto;
+  color: #4a4067;
+  padding: 25px 15px;
+  margin-bottom: 25px;
 }
 
 .mat-radio-button {
@@ -33,16 +34,56 @@ mat-label.label {
   font-weight: 500;
 }
 
-.buttonForm {
-  background-color: #78AF6F;
-  color: white;
-  font-size: large;
-  padding: 15px 116px;
-  font-weight: 600;
-}
-
 .container-button {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.buttonBack { 
+color: #e33b88;
+padding: 5px 25px 5px 15px; 
+border: 0.5px solid #e33b88; 
+}
+
+.icon-back { 
+// background-color: #AF6F6F; 
+background-color: #e33b88; 
+color: white;
+border-radius: 50%; 
+}
+
+a { margin: 20px; }
+
+.buttonGo { 
+  color: white;
+  padding: 5px 15px 5px 25px; 
+  border: 0.5px solid #4a4067;
+  background-color: #4a4067; 
+ 
+}
+
+.icon-go { 
+  // background-color: #AF6F6F; 
+  background-color: white; 
+  color: #4a4067;
+  border-radius: 50%; 
+}
+
+a { margin: 20px; }
+
+.mat-card-actions {
+  margin-left: 0px;
+}
+
+// .buttonForm {
+//   background-color: #4a4067;
+//   color: white;
+//   font-size: larger;
+//   padding: 10px 80px;
+//   font-weight: 600;
+// }
+
+
+
+

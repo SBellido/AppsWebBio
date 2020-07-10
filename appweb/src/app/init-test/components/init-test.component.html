@@ -1,14 +1,21 @@
 <div class="container-all">
     <app-header></app-header>
-    <div class="container-title-ejemplo">
-        <h3 class="test-name">Actividad seleccionada: CREATIVIDAD</h3>
-        <hr class="line-test">
+    <div class="container">
+        <div class="container-title">
+            <h1 class="title">Completá el formulario</h1><br>
+        </div>       
+        <section class="container-form">
+            <!-- <app-user-form></app-user-form> -->
+            <app-contact></app-contact>
+        </section>
+        <!-- <div class="container-button">
+            <button routerLink="/instructions-creativity" routerLinkActive="active"
+                class="buttonBack" mat-raised-button>
+                <span class="material-icons icon-back"><mat-icon>chevron_left</mat-icon></span>
+                <a>REGRESAR</a>
+            </button>
+        </div>     -->
     </div>
-    <section class="container">          
-        <article class="container-form">
-            <app-user-form container-form></app-user-form>
-        </article>    
-    </section> 
 </div>
 <router-outlet></router-outlet>
 

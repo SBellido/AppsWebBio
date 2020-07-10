@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UsersService } from './services/users/users.service';
-
+import { DataDbService } from './services/db/data-db.service';
 
 @NgModule({
   declarations: [],
@@ -10,7 +10,8 @@ import { UsersService } from './services/users/users.service';
     CommonModule
   ],
   providers: [
-    UsersService
+    UsersService,
+    DataDbService
   ]
 })
 export class CoreModule { }
