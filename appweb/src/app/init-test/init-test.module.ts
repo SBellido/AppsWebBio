@@ -26,4 +26,5 @@ import { DataDbService } from './../core/services/db/data-db.service';
   ],
   providers: [DataDbService]
 })
+
 export class InitTestModule { }

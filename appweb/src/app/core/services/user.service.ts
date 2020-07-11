@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
+// import { Injectable } from '@angular/core';
 
-import { User } from 'src/app/core/models/user.module';
+// import { User } from 'src/app/core/models/user.module';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class UsersService {
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class UsersService {
 
-  users: User[];
+//   users: User[];
 
-  constructor() { }
+//   constructor() { }
 
-  getAllUsers() {
-    return this.users;
-  }
-  getUser(id: string) {
-    return this.users.find(item => id === item.id);
-  }
-}
+//   getAllUsers() {
+//     return this.users;
+//   }
+//   getUser(id: string) {
+//     return this.users.find(item => id === item.id);
+//   }
+// }

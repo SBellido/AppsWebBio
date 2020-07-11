@@ -22,55 +22,138 @@
     </form>
 </div> -->
 
-<form [formGroup]="contactForm" (ngSubmit)="onSaveForm()">
+<form [formGroup]="contactForm" novalidate (ngSubmit)="onSaveForm()">
     <mat-card class="shipping-card">
-      <mat-card-header>
+      <mat-card-header class="container-title">
         <mat-card-title>Datos personales</mat-card-title>
       </mat-card-header>
       <mat-card-content>
+        <div class="container-message">
+          <p class="message">Todos los campos son requeridos</p>
+        </div>
         <div class="row">
           <div class="col">
-            <mat-form-field class="full-width">
-              <input type="text" matInput placeholder="Nombre" formControlName="name">
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Nombre</mat-label>
+              <input matNativeControl type="text" matInput placeholder="Ingresá tu nombre" formControlName="name">
+              <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+                <div class="container-error-message" *ngIf="name.errors.required">
+                  Tu nombre es un dato requerido.
+                </div>
+                <div class="container-error-message" *ngIf="name.errors.minlength">
+                  Debe tener 3 carácteres como mínimo.
+                </div>
+                <div class="container-error-message" *ngIf="name.errors.maxlength">
+                  Puede tener 15 carácteres como máximo.
+                </div>
+                <div class="container-error-message" *ngIf="(name.errors.pattern)">
+                  El nombre ingresado debe ser válido
+                </div>
+              </div>
+            </mat-form-field>
+          </div>       
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Apellido</mat-label>
+                <input matNativeControl type="text" matInput placeholder="Ingresá tu apellido" formControlName="lastName"> 
+                <div class="alert-danger" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                  <div class="container-error-message" *ngIf="lastName.errors.required">
+                    Tu apellido es un dato requerido.
+                  </div>
+                  <div class="container-error-message" *ngIf="(lastName.errors.pattern)">
+                    El apellido ingresado debe ser válido
+                  </div>
+                  <div class="container-error-message" *ngIf="lastName.errors.minlength">
+                    Debe tener 3 caracteres como mínimo.
+                  </div>
+                  <div class="container-error-message" *ngIf="lastName.errors.maxlength">
+                    Puede tener 15 caracteres como máximo.
+                  </div>
+                </div>
             </mat-form-field>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <mat-form-field class="full-width">
-                <input type="text" matInput placeholder="Apellido" formControlName="lastName"> 
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Edad</mat-label>
+                <input matNativeControl type="number" matInput placeholder="Ingresá tu edad" formControlName="age">
+                <div class="alert-danger" *ngIf="age.invalid && (age.dirty || age.touched)">
+                  <div class="container-error-message" *ngIf="age.errors.required">
+                    Tu edad es un dato requerido.
+                  </div>
+                  <div class="container-error-message" *ngIf="age.errors.min">
+                    Es necesario que tengas al menos 10 años.
+                  </div>
+                  <div class="container-error-message" *ngIf="age.errors.max">
+                    No podés tener más de 100 años.
+                  </div>
+                </div>
             </mat-form-field>
           </div>
         </div>
         <div class="row">
           <div class="col">
-            <mat-form-field class="full-width">
-                <input type="number" matInput placeholder="Edad" formControlName="age">
-            </mat-form-field>
+              <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Email</mat-label>
+                  <input matNativeControl type="email" matInput placeholder="Ingresá tu email" formControlName="email" >
+                  <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <div class="container-error-message" *ngIf="email.errors.required">
+                      Tu email es un dato requerido.
+                    </div>
+                    <div class="container-error-message" *ngIf="(email.dirty || email.touched)
+                      && (email.errors.pattern)">
+                      El email ingresado debe ser válido
+                    </div>
+                  </div>
+              </mat-form-field>
           </div>
-        </div>
+        </div> 
+
+        <!-- <mat-form-field appearance="fill">
+          <mat-label>Educación formal</mat-label>
+          <select matNativeControl>
+            <option value="" selected></option>
+            <option value="Primaria">Primaria</option>
+            <option value="Secundaria" disabled>Secundaria</option>
+            <option value="Terciaria">Terciaria</option>
+            <option value="Universitaria">Universitaria</option>
+            <option value="Ninguna">Ninguna</option>
+          </select>
+        </mat-form-field>
+          -->
         <div class="row">
             <div class="col">
-                <mat-form-field class="full-width">
-                    <input type="email" matInput placeholder="Email" formControlName="email">
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-            <mat-form-field class="full-width">
-                <input type="text" matInput placeholder="Educación formal" formControlName="educationLevel">
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Educación formal</mat-label>
+              <select matNativeControl formControlName="educationLevel" matInput placeholder="Educación formal">
+                <option value="" selected></option>
+                <option value="Primaria">Primaria</option>
+                <option value="Secundaria">Secundaria</option>
+                <option value="Terciaria">Terciaria</option>
+                <option value="Universitaria">Universitaria</option>
+                <option value="Ninguna">Ninguna</option>
+              </select>
+              <div class="alert-danger" *ngIf="educationLevel.invalid && (educationLevel.dirty || educationLevel.touched)">
+                <div class="container-error-message" *ngIf="educationLevel.errors.required">
+                  Éste es un dato requerido.
+                </div>
+              </div>
             </mat-form-field>
             </div>
         </div>
       </mat-card-content>
     </mat-card>
     <mat-card-actions class="container-button">
-        <button mat-raised-button class="buttonForm" type="submit">
-            ENVIAR
+        <button mat-raised-button class="buttonForm" 
+          type="submit" [disabled]="!contactForm.valid">
+          ENVIAR
         </button>   
     </mat-card-actions>
   </form>
+
   <router-outlet></router-outlet>
   
   

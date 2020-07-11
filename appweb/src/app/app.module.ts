@@ -4,8 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire';
-// import { AngularFireAuthModule } from '@angular/fire/auth';
-// import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from './../environments/environment';
 
@@ -43,9 +41,7 @@ import { MatCardModule } from '@angular/material/card';
     InitTestModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    // AngularFireAuthModule,
     AngularFirestoreModule,
-    // AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

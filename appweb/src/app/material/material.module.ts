@@ -37,7 +37,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatMenuModule,
     MatSortModule,
     LayoutModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   exports: [
     MatButtonModule,
@@ -55,7 +55,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatMenuModule,
     MatSortModule,
     LayoutModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ]
 })
 export class MaterialModule { }
