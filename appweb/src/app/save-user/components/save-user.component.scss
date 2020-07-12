@@ -28,7 +28,7 @@ span {
     margin-left: 70px;
     color: #4a4067;
 }
-.container-test-name {
+.col {
     background-color: #eeeeee;
     padding: 0px;
     width: 33%;
@@ -47,11 +47,6 @@ h1.title {
     flex-direction: column; 
 }
 
-
-h3.test-off {
-    font-weight: bold;
-    color: #4A4067;
-}
 .icon-off { 
     opacity: 0.5;
 }
@@ -83,7 +78,7 @@ div.test-icon {
 
 img.icon { 
     width: 76px; height: 76px; 
-    margin-top: 20px; 
+    margin-top: 10px; 
 }
 
 .test-icon:hover {
@@ -91,9 +86,9 @@ img.icon {
     -webkit-box-shadow: inset 0 0 0 2px #f4c713;
     -moz-box-shadow: inset 0 0 0 2px #f4c713;
     box-shadow: inset 0px 0px 0px 2px #f4c713; 
-    background-color: rgba($color: #FFFFFF, $alpha: 0.8); 
+    background-color: rgba($color: #FFFFFF, $alpha: 0.0); 
 }
-h3.test {
+h4.test {
     margin: 10px;
     font-weight: bold;
     color:#E33B88;

@@ -1,1 +1,15 @@
-<p>my-dialog works!</p>
+<div class="container-all">
+    <div class="container-message">
+        <img src="assets\images\ready.png" alt="">
+        <h1 mat-dialog-title class="mesagge">¡Gracias!</h1>
+        <h4 class="mesagge">Tus datos fueron guardados con éxito
+        <br>A la cuenta de tres comenzará la actividad</h4>
+    </div>
+    <div class="container-button">
+        <button (click)="goTest()" class="button" mat-raised-button
+            routerLink="/test-creativity" routerLinkActive="active"
+            data-backdrop="static" data-keyboard="false">
+            ACEPTAR
+        </button>
+    </div>
+</div>

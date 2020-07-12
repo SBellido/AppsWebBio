@@ -1,13 +1,12 @@
 <div class="container-all">
     <app-header></app-header>
     <div class="row">
-        <div class="col"></div>
-            <div class="container-test-name">
-                <div class="test-icon" routerLink="/instructions-creativity" routerLinkActive="active">
-                    <img class="icon" src="assets/images/testCreatividad.png" alt="mano sosteniendo un foco, test de creatividad">
-                    <h3 class="test">CREATIVIDAD</h3>
-                </div>
+        <div class="col">
+            <div class="test-icon" routerLink="/instructions-creativity" routerLinkActive="active">
+                <img class="icon" src="assets/images/testCreatividad.png" alt="mano sosteniendo un foco, test de creatividad">
+                <h4 class="test">INSTRUCCIONES</h4>
             </div>
+        </div>
         <div class="col">          
             <app-contact></app-contact>
             <!-- <button routerLink="/instructions-creativity" routerLinkActive="active"
@@ -16,15 +15,6 @@
                 <a>REGRESAR</a>
             </button> -->
         </div>
-        </div>           
-    </div>
-    <div>
+    </div>           
 </div>
 <router-outlet></router-outlet>
-
-<!-- <input [formControl]="emailField" type="text">
-{{ emailField.valid }}, {{ emailField.invalid }} 
-<button routerLink="/test-creativity" routerLinkActive="active"
-    mat-raised-button class="buttonForm" type="submit"
-    *ngIf="emailField.valid" (click)="sendUserData()">ENVIAR</button>
-<p *ngIf="emailField.invalid">Ingresá entre 3 y 15 letras</p> -->
