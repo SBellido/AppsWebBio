@@ -20,9 +20,11 @@
     font-weight: 600;   
     background-color: #4a4067;
     color: white;
-    margin-top: 50px;
+    margin-top: 75px;
 }
-
+.buttonGo:hover {
+    background-color: #4a40679f;
+}
 a { margin: 20px; }
 
 div.swiper-button-prev, .swiper-button-next {
@@ -40,6 +42,8 @@ div.swiper-button-next:hover, div.swiper-button-prev:hover {
     -webkit-box-shadow: inset 0 0 0 2px #f4c713;
     -moz-box-shadow: inset 0 0 0 2px #f4c713;
     box-shadow: inset 0px 0px 0px 2px #f4c713; 
+    background-color: rgba($color: #f4c713, $alpha: 0.1); 
+
     
 }
 

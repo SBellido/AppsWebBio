@@ -57,6 +57,7 @@ export class ContactComponent implements OnInit {
     if (this.contactForm.valid) {
       this.dbData.saveContact(this.contactForm.value);
       this.onResetForm();
+      alert('Tus datos fueron guardados correctamente');
       console.log('Valid');
     } else {
       console.log('Not valid');

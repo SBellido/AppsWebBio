@@ -5,8 +5,8 @@
 mat-card.shipping-card {
   min-width: 400px;
   color: #4a4067;
-  padding: 0px 0px 25px 0px;
-  margin-bottom: 25px;
+  padding: 10px 10px 0px 10px;
+  margin: 50px 25px 20px 25px;
 }
 mat-card > mat-card-header.container-title {
   background-color: #4a4067;
@@ -14,17 +14,13 @@ mat-card > mat-card-header.container-title {
   display: flex;  
   justify-content: center;
   padding-top: 15px;
+  padding-bottom: 5px;
 }
 p.message {
   display: flex;  
   justify-content: center;
   font-weight: bold;
   color: #e33b88;
-}
-
-.mat-radio-button {
-  display: block;
-  margin: 5px 0;
 }
 
 div.row {
@@ -85,9 +81,9 @@ a { margin: 20px; }
 
 a { margin: 20px; }
 
-.mat-card-actions {
-  margin-left: 0px;
-}
+// .mat-card-actions {
+//   margin-left: 0px;
+// }
 .alert-danger {
   margin-top: 0px;
 }
@@ -95,7 +91,7 @@ a { margin: 20px; }
   background-color: #78af6f;
   color: white;
   font-size: large;
-  padding: 10px 80px;
+  padding: 10px 178px;
   font-weight: 500;
 }
 div.container-error-message {

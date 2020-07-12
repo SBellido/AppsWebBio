@@ -68,9 +68,8 @@ h3.test-off {
     -webkit-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0);
     -moz-box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0);
     box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0);  
-    background-color: rgba($color: #FFFFFF, $alpha: 0.5); 
-
 }
+
 img.icon, img.icon-off { margin-top: 15px; }
 
 .test-icon:hover {
@@ -78,16 +77,13 @@ img.icon, img.icon-off { margin-top: 15px; }
     -webkit-box-shadow: inset 0 0 0 2px #f4c713;
     -moz-box-shadow: inset 0 0 0 2px #f4c713;
     box-shadow: inset 0px 0px 0px 2px #f4c713; 
+    background-color: rgba($color: #FFFFFF, $alpha: 0.8); 
 }
 
 figure.container {
     margin: 0px !important;
     width: 100%;
 }
-
-
-
-
 
 hr.title-line {
     border: 0.5px solid #f4c713;
