@@ -16,7 +16,7 @@ import { ProposalComponent } from '../proposal/components/proposal.component';
         TestCreativityComponent,
         ClockComponent,
         ElementComponent,
-        ProposalComponent
+        ProposalComponent,
     ],
     imports: [
         CommonModule,
@@ -28,3 +28,5 @@ import { ProposalComponent } from '../proposal/components/proposal.component';
 })
 
 export class TestCreativityModule {}
+
+
