@@ -8,14 +8,14 @@ import { ContactI } from './../../models/contact.interface';
 })
 
 export class DataDbService {
-  private contactCollection: AngularFirestoreCollection<ContactI>;
+  private creativesCollection: AngularFirestoreCollection<ContactI>;
 
   constructor(private afs: AngularFirestore) {
-    this.contactCollection = afs.collection<any>('contacts');
+    this.creativesCollection = afs.collection<any>('creatives-users');
   }
 
   saveContact(newContact: any): void {
-    this.contactCollection.add(newContact);
+    this.creativesCollection.add(newContact);
   }
 
 }

@@ -10,7 +10,6 @@ import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
-import { InitTestModule } from './init-test/init-test.module';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
@@ -18,11 +17,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
+import { MyDialogComponent } from './my-dialog/my-dialog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    MyDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,6 @@ import { MatCardModule } from '@angular/material/card';
     MatRadioModule,
     MatCardModule,
     ReactiveFormsModule,
-    InitTestModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

@@ -48,12 +48,12 @@ export class ClockComponent implements OnInit, OnDestroy {
       getCurrentTime() {
         let timeText = '';
         if (this.clock.seconds < 10) {
-            timeText += this.clock.minutes + ':0' + this.clock.seconds;
+            timeText += this.clock.minutes + this.clock.seconds;
             if (this.clock.minutes === 1) {
                 this.clock.paused = true;
             }
         } else {
-            timeText += this.clock.minutes + ':' + this.clock.seconds;
+            timeText += this.clock.minutes + this.clock.seconds;
         }
         return timeText;
     }
@@ -67,7 +67,7 @@ export class ClockComponent implements OnInit, OnDestroy {
     // ngDoCheck() {
     //     console.log('ngDoCheck');
     // }
-    
+
     // ngOnChanges(changes: SimpleChanges) {
     //     console.log('ngOnChanges');
     //     console.log(changes);

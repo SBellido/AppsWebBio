@@ -14,30 +14,25 @@ const routes: Routes = [
       .then(m => m.HomeModule)
   },
   {
+    path: 'select-test',
+    loadChildren: () => import('./select-test/select-test.module')
+    .then(m => m.SelectTestModule)
+  },
+  {
     path: 'instructions-creativity',
     loadChildren:  () => import('./instructions-creativity/instructions-creativity.module')
-      .then(m => m.InstructionsCreativityModule)
+    .then(m => m.InstructionsCreativityModule)
+  },
+  {
+    path: 'save-user',
+    loadChildren: () => import('./save-user/save-user.module')
+    .then(m => m.SaveUserModule)
   },
   {
     path: 'test-creativity',
     // routea un modulo
     loadChildren: () => import('./testCreativity/testCreativity.module')
-      .then(m => m.TestCreativityModule)
-  },
-  {
-    path: 'select-test',
-    loadChildren: () => import('./select-test/select-test.module')
-      .then(m => m.SelectTestModule)
-  },
-  {
-    path: 'init-test',
-    loadChildren: () => import('./init-test/init-test.module')
-      .then(m => m.InitTestModule)
-  },
-  {
-    path: 'prueba',
-    loadChildren: () => import('./prueba-tiempo/prueba-tiempo.module')
-      .then(m => m.PruebaTiempoModule)
+    .then(m => m.TestCreativityModule)
   },
   {
     path: '**',

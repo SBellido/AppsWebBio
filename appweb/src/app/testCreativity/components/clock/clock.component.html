@@ -2,7 +2,12 @@
     <h1 class="clock">0{{ clock.minutes }}:0{{ clock.seconds }}</h1>
 </div> -->
 
-<div class="container-clock">
+<div *ngIf="clock.paused == false" class="container-clock">
+    <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
+    <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
+    <!-- <h1>0{{ time.getMinutes() }} : 0{{ time.getSeconds() }}</h1> -->
+</div> 
+<div *ngIf="clock.paused == true" class="container-clock-paused">
     <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
     <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
     <!-- <h1>0{{ time.getMinutes() }} : 0{{ time.getSeconds() }}</h1> -->

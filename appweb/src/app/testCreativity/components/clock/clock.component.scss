@@ -1,4 +1,4 @@
-.container-clock {
+.container-clock-paused {
     background-color: #AF6F6F;
     padding: 0.5px 3px;
     text-align: center;
@@ -7,4 +7,12 @@
 }
 h1.clock {
     font-size: xx-large;
+}
+
+.container-clock {
+    background-color: #78af6f;
+    padding: 0.5px 3px;
+    text-align: center;
+    color: white;
+    width: 200px;
 }

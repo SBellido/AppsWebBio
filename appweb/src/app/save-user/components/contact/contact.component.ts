@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataDbService } from './../../../core/services/db/data-db.service';
 import { FormControl, FormGroup, Validators, PatternValidator } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MyDialogComponent } from './../../../my-dialog/my-dialog.component';
 
 @Component({
   selector: 'app-contact',
@@ -9,13 +11,20 @@ import { FormControl, FormGroup, Validators, PatternValidator } from '@angular/f
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private dbData: DataDbService) {
+  constructor(public dialog: MatDialog , private dbData: DataDbService) {
     this.contactForm = this.createFormGroup();
    }
+   contactForm: FormGroup;
+   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+   private stringPattern: any = /[^0-9]/;
 
-  contactForm: FormGroup;
-  private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  private stringPattern: any = /[^0-9]/;
+   openDialog() {
+    const dialogRef = this.dialog.open(MyDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   createFormGroup() {
     return new FormGroup({
@@ -57,7 +66,7 @@ export class ContactComponent implements OnInit {
     if (this.contactForm.valid) {
       this.dbData.saveContact(this.contactForm.value);
       this.onResetForm();
-      alert('Tus datos fueron guardados correctamente');
+      this.openDialog();
       console.log('Valid');
     } else {
       console.log('Not valid');
