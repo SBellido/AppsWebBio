@@ -1,13 +1,14 @@
-.container-all {
-    background: #eeeeee !important;
-    height: 100%
+.container {
+    background-color: #eeeeee;
+    width: 100%;
+    height: 100%;
 }
 
 .container-form {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;   
+    flex-direction: column;
 }
 
 div.col {
@@ -16,11 +17,7 @@ div.col {
     align-items: center;
     flex-direction: column;
 }
-.container {    
-    background-color: #eeeeee;
-    width: auto;
-    padding: 0px 150px; 
-}
+
 span {
     color: #e33b88;
 }

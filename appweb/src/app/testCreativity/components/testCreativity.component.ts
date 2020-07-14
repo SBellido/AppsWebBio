@@ -13,6 +13,8 @@ import { Proposal } from '../../core/models/proposal.module';
 })
 
 export class TestCreativityComponent implements OnInit {
+    started = false;
+    time = 3;
 
     constructor() { }
 
@@ -35,6 +37,16 @@ export class TestCreativityComponent implements OnInit {
 
 
     ngOnInit(): void {
+        setTimeout(() =>  {
+            this.time = 2;
+            setTimeout(() =>  {
+                this.time = 1;
+                setTimeout(() =>  {
+                    this.started = true;
+                }, 1000);
+            }, 1000);
+        }, 1000);
     }
 
 }
+

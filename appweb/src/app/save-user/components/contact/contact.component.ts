@@ -3,6 +3,7 @@ import { DataDbService } from './../../../core/services/db/data-db.service';
 import { FormControl, FormGroup, Validators, PatternValidator } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MyDialogComponent } from './../../../my-dialog/my-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -11,7 +12,10 @@ import { MyDialogComponent } from './../../../my-dialog/my-dialog.component';
 })
 export class ContactComponent implements OnInit {
 
-  constructor(public dialog: MatDialog , private dbData: DataDbService) {
+  constructor(
+    private router: Router,
+    public dialog: MatDialog ,
+    private dbData: DataDbService) {
     this.contactForm = this.createFormGroup();
    }
    contactForm: FormGroup;
@@ -62,11 +66,14 @@ export class ContactComponent implements OnInit {
     this.contactForm.reset();
   }
 
-  onSaveForm() {
+  onSaveForm($event) {
+    $event.preventDefault();
+    alert('funciona');
     if (this.contactForm.valid) {
       this.dbData.saveContact(this.contactForm.value);
       this.onResetForm();
-      this.openDialog();
+      this.router.navigate(['test-creativity']);
+      // this.openDialog();
       console.log('Valid');
     } else {
       console.log('Not valid');

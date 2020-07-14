@@ -15,7 +15,9 @@ export class MyDialogComponent implements OnInit {
 
   ngOnInit(): void {
     // this.dialogRef.backdropClick();
-    this.dialogRef.beforeClosed();
+    // this.dialogRef.open();
+    //   backdrop  : 'static',
+    //   keyboard  : false
   }
 
 

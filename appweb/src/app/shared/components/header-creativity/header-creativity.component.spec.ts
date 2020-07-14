@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderLightComponent } from './header-light.component';
+import { HeaderCreativityComponent } from './header-creativitycomponent';
 
-describe('HeaderLightComponent', () => {
-  let component: HeaderLightComponent;
-  let fixture: ComponentFixture<HeaderLightComponent>;
+describe('HeaderCreativityComponent', () => {
+  let component: HeaderCreativityComponent;
+  let fixture: ComponentFixture<HeaderCreativityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderLightComponent ]
+      declarations: [ HeaderCreativityComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderLightComponent);
+    fixture = TestBed.createComponent(HeaderCreativityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

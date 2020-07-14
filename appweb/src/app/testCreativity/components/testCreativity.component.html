@@ -1,9 +1,13 @@
-<div class="container-all">
-    <app-header-light></app-header-light>
-    <div class="container-test-name">
-        <h3 class="test-name">Actividad seleccionada: <span>{{ testCreativity.name | uppercase }}</span></h3>
-        <hr class="line-test">
-    </div>
+<div *ngIf="!started" class="container-all">
+    <app-header-creativity></app-header-creativity>
+    <section class="container">
+        <h1 class="countdown">{{ time }}</h1> 
+    </section>
+</div>
+
+<router-outlet></router-outlet>
+<div *ngIf="started" class="container-all">
+    <app-header-creativity></app-header-creativity>
     <section class="container">
         <article class="container-element-textarea"> 
             <app-element class="container-element"></app-element>   

@@ -5,7 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderDarkComponent } from './components/header-dark/header-dark.component';
-import { HeaderLightComponent } from './components/header-light/header-light.component';
+import { HeaderQuestionComponent } from './components/header-question/header-question.component';
+import { HeaderCreativityComponent } from './components/header-creativity/header-creativitycomponent';
 
 import { MaterialModule } from './../material/material.module';
 
@@ -13,18 +14,21 @@ import { MaterialModule } from './../material/material.module';
   declarations: [
     HeaderComponent,
     HeaderDarkComponent,
-    HeaderLightComponent,
+    HeaderQuestionComponent,
+    HeaderCreativityComponent
+
   ],
   exports: [
     HeaderComponent,
     HeaderDarkComponent,
-    HeaderLightComponent
+    HeaderQuestionComponent,
+    HeaderCreativityComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class SharedModule { }
