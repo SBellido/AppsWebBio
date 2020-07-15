@@ -3,11 +3,11 @@ import { FormControl, Validator, Validators } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-save-user',
-  templateUrl: './save-user.component.html',
-  styleUrls: ['./save-user.component.scss']
+  selector: 'app-personal-info',
+  templateUrl: './personal-info.component.html',
+  styleUrls: ['./personal-info.component.scss']
 })
-export class SaveUserComponent implements OnInit {
+export class PersonalInfoComponent implements OnInit {
 
   // emailField: FormControl;
 

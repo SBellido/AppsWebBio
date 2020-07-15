@@ -24,9 +24,14 @@ const routes: Routes = [
     .then(m => m.InstructionsCreativityModule)
   },
   {
-    path: 'save-user',
-    loadChildren: () => import('./save-user/save-user.module')
-    .then(m => m.SaveUserModule)
+    path: 'personal-info',
+    loadChildren: () => import('./personal-info/personal-info.module')
+    .then(m => m.PersonalInfoModule)
+  },
+  {
+    path: 'message-ok-prev-test',
+    loadChildren: () => import('./message-ok-prev-test/message-ok-prev-test.module')
+    .then(m => m.MessageOkPrevTestModule)
   },
   {
     path: 'test-creativity',

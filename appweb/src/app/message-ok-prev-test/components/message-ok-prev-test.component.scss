@@ -1,0 +1,61 @@
+.container-all {
+    background-color: #eeeeee;
+    width: 100%;
+    height: 100%;
+} 
+div.container-message {
+    text-align: center;
+}
+h1.message {
+    color: #e33b88;
+    font-size: xx-large;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+h4.message {
+    color: #4a4067;
+    margin-top: 10px;
+    font-size: large;
+}
+
+p.message {
+    color: #4a4067;
+    margin-top: 50px;
+}
+section.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    
+}
+.container-message {
+    padding-top: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    // background-color: #eeeeee;
+}
+
+.buttonInit {
+    color: #ffffff;
+    padding: 5px 15px 5px 25px; 
+    background-color: #76ad2e;
+}
+
+
+.buttonInit:hover {
+    background-color: #5a8128;
+}
+
+a { margin: 20px; }
+
+.icon-go { 
+    // background-color: #AF6F6F; 
+    background-color: #ffffff; 
+    color: #76ad2e;
+    border-radius: 50%; 
+}

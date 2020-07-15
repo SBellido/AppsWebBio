@@ -117,7 +117,7 @@
           <div class="col">
             <mat-form-field class="full-width" appearance="fill" hintLabel="Mímino 10 años">
               <mat-label>Edad</mat-label>
-                <input matNativeControl type="number" matInput placeholder="Ingresá tu edad" formControlName="age">
+                <input matNativeControl type="number" min="10" matInput placeholder="Ingresá tu edad" formControlName="age">
                 <div class="alert-danger" *ngIf="age.invalid && (age.dirty || age.touched)">
                   <div class="container-error-message" *ngIf="age.errors.required">
                     Tu edad es un dato requerido.
@@ -173,13 +173,20 @@
         </div>
       </mat-card-content>
     </mat-card>
-    <mat-card-actions class="container-button">
-        <button mat-raised-button class="buttonForm" 
+    <mat-card-actions *ngIf="!contactForm.valid" class="container-button">
+        <button mat-raised-button class="buttonForm-off" 
           type="submit" [disabled]="!contactForm.valid">
           <!-- routerLink="/test-crativity" routerLinkActive="active"> -->
           ENVIAR
         </button>   
     </mat-card-actions>
+    <mat-card-actions *ngIf="contactForm.valid" class="container-button">
+      <button mat-raised-button class="buttonForm" 
+        type="submit" [disabled]="!contactForm.valid">
+        <!-- routerLink="/test-crativity" routerLinkActive="active"> -->
+        ENVIAR
+      </button>   
+  </mat-card-actions>
   </form>
   
   <router-outlet></router-outlet>

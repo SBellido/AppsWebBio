@@ -3,21 +3,21 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
-import { SaveUserRoutingModule } from './save-user-routing.module';
+import { PersonalInfoRoutingModule } from './personal-info-routing.module';
 import { MaterialModule } from '../material/material.module';
 
-import { SaveUserComponent } from './components/save-user.component';
-import { ContactComponent } from './components/contact/contact.component';
+import { PersonalInfoComponent } from './components/personal-info.component';
+import { FormComponent } from './components/form/form.component';
 import { DataDbService } from '../core/services/db/data-db.service';
 
 @NgModule({
   declarations: [
-    SaveUserComponent,
-    ContactComponent
+    PersonalInfoComponent,
+    FormComponent
   ],
   imports: [
     CommonModule,
-    SaveUserRoutingModule,
+    PersonalInfoRoutingModule,
     SharedModule,
     ReactiveFormsModule,
     MaterialModule
@@ -25,4 +25,4 @@ import { DataDbService } from '../core/services/db/data-db.service';
   providers: [DataDbService]
 })
 
-export class SaveUserModule { }
+export class PersonalInfoModule { }

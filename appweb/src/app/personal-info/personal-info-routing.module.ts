@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SaveUserComponent } from './components/save-user.component';
+import { PersonalInfoComponent } from './components/personal-info.component';
 import { MyDialogComponent } from '../my-dialog/my-dialog.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SaveUserComponent
+    component: PersonalInfoComponent
   }
 ];
 
@@ -22,4 +22,4 @@ const routes: Routes = [
     MyDialogComponent
   ]
 })
-export class SaveUserRoutingModule { }
+export class PersonalInfoRoutingModule { }

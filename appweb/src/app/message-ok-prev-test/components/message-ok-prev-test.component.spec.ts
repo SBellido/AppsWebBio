@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContactComponent } from './contact.component';
+import { MessageOkPrevTestComponent } from './message-ok-prev-test.component';
 
-describe('ContactComponent', () => {
-  let component: ContactComponent;
-  let fixture: ComponentFixture<ContactComponent>;
+describe('MessageOkPrevTestComponent', () => {
+  let component: MessageOkPrevTestComponent;
+  let fixture: ComponentFixture<MessageOkPrevTestComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContactComponent ]
+      declarations: [ MessageOkPrevTestComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContactComponent);
+    fixture = TestBed.createComponent(MessageOkPrevTestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

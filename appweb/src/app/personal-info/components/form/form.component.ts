@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { DataDbService } from './../../../core/services/db/data-db.service';
+import { DataDbService } from '../../../core/services/db/data-db.service';
 import { FormControl, FormGroup, Validators, PatternValidator } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MyDialogComponent } from './../../../my-dialog/my-dialog.component';
+// import { MyDialogComponent } from '../../../my-dialog/my-dialog.component';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.scss']
 })
-export class ContactComponent implements OnInit {
+export class FormComponent implements OnInit {
 
   constructor(
     private router: Router,
@@ -20,15 +20,15 @@ export class ContactComponent implements OnInit {
    }
    contactForm: FormGroup;
    private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-   private stringPattern: any = /[^0-9]/;
+   private stringPattern: any = /^[a-zA-Z ]*$/;
 
-   openDialog() {
-    const dialogRef = this.dialog.open(MyDialogComponent);
+  //  openDialog() {
+  //   const dialogRef = this.dialog.open(MyDialogComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
+  // }
 
   createFormGroup() {
     return new FormGroup({
@@ -68,11 +68,10 @@ export class ContactComponent implements OnInit {
 
   onSaveForm($event) {
     $event.preventDefault();
-    alert('funciona');
     if (this.contactForm.valid) {
       this.dbData.saveContact(this.contactForm.value);
       this.onResetForm();
-      this.router.navigate(['test-creativity']);
+      this.router.navigate(['message-ok-prev-test']);
       // this.openDialog();
       console.log('Valid');
     } else {
