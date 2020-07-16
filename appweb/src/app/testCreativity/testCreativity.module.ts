@@ -10,6 +10,7 @@ import { TestCreativityComponent } from './components/testCreativity.component';
 import { ClockComponent } from './components/clock/clock.component';
 import { ElementComponent } from './components/element/element.component';
 import { ProposalComponent } from '../proposal/components/proposal.component';
+import { CreativeUserComponent } from './components/creative-user/creative-user.component';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { ProposalComponent } from '../proposal/components/proposal.component';
         ClockComponent,
         ElementComponent,
         ProposalComponent,
+        CreativeUserComponent
     ],
     imports: [
         CommonModule,

@@ -16,9 +16,9 @@ export class FormComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog ,
     private dbData: DataDbService) {
-    this.contactForm = this.createFormGroup();
+    this.creativeUser = this.createFormGroup();
    }
-   contactForm: FormGroup;
+   creativeUser: FormGroup;
    private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
    private stringPattern: any = /^[a-zA-Z ]*$/;
 
@@ -63,13 +63,13 @@ export class FormComponent implements OnInit {
   }
 
   onResetForm() {
-    this.contactForm.reset();
+    this.creativeUser.reset();
   }
 
-  onSaveForm($event) {
+  onSaveForm($event: any) {
     $event.preventDefault();
-    if (this.contactForm.valid) {
-      this.dbData.saveContact(this.contactForm.value);
+    if (this.creativeUser.valid) {
+      // this.dbData.saveContact(this.contactForm.value);
       this.onResetForm();
       this.router.navigate(['message-ok-prev-test']);
       // this.openDialog();
@@ -79,11 +79,11 @@ export class FormComponent implements OnInit {
     }
   }
 
-  get name() { return this.contactForm.get('name'); }
-  get lastName() { return this.contactForm.get('lastName'); }
-  get age() { return this.contactForm.get('age'); }
-  get email() { return this.contactForm.get('email'); }
-  get educationLevel() { return this.contactForm.get('educationLevel'); }
+  get name() { return this.creativeUser.get('name'); }
+  get lastName() { return this.creativeUser.get('lastName'); }
+  get age() { return this.creativeUser.get('age'); }
+  get email() { return this.creativeUser.get('email'); }
+  get educationLevel() { return this.creativeUser.get('educationLevel'); }
 
 }
 

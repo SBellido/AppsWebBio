@@ -51,7 +51,11 @@ section.container {
     background-color: #5a8128;
 }
 
-a { margin: 20px; }
+a { 
+    color: #ffffff;
+    text-decoration: none;
+    margin: 20px; 
+}
 
 .icon-go { 
     // background-color: #AF6F6F; 

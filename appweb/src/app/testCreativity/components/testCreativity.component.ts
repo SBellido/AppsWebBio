@@ -15,6 +15,8 @@ import { Proposal } from '../../core/models/proposal.module';
 export class TestCreativityComponent implements OnInit {
     started = false;
     time = 3;
+    audio = new Audio('assets/sounds/beep.mp3');
+
 
     constructor() { }
 
@@ -37,9 +39,16 @@ export class TestCreativityComponent implements OnInit {
 
 
     ngOnInit(): void {
+        this.countdown();
+    }
+
+    countdown() {
+        this.audio.play();
         setTimeout(() =>  {
+            this.audio.play();
             this.time = 2;
             setTimeout(() =>  {
+                this.audio.play();
                 this.time = 1;
                 setTimeout(() =>  {
                     this.started = true;

@@ -6,10 +6,14 @@
 
 h1.countdown {
     font-size: 200px;
-    color: #e33b88;
-    background-color: #ffffff;
+    color: #e33b88;    
+}
+.container-countdown {
     border-radius: 100%;
-    padding: 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 .test-name {
     margin-left: 70px;
@@ -24,7 +28,6 @@ section.container {
     width: 100%;
 }
  
-
 .line-test {
     margin-left: 70px;
     color: #4a4067;

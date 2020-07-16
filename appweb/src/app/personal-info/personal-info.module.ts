@@ -22,6 +22,10 @@ import { DataDbService } from '../core/services/db/data-db.service';
     ReactiveFormsModule,
     MaterialModule
   ],
+  exports: [
+    PersonalInfoComponent,
+    FormComponent
+  ],
   providers: [DataDbService]
 })
 

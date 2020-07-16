@@ -16,54 +16,92 @@ import { Clock } from '../../../core/models/clock.module';
     styleUrls: ['./clock.component.scss']
 })
 
-export class ClockComponent implements OnInit, OnDestroy {
+export class ClockComponent implements OnInit {
 
     constructor() { }
+
+    ting = new Audio('/assets/sounds/ting.mp3');
+    alertSecond = new Audio('/assets/sounds/second.mp3');
 
     clock: Clock = {
         seconds: 0,
         minutes: 0,
-        paused: false
+        state: 'started'
 
     };
 
     ngOnInit() {
-        setInterval(() => {
-            // tslint:disable-next-line: triple-equals
-            if (this.clock.paused == false) {
-                this.clock.seconds++;
-                if (this.clock.seconds >= 60){
-                this.clock.minutes++;
-                this.clock.seconds = 0;
-              }
-                this.getCurrentTime();
+        const timeClock = setInterval(() => {
+            this.controlSecondsMinutes();
+            this.checkLastSeconds();
+            if (this.clock.minutes === 1) {
+                this.pauseTimer();
+                this.ting.play();
+                clearInterval(timeClock);
             }
-          }, 1000);
+        }, 1000);
+    }
+
+    checkLastSeconds() {
+        let count = 0 ;
+        if (this.clock.minutes === 0 && this.clock.seconds === 50) {
+            this.clock.state = 'alert';
+            const timeOut = setInterval(() => {
+                this.playSoundSecond();
+                count++;
+                console.log(count);
+                if (count === 9) {
+                    clearInterval(timeOut);
+                }
+            },  1000);
+        }
+    }
+
+    playSoundSecond() {
+        this.alertSecond.play();
+    }
+
+    controlSecondsMinutes() {
+        if (this.clock.state !== 'finalized') {
+            this.clock.seconds++;
+            if (this.clock.seconds >= 60){
+              this.clock.minutes++;
+              this.clock.seconds = 0;
+            }
+          }
     }
 
     pauseTimer(): void {
-        this.clock.paused = true;
+        this.clock.state = 'finalized';
       }
 
-      getCurrentTime() {
-        let timeText = '';
-        if (this.clock.seconds < 10) {
-            timeText += this.clock.minutes + this.clock.seconds;
-            if (this.clock.minutes === 1) {
-                this.clock.paused = true;
-            }
-        } else {
-            timeText += this.clock.minutes + this.clock.seconds;
-        }
-        return timeText;
+    //   getCurrentTime() {
+    //     let timeText = '';
+    //     if (this.clock.seconds) {
+    //         timeText += this.clock.minutes + this.clock.seconds;
+    //     }
+    //     return timeText;
+    // }
+
+    resetTimer() {
+        this.clock.state = 'started';
+        this.clock.minutes = 0;
+        this.clock.seconds = 0;
     }
 
-  resetTimer() {
-    this.clock.paused = false;
-    this.clock.minutes = 0;
-    this.clock.seconds = -1;
-  }
 
+    alertTime() {
+        const timeout = setInterval(() => {
+            let count = 0;
+            this.alertSecond.play();
+            count ++;
+            if (count <= 10) {
+            count ++;
+            } else {
+                clearInterval(timeout);
+            }
+        }, 1000);
+    }
     // ngDoCheck() {
     //     console.log('ngDoCheck');
     // }
@@ -73,9 +111,6 @@ export class ClockComponent implements OnInit, OnDestroy {
     //     console.log(changes);
     // }
 
-ngOnDestroy() {
-        console.log('ngOnDestroy');
-    }
 }
 
 

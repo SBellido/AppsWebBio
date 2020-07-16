@@ -22,7 +22,7 @@
     </form>
 </div> -->
 
-<form [formGroup]="contactForm" novalidate (ngSubmit)="onSaveForm($event)">
+<form [formGroup]="creativeUser" novalidate (ngSubmit)="onSaveForm($event)">
     <mat-card class="shipping-card">
       <mat-card-header class="container-title">
         <mat-card-title>Datos personales</mat-card-title>
@@ -173,16 +173,16 @@
         </div>
       </mat-card-content>
     </mat-card>
-    <mat-card-actions *ngIf="!contactForm.valid" class="container-button">
+    <mat-card-actions *ngIf="!creativeUser.valid" class="container-button-off">
         <button mat-raised-button class="buttonForm-off" 
-          type="submit" [disabled]="!contactForm.valid">
+          type="submit" [disabled]="!creativeUser.valid">
           <!-- routerLink="/test-crativity" routerLinkActive="active"> -->
           ENVIAR
         </button>   
     </mat-card-actions>
-    <mat-card-actions *ngIf="contactForm.valid" class="container-button">
+    <mat-card-actions *ngIf="creativeUser.valid" class="container-button">
       <button mat-raised-button class="buttonForm" 
-        type="submit" [disabled]="!contactForm.valid">
+        type="submit" [disabled]="!creativeUser.valid">
         <!-- routerLink="/test-crativity" routerLinkActive="active"> -->
         ENVIAR
       </button>   

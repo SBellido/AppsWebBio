@@ -48,7 +48,11 @@ mat-label.label {
   justify-content: center;
   align-items: center;
 }
-
+.container-button-off {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .buttonBack { 
   color: #e33b88;
   padding: 5px 25px 5px 15px; 
