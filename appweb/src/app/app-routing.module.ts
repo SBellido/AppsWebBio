@@ -8,6 +8,7 @@ const routes: Routes = [
     redirectTo: '/home',
     pathMatch: 'full',
   },
+  // routea modulos
   {
     path: 'home',
     loadChildren: () => import('./home/home.module')
@@ -35,9 +36,13 @@ const routes: Routes = [
   },
   {
     path: 'test-creativity',
-    // routea un modulo
     loadChildren: () => import('./testCreativity/testCreativity.module')
     .then(m => m.TestCreativityModule)
+  },
+  {
+    path: 'test-result',
+    loadChildren: () => import('./test-result/test-result.module')
+    .then(m => m.TestResultModule)
   },
   {
     path: '**',

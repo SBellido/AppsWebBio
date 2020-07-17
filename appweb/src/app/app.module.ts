@@ -18,12 +18,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { MyDialogComponent } from './my-dialog/my-dialog.component';
+import { TestResultComponent } from './test-result/components/test-result/test-result.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MyDialogComponent,
+    TestResultComponent,
   ],
   imports: [
     BrowserModule,

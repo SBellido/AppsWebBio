@@ -75,14 +75,6 @@ export class ClockComponent implements OnInit {
         this.clock.state = 'finalized';
       }
 
-    //   getCurrentTime() {
-    //     let timeText = '';
-    //     if (this.clock.seconds) {
-    //         timeText += this.clock.minutes + this.clock.seconds;
-    //     }
-    //     return timeText;
-    // }
-
     resetTimer() {
         this.clock.state = 'started';
         this.clock.minutes = 0;

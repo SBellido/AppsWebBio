@@ -6,7 +6,7 @@ import {
     OnInit
 } from '@angular/core';
 
-import { Proposal } from './../../core/models/proposal.module';
+import { Proposal } from './../../../core/models/proposal.module';
 
 @Component({
     /*usaré ese selector como una etiqueta HTML en el template*/
