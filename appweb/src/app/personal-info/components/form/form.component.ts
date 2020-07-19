@@ -20,7 +20,7 @@ export class FormComponent implements OnInit {
    }
    creativeUser: FormGroup;
    private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-   private stringPattern: any = /^[a-zA-Z ]*$/;
+   private stringPattern: any = /^[a-zA-ZñÑ ]*$/;
 
   //  openDialog() {
   //   const dialogRef = this.dialog.open(MyDialogComponent);
@@ -69,7 +69,7 @@ export class FormComponent implements OnInit {
   onSaveForm($event: any) {
     $event.preventDefault();
     if (this.creativeUser.valid) {
-      // this.dbData.saveContact(this.contactForm.value);
+      this.dbData.saveContact(this.creativeUser.value);
       this.onResetForm();
       this.router.navigate(['message-ok-prev-test']);
       // this.openDialog();

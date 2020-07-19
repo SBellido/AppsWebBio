@@ -17,7 +17,7 @@
 .buttonGo {
     font-size: larger;
     padding: 10px 80px;
-    font-weight: 600;   
+    font-weight: 500;   
     background-color: #4a4067;
     color: white;
     margin-top: 75px;
@@ -25,7 +25,6 @@
 .buttonGo:hover {
     background-color: #4a4067cc;
 }
-a { margin: 20px; }
 
 div.swiper-button-prev, .swiper-button-next {
     color: #FFCF02 !important;
@@ -61,6 +60,11 @@ li {
 }
 .intruction {
     color: #e33b88;
+}
+
+span.instructions-text {
+    font-weight: 600;
+    font-size: 16px;
 }
 .container-title-intruction {
     display: flex;

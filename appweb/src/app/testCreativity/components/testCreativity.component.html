@@ -1,24 +1,99 @@
+<!-- COUNTDOWN -->
 <div *ngIf="!started" class="container-all">
     <app-header-creativity></app-header-creativity>
     <section class="container-countdown">
-        <h1 class="countdown">{{ time }}</h1> 
+        <h1 class="countdown">{{ countDown }}</h1> 
     </section>
 </div>
 
-<router-outlet></router-outlet>
+<!-- TEST -->
 <div *ngIf="started" class="container-all">
     <app-header-creativity></app-header-creativity>
     <section class="container">
-        <article class="container-element-textarea"> 
-            <app-element class="container-element"></app-element>   
-            <app-proposal
-                *ngFor="let proposal of proposals" 
-                (proposalAggregate)="addProposalToTextarea($event)"
-                [proposal]="proposal">
-            </app-proposal>   
+        <article *ngIf="clock.state == 'started' || clock.state == 'alert'"
+            class="container-element-textarea"> 
+            <h1 class="title"><span>¿Qué usos le darías a un Clip?</span></h1>
+            <img src="assets/images/clip.jpg" alt="">
+            <!-- <app-element class="row container-element"></app-element> -->
         </article>
-        <app-clock></app-clock>
+        <article *ngIf="clock.state == 'finalized'"
+            class="container-element-textarea"> 
+            <h1 class="title"><span>¡Gracias por tu participación!</span></h1>
+            <img src="assets/images/final-message.jpg" alt="">
+            <!-- <app-element class="row container-element"></app-element> -->       
+        </article>
+        <section class="container-right">
+            <article *ngIf="clock.state == 'started' || clock.state == 'alert'">
+                <app-proposal class="col"
+                    *ngFor="let proposal of proposals" 
+                    (proposalAggregate)="addProposalToTextarea($event)"
+                    [proposal]="proposal">
+                </app-proposal>
+            </article>
+            <article *ngIf="clock.state == 'finalized'" 
+                class="container-textarea">
+                <span class="material-icons cloud-icon">
+                    cloud_done
+                </span>
+                <p class="message">Tus propuestas se han<br>guardado con éxito</p> 
+            </article>   
+            <!-- CLOCK -->
+            <div *ngIf="clock.state == 'started'" class="container-clock">
+                <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
+                <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
+            </div> 
+            <div *ngIf="clock.state == 'alert'" class="container-clock-alert">
+                <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
+                <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
+            </div>            
+            <div *ngIf="clock.state == 'finalized'" 
+                class="container-clock-finalized">
+                <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
+                <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
+            </div>
+            <mat-card-actions *ngIf="clock.state != 'finalized'" 
+                class="container-button-off">
+                <button mat-raised-button class="buttonViewResult-off" 
+                    type="submit" [disabled]="clock.state != 'finalized'">
+                    VER RESULTADO
+                </button>   
+            </mat-card-actions>
+            <mat-card-actions *ngIf="clock.state == 'finalized'"
+                class="container-button">
+                <button mat-raised-button class="buttonViewResult" 
+                    type="submit" [disabled]="clock.state != 'finalized'"
+                    routerLink="/test-result" routerLinkActive="active">
+                    VER RESULTADO
+                </button>   
+            </mat-card-actions> 
+         
+        </section>
     </section>
 </div>
+<div *ngIf="clock.state == 'finalized'" class="container-all">
+    <app-header-creativity></app-header-creativity>
+    <section class="container">
+        <!-- <article class="container-element-textarea"> 
+            <h1 class="title"><span>¡Gracias por tu participación!</span></h1>
+            <img src="assets/images/final-message.jpg" alt="">
+        </article> -->
+       <section>
+        <article class="container-textarea">
+            <label class="label-test" for="">Tus propuestas han sido computadas</label>
+            <textarea disabled class="textarea-text">
+            </textarea>
+        </article>
+
+            <!-- <div class="container-clock-finalized">
+                <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
+                <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
+            </div>  -->
+           <!-- <button routerLink="/select-test" routerLinkActive="active"
+               class="buttonViewResult" mat-raised-button>
+               VER RESULTADO
+           </button> -->
+       </section>         
+    </section>
+</div>  
 <router-outlet></router-outlet>
 

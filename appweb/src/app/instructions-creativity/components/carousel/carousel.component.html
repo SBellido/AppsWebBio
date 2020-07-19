@@ -2,52 +2,67 @@
   <div class="swiper-wrapper">
     <div class="swiper-slide" *ngFor="let img of images">
       <img [src]="img" alt="imagen del carousel">
-      <div *ngIf="img == 'assets/images/instruction_c1.png'">
+      <div *ngIf="img == 'assets/images/instruction_1.png'">
         <div class="container-instructions">
           <div class="container-title-intruction">
             <h3 class="intruction">Instrucción 1 de 4</h3>
           </div>
           <ul class="container-items">
-            <li>
-              El objetivo de esta práctica es describir todos los usos que se te ocurran<br>para un objeto en particular.
+            <li>El objetivo de esta práctica es 
+              <span class="instructions-text">
+                describir todos los usos que se te ocurran
+              </span>
+              <br>para un objeto en particular.
             </li>
-            <li>
-              Tenés que escribir tus propuestas<br>y presionar "Enter" al terminar cada una.
+            <li>Tenés que escribir tus propuestas y<br>
+              <span class="instructions-text">
+                presionar "Enter" al terminar cada una.
+              </span>
             </li>
           </ul>
         </div>
       </div>
-      <div *ngIf="img == 'assets/images/instruction_c2.png'">
+      <div *ngIf="img == 'assets/images/instruction_2.png'">
         <div class="container-instructions">
           <div class="container-number">
             <h3 class="intruction">Instrucción 2 de 4</h3>
           </div>
           <ul class="container-items">
-            <li>Usá tu imaginación y creatividad para generar tus propuestas, todas son válidas, no hay límites.</li>
-            <li>Tu única limitación es el tiempo,<br>vas a disponer de 5 minutos.</li>
+            <li>Usá tu imaginación y creatividad para generar tus propuestas, todas son válidas, 
+              <span class="instructions-text">
+                no hay límites.
+              </span>
+            </li>
+            <li>Tu única limitación es el tiempo,<br>
+              <span class="instructions-text">
+                vas a disponer de 5 minutos.
+              </span>
+            </li>
           </ul>
         </div>
       </div>
-      <div *ngIf="img == 'assets/images/instruction_c3.png'">
+      <div *ngIf="img == 'assets/images/instruction_3.png'">
         <div class="container-instructions">
           <div class="container-number">
             <h3 class="intruction">Instrucción 3 de 4</h3>
           </div>
           <ul class="container-items">
             <li><h3>Te damos un ejemplo.</h3></li>
-            <li>¿Qué uso le darías a un diario?</li>
-            <li>"Hacer un avión de papel".</li>
+            <span class="instructions-text">
+              <li>¿Qué uso le darías a un diario?</li>
+              <li>"Hacer un avión de papel".</li>
+            </span>
           </ul>
         </div>       
       </div>
-      <div *ngIf="img == 'assets/images/instruction_c4.png'">
+      <div *ngIf="img == 'assets/images/instruction_4.png'">
         <div class="container-instructions">
           <div class="container-number">
             <h3 class="intruction">Instrucción 4 de 4</h3>
           </div>
           <button routerLink="/personal-info" routerLinkActive="active"
             class="buttonGo" mat-raised-button>
-          <a>COMENZAR</a>
+            COMENZAR
           </button>
         </div>       
       </div>

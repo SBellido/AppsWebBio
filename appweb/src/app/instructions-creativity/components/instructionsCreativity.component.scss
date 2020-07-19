@@ -1,20 +1,20 @@
 
 .buttonBack { 
     color: #e33b88;
-    padding: 5px 25px 5px 15px; 
+    padding: 5px 40px 5px 15px; 
     border: 0.5px solid #e33b88; 
 }
+
 .buttonBack:hover {
     background-color: #e33b881b;
 }
-
-a { margin: 20px; }
 
 .icon-back { 
     // background-color: #AF6F6F; 
     background-color: #e33b88; 
     color: white;
-    border-radius: 50%; 
+    border-radius: 50%;
+    margin-right: 20px; 
 }
 .container-title {
     display: flex;

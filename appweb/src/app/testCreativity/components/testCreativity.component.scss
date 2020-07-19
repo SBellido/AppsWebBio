@@ -3,7 +3,12 @@
     width: 100%;
     height: 100%;
 }
-
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
 h1.countdown {
     font-size: 200px;
     color: #e33b88;    
@@ -12,9 +17,9 @@ h1.countdown {
     border-radius: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center;  
 }
+
 .test-name {
     margin-left: 70px;
     color: #4a4067;
@@ -24,7 +29,7 @@ section.container {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
 }
  
@@ -34,19 +39,145 @@ section.container {
     width: 20%;
 }
 .container-element {
-    width: 75%;
+    width: 50%;
 }
-span {
-   color: #e33b88;
-}
+
 .containProposal .containTestCreativity {
     margin: 20px;
     padding: 20px;
 }
 
 .container-element-textarea {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: auto;
+}
+
+// CLOCK STYLE
+.container-clock-finalized {
+    background-color: #af3434;
+    padding: 0.5px 3px;
+    text-align: center;
+    color: white;
+    width: 300px;
+}
+h1.clock {
+    font-size: xx-large;
+}
+
+.container-clock {
+    background-color: #76ad2e;
+    padding: 0.5px 3px;
+    text-align: center;
+    color: white;
+    width: 300px;
+}
+.container-clock-alert {
+    background-color: #ffcf02;
+    padding: 0.5px 3px;
+    text-align: center;
+    color: white;
+    width: 300px;
+}
+// STYLE ELEMENT
+
+img {
+    max-width: 95%;
+    border-radius: 10px;
+}
+
+h1.title {
+    font-weight: 100; font-size: 2em; 
+    color: #4a4067;
+}
+h1>span{
+    font-weight: 600;
+}
+
+// STYLE TEXTAREA
+.textarea-test {
+  width: 100%;
+    height: 500px;
+    margin-top: 15px;
+}
+article.container-textarea {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    width: 306px;  
+    height: 300px; 
+    text-align: center;
+    background-color: #ffffff;
+    margin-top: 80px;
+    -webkit-box-shadow: inset 0 0 0 2px #76ad2e;
+    -moz-box-shadow: inset 0 0 0 2px #76ad2e;
+    box-shadow: inset 0px 0px 0px 2px #76ad2e; 
+    margin-top: 94px;
+}
+p.message {
+    font-weight: normal;  
+    color: #4a4067; 
+    font-size: medium;
+}
+.cloud-icon {
+    font-size: 50px;
+    color: #76ad2e;
+}
+
+// .textarea-text {
+//     width: 300px;
+//     max-width: 300px;
+//     min-width: 300px;
+//     height: 300px;
+//     max-height: 300px;
+//     min-height: 300px;
+// }
+.label-test {
+    font-weight: 500;
+    font-size: 15px;
+}
+app-proposal.row {
+    margin-top: 30px;
+}
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+  
+.example-full-width {
+    width: 100%;
+}
+
+.buttonViewResult {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding: 12px 80px;
+    background-color: #4a4067;
+    color: #ffffff;
+    font-size: larger;
+    font-weight: 500;   
+}
+.buttonViewResult-off {
+    opacity: 0;
+    margin-top: 30px;
+}
+
+.buttonViewResult:hover {
+    background-color: #4a4067cc;
+}
+.container-button .container-button-off {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.container-right {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column;
+}
+
  

@@ -2,20 +2,23 @@
     <app-header></app-header>
     <section class="container">
         <div class="container-message">
-            <h1 mat-dialog-title class="message">¡Gracias!</h1>
-            <img src="assets\images\ready.png" alt="">
+            <h1 mat-dialog-title class="message">¡Perfecto!</h1>
+            <span class="material-icons icon-cloud">
+                cloud_done
+            </span>
+            <!-- <img src="assets\images\ready.png" alt=""> -->
             <h4 class="message">Tus datos fueron<br>guardados con éxito</h4>
-            <p class="message">Presioná INICIAR<br>para comenzar la actividad</p>
         </div>
         <div class="container-button">
             <button class="buttonInit" mat-raised-button
                 routerLink="/test-creativity" routerLinkActive="active"
                 data-backdrop="static" data-keyboard="false">
-                <a href="#">INICIAR</a> 
-                <span class="material-icons icon-go">
-                    <mat-icon>chevron_right</mat-icon>
+                INICIAR PRÁCTICA
+                <span class="material-icons icon-go">                
+                    <mat-icon>play_circle_filled</mat-icon>                       
                 </span>
             </button>
+            <p class="message">Cuando quieras podés<br>iniciar la práctica.</p>
         </div>
     </section>
 </div>

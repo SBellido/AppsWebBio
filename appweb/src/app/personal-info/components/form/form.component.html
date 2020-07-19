@@ -1,27 +1,3 @@
-<!-- <div class="form-container">
-    <h1>contact</h1>
-    <form [formGroup]="contactForm" (ngSubmit)="onSaveForm()">
-        <input type="text" matInput placeholder="Tu nombre" formControlName="name">
-        <input type="text" matInput placeholder="Tu apellido" formControlName="lastName"> 
-        <input type="number" matInput placeholder="Tu edad" formControlName="age">
-        <input type="email" matInput placeholder="Tu email" formControlName="email">
-        <input type="text" matInput placeholder="Educación formal" formControlName="educationLevel">
-    <button type="submit">Enviar</button>
-    </form>
-</div> -->
-
-<!-- <div class="form-container">
-    <h1>contact</h1>
-    <form [formGroup]="contactForm" (ngSubmit)="onSaveForm()">
-        <input type="text" matInput placeholder="Tu nombre" formControlName="name">
-        <input type="text" matInput placeholder="Tu apellido" formControlName="lastName"> 
-        <input type="number" matInput placeholder="Tu edad" formControlName="age">
-        <input type="email" matInput placeholder="Tu email" formControlName="email">
-        <input type="text" matInput placeholder="Educación formal" formControlName="educationlevel">
-    <button type="submit">Enviar</button>
-    </form>
-</div> -->
-
 <form [formGroup]="creativeUser" novalidate (ngSubmit)="onSaveForm($event)">
     <mat-card class="shipping-card">
       <mat-card-header class="container-title">
@@ -33,35 +9,20 @@
         </div>
         <div class="row">
           <div class="col">
-            <!-- <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Nombre</mat-label>
-              <input matNativeControl type="text" matInput placeholder="Ingresá tu nombre" formControlName="name">
-              <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
-                <div class="container-error-message" *ngIf="name.errors.required">
-                  Tu nombre es un dato requerido.
-                </div>
-                <div class="container-error-message" *ngIf="name.errors.minlength">
-                  Debe tener 3 carácteres como mínimo.
-                </div>
-                <div class="container-error-message" *ngIf="name.errors.maxlength">
-                  Puede tener 15 carácteres como máximo.
-                </div>
-                <div class="container-error-message" *ngIf="(name.errors.pattern)">
-                  El nombre ingresado debe ser válido
-                </div>
-              </div>
-            </mat-form-field> -->
             <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 15 caracteres">
               <mat-label>Nombre</mat-label>
               <input matNativeControl type="text" matInput placeholder="Ingresá tu nombre" 
                 #input maxlength="15" formControlName="name">
-              <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint> 
+              <!-- <mat-hint align="end">{{input.value?.length || 15}}/3</mat-hint>  -->
               <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
                 <div class="container-error-message" *ngIf="name.errors.required">
                   Tu nombre es un dato requerido.
                 </div>
-                <div class="container-error-message" *ngIf="(name.errors.pattern)">
+                <div class="container-error-message" *ngIf="name.errors.pattern">
                   El nombre ingresado debe ser válido
+                </div>
+                <div class="container-error-message" *ngIf="name.errors.minlength">
+                  Debe tener 3 carácteres como mínimo.
                 </div>
               </div>
             </mat-form-field>
@@ -69,29 +30,11 @@
         </div>
         <div class="row">
           <div class="col">
-            <!-- <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Apellido</mat-label>
-                <input matNativeControl type="text" matInput placeholder="Ingresá tu apellido" formControlName="lastName"> 
-                <div class="alert-danger" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
-                  <div class="container-error-message" *ngIf="lastName.errors.required">
-                    Tu apellido es un dato requerido.
-                  </div>
-                  <div class="container-error-message" *ngIf="(lastName.errors.pattern)">
-                    El apellido ingresado debe ser válido
-                  </div>
-                  <div class="container-error-message" *ngIf="lastName.errors.minlength">
-                    Debe tener 3 caracteres como mínimo.
-                  </div>
-                  <div class="container-error-message" *ngIf="lastName.errors.maxlength">
-                    Puede tener 15 caracteres como máximo.
-                  </div>
-                </div>
-            </mat-form-field> -->
             <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 15 caracteres">
               <mat-label>Apellido</mat-label>
                 <input matNativeControl type="text" placeholder="Ingresá tu apellido" 
                   #input maxlength="15" matInput  formControlName="lastName">
-                <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint> 
+                <!-- <mat-hint align="end">{{input.value?.length || 15}}/3</mat-hint>  -->
                 <div class="alert-danger" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
                   <div class="container-error-message" *ngIf="lastName.errors.required">
                     Tu apellido es un dato requerido.
@@ -99,17 +42,10 @@
                   <div class="container-error-message" *ngIf="(lastName.errors.pattern)">
                     El nombre ingresado debe ser válido
                   </div>
-                </div>
-                  <!-- <div class="container-error-message" *ngIf="(lastName.errors.pattern)">
-                    El apellido ingresado debe ser válido
-                  </div>
                   <div class="container-error-message" *ngIf="lastName.errors.minlength">
-                    Debe tener 3 caracteres como mínimo.
+                    Debe tener 3 carácteres como mínimo.
                   </div>
-                  <div class="container-error-message" *ngIf="lastName.errors.maxlength">
-                    Puede tener 15 caracteres como máximo.
-                  </div>
-                </div> -->
+                </div>
             </mat-form-field>
           </div>
         </div>
@@ -176,14 +112,12 @@
     <mat-card-actions *ngIf="!creativeUser.valid" class="container-button-off">
         <button mat-raised-button class="buttonForm-off" 
           type="submit" [disabled]="!creativeUser.valid">
-          <!-- routerLink="/test-crativity" routerLinkActive="active"> -->
           ENVIAR
         </button>   
     </mat-card-actions>
     <mat-card-actions *ngIf="creativeUser.valid" class="container-button">
       <button mat-raised-button class="buttonForm" 
         type="submit" [disabled]="!creativeUser.valid">
-        <!-- routerLink="/test-crativity" routerLinkActive="active"> -->
         ENVIAR
       </button>   
   </mat-card-actions>
