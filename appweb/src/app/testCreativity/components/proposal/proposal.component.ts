@@ -22,13 +22,16 @@ export class ProposalComponent implements OnInit {
     // debo agregar el output en el componente padre
     @Output() proposalAggregate: EventEmitter<string> = new EventEmitter();
 
+    empty = '';
     proposals = [];
+    finalArray = [];
 
     ngOnInit() {
         setTimeout(() => {
             let arrayProposal: any;
             arrayProposal = this.proposal.description.split('\n');
-            console.log(arrayProposal);
+            this.finalArray = this.validProposal(arrayProposal, this.empty);
+            console.log('El total de propuestas es ' + this.finalArray.length);
         }, 10000);
     }
 
@@ -38,6 +41,17 @@ export class ProposalComponent implements OnInit {
         this.proposalAggregate.emit(this.proposal.description);
         this.proposals.push(this.proposal.description);
         console.log(this.proposals);
+    }
+
+    validProposal(arrayProposal: string | any[], empty: any){
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < arrayProposal.length; i++) {
+            const proposal = arrayProposal[i];
+            if (proposal !== empty) {
+                this.finalArray.push(proposal);
+            }
+        }
+        return this.finalArray;
     }
 }
 

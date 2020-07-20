@@ -110,11 +110,16 @@ article.container-textarea {
     height: 300px; 
     text-align: center;
     background-color: #ffffff;
-    margin-top: 80px;
+    margin-top: 98px;
     -webkit-box-shadow: inset 0 0 0 2px #76ad2e;
     -moz-box-shadow: inset 0 0 0 2px #76ad2e;
     box-shadow: inset 0px 0px 0px 2px #76ad2e; 
-    margin-top: 94px;
+    margin-top: 90px;
+}
+.label-test {
+    font-weight: 500;
+    font-size: 15px;
+    opacity: 0;
 }
 p.message {
     font-weight: normal;  
@@ -152,9 +157,9 @@ app-proposal.row {
 }
 
 .buttonViewResult {
-    margin-top: 10px;
+    margin-top: 16px;
     margin-bottom: 0px;
-    padding: 12px 80px;
+    padding: 8px 80px;
     background-color: #4a4067;
     color: #ffffff;
     font-size: larger;
