@@ -96,12 +96,8 @@ h1>span{
 }
 
 // STYLE TEXTAREA
-.textarea-test {
-  width: 100%;
-    height: 500px;
-    margin-top: 15px;
-}
-article.container-textarea {
+
+article.container-message {
     display: flex;
     justify-content: center;
     align-items: left;
@@ -111,46 +107,48 @@ article.container-textarea {
     text-align: center;
     background-color: #ffffff;
     margin-top: 98px;
-    -webkit-box-shadow: inset 0 0 0 2px #76ad2e;
-    -moz-box-shadow: inset 0 0 0 2px #76ad2e;
-    box-shadow: inset 0px 0px 0px 2px #76ad2e; 
+    border-radius: 10px 10px 0px 0px;
+    -webkit-box-shadow: inset 0 0 0 2px #af3434;
+    -moz-box-shadow: inset 0 0 0 2px #af3434;
+    box-shadow: inset 0px 0px 0px 2px #af3434; 
     margin-top: 90px;
 }
-.label-test {
+.label-test-hidden {
     font-weight: 500;
     font-size: 15px;
-    opacity: 0;
+    display: none;
 }
 p.message {
     font-weight: normal;  
     color: #4a4067; 
     font-size: medium;
 }
-.cloud-icon {
-    font-size: 50px;
-    color: #76ad2e;
-}
-
-// .textarea-text {
-//     width: 300px;
-//     max-width: 300px;
-//     min-width: 300px;
-//     height: 300px;
-//     max-height: 300px;
-//     min-height: 300px;
+// .cloud-icon {
+//     font-size: 50px;
+//     color: #76ad2e;
 // }
+.timer-icon {
+    font-size: 50px;
+    color: #af3434;
+}
+.timer-message {
+    color: #af3434;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px;
+}
 .label-test {
     font-weight: 500;
     font-size: 15px;
 }
-app-proposal.row {
-    margin-top: 30px;
-}
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-}
+// app-proposal.row {
+//     margin-top: 30px;
+// }
+// .example-form {
+//     min-width: 150px;
+//     max-width: 500px;
+//     width: 100%;
+// }
   
 .example-full-width {
     width: 100%;
@@ -164,7 +162,9 @@ app-proposal.row {
     color: #ffffff;
     font-size: larger;
     font-weight: 500;   
+    margin-bottom: -6px;
 }
+
 .buttonViewResult-off {
     opacity: 0;
     margin-top: 30px;
@@ -184,5 +184,51 @@ app-proposal.row {
     align-items: center; 
     flex-direction: column;
 }
+
+// PROPOSAL
+.textarea-test {
+    font-family: 'Roboto', sans-serif;    
+    font-size: 16px;
+    width: 286px;
+    max-width: 286px;
+    min-width: 286px;
+    height: 290px;
+    max-height: 290px;
+    min-height: 290px;
+    margin-top: 7px;
+    border: transparent;
+    padding: 10px;
+    color: #4a4067;
+    border-radius: 10px 10px 0px 0px;
+}
+.textarea-test:focus {
+    outline: none !important;
+}
+article.container-textarea {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    margin-top: 76px;
+}
+.label-test {
+    font-weight: 500;
+    font-size: 15px;
+    color: #4a4067;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+.example-full-width {
+    width: auto;
+}
+.mat-form-field-infix .ng-tns-c91-0 {
+    width: auto;
+}
+// END PROPOSAL
 
  

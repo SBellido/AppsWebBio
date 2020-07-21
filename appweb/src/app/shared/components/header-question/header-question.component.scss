@@ -16,9 +16,7 @@
     left: 88%;
     width: auto;
     cursor: pointer;
-    padding: 16px 18px;
-
-    
+    padding: 12px 18px; 
 }
 
 .container-question-link:hover {
@@ -28,7 +26,10 @@
     background-color: #4a40673f;
     outline: none;
 }
-
+.question {
+    color: #4a4067;
+    font-size: 60px;  
+}
 .container-col {
     display: flex;
     justify-content: center;

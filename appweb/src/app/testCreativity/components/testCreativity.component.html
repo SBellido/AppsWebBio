@@ -10,7 +10,7 @@
 <div *ngIf="started" class="container-all">
     <app-header-creativity></app-header-creativity>
     <section class="container">
-        <article *ngIf="clock.state == 'started' || clock.state == 'alert'"
+        <article *ngIf="clock.state != 'finalized'"
             class="container-element-textarea"> 
             <h1 class="title"><span>¿Qué usos le darías a un Clip?</span></h1>
             <img src="assets/images/clip.jpg" alt="">
@@ -23,30 +23,35 @@
             <!-- <app-element class="row container-element"></app-element> -->       
         </article>
         <section class="container-right">
-            <article *ngIf="clock.state == 'started' || clock.state == 'alert'">
-                <app-proposal class="col"
-                    *ngFor="let proposal of proposals" 
-                    (proposalAggregate)="addProposalToTextarea($event)"
-                    [proposal]="proposal">
-                </app-proposal>
-            </article>
-            <article *ngIf="clock.state == 'finalized'" 
+            <article *ngIf="clock.state != 'finalized'" 
                 class="container-textarea">
                 <label class="label-test" for="">Presioná "Enter" después de cada propuesta</label>
-                <span class="material-icons cloud-icon">
-                    cloud_done
+                <textarea [(ngModel)]="proposal.description" placeholder="Escribí tus propuetas"
+                    class="textarea-test"></textarea>
+            </article>
+            
+            <!-- <app-proposal class="col"
+                *ngFor="let proposal of proposals" 
+                (proposalAggregate)="addProposalToTextarea($event)"
+                [proposal]="proposal">
+            </app-proposal> -->
+            <article *ngIf="clock.state == 'finalized'" 
+                class="container-message">
+                <label class="label-test-hidden" for="">Presioná "Enter" después de cada propuesta</label>
+                <span class="material-icons timer-icon">
+                    timer
                 </span>
-                <p class="message">Tus propuestas se han<br>guardado con éxito</p> 
+                <p class="timer-message">Tiempo agotado</p>
+                <!-- <span class="material-icons cloud-icon">
+                    cloud_done
+                </span> -->
+                <!-- <p class="message">Tus propuestas se han<br>guardado con éxito</p>  -->
             </article>   
             <!-- CLOCK -->
             <div *ngIf="clock.state == 'started'" class="container-clock">
                 <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
                 <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
-            </div> 
-            <div *ngIf="clock.state == 'alert'" class="container-clock-alert">
-                <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
-                <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
-            </div>            
+            </div>         
             <div *ngIf="clock.state == 'finalized'" 
                 class="container-clock-finalized">
                 <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>

@@ -31,6 +31,7 @@ export class ProposalComponent implements OnInit {
             let arrayProposal: any;
             arrayProposal = this.proposal.description.split('\n');
             this.finalArray = this.validProposal(arrayProposal, this.empty);
+            console.log(arrayProposal);
             console.log('El total de propuestas es ' + this.finalArray.length);
         }, 10000);
     }

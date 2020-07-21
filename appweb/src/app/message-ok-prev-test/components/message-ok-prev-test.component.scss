@@ -42,9 +42,11 @@ section.container {
 }
 
 .buttonInit {
-    color: #ffffff;
-    padding: 5px 15px 5px 25px; 
+    padding: 8px 80px;
     background-color: #4a4067;
+    color: #ffffff;
+    font-size: larger;
+    font-weight: 500;   
 }
 
 
@@ -61,16 +63,13 @@ section.container {
 }
 
 .icon-go { 
-    // background-color: #AF6F6F; 
     background-color: #ffffff; 
     color: #4a4067;
     border-radius: 50%;
-    margin-left: 15px; 
+    margin: 0px 15px 0px 35px; 
 }
 
 .icon-cloud {
     color: #76ad2e;
     font-size: 80px;
-
-
 }

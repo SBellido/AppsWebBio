@@ -6,16 +6,17 @@ import { TestResultComponent } from './components/test-result/test-result.compon
 import { TestResultRoutingModule } from './test-result-routing.module';
 import { MaterialModule } from './../material/material.module';
 import { SharedModule } from './../shared/shared.module';
-
+// import { ProposalComponent } from './../testCreativity/components/proposal/proposal.component';
 @NgModule({
   declarations: [
-    TestResultComponent
+    TestResultComponent,
+    // ProposalComponent
   ],
   imports: [
     CommonModule,
     TestResultRoutingModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class TestResultModule { }

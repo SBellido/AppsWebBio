@@ -42,30 +42,33 @@ div.swiper-button-next:hover, div.swiper-button-prev:hover {
     -moz-box-shadow: inset 0 0 0 2px #f4c713;
     box-shadow: inset 0px 0px 0px 2px #f4c713; 
     background-color: rgba($color: #f4c713, $alpha: 0.1); 
-
-    
 }
 
 .container-items {
-    width: 290px;
+    width:290px;
     height: 120px;
     background-color: #4A4067;
     color: white;
     padding: 20px 80px 20px 80px;
     text-align: center;
 }
+
 li {
     margin: 10px 0px 5px 0px;
     list-style: none;
+    font-size: 15px;
 }
+
 .intruction {
     color: #e33b88;
 }
 
 span.instructions-text {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 15px;
+    letter-spacing: 0.2px;
 }
+
 .container-title-intruction {
     display: flex;
     justify-content: center;

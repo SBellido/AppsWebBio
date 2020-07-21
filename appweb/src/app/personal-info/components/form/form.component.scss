@@ -47,11 +47,15 @@ mat-label.label {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 14px 4px;
+  margin: 0px;
 }
 .container-button-off {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 14px 4px;
+  margin: 0px;
 }
 .buttonBack { 
   color: #e33b88;
@@ -90,22 +94,26 @@ a { margin: 20px; }
 .alert-danger {
   margin-top: 0px;
 }
+
+button {
+  margin: 2px 0px;
+}
 .buttonForm {
   background-color: #76ad2e;
   color: white;
   font-size: large;
-  padding: 10px 178px;
+  padding: 10px 140px;
   font-weight: 500;
 }
 .buttonForm-off {
   background-color: #76ad2e;
   color: white;
   font-size: large;
-  padding: 10px 178px;
+  padding: 10px 140px;
   font-weight: 500;
 }
 .buttonForm:hover {
-  background-color: #5a8128;
+  background-color: #76ad2ecc;
 }
 div.container-error-message {
   margin-top: 5px;
