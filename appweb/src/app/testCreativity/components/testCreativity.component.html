@@ -11,13 +11,13 @@
     <app-header-creativity></app-header-creativity>
     <section class="container">
         <article *ngIf="clock.state != 'finalized'"
-            class="container-element-textarea"> 
+            class="container-element"> 
             <h1 class="title"><span>¿Qué usos le darías a un Clip?</span></h1>
             <img src="assets/images/clip.jpg" alt="">
             <!-- <app-element class="row container-element"></app-element> -->
         </article>
         <article *ngIf="clock.state == 'finalized'"
-            class="container-element-textarea"> 
+            class="container-element"> 
             <h1 class="title"><span>¡Gracias por tu participación!</span></h1>
             <img src="assets/images/final-message.jpg" alt="">
             <!-- <app-element class="row container-element"></app-element> -->       

@@ -10,7 +10,8 @@ import { CreativeUser } from './../../../core/models/creative-user.interface';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-@Input('formControlName')
+
+// @Input('formControlName')
 
 export class FormComponent implements OnInit {
 
@@ -60,12 +61,10 @@ export class FormComponent implements OnInit {
       educationLevel: new FormControl('', [
         Validators.required])
     });
-    // this.setDataInStorage(formData);
     return formData;
   }
 
   ngOnInit(): void {
-    localStorage.removeItem('creative-user');
   }
 
   onResetForm() {
@@ -75,10 +74,9 @@ export class FormComponent implements OnInit {
   onSaveForm($event: any) {
     $event.preventDefault();
     if (this.dataCreativeUser.valid) {
-      this.dbData.saveContact(this.dataCreativeUser.value);
       console.log('Valid');
       console.log(this.dataCreativeUser.value);
-      localStorage.setItem('creative-user', JSON.stringify(this.dataCreativeUser.value));
+      localStorage.setItem('creative-user', this.dataCreativeUser.value);
       this.onResetForm();
       this.router.navigate(['message-ok-prev-test']);
     } else {
@@ -87,10 +85,15 @@ export class FormComponent implements OnInit {
   }
 
 
-  setDataInStorage(formData: FormGroup) {
-    localStorage.setItem('lastName', formData.value(this.lastName));
-
-  }
+  // setDataInStorage(formData: FormGroup) {
+  //   localStorage.setItem('name', formData.value);
+  //   this.creativeUser.name = this.dataCreativeUser.get('name');
+  //   this.creativeUser.lastName = this.dataCreativeUser.get('lastName');
+  //   this.creativeUser.age = this.dataCreativeUser.get('age');
+  //   this.creativeUser.age = this.dataCreativeUser.get('email');
+  //   this.creativeUser.educationLevel = this.dataCreativeUser.get('educationLevel');
+  //   return this.creativeUser;
+  // }
 
   get name() { return this.dataCreativeUser.get('name'); }
   get lastName() { return this.dataCreativeUser.get('lastName'); }

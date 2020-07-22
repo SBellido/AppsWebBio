@@ -1,6 +1,10 @@
+
 <div class="container-all">
     <app-header></app-header>
-    <section class="container">
+    <section *ngIf="load == false" class="container">
+        <div class="preloader"></div>
+    </section>
+    <section *ngIf="load == true" class="container">
         <div class="container-message">
             <h1 mat-dialog-title class="message">¡Perfecto!</h1>
             <span class="material-icons icon-cloud">
@@ -10,7 +14,7 @@
             <h4 class="message">Tus datos fueron<br>guardados con éxito</h4>
         </div>
         <div class="container-button">
-            <button class="buttonInit" mat-raised-button
+            <button class="buttonInit" mat-raised-button 
                 routerLink="/test-creativity" routerLinkActive="active"
                 data-backdrop="static" data-keyboard="false">
                 INICIAR PRÁCTICA

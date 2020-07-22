@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CreativeUserI } from './../../../core/models/creative-user.interface';
+import { CreativeUser } from './../../../core/models/creative-user.interface';
 
 @Component({
   selector: 'app-creative-user',

@@ -1,0 +1,129 @@
+.full-width {
+    width: 100%;
+  }
+  
+mat-card.shipping-card {
+  min-width: 400px;
+  color: #4a4067;
+  padding: 10px 10px 0px 10px;
+  margin: 75px 25px 20px 25px;
+}
+mat-card > mat-card-header.container-title {
+  background-color: #4a4067;
+  color: white;
+  display: flex;  
+  justify-content: center;
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+p.message {
+  display: flex;  
+  justify-content: center;
+  font-weight: bold;
+  color: #e33b88;
+}
+
+div.row {
+  display: flex;
+  flex-direction: row;
+  padding: 6px 20px;
+}
+
+.col {
+  flex: 1;
+}
+div.col {
+  text-align: left;
+}
+.col:last-child {
+  margin-right: 0;
+}
+
+mat-label.label {
+  font-weight: 500;
+}
+
+.container-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 4px;
+  margin: 0px;
+}
+.container-button-off {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 4px;
+  margin: 0px;
+}
+.buttonBack { 
+  color: #e33b88;
+  padding: 5px 25px 5px 15px; 
+  border: 0.5px solid #e33b88; 
+}
+
+.icon-back { 
+// background-color: #AF6F6F; 
+  background-color: #e33b88; 
+  color: white;
+  border-radius: 50%; 
+}
+
+a { margin: 20px; }
+
+// .buttonGo { 
+//   color: white;
+//   padding: 5px 15px 5px 25px; 
+//   border: 0.5px solid #4a4067;
+//   background-color: #4a4067; 
+// }
+
+// .icon-go { 
+// background-color: #AF6F6F; 
+//   background-color: white; 
+//   color: #4a4067;
+//   border-radius: 50%; 
+// }
+
+a { margin: 20px; }
+
+// .mat-card-actions {
+//   margin-left: 0px;
+// }
+.alert-danger {
+  margin-top: 0px;
+}
+
+button {
+  margin: 2px 0px;
+}
+.buttonForm {
+  background-color: #76ad2e;
+  color: white;
+  font-size: large;
+  padding: 10px 140px;
+  font-weight: 500;
+}
+.buttonForm-off {
+  background-color: #76ad2e;
+  color: white;
+  font-size: large;
+  padding: 10px 140px;
+  font-weight: 500;
+}
+.buttonForm:hover {
+  background-color: #76ad2ecc;
+}
+div.container-error-message {
+  margin-top: 5px;
+  color: #e33b88;
+  font-weight: bold;
+  font-size: x-small;
+}
+// mat-form-field {
+//   margin: 0px 15px;
+// }
+
+
+

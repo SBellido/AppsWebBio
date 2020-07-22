@@ -1,8 +1,8 @@
-export interface CreativeUserI {
-    name: string;
-    lastName: string;
-    age: number;
-    email: string;
-    educationLevel: string;
-    proposal: [string];
+export interface CreativeUser {
+    name: any;
+    lastName: any;
+    age: any;
+    email: any;
+    educationLevel: any;
+    proposal: [any];
 }

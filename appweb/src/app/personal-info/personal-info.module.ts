@@ -24,7 +24,7 @@ import { DataDbService } from '../core/services/db/data-db.service';
   ],
   exports: [
     PersonalInfoComponent,
-    FormComponent
+    // FormComponent
   ],
   providers: [DataDbService]
 })

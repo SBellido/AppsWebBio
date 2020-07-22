@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TestCreativity } from '../../core/models/testCreativity.module';
-
 import { Clock } from '../../core/models/clock.module';
 import { Proposal } from './../../core/models/proposal.module';
 
+import { DataDbService } from '../../core/services/db/data-db.service';
+
+import { Router } from '@angular/router';
+
 @Component({
-    /*usaré ese selector como una etiqueta HTML en el template*/
+    // usaré ese selector como una etiqueta HTML en el template
     selector: 'app-testcreativity',
     templateUrl: './testCreativity.component.html',
     styleUrls: ['testCreativity.component.scss']
@@ -14,22 +17,20 @@ import { Proposal } from './../../core/models/proposal.module';
 
 export class TestCreativityComponent implements OnInit {
 
-    constructor() { }
+    constructor(private router: Router, private dbData: DataDbService) { }
 
-    // INIT
+// INIT
     started = false;
     countDown = 3;
-    // audio = new Audio('assets/sounds/beep.mp3');
 
-    // CLOCK
-    ting = new Audio('/assets/sounds/ting.mp3');
+// CLOCK
     clock: Clock = {
         seconds: -3,
         minutes: 0,
         state: 'started'
     };
 
-    // PROPOSAL
+// PROPOSAL
     empty = '';
     proposals = [];
     finalArray = [];
@@ -43,7 +44,9 @@ export class TestCreativityComponent implements OnInit {
         name: 'Creatividad'
     };
 
+// TEST
     ngOnInit(): void {
+        this.verifyData();
         this.countdown();
         this.startClock();
         const test = setInterval(() => {
@@ -51,23 +54,26 @@ export class TestCreativityComponent implements OnInit {
             arrayProposal = this.proposal.description.split('\n');
             if (this.clock.state === 'finalized') {
                 this.finalArray = this.validProposal(arrayProposal, this.empty);
+                // this.dbData.saveContact(this.dataCreativeUser.value);
                 console.log(arrayProposal);
                 console.log('El total de propuestas es ' + this.finalArray.length);
                 clearInterval(test);
             }
-        }, 10000);
+        }, 1000);
+        // this.saveInBBDD();
     }
+    // saveInBBDD() {
 
-    // FUNCTIONS PROPOSAL
-    validProposal(arrayProposal: string | any[], empty: any){
-        // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < arrayProposal.length; i++) {
-            const proposal = arrayProposal[i];
-            if (proposal !== empty) {
-                this.finalArray.push(proposal);
-            }
+    //     this.dbData.saveContact(this.dataCreativeUser.value);
+    // }
+
+    verifyData() {
+        const creativeUser =  JSON.parse(localStorage.getItem('creative-user'));
+        console.log(creativeUser);
+        if (creativeUser == null) {
+            this.router.navigate(['personal-info']);
         }
-        return this.finalArray;
+        return creativeUser;
     }
 
     countdown() {
@@ -82,7 +88,19 @@ export class TestCreativityComponent implements OnInit {
         }, 1000);
     }
 
-    // CLOCK FUNTIONS
+// FUNCTIONS PROPOSAL
+    validProposal(arrayProposal: string | any[], empty: any){
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < arrayProposal.length; i++) {
+            const proposal = arrayProposal[i];
+            if (proposal !== empty) {
+                this.finalArray.push(proposal);
+            }
+        }
+        return this.finalArray;
+    }
+
+// CLOCK FUNTIONS
     startClock() {
         const timeClock = setInterval(() => {
             this.controlSecondsMinutes();
@@ -93,25 +111,6 @@ export class TestCreativityComponent implements OnInit {
             }
         }, 1000);
     }
-
-    // checkLastSeconds() {
-    //     let count = 0 ;
-    //     if (this.clock.minutes === 0 && this.clock.seconds === 50) {
-    //         this.clock.state = 'alert';
-    //         const timeOut = setInterval(() => {
-    //             this.playSoundSecond();
-    //             count++;
-    //             console.log(count);
-    //             if (count === 9) {
-    //                 clearInterval(timeOut);
-    //             }
-    //         },  1000);
-    //     }
-    // }
-
-    // playSoundSecond() {
-    //     this.alertSecond.play();
-    // }
 
     controlSecondsMinutes() {
         if (this.clock.state !== 'finalized') {
@@ -132,20 +131,6 @@ export class TestCreativityComponent implements OnInit {
         this.clock.minutes = 0;
         this.clock.seconds = -3;
     }
-
-    // alertTime() {
-    //     const timeout = setInterval(() => {
-    //         let count = 0;
-    //         this.alertSecond.play();
-    //         count ++;
-    //         if (count <= 10) {
-    //         count ++;
-    //         } else {
-    //             clearInterval(timeout);
-    //         }
-    //     }, 1000);
-    // }
-    // END CLOCK FUNTIONS
 
 }
 
