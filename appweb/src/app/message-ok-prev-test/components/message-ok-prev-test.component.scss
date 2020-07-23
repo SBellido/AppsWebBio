@@ -1,7 +1,7 @@
 .preloader {
     width: 50px;
     height: 50px;
-    border: 10px solid #ffffff;
+    border: 10px solid #4a406769;
     border-top: 10px solid #4a4067;
     border-radius: 50%;
     animation-name: girar;
@@ -9,15 +9,16 @@
     animation-iteration-count: 3s;
     animation-timing-function: linear;
     margin-top: 170px;
-  }
-  @keyframes girar {
+}
+@keyframes girar {
     from {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
     to {
-      transform: rotate(720deg);
+        transform: rotate(720deg);
     }
-  }
+}
+
 .container-all {
     background-color: #eeeeee;
     width: 100%;

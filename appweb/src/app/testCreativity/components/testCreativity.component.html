@@ -14,38 +14,42 @@
             class="container-element"> 
             <h1 class="title"><span>¿Qué usos le darías a un Clip?</span></h1>
             <img src="assets/images/clip.jpg" alt="">
-            <!-- <app-element class="row container-element"></app-element> -->
         </article>
         <article *ngIf="clock.state == 'finalized'"
             class="container-element"> 
             <h1 class="title"><span>¡Gracias por tu participación!</span></h1>
             <img src="assets/images/final-message.jpg" alt="">
-            <!-- <app-element class="row container-element"></app-element> -->       
         </article>
         <section class="container-right">
             <article *ngIf="clock.state != 'finalized'" 
                 class="container-textarea">
-                <label class="label-test" for="">Presioná "Enter" después de cada propuesta</label>
-                <textarea [(ngModel)]="proposal.description" placeholder="Escribí tus propuetas"
+                <label class="label-test" for="">Presioná <span class="enter">"Enter"</span> después de cada propuesta</label>
+                <textarea [(ngModel)]="proposals" placeholder="Escribí tus propuestas"
                     class="textarea-test"></textarea>
-            </article>
-            
-            <!-- <app-proposal class="col"
-                *ngFor="let proposal of proposals" 
-                (proposalAggregate)="addProposalToTextarea($event)"
-                [proposal]="proposal">
-            </app-proposal> -->
+            </article>           
             <article *ngIf="clock.state == 'finalized'" 
                 class="container-message">
                 <label class="label-test-hidden" for="">Presioná "Enter" después de cada propuesta</label>
+                <!-- <h1 class="message-final">¡Felicitaciones!</h1> -->
+                <h1 *ngIf="points < 1" 
+                    class="message-final">¿Te dormiste?</h1>
+                
+                <h1 *ngIf="points == 1" 
+                    class="message-final">¿Te dormiste?</h1>
+                <h2  *ngIf="points == 1"  class="result">Obtuviste {{ points }} punto</h2>
+                <h1 *ngIf="points > 1 && points <= 10" 
+                        class="message-final">¡Felicitaciones!</h1>
+                <h1 *ngIf="points >= 10 && points < 20" 
+                    class="message-final">¡Felicitaciones!</h1>
+                <h1 *ngIf="points >= 20 && points < 30" 
+                    class="message-final">¡Increíble! Obtuviste {{ points }} puntos</h1>
+                <h1 *ngIf="points >= 30 " 
+                    class="message-final">¡Excelente! Obtuviste {{ points }} puntos</h1>
+                <h2 class="result">Obtuviste {{ points }} puntos</h2>
                 <span class="material-icons timer-icon">
                     timer
                 </span>
                 <p class="timer-message">Tiempo agotado</p>
-                <!-- <span class="material-icons cloud-icon">
-                    cloud_done
-                </span> -->
-                <!-- <p class="message">Tus propuestas se han<br>guardado con éxito</p>  -->
             </article>   
             <!-- CLOCK -->
             <div *ngIf="clock.state == 'started'" class="container-clock">
@@ -56,50 +60,15 @@
                 class="container-clock-finalized">
                 <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
                 <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
-            </div>
-            <mat-card-actions *ngIf="clock.state != 'finalized'" 
-                class="container-button-off">
-                <button mat-raised-button class="buttonViewResult-off" 
-                    type="submit" [disabled]="clock.state != 'finalized'">
-                    VER RESULTADO
-                </button>   
-            </mat-card-actions>
-            <mat-card-actions *ngIf="clock.state == 'finalized'"
-                class="container-button">
-                <button mat-raised-button class="buttonViewResult" 
-                    type="submit" [disabled]="clock.state != 'finalized'"
-                    routerLink="/test-result" routerLinkActive="active">
-                    VER RESULTADO
-                </button>   
-            </mat-card-actions> 
-         
+            </div>         
         </section>
     </section>
+    <div *ngIf="clock.state == 'finalized'" class="finish">
+        <button mat-raised-button class="finish-button"
+            routerLink="/select-test" routerLinkActive="active" >
+            TERMINAR
+        </button>
+    </div>
 </div>
-<div *ngIf="clock.state == 'finalized'" class="container-all">
-    <app-header-creativity></app-header-creativity>
-    <section class="container">
-        <!-- <article class="container-element-textarea"> 
-            <h1 class="title"><span>¡Gracias por tu participación!</span></h1>
-            <img src="assets/images/final-message.jpg" alt="">
-        </article> -->
-       <section>
-        <article class="container-textarea">
-            <label class="label-test" for="">Tus propuestas han sido computadas</label>
-            <textarea disabled class="textarea-text">
-            </textarea>
-        </article>
-
-            <!-- <div class="container-clock-finalized">
-                <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
-                <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
-            </div>  -->
-           <!-- <button routerLink="/select-test" routerLinkActive="active"
-               class="buttonViewResult" mat-raised-button>
-               VER RESULTADO
-           </button> -->
-       </section>         
-    </section>
-</div>  
 <router-outlet></router-outlet>
 

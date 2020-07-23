@@ -61,6 +61,7 @@ section.container {
     text-align: center;
     color: white;
     width: 300px;
+    border-radius: 0px 0px 10px 10px;
 }
 h1.clock {
     font-size: xx-large;
@@ -72,14 +73,16 @@ h1.clock {
     text-align: center;
     color: white;
     width: 300px;
+    border-radius: 0px 0px 10px 10px;
+
 }
-.container-clock-alert {
-    background-color: #ffcf02;
-    padding: 0.5px 3px;
-    text-align: center;
-    color: white;
-    width: 300px;
-}
+// .container-clock-alert {
+//     background-color: #ffcf02;
+//     padding: 0.5px 3px;
+//     text-align: center;
+//     color: white;
+//     width: 300px;
+// }
 // STYLE ELEMENT
 
 img {
@@ -103,7 +106,7 @@ article.container-message {
     align-items: left;
     flex-direction: column;
     width: 306px;  
-    height: 300px; 
+    height: 323px; 
     text-align: center;
     background-color: #ffffff;
     margin-top: 98px;
@@ -111,7 +114,7 @@ article.container-message {
     -webkit-box-shadow: inset 0 0 0 2px #af3434;
     -moz-box-shadow: inset 0 0 0 2px #af3434;
     box-shadow: inset 0px 0px 0px 2px #af3434; 
-    margin-top: 90px;
+    margin-top: 146px;
 }
 .label-test-hidden {
     font-weight: 500;
@@ -123,13 +126,22 @@ p.message {
     color: #4a4067; 
     font-size: medium;
 }
-// .cloud-icon {
-//     font-size: 50px;
-//     color: #76ad2e;
-// }
+h1.message-final {
+    color: #e33b88;
+    font-size: 30px;
+    margin-top: 0px;
+}
+h2.result {
+    color: #76ad2e;
+    margin-bottom: 0px;
+    margin-top: 0px;
+
+}
+
 .timer-icon {
     font-size: 50px;
     color: #af3434;
+    margin-top: 80px;
 }
 .timer-message {
     color: #af3434;
@@ -153,7 +165,23 @@ p.message {
 .example-full-width {
     width: 100%;
 }
-
+.finish {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.finish-button {
+    background-color: #4a4067;
+    color: #ffffff;
+    font-weight: 500;  
+    margin-top: 50px;
+    margin-bottom: 0px;
+    padding: 8px 80px;
+    font-size: large; 
+}
+span.enter { 
+    font-weight: bold;
+}
 .buttonViewResult {
     margin-top: 16px;
     margin-bottom: 0px;
@@ -192,9 +220,9 @@ p.message {
     width: 286px;
     max-width: 286px;
     min-width: 286px;
-    height: 268px;
-    max-height: 290px;
-    min-height: 290px;
+    height: 300px;
+    max-height: 300px;
+    min-height: 300px;
     margin-top: 7px;
     border: transparent;
     padding: 10px;
@@ -209,7 +237,7 @@ article.container-textarea {
     justify-content: center;
     align-items: left;
     flex-direction: column;
-    margin-top: 76px;
+    margin-top: 124px;
 }
 .label-test {
     font-weight: 500;

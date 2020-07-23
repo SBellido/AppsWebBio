@@ -10,6 +10,7 @@ export class SelectTestComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    localStorage.clear();
   }
 
 }

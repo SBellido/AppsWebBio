@@ -4,5 +4,6 @@ export interface CreativeUser {
     age: any;
     email: any;
     educationLevel: any;
-    proposal: [any];
+    proposal: any[];
+    points: number;
 }

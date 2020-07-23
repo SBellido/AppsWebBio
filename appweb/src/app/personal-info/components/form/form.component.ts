@@ -26,12 +26,13 @@ export class FormComponent implements OnInit {
     age: 0,
     email: '',
     educationLevel: '',
-    proposal: ['']
+    proposal: [''],
+    points: 0
   };
 
   dataCreativeUser: FormGroup;
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  private stringPattern: any = /^[a-zA-ZñÑ]*$/;
+  private stringPattern: any = /^[a-zA-ZñÑáéíóú ]*$/;
 
   createDataUser() {
     const formData = new FormGroup({
@@ -65,7 +66,8 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.removeItem('creative-user');
+    localStorage.clear();
+    // localStorage.removeItem('creative-user');
   }
 
   onResetForm() {
@@ -75,7 +77,6 @@ export class FormComponent implements OnInit {
   onSaveForm($event: any) {
     $event.preventDefault();
     if (this.dataCreativeUser.valid) {
-      this.dbData.saveContact(this.dataCreativeUser.value);
       console.log('Valid');
       console.log(this.dataCreativeUser.value);
       localStorage.setItem('creative-user', JSON.stringify(this.dataCreativeUser.value));
@@ -89,7 +90,6 @@ export class FormComponent implements OnInit {
 
   setDataInStorage(formData: FormGroup) {
     localStorage.setItem('lastName', formData.value(this.lastName));
-
   }
 
   get name() { return this.dataCreativeUser.get('name'); }

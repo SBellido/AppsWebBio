@@ -1,34 +1,238 @@
-.container-all {
-    background: #4a4067 !important;
-    height: 100%;
-}
+// Pantallas pequeñas (usadas por ejemplo en netbooks): 1024 x 600
+// Pantallas medianas: 1280 x 720 / 1280 x 800
+// Pantallas grandes: ancho superior a 1400 píxeles, ejemplo 1400 x 900 o 1600 x 1200.
 
-.container-logoAndText {
-    padding-top: 100px;
-}
+@media (min-width: 1920px) { 
 
-.container-logos {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 200px;
-}
+    .container-all {
+        background: #4a4067 !important;
+        min-height: 100%;
+        max-height: 100%;
+    }
+    
+    .container-logoAndText {
+        padding-top: 100px;
+    }
+    
+    .container-logos {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 200px 30px 200px;
+    }
+    
+    .logo-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 80px 350px 0px 150px;
+        margin-bottom: 150px;
+    }
+    .text-home {
+        color: white;
+        font-weight: lighter;
+    }
+    
+    .buttonHome {
+        font-size: larger;
+        padding: 10px 80px;
+        font-weight: 600;
+        color: #E33B88;
+    }
 
-.logo-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 80px 350px 0px 150px;
-    margin-bottom: 150px;
-}
-.textHome {
-    color: white;
-    font-weight: lighter;
-}
+}   
+@media (min-width: 1600px) and (max-width: 1919px) {  
 
-.buttonHome {
-    font-size: larger;
-    padding: 10px 80px;
-    font-weight: 600;
-    color: #E33B88;
+    .container-all {
+        flex-basis: auto;
+        background: #4a4067 !important;
+        min-height: 100%;
+        max-height: 100%;
+    }
+    
+    .container-logoAndText {
+        padding-top: 100px;
+    }
+    
+    .container-logos {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 200px 30px 200px;
+    }
+    
+    .logo-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 80px 200px 0px 150px;
+        margin-bottom: 150px;
+    }
+    .text-home {
+        color: white;
+        font-weight: lighter;
+        font-size: 20px;
+    }
+    
+    .buttonHome {
+        font-size: larger;
+        padding: 10px 80px;
+        font-weight: 600;
+        color: #E33B88;
+    }
+
 }
+@media (min-width: 1400px) and (max-width: 1599px) {  
+
+    .container-all {
+        flex-basis: auto;
+        background: #4a4067 !important;
+        min-height: 100%;
+        max-height: 100%;
+    }
+    
+    .container-logoAndText {
+        padding-top: 100px;
+    }
+    
+    .container-logos {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 150px 30px 100px;
+    }
+    
+    .logo-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 80px 150px 0px 50px;
+        margin-bottom: 150px;
+    }
+    .text-home {
+        color: white;
+        font-weight: lighter;
+        font-size: 20px;
+    }
+    
+    .buttonHome {
+        font-size: larger;
+        padding: 10px 80px;
+        font-weight: 600;
+        color: #E33B88;
+    }
+
+}
+@media (min-width: 1280px) and (max-width: 1399px) { 
+    
+    .container-all {
+        background: #4a4067 !important;
+        min-height: 100%;
+        max-height: 100%;
+    }
+    
+    .container-logoAndText {
+        padding-top: 0px;
+        margin-right: 100px;
+    }
+    
+    .container-logos {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 100px 0px 100px;
+    }
+
+    .logo-home { 
+        width: 55%; height: 55%; 
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 150px 60px 0px 60px;
+        margin-bottom: 100px;
+    }
+    .text-home {
+        color: white;
+        font-weight: lighter;
+        font-size: 20px;
+    }
+    
+    .buttonHome {
+        font-size: larger;
+        padding: 10px 80px;
+        font-weight: 600;
+        color: #E33B88;
+    }
+
+    .logos-inst {
+        width: 14%;
+        height: 14%;
+    }
+    .logo-itba {
+        width: 17%;
+        height: 17%;
+    }
+    
+
+} 
+@media (min-width: 1024px) and (max-width: 1279px) { 
+    
+    .container-all {
+        background: #4a4067 !important;
+        min-height: 100%;
+        max-height: 100%;
+    }
+    
+    .container-logoAndText {
+        padding-top: 0px;
+        margin-right: 100px;
+    }
+    
+    .container-logos {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 100px 0px 100px;
+    }
+
+    .logo-home { 
+        width: 55%; height: 55%; 
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 150px 60px 0px 60px;
+        margin-bottom: 100px;
+    }
+    .text-home {
+        color: white;
+        font-weight: lighter;
+        font-size: 20px;
+    }
+    
+    .buttonHome {
+        font-size: larger;
+        padding: 10px 80px;
+        font-weight: 600;
+        color: #E33B88;
+    }
+
+    .logos-inst {
+        width: 14%;
+        height: 14%;
+    }
+    .logo-itba {
+        width: 17%;
+        height: 17%;
+    }
+    
+
+} 
+
+
+
