@@ -87,15 +87,6 @@ export class TestCreativityComponent implements OnInit {
             }
         }, 1000);
     }
-    // startTest() {
-    //     const test = setInterval(() => {
-    //         this.clock.seconds++;
-    //         if (this.clock.seconds > this.clock.limit) {
-    //             this.finalizedTest();
-    //             clearInterval(test);
-    //         }
-    //     }, 1000);
-    // }
 
     finalizedTest() {
         this.clock.state = 'finalized';
@@ -104,9 +95,8 @@ export class TestCreativityComponent implements OnInit {
         this.finalProposals = this.validProposal(arrayProposal, this.empty);
         this.showProposal(this.finalProposals);
         const finalScore = this.getFinalScore();
-        this.assingDataToUser();
         this.points = finalScore + this.finalProposals.length;
-        console.log(this.points);
+        this.assingDataToUser();
         this.saveInBBDD();
     }
 
@@ -114,7 +104,6 @@ export class TestCreativityComponent implements OnInit {
         this.user = JSON.parse(localStorage.getItem('creative-user'));
         this.user.proposal = this.finalProposals;
         this.user.points = this.points;
-        console.log(this.user);
     }
 
     getFinalScore() {
@@ -123,7 +112,6 @@ export class TestCreativityComponent implements OnInit {
 
     saveInBBDD() {
         this.dbData.saveContact(this.user);
-        console.log('datos almacenados correctamente');
     }
 
 

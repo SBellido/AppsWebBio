@@ -24,27 +24,38 @@
             <article *ngIf="clock.state != 'finalized'" 
                 class="container-textarea">
                 <label class="label-test" for="">Presioná <span class="enter">"Enter"</span> después de cada propuesta</label>
-                <textarea [(ngModel)]="proposals" placeholder="Escribí tus propuestas"
+                <textarea [(ngModel)]="proposals" placeholder="Escribí todas las que se te ocurran"
                     class="textarea-test"></textarea>
             </article>           
             <article *ngIf="clock.state == 'finalized'" 
                 class="container-message">
                 <label class="label-test-hidden" for="">Presioná "Enter" después de cada propuesta</label>
                 <!-- <h1 class="message-final">¡Felicitaciones!</h1> -->
-                <h1 *ngIf="points < 1" 
-                    class="message-final">¿Te dormiste?</h1>
-                
-                <h1 *ngIf="points == 1" 
-                    class="message-final">¿Te dormiste?</h1>
+                <div *ngIf="points < 1" class="message-icon">
+                    <h1 class="message-final">¿Te dormiste?</h1>
+                    <img class="emoyi" src="assets\images\emoyi_5.png" alt="emoyi dudando">
+                </div>               
+                <div *ngIf="points == 1" class="message-icon">
+                    <h1 class="message-final">¿Te dormiste?</h1>
+                    <img src="assets\images\emoyi_5.png" alt="emoyi dudando">
+                </div>
+                <div *ngIf="points > 1 && points <= 10" class="message-icon">
+                    <h1 class="message-final">¡Buen trabajo!</h1>
+                    <img src="assets\images\emoyi_2.png" alt="emoyi dudando">
+                </div>
+                <div *ngIf="points >= 10 && points < 20" class="message-icon">
+                    <h1 class="message-final">¡Felicitaciones!</h1>
+                    <img src="assets\images\emoyi_1.png" alt="emoyi dudando">
+                </div>
+                <div *ngIf="points >= 20 && points < 30" class="message-icon">
+                    <h1 class="message-final">¡Excelente!</h1>
+                    <img src="assets\images\emoyi_3.png" alt="emoyi dudando">
+                </div>
+                <div *ngIf="points >= 30" class="message-icon">
+                    <h1 class="message-final">¡Increíble!</h1>
+                    <img src="assets\images\emoyi_4.png" alt="emoyi dudando">
+                </div>
                 <h2  *ngIf="points == 1"  class="result">Obtuviste {{ points }} punto</h2>
-                <h1 *ngIf="points > 1 && points <= 10" 
-                        class="message-final">¡Felicitaciones!</h1>
-                <h1 *ngIf="points >= 10 && points < 20" 
-                    class="message-final">¡Felicitaciones!</h1>
-                <h1 *ngIf="points >= 20 && points < 30" 
-                    class="message-final">¡Increíble! Obtuviste {{ points }} puntos</h1>
-                <h1 *ngIf="points >= 30 " 
-                    class="message-final">¡Excelente! Obtuviste {{ points }} puntos</h1>
                 <h2 class="result">Obtuviste {{ points }} puntos</h2>
                 <span class="material-icons timer-icon">
                     timer

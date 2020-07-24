@@ -130,38 +130,35 @@ h1.message-final {
     color: #e33b88;
     font-size: 30px;
     margin-top: 0px;
+    margin-bottom: 20px;
 }
 h2.result {
-    color: #76ad2e;
+    color: #ffcf02;
     margin-bottom: 0px;
     margin-top: 0px;
+    font-weight: normal;
 
 }
-
+.emoyi {
+    width: 100px;
+    height: 100px;
+}
 .timer-icon {
     font-size: 50px;
     color: #af3434;
-    margin-top: 80px;
+    margin-top: 40px;
 }
 .timer-message {
     color: #af3434;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: normal;
     margin: 0px;
 }
 .label-test {
     font-weight: 500;
     font-size: 15px;
 }
-// app-proposal.row {
-//     margin-top: 30px;
-// }
-// .example-form {
-//     min-width: 150px;
-//     max-width: 500px;
-//     width: 100%;
-// }
-  
+
 .example-full-width {
     width: 100%;
 }
@@ -170,8 +167,8 @@ h2.result {
     justify-content: center;
     align-items: center;
 }
-.finish-button {
-    background-color: #4a4067;
+.finish-button:hover {
+    background-color: #4a4067cc;
     color: #ffffff;
     font-weight: 500;  
     margin-top: 50px;
@@ -179,28 +176,20 @@ h2.result {
     padding: 8px 80px;
     font-size: large; 
 }
-span.enter { 
-    font-weight: bold;
-}
-.buttonViewResult {
-    margin-top: 16px;
-    margin-bottom: 0px;
-    padding: 8px 80px;
+.finish-button {
     background-color: #4a4067;
     color: #ffffff;
-    font-size: larger;
-    font-weight: 500;   
-    margin-bottom: -6px;
+    font-weight: 500;  
+    margin-top: 40px;
+    margin-bottom: 0px;
+    padding: 8px 80px;
+    font-size: large; 
+}
+span.enter { 
+    font-weight: bold;
+    color: #e33b88;
 }
 
-.buttonViewResult-off {
-    opacity: 0;
-    margin-top: 30px;
-}
-
-.buttonViewResult:hover {
-    background-color: #4a4067cc;
-}
 .container-button .container-button-off {
     display: flex;
     justify-content: center;
