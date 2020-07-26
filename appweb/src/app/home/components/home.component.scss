@@ -2,25 +2,27 @@
 // Pantallas medianas: 1280 x 720 / 1280 x 800
 // Pantallas grandes: ancho superior a 1400 píxeles, ejemplo 1400 x 900 o 1600 x 1200.
 
-@media (min-width: 1920px) { 
+// DESKTOP
+@media (min-width: 1920px) {
 
     .container-all {
         background: #4a4067 !important;
         min-height: 100%;
         max-height: 100%;
     }
-    
+
     .container-logoAndText {
         padding-top: 100px;
     }
-    
+
     .container-logos {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0px 200px 30px 200px;
+        margin-bottom: 0px;
     }
-    
+
     .logo-container {
         display: flex;
         justify-content: space-between;
@@ -32,40 +34,53 @@
         color: white;
         font-weight: lighter;
     }
-    
-    .buttonHome {
+
+    .button-home {
         font-size: larger;
         padding: 10px 80px;
         font-weight: 600;
         color: #E33B88;
     }
+    .button-home:hover {
+        font-size: larger;
+        padding: 10px 80px;
+        font-weight: 600;
+        color: #E33B88;
+        background-color: #ffffffcc;
+        -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
+        -moz-box-shadow: inset 0 0 0 2px #ffcf02;
+        box-shadow: inset 0px 0px 0px 2px #ffcf02;
+    }
+    .container-logos-mobile {
+        display: none;
+    }
 
-}   
-@media (min-width: 1600px) and (max-width: 1919px) {  
+}
+@media (min-width: 1600px) and (max-width: 1919px) {
 
     .container-all {
-        flex-basis: auto;
         background: #4a4067 !important;
         min-height: 100%;
         max-height: 100%;
     }
-    
+
     .container-logoAndText {
         padding-top: 100px;
     }
-    
+
     .container-logos {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0px 200px 30px 200px;
+        margin-bottom: 0px;
     }
-    
+
     .logo-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 80px 200px 0px 150px;
+        padding: 80px 250px 0px 150px;
         margin-bottom: 150px;
     }
     .text-home {
@@ -73,40 +88,54 @@
         font-weight: lighter;
         font-size: 20px;
     }
-    
-    .buttonHome {
+
+    .button-home {
         font-size: larger;
         padding: 10px 80px;
         font-weight: 600;
         color: #E33B88;
     }
 
+    .button-home:hover {
+        font-size: larger;
+        padding: 10px 80px;
+        font-weight: 600;
+        color: #E33B88;
+        background-color: #ffffffcc;
+        -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
+        -moz-box-shadow: inset 0 0 0 2px #ffcf02;
+        box-shadow: inset 0px 0px 0px 2px #ffcf02;
+    }
+    .container-logos-mobile {
+        display: none;
+    }
+
 }
-@media (min-width: 1400px) and (max-width: 1599px) {  
+@media (min-width: 1400px) and (max-width: 1599px) {
 
     .container-all {
-        flex-basis: auto;
         background: #4a4067 !important;
         min-height: 100%;
         max-height: 100%;
     }
-    
+
     .container-logoAndText {
         padding-top: 100px;
     }
-    
+
     .container-logos {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0px 150px 30px 100px;
+        margin-bottom: 0px;
     }
-    
+
     .logo-container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 80px 150px 0px 50px;
+        padding: 80px 200px 0px 50px;
         margin-bottom: 150px;
     }
     .text-home {
@@ -114,37 +143,52 @@
         font-weight: lighter;
         font-size: 20px;
     }
-    
-    .buttonHome {
+
+    .button-home {
         font-size: larger;
         padding: 10px 80px;
         font-weight: 600;
         color: #E33B88;
+    }
+
+    .button-home:hover {
+        font-size: larger;
+        padding: 10px 80px;
+        font-weight: 600;
+        color: #E33B88;
+        background-color: #ffffffcc;
+        -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
+        -moz-box-shadow: inset 0 0 0 2px #ffcf02;
+        box-shadow: inset 0px 0px 0px 2px #ffcf02;
+    }
+    .container-logos-mobile {
+        display: none;
     }
 
 }
-@media (min-width: 1280px) and (max-width: 1399px) { 
-    
+@media (min-width: 1280px) and (max-width: 1399px) {
+
     .container-all {
         background: #4a4067 !important;
         min-height: 100%;
-        max-height: 100%;
+        max-height: auto;
     }
-    
+
     .container-logoAndText {
         padding-top: 0px;
         margin-right: 100px;
     }
-    
+
     .container-logos {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0px 100px 0px 100px;
+        padding: 0px 70px 0px 70px;
+        margin-bottom: 0px;
     }
 
-    .logo-home { 
-        width: 55%; height: 55%; 
+    .logo-home {
+        width: 55%; height: 55%;
     }
 
     .logo-container {
@@ -153,18 +197,96 @@
         align-items: center;
         padding: 150px 60px 0px 60px;
         margin-bottom: 100px;
+        margin-bottom: 120px;
     }
     .text-home {
         color: white;
         font-weight: lighter;
         font-size: 20px;
     }
-    
-    .buttonHome {
+
+    .button-home {
         font-size: larger;
         padding: 10px 80px;
         font-weight: 600;
         color: #E33B88;
+    }
+
+    .button-home:hover {
+        font-size: larger;
+        padding: 10px 80px;
+        font-weight: 600;
+        color: #E33B88;
+        background-color: #ffffffcc;
+        -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
+        -moz-box-shadow: inset 0 0 0 2px #ffcf02;
+        box-shadow: inset 0px 0px 0px 2px #ffcf02;
+    }
+
+    .logos-inst {
+        width: 15%;
+        height: 15%;
+    }
+    .logo-itba {
+        width: 17%;
+        height: 17%;
+    }
+    .container-logos-mobile {
+        display: none;
+    }
+
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+
+    .container-all {
+        background: #4a4067 !important;
+        min-height: 100%;
+        max-height: 100%;
+    }
+
+    .container-logoAndText {
+        padding-top: 0px;
+        margin-right: 50px;
+    }
+
+    .container-logos {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 100px 0px 100px;
+        margin: 0px;
+    }
+
+    .logo-home {
+        width: 55%; height: 55%;
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 110px 60px 0px 60px;
+        margin-bottom: 110px;
+        width: auto;
+    }
+    .text-home {
+        color: white;
+        font-weight: lighter;
+        font-size: 16px;
+    }
+
+    .button-home {
+        font-size: large;
+        padding: 8px 60px;
+        font-weight: 600;
+        color: #E33B88;
+    }
+
+    .button-home:hover {
+        background-color: #ffffffcc;
+        -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
+        -moz-box-shadow: inset 0 0 0 2px #ffcf02;
+        box-shadow: inset 0px 0px 0px 2px #ffcf02;
     }
 
     .logos-inst {
@@ -175,64 +297,462 @@
         width: 17%;
         height: 17%;
     }
-    
+    .logo-lab {
+        width: 35%;
+        height: 35%;
+    }
 
-} 
-@media (min-width: 1024px) and (max-width: 1279px) { 
-    
+    .container-logos-mobile {
+        display: none;
+    }
+
+}
+
+// MOBILE
+@media (min-width: 280px) and (max-width: 359px) {
     .container-all {
         background: #4a4067 !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
         min-height: 100%;
         max-height: 100%;
     }
-    
+
     .container-logoAndText {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
         padding-top: 0px;
-        margin-right: 100px;
+        margin-bottom: 0px;
     }
-    
+
     .container-logos {
+        width: 100%;
+        margin: 0px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        padding: 0px 100px 0px 100px;
+        flex-direction: column;
+        padding: 0px;
+        margin-right: 0px;
     }
-
-    .logo-home { 
-        width: 55%; height: 55%; 
+    .logo-home {
+        width: 100%;
     }
-
     .logo-container {
+        width: 100% ;
+        height: auto;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        padding: 150px 60px 0px 60px;
-        margin-bottom: 100px;
+        flex-direction: column;
+        padding: 50px 0px 0px 0px;
+        margin-bottom: 30px;
+        max-width: 280px;
+        min-width: 280px;
+    }
+    .container-button-description {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        max-width: 280px;
+        width: 280px;
+        margin-top: 44px;
     }
     .text-home {
         color: white;
         font-weight: lighter;
-        font-size: 20px;
-    }
-    
-    .buttonHome {
-        font-size: larger;
-        padding: 10px 80px;
-        font-weight: 600;
-        color: #E33B88;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 0px;
     }
 
+    .button-home {
+        line-height: 15px;
+        font-size: 10px !important;
+        padding: 8px 35px;
+        font-weight: 600;
+        color: #e33b88;
+        text-align: center ;
+        margin-top: 0px;
+        width: 90%;
+        height: 60px;
+        font-size: 20px !important;
+    }
+  
+    .button-home:hover {
+        background-color: #ffffffcc;
+        -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
+        -moz-box-shadow: inset 0 0 0 2px #ffcf02;
+        box-shadow: inset 0px 0px 0px 2px #ffcf02;
+    }
+    .logos-a {
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+    }
+    .logos-b {
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+    }
     .logos-inst {
-        width: 14%;
-        height: 14%;
+        margin: 5px 0px;
+        width: 35%;
+        height: 35%;
     }
     .logo-itba {
-        width: 17%;
-        height: 17%;
+        width: 37%;
+        height: 37%;
+        margin: 30px 0px;
     }
-    
+    .logo-lab {
+        width: 100%;
+        height: 100%;
+    }
+    .container-logos {
+        display: none;
+    }
 
-} 
+}
+@media (min-width: 320px) and (max-width: 359px) {
+    .container-all {
+        background: #4a4067 !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: 100%;
+        max-height: 100%;
+    }
+
+    .container-logoAndText {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .container-logos {
+        width: 100%;
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0px;
+        margin-right: 0px;
+    }
+    .logo-home {
+        width: 100%;
+    }
+    .logo-container {
+        width: 100% ;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 50px 0px 0px 0px;
+        margin-bottom: 30px;
+        max-width: 320px;
+        min-width: 320px;
+    }
+    .container-button-description {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        max-width: 320px;
+        width: 320px;
+        margin-top: 44px;
+    }
+    .text-home {
+        color: white;
+        font-weight: lighter;
+        font-size: 16px;
+        text-align: center;
+        margin-top: 0px;
+    }
+
+    .button-home {
+        line-height: 15px;
+        font-size: 10px !important;
+        padding: 8px 35px;
+        font-weight: 600;
+        color: #e33b88;
+        text-align: center ;
+        margin-top: 0px;
+        width: 90%;
+        height: 60px;
+        font-size: 20px !important;
+    }
+  
+    .button-home:hover {
+        background-color: #ffffffcc;
+        -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
+        -moz-box-shadow: inset 0 0 0 2px #ffcf02;
+        box-shadow: inset 0px 0px 0px 2px #ffcf02;
+    }
+    .logos-a {
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+    }
+    .logos-b {
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+    }
+    .logos-inst {
+        margin: 5px 0px;
+        width: 30%;
+        height: 30%;
+    }
+    .logo-itba {
+        width: 32%;
+        height: 32%;
+        margin: 10px 0px;
+    }
+    .logo-lab {
+        width: 90%;
+        height: 90%;
+    }
+    .container-logos {
+        display: none;
+    }
+
+}
+@media (min-width: 360px) and (max-width: 410px) {
+
+    .container-all {
+        background: #4a4067 !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: 100%;
+        max-height: 100%;
+    }
+
+    .container-logoAndText {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .container-logos {
+        width: 100%;
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0px;
+        margin-right: 0px;
+    }
+    .logo-home {
+        width: 100%;
+    }
+    .logo-container {
+        width: 100% ;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 50px 20px 0px 20px;
+        margin-bottom: 30px;
+        max-width: 320px;
+        min-width: 320px;
+    }
+    .container-button-description {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        max-width: 320px;
+        width: 320px;
+        margin-top: 44px;
+    }
+    .text-home {
+        color: white;
+        font-weight: lighter;
+        font-size: 16px;
+        text-align: center;
+        margin-top: 0px;
+    }
+
+    .button-home {
+        line-height: 15px;
+        font-size: 10px !important;
+        padding: 8px 35px;
+        font-weight: 600;
+        color: #e33b88;
+        text-align: center ;
+        margin-top: 0px;
+        width: 100%;
+        height: 60px;
+        font-size: 20px !important;
+    }
+  
+    .button-home:hover {
+        background-color: #ffffffcc;
+        -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
+        -moz-box-shadow: inset 0 0 0 2px #ffcf02;
+        box-shadow: inset 0px 0px 0px 2px #ffcf02;
+    }
+    .logos-a {
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+    }
+    .logos-b {
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+    }
+    .logos-inst {
+        margin: 15px 0px;
+        width: 25%;
+        height: 25%;
+    }
+    .logo-itba {
+        width: 27%;
+        height: 27%;
+        margin: 10px 0px;
+    }
+    .logo-lab {
+        width: 80%;
+        height: 80%;
+    }
+    .container-logos {
+        display: none;
+    }
+
+}
+@media (min-width: 411px) and (max-width: 767px) {
+
+    .container-all {
+        background: #4a4067 !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: 100%;
+        max-height: 100%;
+    }
+
+    .container-logoAndText {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .container-logos {
+        width: 100%;
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0px;
+        margin-right: 0px;
+    }
+    .logo-home {
+        width: 350px;
+
+    }
+    .logo-container {
+        width: 100% ;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 80px 20px 0px 20px;
+        margin-bottom: 80px;
+        max-width: 320px;
+        min-width: 320px;
+    }
+    .container-button-description {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        max-width: 320px;
+        width: 320px;
+        margin-top: 80px;
+    }
+    .text-home {
+        color: white;
+        font-weight: lighter;
+        font-size: 16px;
+        text-align: center;
+        margin-top: 0px;
+    }
+
+    .button-home {
+        line-height: 15px;
+        font-size: 10px !important;
+        padding: 8px 35px;
+        font-weight: 600;
+        color: #e33b88;
+        text-align: center ;
+        margin-top: 0px;
+        width: 100%;
+        height: 60px;
+        font-size: 20px !important;
+    }
+  
+    .button-home:hover {
+        background-color: #ffffffcc;
+        -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
+        -moz-box-shadow: inset 0 0 0 2px #ffcf02;
+        box-shadow: inset 0px 0px 0px 2px #ffcf02;
+    }
+    .logos-a {
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;
+        margin-top: 50px;
+    }
+    .logos-b {
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row;     
+    }
+    .logos-inst {
+        margin: 15px 0px;
+        width: 25%;
+        height: 25%;
+    }
+    .logo-itba {
+        width: 27%;
+        height: 27%;
+        margin: 10px 0px;
+    }
+    .logo-lab {
+        width: 80%;
+        height: 80%;
+    }
+    .container-logos {
+        display: none;
+    }
+
+}
 
 
 

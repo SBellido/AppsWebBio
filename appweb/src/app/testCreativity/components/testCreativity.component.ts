@@ -16,9 +16,7 @@ import { Router } from '@angular/router';
 })
 
 export class TestCreativityComponent implements OnInit {
-    min = 0;
-    max = 2;
-    points = 0;
+
     constructor(private router: Router, private dbData: DataDbService) { }
 
     // INIT
@@ -26,11 +24,13 @@ export class TestCreativityComponent implements OnInit {
     countDown = 3;
 
     // CLOCK
+    controlTime = 59;
+
     clock: Clock = {
-        seconds: 0,
+        seconds: this.controlTime,
         state: 'started',
-        minutes: 0,
-        limit: 1
+        minutes: 4,
+        limit: 0
     };
 
     // PROPOSAL
@@ -41,6 +41,9 @@ export class TestCreativityComponent implements OnInit {
     // USER
     user: CreativeUser;
 
+    points = 0;
+    minRandom = 0;
+    maxRandom = 2;
 
     // TEST
     testCreativity: TestCreativity = {
@@ -76,12 +79,13 @@ export class TestCreativityComponent implements OnInit {
 
     startTest() {
         const test = setInterval(() => {
-            this.clock.seconds++;
-            if (this.clock.seconds === 60) {
-                this.clock.seconds = 0;
-                this.clock.minutes++;
+            this.clock.seconds--;
+            if (this.clock.seconds === -1) {
+                this.clock.seconds = this.controlTime;
+                this.clock.minutes--;
             }
-            if (this.clock.minutes === this.clock.limit) {
+            if (this.clock.minutes === this.clock.limit
+                && this.clock.seconds === this.clock.limit) {
                 this.finalizedTest();
                 clearInterval(test);
             }
@@ -107,7 +111,7 @@ export class TestCreativityComponent implements OnInit {
     }
 
     getFinalScore() {
-        return this.min + Math.floor((this.max - this.min) * Math.random());
+        return this.minRandom + Math.floor((this.maxRandom - this.minRandom) * Math.random());
     }
 
     saveInBBDD() {

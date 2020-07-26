@@ -18,13 +18,21 @@ h1.title {
     width: auto;
     height: auto;
 }
-.buttonHome {
+.button-back {
     margin-top: 25px;
     font-size: larger;
     padding: 10px 116px;
     font-weight: 600;
     color: white;
-    background-color:#E33B88;
+    background-color:#e33b88;
+}
+.button-back:hover {
+    margin-top: 25px;
+    font-size: larger;
+    padding: 10px 116px;
+    font-weight: 600;
+    color: white;
+    background-color:#e33b8880; 
 }
 .image-calendar {
     margin-top: 20px;
