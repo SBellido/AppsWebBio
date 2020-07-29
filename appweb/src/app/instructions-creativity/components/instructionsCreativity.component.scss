@@ -1,21 +1,26 @@
+// DESKTOP
+// 1600 x 900
+// 1440 x 900
+// 1366 x 768
+// 1024 x 600
 
-.buttonBack { 
+.button-back { 
     color: #e33b88;
     padding: 5px 40px 5px 15px; 
     border: 0.5px solid #e33b88; 
 }
 
-.buttonBack:hover {
+.button-back:hover {
     background-color: #e33b881b;
 }
 
 .icon-back { 
-    // background-color: #AF6F6F; 
     background-color: #e33b88; 
     color: white;
     border-radius: 50%;
     margin-right: 20px; 
 }
+
 .container-title {
     display: flex;
     justify-content: center;
@@ -35,34 +40,21 @@
     flex-direction: column;
 }
 
-ul.instructions-items {
-    background-color: white;
-    color: #4A4067;
-    padding: 20px 30px 20px 30px;
-    margin: 50px 0px 40px 0px;
-    border-radius: 0% 5% 0% 5%;
-    width: 400px;
-    height: 450px;
-    line-height: 1.5em;
-    -webkit-box-shadow: -1px 3px 30px -20px rgba(0,0,0,0.75);
-    -moz-box-shadow: -1px 3px 30px -20px rgba(0,0,0,0.75);
-    box-shadow: -1px 3px 30px -20px rgba(0,0,0,0.75);
-}
-
 hr { margin-bottom: 25px; }
 
 li { margin: 15px; }
 
 h1.title { 
-    text-align: center; font-weight: 500; font-size: 3em; 
+    text-align: center; font-weight: 400; font-size: 3em; 
     margin-top: 30px; 
     margin-bottom: 30px;
     color: #4A4067; 
 }
 
 h1>span {
-    font-weight: 500; 
+    font-weight: 400; 
     margin-top: 12px; color: #e33b88; 
+    
 }
 .instructions {
     display: flex;
@@ -70,4 +62,40 @@ h1>span {
     align-items: center;
     flex-direction: row;
     width: 40%;
+}
+@media screen and (max-width: 1600px) {
+    
+    h1.title { 
+        margin-top: 20px; 
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    
+    h1.title { 
+        text-align: center; font-weight: 400; font-size: 2em; 
+        margin-top: 20px; 
+        margin-bottom: 20px;
+        color: #4A4067; 
+    }
+    
+    h1>span {
+        font-weight: 400; 
+        margin-top: 12px; color: #e33b88; 
+        
+    }
+
+    .button-back { 
+        padding: 0px 20px 0px 10px; 
+        font-size: small;
+    }
+    
+    .icon-back { 
+        margin-right: 10px; 
+    }
+
+    h1.title {
+        margin-bottom: 10px;
+    }
 }

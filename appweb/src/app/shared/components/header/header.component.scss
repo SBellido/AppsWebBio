@@ -47,3 +47,20 @@ nav > a.active {
 .logo:hover {
     cursor: pointer;
 } 
+
+@media screen and (max-width: 1366px) {
+
+    mat-toolbar.container-header {
+       height: 100px;
+    }
+ 
+    .nav_logo { 
+       padding: 50px 50px 25px 50px; 
+    }
+ 
+    img.logo {
+       width: 170px;
+       height: 85px;
+    }
+  
+ }

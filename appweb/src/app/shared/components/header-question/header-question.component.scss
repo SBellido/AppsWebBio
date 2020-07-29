@@ -60,3 +60,20 @@ mat-toolbar.container-header {
     -moz-box-shadow: 0px 2px 5px 0px rgba(74,64,103,0.3);
     box-shadow: 0px 2px 5px 0px rgba(74,64,103,0.3);
 }
+
+@media screen and (max-width: 1366px) {
+
+    mat-toolbar.container-header {
+       height: 100px;
+    }
+ 
+    .nav_logo { 
+       padding: 50px 50px 25px 50px; 
+    }
+ 
+    img.logo {
+       width: 170px;
+       height: 85px;
+    }
+  
+ }

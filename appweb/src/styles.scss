@@ -1,19 +1,13 @@
-body {
-    margin: 0px;
-    padding: 0px;
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-}
+// .test-grid {
+//     display: grid;
+//     grid-template-columns: repeat(1, 1fr);
+// }
 
-.test-grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-}
-
-@media (min-wdth:576px) {
-    .test-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
+// @media (min-wdth:576px) {
+//     .test-grid {
+//         grid-template-columns: repeat(3, 1fr);
+//     }
+// }
 // @media (min-wdth:1024px) {
 //     .test-grid {
 //         grid-template-columns: repeat(3, 1fr);

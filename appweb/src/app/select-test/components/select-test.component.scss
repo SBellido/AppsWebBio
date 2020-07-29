@@ -1,3 +1,9 @@
+// DESKTOP
+// 1600 x 900
+// 1440 x 900
+// 1366 x 768
+// 1024 x 600
+
 .container-all {
     background: #4a4067 !important;
     height: 100%;
@@ -38,6 +44,7 @@ h3.test-off {
 .icon-off { 
     opacity: 0.5;
 }
+
 .test-icon {
     text-align: center;
     flex-direction: row;
@@ -52,8 +59,8 @@ h3.test-off {
     -moz-box-shadow: -2px 0px 15px -1px rgba(0,0,0,0.51);
     box-shadow: -2px 0px 15px -1px rgba(0,0,0,0.51);
 }
-.test-icon-off {
-   
+
+.test-icon-off {  
     text-align: center;
     flex-direction: row;
     margin: 15px 15px;
@@ -92,6 +99,28 @@ figure.container {
 hr.title-line {
     border: 1px solid #ffcf02;
     width: 480px;
-    margin-top: 5px;
     margin-bottom: 50px;
+}
+
+@media screen and (max-width: 1366px) {
+    .test-icon, .test-icon-off {
+        width: 175px;
+        height: 153px;
+    }
+    hr.title-line {
+        width: 390px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+    h1.title {
+        font-size: 1.6em; 
+        margin-top: 40px;
+    }
+    img.icon, img.icon-off { margin-top: 10px; }
+
+    h3.test, h3.test-off {
+       margin: 0px 5px;
+    
+    }
+    
 }
