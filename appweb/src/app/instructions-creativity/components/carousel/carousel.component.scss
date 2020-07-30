@@ -69,11 +69,10 @@ div.swiper-button-next:hover, div.swiper-button-prev:hover {
 }
 
 .container-items {
-    width: 270px;
-    height: 120px;
-    background-color: #4A4067;
-    color: white;
-    padding: 20px 80px 20px 80px;
+    width: 350px;
+    height: 145px;
+    background-color: #4a4067; 
+    padding: 10px 50px 10px 50px;
     text-align: center;
     border-radius: 10px;
 }
@@ -81,8 +80,9 @@ div.swiper-button-next:hover, div.swiper-button-prev:hover {
 li {
     margin: 10px 0px 5px 0px;
     list-style: none;
-    font-size: 15px;
-    width: 282px;
+    font-size: 20px;
+    width: 350px;
+    color: #ffffff;
 }
 
 li.example {
@@ -95,7 +95,7 @@ li.example {
 
 span.instructions-text {
     font-weight: 600;
-    font-size: 15px;
+    font-size: 20px;
     letter-spacing: 0.2px;
 }
 
@@ -104,7 +104,9 @@ span.instructions-text {
     justify-content: center;
     align-items: center;
 }
-
+li>h3 {
+    margin-top: 8px;
+}
 
 @media screen and (max-width: 1366px) {
 
@@ -157,10 +159,6 @@ span.instructions-text {
         font-size: 13px;
         width: 246px;
         margin: 0px;
-    }
-    
-    h3 {
-        margin-top: 8px;
     }
     
     .button-go {

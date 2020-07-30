@@ -1,9 +1,11 @@
 export interface CreativeUser {
-    name: any;
-    lastName: any;
+    nameLastName: any;
     age: any;
     email: any;
     educationLevel: any;
+    school: any;
+    year: any;
+    course: any;
+    object: any;
     proposal: any[];
-    points: number;
 }

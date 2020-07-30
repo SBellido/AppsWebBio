@@ -55,34 +55,28 @@ section.container {
 }
 
 // CLOCK STYLE
-.container-clock-finalized {
-    background-color: #af3434;
-    padding: 0.5px 3px;
-    text-align: center;
-    color: white;
-    width: 300px;
-    border-radius: 0px 0px 10px 10px;
-}
 h1.clock {
     font-size: xx-large;
+    margin: 26px 0px;
 }
-
+.container-clock-finalized {
+    background-color: #af3434;
+}
 .container-clock {
     background-color: #76ad2e;
+}
+.container-clock-finalized, .container-clock {
     padding: 0.5px 3px;
     text-align: center;
     color: white;
     width: 300px;
     border-radius: 0px 0px 10px 10px;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-// .container-clock-alert {
-//     background-color: #ffcf02;
-//     padding: 0.5px 3px;
-//     text-align: center;
-//     color: white;
-//     width: 300px;
-// }
+
 // STYLE ELEMENT
 
 img {
@@ -95,7 +89,7 @@ h1.title {
     color: #4a4067;
 }
 h1>span{
-    font-weight: 600;
+    font-weight: 400;
 }
 
 // STYLE TEXTAREA
@@ -162,10 +156,24 @@ h2.result {
 .example-full-width {
     width: 100%;
 }
-.finish {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+span.mat-button-wrapper {
+    position: absolute;
+    right: 50px;
+}
+.finalize-button:hover {
+    background-color: #e33b881b;
+}
+
+.cancel-icon { 
+    color: #af3434;
+    border-radius: 50%;
+    position: relative;
+    top: 11px;
+    glyph-orientation-horizontal: initial;
+}
+.finish, .finalize {
+    margin-bottom: 26px;
 }
 .finish-button:hover {
     background-color: #4a4067cc;
@@ -176,14 +184,15 @@ h2.result {
     padding: 8px 80px;
     font-size: large; 
 }
-.finish-button {
-    background-color: #4a4067;
-    color: #ffffff;
-    font-weight: 500;  
-    margin-top: 40px;
-    margin-bottom: 0px;
-    padding: 8px 80px;
-    font-size: large; 
+
+.finish-button, .finalize-button { 
+    color: #af3434;
+    font-size: medium; 
+    padding: 5px 25px 5px 20px; 
+    background-color: #ffffff;
+    display: table-cell;
+	vertical-align: middle
+    
 }
 span.enter { 
     font-weight: bold;
@@ -226,7 +235,7 @@ article.container-textarea {
     justify-content: center;
     align-items: left;
     flex-direction: column;
-    margin-top: 124px;
+    margin-top: 70px;
 }
 .label-test {
     font-weight: 500;
@@ -238,7 +247,7 @@ article.container-textarea {
     min-width: 150px;
     max-width: 500px;
     width: 100%;
-  }
+}
   
 .example-full-width {
     width: auto;
@@ -246,6 +255,7 @@ article.container-textarea {
 .mat-form-field-infix .ng-tns-c91-0 {
     width: auto;
 }
+
 // END PROPOSAL
 
  

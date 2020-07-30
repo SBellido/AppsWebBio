@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { TestCreativity } from '../../core/models/testCreativity.module';
 import { Clock } from '../../core/models/clock.module';
 import { CreativeUser } from './../../core/models/creative-user.interface';
-
+import { Element } from './../../core/models/element.module';
 import { DataDbService } from '../../core/services/db/data-db.service';
 
 import { Router } from '@angular/router';
@@ -31,6 +31,19 @@ export class TestCreativityComponent implements OnInit {
         state: 'started',
         minutes: 4,
         limit: 0
+    };
+
+    // OBJECT
+    elementClip: Element = {
+        id: 1,
+        name: 'Clip',
+        image: 'assets/images/clip.jpg'
+    };
+
+    elementJournal: Element = {
+        id: 2,
+        name: 'Diario',
+        image: 'assets/images/diario.jpg'
     };
 
     // PROPOSAL
@@ -107,7 +120,7 @@ export class TestCreativityComponent implements OnInit {
     assingDataToUser() {
         this.user = JSON.parse(localStorage.getItem('creative-user'));
         this.user.proposal = this.finalProposals;
-        this.user.points = this.points;
+        this.user.object = this.elementClip.name;
     }
 
     getFinalScore() {

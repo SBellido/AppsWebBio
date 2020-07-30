@@ -1,9 +1,15 @@
+// DESKTOP
+// 1600 x 900
+// 1440 x 900
+// 1366 x 768
+// 1024 x 600
+
 .full-width {
     width: 100%;
   }
   
 mat-card.shipping-card {
-  min-width: 400px;
+  min-width: 410px;
   color: #4a4067;
   padding: 10px 10px 0px 10px;
   margin: 75px 25px 20px 25px;
@@ -13,14 +19,18 @@ mat-card > mat-card-header.container-title {
   color: white;
   display: flex;  
   justify-content: center;
-  padding-top: 15px;
-  padding-bottom: 5px;
+  padding: 14px 0px; 
+}
+
+.mat-card-title {
+  margin: 0px !important;
 }
 p.message {
   display: flex;  
   justify-content: center;
   font-weight: bold;
   color: #e33b88;
+  margin: 8px 0px 4px 0px;
 }
 
 div.row {
@@ -31,6 +41,12 @@ div.row {
 
 .col {
   flex: 1;
+}
+.year {
+  margin-right: 5px;
+}
+.course {
+  margin-left: 5px;
 }
 div.col {
   text-align: left;
@@ -57,43 +73,6 @@ mat-label.label {
   padding: 14px 4px;
   margin: 0px;
 }
-.buttonBack { 
-  color: #e33b88;
-  padding: 5px 25px 5px 15px; 
-  border: 0.5px solid #e33b88; 
-}
-
-.icon-back { 
-// background-color: #AF6F6F; 
-  background-color: #e33b88; 
-  color: white;
-  border-radius: 50%; 
-}
-
-a { margin: 20px; }
-
-// .buttonGo { 
-//   color: white;
-//   padding: 5px 15px 5px 25px; 
-//   border: 0.5px solid #4a4067;
-//   background-color: #4a4067; 
-// }
-
-// .icon-go { 
-// background-color: #AF6F6F; 
-//   background-color: white; 
-//   color: #4a4067;
-//   border-radius: 50%; 
-// }
-
-a { margin: 20px; }
-
-// .mat-card-actions {
-//   margin-left: 0px;
-// }
-.alert-danger {
-  margin-top: 0px;
-}
 
 button {
   margin: 2px 0px;
@@ -102,14 +81,14 @@ button {
   background-color: #76ad2e;
   color: white;
   font-size: large;
-  padding: 10px 140px;
+  padding: 10px 134px;
   font-weight: 500;
 }
 .buttonForm-off {
   background-color: #76ad2e;
   color: white;
   font-size: large;
-  padding: 10px 140px;
+  padding: 10px 134px;
   font-weight: 500;
 }
 .buttonForm:hover {
@@ -121,9 +100,30 @@ div.container-error-message {
   font-weight: bold;
   font-size: x-small;
 }
-// mat-form-field {
-//   margin: 0px 15px;
-// }
 
+@media screen and (max-width: 1366px) {
+
+  mat-card.shipping-card { 
+    padding: 10px 10px 0px 10px;   
+    margin: 30px 25px 30px 25px;
+  }
+  div.row {
+    padding: 7px 20px;
+  }
+  div.mat-form-field-infix .ng-tns-c91-0 {
+    border-top: 0px !important;  
+  }
+
+  .buttonForm, .buttonForm-off { 
+    padding: 5px 134px;
+  }
+   
+}
+
+@media screen and (max-width: 1280px) {
+  mat-card.shipping-card { 
+    margin: 56px 25px 30px 25px;
+  }
+}
 
 

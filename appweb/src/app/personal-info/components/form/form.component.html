@@ -1,4 +1,4 @@
-<form [formGroup]="dataCreativeUser" novalidate (ngSubmit)="onSaveForm($event)">
+<form [formGroup]="dataUser" novalidate (ngSubmit)="onSaveForm($event)">
     <mat-card class="shipping-card">
       <mat-card-header class="container-title">
         <mat-card-title>Datos personales</mat-card-title>
@@ -9,45 +9,24 @@
         </div>
         <div class="row">
           <div class="col">
-            <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 15 caracteres">
-              <mat-label>Nombre</mat-label>
-              <input matNativeControl type="text" formControlName="name" 
-                matInput #nameInput maxlength="15" placeholder="Ingresá tu nombre">
-              <mat-hint align="end">{{nameInput.value.length}}/15</mat-hint> 
-              <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
-                <div class="container-error-message" *ngIf="name.errors.required">
+            <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 30 caracteres">
+              <mat-label>Nombre y Apellido</mat-label>
+              <input matNativeControl type="text" formControlName="nameLastName" 
+                matInput #nameLastNameInput maxlength="30" placeholder="Ingresá tu nombre y apellido">
+              <mat-hint align="end">{{ nameLastNameInput.value.length }}/30</mat-hint> 
+              <div class="alert-danger" *ngIf="nameLastName.invalid && (nameLastName.dirty || nameLastName.touched)">
+                <div class="container-error-message" *ngIf="nameLastName.errors.required">
                   Tu nombre es un dato requerido.
                 </div>
-                <div class="container-error-message" *ngIf="name.errors.pattern">
+                <div class="container-error-message" *ngIf="nameLastName.errors.pattern">
                   El nombre ingresado debe ser válido
                 </div>
-                <div class="container-error-message" *ngIf="name.errors.minlength">
+                <div class="container-error-message" *ngIf="nameLastName.errors.minlength">
                   Debe tener 3 carácteres como mínimo.
                 </div>
               </div>
             </mat-form-field>
           </div>       
-        </div>
-        <div class="row">
-          <div class="col">
-            <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 15 caracteres">
-              <mat-label>Apellido</mat-label>
-                <input matNativeControl type="text" formControlName="lastName"
-                  matInput #lastNameInput maxlength="15" placeholder="Ingresá tu apellido">
-                <mat-hint align="end">{{lastNameInput.value.length}}/15</mat-hint> 
-                <div class="alert-danger" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
-                  <div class="container-error-message" *ngIf="lastName.errors.required">
-                    Tu apellido es un dato requerido.
-                  </div>
-                  <div class="container-error-message" *ngIf="(lastName.errors.pattern)">
-                    El nombre ingresado debe ser válido
-                  </div>
-                  <div class="container-error-message" *ngIf="lastName.errors.minlength">
-                    Debe tener 3 carácteres como mínimo.
-                  </div>
-                </div>
-            </mat-form-field>
-          </div>
         </div>
         <div class="row">
           <div class="col">
@@ -87,7 +66,7 @@
           </div>
         </div> 
         <div class="row">
-            <div class="col">
+          <div class="col">
             <mat-form-field class="full-width" appearance="fill">
               <mat-label>Educación formal</mat-label>
               <mat-select matNativeControl type="text" matInput 
@@ -98,24 +77,102 @@
                 <mat-option value="Universitaria">Universitaria</mat-option>
                 <mat-option value="Ninguna">Ninguna</mat-option>
               </mat-select>
-              <mat-hint align="end">Hacé click en la flecha desplegable ^</mat-hint>
+              <mat-hint align="end">Hace click en la flecha ^</mat-hint>
               <div class="alert-danger" *ngIf="educationLevel.invalid && (educationLevel.dirty || educationLevel.touched)">
                 <div class="container-error-message" *ngIf="educationLevel.errors.required">
                   Educación formal es un dato requerido.
                 </div>
               </div>
             </mat-form-field>
-            </div>
+          </div>
         </div>
-        <mat-card-actions *ngIf="!dataCreativeUser.valid" class="container-button-off">
+        <div  *ngIf="educationLevel.value == 'Secundaria'" class="row">
+          <div class="col">
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Colegio</mat-label>
+                <input matNativeControl type="text" matInput 
+                #schoolInput maxlength="30" placeholder="Ingresá tu nombre y apellido"
+                  placeholder="Nombre de tu colegio" formControlName="school" >
+                  <mat-hint align="end">{{ schoolInput.value.length }}/30</mat-hint>
+                <div class="alert-danger" *ngIf="school.invalid && (school.dirty || school.touched)">
+                  <div class="container-error-message" *ngIf="school.errors.required">
+                    El nombre de tu colegio es un dato requerido.
+                  </div>
+                  <div class="container-error-message" *ngIf="(school.dirty || school.touched)
+                    && (school.errors.pattern)">
+                    El colegio ingresado debe ser válido
+                  </div>
+                </div>
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="educationLevel.value == 'Secundaria' && school.value" class="row">
+          <div class="col">
+            <mat-form-field class="year" appearance="fill">
+              <mat-label>Año</mat-label>
+              <mat-select matNativeControl type="text" matInput 
+              #yearInput formControlName="year"  placeholder="Año de cursada">
+                <mat-option value="1ro">1ro</mat-option>
+                <mat-option value="2do">2do</mat-option>
+                <mat-option value="3er">3er</mat-option>
+                <mat-option value="4to">4to</mat-option>
+                <mat-option value="5to">5to</mat-option>
+                <mat-option value="6to">6to</mat-option>
+              </mat-select>
+              <mat-hint align="end">Hace click en la flecha ^</mat-hint>
+              <!-- <div class="alert-danger" *ngIf="year.invalid && (year.dirty || year.touched)">
+                <div class="container-error-message" *ngIf="year.errors.required">
+                  El año es un dato requerido.
+                </div>
+              </div> -->
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="course" appearance="fill">
+              <mat-label>Curso</mat-label>
+              <mat-select matNativeControl type="text" matInput 
+              #courseInput formControlName="course"  placeholder="Curso al que pertenecés">
+                <mat-option value="A">A</mat-option>
+                <mat-option value="B">B</mat-option>
+                <mat-option value="C">C</mat-option>
+                <mat-option value="D">D</mat-option>
+                <mat-option value="E">E</mat-option>
+              </mat-select>
+              <mat-hint align="end">Hace click en la flecha ^</mat-hint>
+              <!-- <div class="alert-danger" *ngIf="year.invalid && (year.dirty || year.touched)">
+                <div class="container-error-message" *ngIf="year.errors.required">
+                  El año es un dato requerido.
+                </div>
+              </div> -->
+            </mat-form-field>
+          </div>
+        </div>      
+        <mat-card-actions *ngIf="!dataUser.valid" class="container-button-off">
           <button mat-raised-button class="buttonForm-off" 
-            type="submit" [disabled]="!dataCreativeUser.valid">
+            type="submit" [disabled]="!dataUser.valid">
             GUARDAR DATOS
           </button>   
         </mat-card-actions>
-        <mat-card-actions *ngIf="dataCreativeUser.valid" class="container-button">
+        <mat-card-actions *ngIf="dataUser.valid && educationLevel.value != 'Secundaria'" 
+          class="container-button">
           <button mat-raised-button class="buttonForm" 
-            type="submit" [disabled]="!dataCreativeUser.valid">
+            type="submit" [disabled]="!dataUser.valid">
+            GUARDAR DATOS
+          </button>   
+        </mat-card-actions>
+        <mat-card-actions *ngIf="dataUser.valid && educationLevel.value == 'Secundaria'
+          && (school.value == '' || year.value == '' || course.value == '')" 
+          class="container-button">
+          <button mat-raised-button class="buttonForm-off" 
+            type="submit" [disabled]="dataUser.valid">
+            GUARDAR DATOS
+          </button>   
+        </mat-card-actions>
+        <mat-card-actions *ngIf="dataUser.valid && educationLevel.value == 'Secundaria'
+          && (school.value != '' && year.value != '' && course.value != '')" 
+          class="container-button">
+          <button mat-raised-button class="buttonForm" 
+            type="submit" [disabled]="!dataUser.valid">
             GUARDAR DATOS
           </button>   
         </mat-card-actions>

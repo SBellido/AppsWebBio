@@ -11,9 +11,9 @@
     <app-header-creativity></app-header-creativity>
     <section class="container">
         <article *ngIf="clock.state != 'finalized'"
-            class="container-element"> 
-            <h1 class="title"><span>¿Qué usos le darías a un Clip?</span></h1>
-            <img src="assets/images/clip.jpg" alt="">
+            class="container-element">
+            <h1 class="title"><span>¿Qué usos le darías a un {{ elementClip.name }}?</span></h1>
+            <img [src]="elementClip.image" alt="">
         </article>
         <article *ngIf="clock.state == 'finalized'"
             class="container-element"> 
@@ -23,7 +23,7 @@
         <section class="container-right">
             <article *ngIf="clock.state != 'finalized'" 
                 class="container-textarea">
-                <label class="label-test" for="">Presioná <span class="enter">"Enter"</span> después de cada propuesta</label>
+                <label class="label-test" for="">Presioná<span class="enter">"Enter"<br></span>después de cada propuesta</label>
                 <textarea [(ngModel)]="proposals" placeholder="Escribí todas las que se te ocurran"
                     class="textarea-test"></textarea>
             </article>           
@@ -66,20 +66,23 @@
             <div *ngIf="clock.state == 'started'" class="container-clock">
                 <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
                 <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
+                <button mat-raised-button class="finalize-button"
+                    routerLink="/select-test" routerLinkActive="active">
+                    <span class="material-icons cancel-icon">cancel</span>
+                    <p class="text-button">ME RINDO</p>                 
+                </button>
             </div>         
             <div *ngIf="clock.state == 'finalized'" 
                 class="container-clock-finalized">
                 <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
                 <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
-            </div>         
+                <button mat-raised-button class="finish-button"
+                    routerLink="/select-test" routerLinkActive="active" >
+                    TERMINAR
+                </button>
+            </div>  
         </section>
     </section>
-    <div *ngIf="clock.state == 'finalized'" class="finish">
-        <button mat-raised-button class="finish-button"
-            routerLink="/select-test" routerLinkActive="active" >
-            TERMINAR
-        </button>
-    </div>
 </div>
 <router-outlet></router-outlet>
 
