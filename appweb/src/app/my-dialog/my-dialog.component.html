@@ -2,8 +2,8 @@
     <div class="container-message">
         <img src="assets\images\ready.png" alt="">
         <h1 mat-dialog-title class="mesagge">¡Gracias!</h1>
-        <h4 class="mesagge">Tus datos fueron guardados con éxito</h4>
-        <p>A la cuenta de tres comenzará la actividad</p>
+        <h4 class="mesagge">Estás a punto de abandonar la actividad.</h4>
+        <p>¿Querés abandonar?</p>
     </div>
     <div class="container-button">
         <button (click)="goTest()" class="button" mat-raised-button
@@ -11,5 +11,12 @@
             data-backdrop="static" data-keyboard="false">
             ACEPTAR
         </button>
+        <button (click)="goTest()" class="button" mat-raised-button
+            routerLink="/test-creativity" routerLinkActive="active"
+            data-backdrop="static" data-keyboard="false">
+            ACEPTAR
+        </button>
+        
+        
     </div>
 </div>

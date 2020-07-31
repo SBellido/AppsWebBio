@@ -22,6 +22,7 @@ export class TestCreativityComponent implements OnInit {
     // INIT
     started = false;
     countDown = 3;
+    alertDesert = false;
 
     // CLOCK
     controlTime = 59;
@@ -92,21 +93,31 @@ export class TestCreativityComponent implements OnInit {
 
     startTest() {
         const test = setInterval(() => {
-            this.clock.seconds--;
-            if (this.clock.seconds === -1) {
-                this.clock.seconds = this.controlTime;
-                this.clock.minutes--;
-            }
-            if (this.clock.minutes === this.clock.limit
-                && this.clock.seconds === this.clock.limit) {
-                this.finalizedTest();
-                clearInterval(test);
+            if (this.clock.state === 'started') {
+                this.clock.seconds--;
+                if (this.clock.seconds === -1) {
+                    this.clock.seconds = this.controlTime;
+                    this.clock.minutes--;
+                }
+                if (this.clock.minutes === this.clock.limit
+                    && this.clock.seconds === this.clock.limit) {
+                    this.finalizedTest();
+                    clearInterval(test);
+                }
             }
         }, 1000);
     }
 
+    activeAlert() {
+        if (!this.alertDesert) {
+            this.alertDesert = true;
+        } else {
+            this.alertDesert = false;
+        }
+    }
+
     finalizedTest() {
-        this.clock.state = 'finalized';
+        this.resetClock();
         let arrayProposal: any;
         arrayProposal = this.proposals.split('\n');
         this.finalProposals = this.validProposal(arrayProposal, this.empty);
@@ -125,6 +136,13 @@ export class TestCreativityComponent implements OnInit {
 
     getFinalScore() {
         return this.minRandom + Math.floor((this.maxRandom - this.minRandom) * Math.random());
+    }
+
+    resetClock(){
+        this.clock.minutes = 0;
+        this.clock.seconds = 0;
+        this.alertDesert = false;
+        this.clock.state = 'finalized';
     }
 
     saveInBBDD() {

@@ -13,7 +13,14 @@
 
 @media screen and (max-width: 1366px) {
     .container {
-        height: 100%;
+        height: auto;
+        min-height: 663px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        min-height: 696px;
     }
 }
 

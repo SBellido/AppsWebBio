@@ -44,8 +44,6 @@ div.swiper-button-prev  {
     margin-bottom: 10px;
     background-color: #FFCF02;
     font-size: small;
-    // width: auto;
-    // height: auto;
 }
 div.swiper-button-next {
     color:  #ffffff !important;
@@ -69,7 +67,7 @@ div.swiper-button-next:hover, div.swiper-button-prev:hover {
 }
 
 .container-items {
-    width: 350px;
+    width: 330px;
     height: 145px;
     background-color: #4a4067; 
     padding: 10px 50px 10px 50px;
@@ -153,6 +151,7 @@ li>h3 {
         font-size: 16px;
         margin-top: 3px;
         margin-bottom: 0px;
+        line-height: 20px;
     }
 
     li {
@@ -160,7 +159,9 @@ li>h3 {
         width: 246px;
         margin: 0px;
     }
-    
+    li>h3 {
+        margin-top: 2px;
+    }
     .button-go {
         margin-top: 40px;
     }

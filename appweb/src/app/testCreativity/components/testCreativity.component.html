@@ -23,14 +23,13 @@
         <section class="container-right">
             <article *ngIf="clock.state != 'finalized'" 
                 class="container-textarea">
-                <label class="label-test" for="">Presioná<span class="enter">"Enter"<br></span>después de cada propuesta</label>
-                <textarea [(ngModel)]="proposals" placeholder="Escribí todas las que se te ocurran"
-                    class="textarea-test"></textarea>
+                <label class="label-test" for="">Presioná<span class="enter"> "Enter"<br></span>después de cada propuesta.</label>
+                <textarea [(ngModel)]="proposals" placeholder="Escribí todas las que se te ocurran."
+                    class="textarea-test">
+                </textarea>
             </article>           
-            <article *ngIf="clock.state == 'finalized'" 
+            <article *ngIf="clock.state == 'finalized' && !alertDesert" 
                 class="container-message">
-                <label class="label-test-hidden" for="">Presioná "Enter" después de cada propuesta</label>
-                <!-- <h1 class="message-final">¡Felicitaciones!</h1> -->
                 <div *ngIf="points < 1" class="message-icon">
                     <h1 class="message-final">¿Te dormiste?</h1>
                     <img class="emoyi" src="assets\images\emoyi_5.png" alt="emoyi dudando">
@@ -63,25 +62,47 @@
                 <p class="timer-message">Tiempo agotado</p>
             </article>   
             <!-- CLOCK -->
-            <div *ngIf="clock.state == 'started'" class="container-clock">
+            <div *ngIf="clock.state == 'started' && !alertDesert" 
+                class="container-clock">
                 <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
                 <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
-                <button mat-raised-button class="finalize-button"
-                    routerLink="/select-test" routerLinkActive="active">
-                    <span class="material-icons cancel-icon">cancel</span>
-                    <p class="text-button">ME RINDO</p>                 
+                <button mat-raised-button class="desert"
+                    (click)="activeAlert()">
+                    <!-- <span class="material-icons cancel-icon">cancel</span> -->
+                    <p class="text-button">TERMINAR</p>                 
                 </button>
             </div>         
-            <div *ngIf="clock.state == 'finalized'" 
+            <div *ngIf="clock.state == 'finalized' && !alertDesert" 
                 class="container-clock-finalized">
                 <h1 class="clock" *ngIf="clock.seconds < 10">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}</h1>
                 <h1 class="clock" *ngIf="clock.seconds >= 10">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
-                <button mat-raised-button class="finish-button"
+                <button mat-raised-button class="backToInit"
                     routerLink="/select-test" routerLinkActive="active" >
-                    TERMINAR
+                    VOLVER A INICIO
                 </button>
-            </div>  
+            </div>
+           
+            <section  *ngIf="clock.state == 'started' && alertDesert" 
+                class="container-alert">
+                <div class="container-message">
+                    <p class="mesagge">Estás a un click <br> de abandonar la actividad.</p>
+                    <h4 class="message">¿Querés abandonar?</h4>
+                </div>
+                <div class="container-button">
+                    <button class="negative" mat-raised-button
+                        (click)="finalizedTest()"
+                        data-backdrop="static" data-keyboard="false">
+                        ABANDONAR
+                    </button>
+                    <button class="positive" mat-raised-button
+                        (click)="activeAlert()"                       
+                        data-backdrop="static" data-keyboard="false">
+                        CONTINUAR
+                    </button>    
+                </div>
+            </section>  
         </section>
+        
     </section>
 </div>
 <router-outlet></router-outlet>

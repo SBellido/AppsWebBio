@@ -15,7 +15,8 @@
     top: 0px;
     left: 88%;
     width: auto;
-    padding: 16px 18px;    
+    padding: 16px 18px; 
+    padding: 12px 18px;    
 }
 
 .container-col {
@@ -59,4 +60,10 @@ mat-toolbar.container-header {
         padding: 10px 0px;    
     }
     
+ }
+
+ @media screen and (max-width: 1024px) { 
+    .container-icon-creativity {
+        left: 85%;
+    }
  }

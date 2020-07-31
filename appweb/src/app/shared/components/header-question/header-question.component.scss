@@ -79,8 +79,15 @@ mat-toolbar.container-header {
         font-size: 46px;  
     }
     
-    
  }
+
+@media screen and (max-width: 1366px) {
+
+    .container-question-link {        
+        left: 85%;   
+    }
+
+}
  
   
   

@@ -57,16 +57,16 @@ section.container {
 // CLOCK STYLE
 h1.clock {
     font-size: xx-large;
-    margin: 26px 0px;
+    margin: 20px 0px 20px 0px;
 }
 .container-clock-finalized {
-    background-color: #af3434;
+    background-color: #4a4067;
 }
 .container-clock {
     background-color: #76ad2e;
 }
 .container-clock-finalized, .container-clock {
-    padding: 0.5px 3px;
+    padding: 0px 3px 12px 3px;
     text-align: center;
     color: white;
     width: 300px;
@@ -75,6 +75,11 @@ h1.clock {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative;
+    top: 15px
+}
+p.text-button {
+    margin: 0px;
 }
 
 // STYLE ELEMENT
@@ -100,21 +105,16 @@ article.container-message {
     align-items: left;
     flex-direction: column;
     width: 306px;  
-    height: 323px; 
+    height: 340px; 
     text-align: center;
     background-color: #ffffff;
-    margin-top: 98px;
     border-radius: 10px 10px 0px 0px;
-    -webkit-box-shadow: inset 0 0 0 2px #af3434;
-    -moz-box-shadow: inset 0 0 0 2px #af3434;
-    box-shadow: inset 0px 0px 0px 2px #af3434; 
-    margin-top: 146px;
+    margin-top: 67px;
+    position: relative;
+    top: 15px;
+    border: 1px solid #ffffff;
 }
-.label-test-hidden {
-    font-weight: 500;
-    font-size: 15px;
-    display: none;
-}
+
 p.message {
     font-weight: normal;  
     color: #4a4067; 
@@ -139,11 +139,11 @@ h2.result {
 }
 .timer-icon {
     font-size: 50px;
-    color: #af3434;
+    color: #4a4067;
     margin-top: 40px;
 }
 .timer-message {
-    color: #af3434;
+    color: #4a4067;
     font-size: 16px;
     font-weight: normal;
     margin: 0px;
@@ -161,42 +161,33 @@ span.mat-button-wrapper {
     position: absolute;
     right: 50px;
 }
-.finalize-button:hover {
-    background-color: #e33b881b;
+
+// .cancel-icon { 
+//     color: #af3434;
+//     border-radius: 50%;
+//     position: relative;
+//     top: 11px;
+//     glyph-orientation-horizontal: initial;
+// }
+  
+.backToInit:hover, .desert:hover {
+    background-color: #ffffffcc;
+    -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
+    -moz-box-shadow: inset 0 0 0 2px #ffcf02;
+    box-shadow: inset 0px 0px 0px 2px #ffcf02;
 }
 
-.cancel-icon { 
-    color: #af3434;
-    border-radius: 50%;
-    position: relative;
-    top: 11px;
-    glyph-orientation-horizontal: initial;
-}
-.finish, .finalize {
-    margin-bottom: 26px;
-}
-.finish-button:hover {
-    background-color: #4a4067cc;
-    color: #ffffff;
-    font-weight: 500;  
-    margin-top: 40px;
-    margin-bottom: 0px;
-    padding: 8px 80px;
-    font-size: large; 
-}
-
-.finish-button, .finalize-button { 
-    color: #af3434;
-    font-size: medium; 
-    padding: 5px 25px 5px 20px; 
-    background-color: #ffffff;
-    display: table-cell;
-	vertical-align: middle
-    
-}
-span.enter { 
-    font-weight: bold;
+.backToInit, .desert { 
+    background-color: #ffffff;   
+    font-size: medium;
+    font-weight: 600; 
     color: #e33b88;
+    padding: 5px 40px 5px 40px; 
+    margin-bottom: 0px; 
+}
+
+span.enter { 
+    font-style: oblique;
 }
 
 .container-button .container-button-off {
@@ -204,6 +195,7 @@ span.enter {
     justify-content: center;
     align-items: center;
 }
+
 .container-right {
     display: flex;
     justify-content: center;
@@ -218,14 +210,12 @@ span.enter {
     width: 286px;
     max-width: 286px;
     min-width: 286px;
-    height: 300px;
-    max-height: 300px;
-    min-height: 300px;
-    margin-top: 7px;
+    height: 260px;
+    max-height: 260px;
+    min-height: 260px;
     border: transparent;
     padding: 10px;
     color: #4a4067;
-    border-radius: 10px 10px 0px 0px;
 }
 .textarea-test:focus {
     outline: none !important;
@@ -236,11 +226,17 @@ article.container-textarea {
     align-items: left;
     flex-direction: column;
     margin-top: 70px;
+    position: relative;
+    top: 12px;
 }
 .label-test {
     font-weight: 500;
     font-size: 15px;
-    color: #4a4067;
+    color: #ffffff;
+    text-align: center;
+    background-color: #4a4067;
+    border-radius: 10px 10px 0px 0px;
+    padding: 10px 0px;
 }
 
 .example-form {
@@ -255,7 +251,48 @@ article.container-textarea {
 .mat-form-field-infix .ng-tns-c91-0 {
     width: auto;
 }
+// ALERT
 
-// END PROPOSAL
+.container-alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.positive {
+     background-color: #76ad2e;
+}
+
+.negative {
+    background-color: #af3434;
+}
+.positive , .negative {
+    margin: 10px;
+    color: #ffffff;
+    padding-top: 3px;
+}
+.negative:hover {
+    background-color: #76ad2ecc;
+}
+.negative:hover {
+    background-color: #af3434cc;
+}
+.container-alert {
+    background-color: #ffffff;
+    color: #4a4067;
+    z-index: 2;
+    position: relative;
+    top: 15px;
+    height: 124px;
+    padding-bottom: 12px;
+    width: 306px;
+    border-radius: 0px 0px 10px 10px;;
+}
+h4.message, p.message {
+    margin:0px;
+}
+
 
  
