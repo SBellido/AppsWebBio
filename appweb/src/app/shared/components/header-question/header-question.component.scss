@@ -16,7 +16,7 @@
     left: 88%;
     width: auto;
     cursor: pointer;
-    padding: 12px 18px; 
+    padding: 18px 18px 18px 10px;  
 }
 
 .container-question-link:hover {
@@ -24,7 +24,7 @@
     -moz-box-shadow: 0px 2px 5px 0px rgba(74,64,103,0.3);
     box-shadow: 0px 2px 5px 0px rgba(74,64,103,0.3);
     background-color: #4a40673f;
-    outline: none;
+    outline: none;  
 }
 .question {
     color: #4a4067;
@@ -48,7 +48,7 @@
 h4.type-activity {
     // margin-right: 1rem;
     // margin-left: 1rem;
-    font-weight: 600;
+    font-weight: 400;
     color: #e33b88;
 }
 

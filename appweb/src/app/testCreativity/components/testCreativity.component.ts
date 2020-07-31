@@ -36,12 +36,14 @@ export class TestCreativityComponent implements OnInit {
 
     // OBJECT
     elementClip: Element = {
+        // variable codigo
         id: 1,
         name: 'Clip',
         image: 'assets/images/clip.jpg'
     };
 
     elementJournal: Element = {
+        // variable codigo
         id: 2,
         name: 'Diario',
         image: 'assets/images/diario.jpg'

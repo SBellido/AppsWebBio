@@ -19,6 +19,7 @@ export class InstructionsCreativityComponent implements OnInit, AfterViewInit {
   };
 
   ngOnInit(): void {
+    // leer url
   }
 
   ngAfterViewInit() {

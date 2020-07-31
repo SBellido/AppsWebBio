@@ -70,6 +70,7 @@ h1.clock {
     text-align: center;
     color: white;
     width: 300px;
+    height: 120px;
     border-radius: 0px 0px 10px 10px;
     display: flex;
     justify-content: center;
@@ -119,6 +120,7 @@ p.message {
     font-weight: normal;  
     color: #4a4067; 
     font-size: medium;
+    margin-bottom: 4px;
 }
 h1.message-final {
     color: #e33b88;
@@ -253,12 +255,21 @@ article.container-textarea {
 }
 // ALERT
 
-.container-alert {
+section.container-alert {
+    background-color: #ffffff;
+    color: #4a4067;
+    z-index: 2;
+    width: 306px;
+    height: 133px;
+    border-radius: 0px 0px 10px 10px;;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
+    position: relative;
+    top: 16px;
+    padding-bottom: 0px !important;
 }
 
 .positive {
@@ -272,24 +283,15 @@ article.container-textarea {
     margin: 10px;
     color: #ffffff;
     padding-top: 3px;
+    margin-bottom: 0px !important;
 }
-.negative:hover {
+.positive:hover {
     background-color: #76ad2ecc;
 }
 .negative:hover {
     background-color: #af3434cc;
 }
-.container-alert {
-    background-color: #ffffff;
-    color: #4a4067;
-    z-index: 2;
-    position: relative;
-    top: 15px;
-    height: 124px;
-    padding-bottom: 12px;
-    width: 306px;
-    border-radius: 0px 0px 10px 10px;;
-}
+
 h4.message, p.message {
     margin:0px;
 }

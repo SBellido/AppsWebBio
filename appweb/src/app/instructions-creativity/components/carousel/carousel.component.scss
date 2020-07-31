@@ -32,20 +32,7 @@
     background-color: #4a4067cc;
 }
 
-div.swiper-button-prev  {
-    color: #ffffff !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row-reverse;
-    padding: 10px 18px;
-    border-radius: 50%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: #FFCF02;
-    font-size: small;
-}
-div.swiper-button-next {
+div.swiper-button-prev, div.swiper-button-next {
     color:  #ffffff !important;
     display: flex;
     justify-content: center;
@@ -56,6 +43,7 @@ div.swiper-button-next {
     margin-bottom: 10px;
     background-color: #ffcf02;
     font-size: small;
+    margin: 7px 18px 18px 18px;
 }
 
 div.swiper-button-next:hover, div.swiper-button-prev:hover {
@@ -67,12 +55,12 @@ div.swiper-button-next:hover, div.swiper-button-prev:hover {
 }
 
 .container-items {
-    width: 330px;
+    width: 346px;
     height: 145px;
     background-color: #4a4067; 
-    padding: 10px 50px 10px 50px;
+    padding: 10px 40px 10px 40px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
 }
 
 li {
@@ -145,9 +133,7 @@ li>h3 {
     .container-items {
         width: 246px;
         height: 90px;
-        color: white;
         padding: 12px 10px 0px 10px;
-        border-radius: 10px;
         font-size: 16px;
         margin-top: 3px;
         margin-bottom: 0px;

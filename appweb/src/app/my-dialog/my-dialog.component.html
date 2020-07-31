@@ -1,7 +1,5 @@
 <div class="container-all">
     <div class="container-message">
-        <img src="assets\images\ready.png" alt="">
-        <h1 mat-dialog-title class="mesagge">¡Gracias!</h1>
         <h4 class="mesagge">Estás a punto de abandonar la actividad.</h4>
         <p>¿Querés abandonar?</p>
     </div>
@@ -9,14 +7,12 @@
         <button (click)="goTest()" class="button" mat-raised-button
             routerLink="/test-creativity" routerLinkActive="active"
             data-backdrop="static" data-keyboard="false">
-            ACEPTAR
+            ABANDONAR
         </button>
         <button (click)="goTest()" class="button" mat-raised-button
             routerLink="/test-creativity" routerLinkActive="active"
             data-backdrop="static" data-keyboard="false">
-            ACEPTAR
-        </button>
-        
-        
+            SEGUIR
+        </button>    
     </div>
 </div>
