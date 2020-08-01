@@ -298,6 +298,11 @@ h4.message, p.message {
 
 // max-width: 1366px
 @media screen and (max-width: 1366px) {
+    
+    h1.countdown {
+        margin-top: 100px; 
+        margin-bottom: 50px;   
+     }
     h1.title {
         font-weight: 100; 
         font-size: 1.6em; 
@@ -386,8 +391,9 @@ h4.message, p.message {
 @media screen and (max-width: 1024px) {
     .container-element {
         position: relative;
-        left: 100px;
+        left: 5px;
     }   
+  
 
 
     

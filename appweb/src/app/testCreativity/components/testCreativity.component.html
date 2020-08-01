@@ -1,7 +1,7 @@
 <!-- COUNTDOWN -->
 <div *ngIf="!started" class="container-all">
     <app-header-creativity></app-header-creativity>
-    <section class="container-countdown">
+    <section *ngIf="countDown <= 3" class="container-countdown">
         <h1 class="countdown">{{ countDown }}</h1> 
     </section>
 </div>

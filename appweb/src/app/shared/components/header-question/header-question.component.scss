@@ -84,7 +84,17 @@ mat-toolbar.container-header {
 @media screen and (max-width: 1366px) {
 
     .container-question-link {        
-        left: 85%;   
+        left: 85%;  
+        padding: 11px 11px;   
+    }
+
+}
+
+
+@media screen and (max-width: 1024px) {
+
+    .container-question-link {        
+        left: 82%;   
     }
 
 }

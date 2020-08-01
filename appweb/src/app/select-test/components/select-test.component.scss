@@ -122,5 +122,31 @@ hr.title-line {
        margin: 0px 5px;
     
     }
-    
 }
+
+@media screen and (max-width: 1024px) {
+
+ h1.title {
+    font-size: 1.4em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+ }
+
+ div.test-icon, div.test-icon-off {
+    width: 153px;
+    height: 130px;
+    margin: 8px;
+ }
+
+ img.icon, img.icon-off {
+    width: 80px;
+    height: 80px;
+ }
+
+ hr.title-line {
+    width: 330px;
+ }
+
+}
+
+ 

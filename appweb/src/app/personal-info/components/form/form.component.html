@@ -12,7 +12,8 @@
             <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 30 caracteres">
               <mat-label>Nombre y Apellido</mat-label>
               <input matNativeControl type="text" formControlName="nameLastName" 
-                matInput #nameLastNameInput maxlength="30" placeholder="Ingresá tu nombre y apellido">
+                matInput #nameLastNameInput maxlength="30" placeholder="Ingresá tu nombre y apellido"
+                class="input">
               <mat-hint align="end">{{ nameLastNameInput.value.length }}/30</mat-hint> 
               <div class="alert-danger" *ngIf="nameLastName.invalid && (nameLastName.dirty || nameLastName.touched)">
                 <div class="container-error-message" *ngIf="nameLastName.errors.required">
@@ -32,7 +33,8 @@
           <div class="col">
             <mat-form-field class="full-width" appearance="fill" hintLabel="Mímino 10 años">
               <mat-label>Edad</mat-label>
-                <input matNativeControl type="number" min="10" matInput placeholder="Ingresá tu edad" formControlName="age">
+                <input matNativeControl type="number" min="10" matInput placeholder="Ingresá tu edad" formControlName="age"
+                  class="input">
                 <div class="alert-danger" *ngIf="age.invalid && (age.dirty || age.touched)">
                   <div class="container-error-message" *ngIf="age.errors.required">
                     Tu edad es un dato requerido.
@@ -52,7 +54,7 @@
             <mat-form-field class="full-width" appearance="fill">
               <mat-label>Email</mat-label>
                 <input matNativeControl type="email" matInput 
-                  placeholder="Ingresá tu email" formControlName="email" >
+                  class="input" placeholder="Ingresá tu email" formControlName="email" >
                 <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
                   <div class="container-error-message" *ngIf="email.errors.required">
                     Tu email es un dato requerido.
@@ -70,7 +72,7 @@
             <mat-form-field class="full-width" appearance="fill">
               <mat-label>Educación formal</mat-label>
               <mat-select matNativeControl type="text" matInput 
-                formControlName="educationLevel"  placeholder="Educación formal">
+                class="input" formControlName="educationLevel"  placeholder="Educación formal">
                 <mat-option value="Primaria">Primaria</mat-option>
                 <mat-option value="Secundaria">Secundaria</mat-option>
                 <mat-option value="Terciaria">Terciaria</mat-option>
@@ -91,8 +93,9 @@
             <mat-form-field class="full-width" appearance="fill">
               <mat-label>Colegio</mat-label>
                 <input matNativeControl type="text" matInput 
-                #schoolInput maxlength="30" placeholder="Ingresá tu nombre y apellido"
-                  placeholder="Nombre de tu colegio" formControlName="school" >
+                  #schoolInput maxlength="30" placeholder="Ingresá tu nombre y apellido"
+                  placeholder="Nombre de tu colegio" formControlName="school" 
+                  class="input">
                   <mat-hint align="end">{{ schoolInput.value.length }}/30</mat-hint>
                 <div class="alert-danger" *ngIf="school.invalid && (school.dirty || school.touched)">
                   <div class="container-error-message" *ngIf="school.errors.required">
@@ -111,7 +114,8 @@
             <mat-form-field class="year" appearance="fill">
               <mat-label>Año</mat-label>
               <mat-select matNativeControl type="text" matInput 
-              #yearInput formControlName="year"  placeholder="Año de cursada">
+                #yearInput formControlName="year"  placeholder="Año de cursada"
+                class="input">
                 <mat-option value="1ro">1ro</mat-option>
                 <mat-option value="2do">2do</mat-option>
                 <mat-option value="3er">3er</mat-option>
@@ -131,7 +135,8 @@
             <mat-form-field class="course" appearance="fill">
               <mat-label>Curso</mat-label>
               <mat-select matNativeControl type="text" matInput 
-              #courseInput formControlName="course"  placeholder="Curso al que pertenecés">
+                #courseInput formControlName="course"  placeholder="Curso al que pertenecés"
+                class="input">
                 <mat-option value="A">A</mat-option>
                 <mat-option value="B">B</mat-option>
                 <mat-option value="C">C</mat-option>

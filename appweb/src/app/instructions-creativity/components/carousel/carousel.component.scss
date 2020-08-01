@@ -152,5 +152,19 @@ li>h3 {
         margin-top: 27px;
     }
 }
+@media screen and (max-width: 1024px){
+    // img {
+    //     width: 270px;     
+    // }
+    // .swiper-container {
+    //     width: 290px;
+    //     // height: 360px;
+    // }
+    div.swiper-button-next,  div.swiper-button-prev {
+        margin-top: 18px;
+       
+    }
+
+}
 
 

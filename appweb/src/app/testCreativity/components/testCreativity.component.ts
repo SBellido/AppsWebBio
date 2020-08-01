@@ -21,7 +21,7 @@ export class TestCreativityComponent implements OnInit {
 
     // INIT
     started = false;
-    countDown = 3;
+    countDown = 4;
     alertDesert = false;
 
     // CLOCK
@@ -84,12 +84,15 @@ export class TestCreativityComponent implements OnInit {
 
     countdown() {
         setTimeout(() => {
-            this.countDown = 2;
+            this.countDown = 3;
             setTimeout(() => {
-                this.countDown = 1;
+                this.countDown = 2;
                 setTimeout(() => {
-                    this.started = true;
-                    this.startTest();
+                    this.countDown = 1;
+                    setTimeout(() => {
+                        this.started = true;
+                        this.startTest();
+                    }, 1000);
                 }, 1000);
             }, 1000);
         }, 1000);
@@ -130,6 +133,7 @@ export class TestCreativityComponent implements OnInit {
         this.points = finalScore + this.finalProposals.length;
         this.assingDataToUser();
         this.saveInBBDD();
+        localStorage.clear();
     }
 
     assingDataToUser() {

@@ -59,14 +59,7 @@ mat-label.label {
   font-weight: 500;
 }
 
-.container-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 14px 4px;
-  margin: 0px;
-}
-.container-button-off {
+.container-button, .container-button-off {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,20 +70,14 @@ mat-label.label {
 button {
   margin: 2px 0px;
 }
-.buttonForm {
+.buttonForm, .buttonForm-off {
   background-color: #76ad2e;
   color: white;
   font-size: large;
   padding: 10px 134px;
   font-weight: 500;
 }
-.buttonForm-off {
-  background-color: #76ad2e;
-  color: white;
-  font-size: large;
-  padding: 10px 134px;
-  font-weight: 500;
-}
+
 .buttonForm:hover {
   background-color: #76ad2ecc;
 }
@@ -113,7 +100,7 @@ div.container-error-message {
 
   mat-card.shipping-card { 
     padding: 10px 10px 0px 10px;   
-    margin: 20px 25px 30px 25px;
+    margin: 20px 25px 0px 25px;
   }
   div.row {
     padding: 7px 20px;
@@ -128,10 +115,18 @@ div.container-error-message {
    
 }
 
-@media screen and (max-width: 1280px) {
-  // mat-card.shipping-card { 
-  //   margin: 56px 25px 30px 25px;
-  // }
+@media screen and (max-width: 1024px) {
+
+  mat-card.shipping-card { 
+    padding: 10px 10px 0px 10px;   
+    margin: 10px 0px 0px 0px;
+  }
+  .row {
+    padding-top: 0px;
+  }
+  .container-button, .container-button-off {
+    padding: 0px 4px 10px 4px;
+  }
 }
 
 

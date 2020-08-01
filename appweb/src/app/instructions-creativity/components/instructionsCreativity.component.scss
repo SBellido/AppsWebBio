@@ -38,8 +38,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    // height: 100%;
-    // padding-bottom: 50px;
+    height: auto;
 }
 
 hr { margin-bottom: 25px; }
@@ -76,10 +75,7 @@ h1>span {
 @media screen and (max-width: 1366px) {
 
     h1.title {
-        text-align: center; font-weight: 400; font-size: 2em;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        color: #4A4067;
+        font-size: 1.8em;
     }
 
     h1>span {
@@ -98,5 +94,13 @@ h1>span {
 
     h1.title {
         margin-bottom: 10px;
+    }
+
+}
+
+@media screen and(max-width: 1024px) {
+
+    h1.title {
+        margin-top: 10px;
     }
 }
