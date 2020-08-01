@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+
 import { InstructionsCreativity } from '../../core/models/instructionsCreativity.module';
 import Swiper from 'swiper';
 
@@ -11,7 +12,7 @@ export class InstructionsCreativityComponent implements OnInit, AfterViewInit {
 
   mySwiper: Swiper;
 
-  constructor() { }
+  constructor() {  }
 
   instructionsCrativity: InstructionsCreativity = {
     title: 'Instrucciones',
@@ -19,7 +20,7 @@ export class InstructionsCreativityComponent implements OnInit, AfterViewInit {
   };
 
   ngOnInit(): void {
-    // leer url
+  
   }
 
   ngAfterViewInit() {

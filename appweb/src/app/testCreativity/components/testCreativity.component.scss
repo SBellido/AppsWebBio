@@ -38,9 +38,6 @@ section.container {
     color: #4a4067;
     width: 20%;
 }
-.container-element {
-    width: 50%;
-}
 
 .containProposal .containTestCreativity {
     margin: 20px;
@@ -48,6 +45,7 @@ section.container {
 }
 
 .container-element {
+    width: 50%;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -98,8 +96,7 @@ h1>span{
     font-weight: 400;
 }
 
-// STYLE TEXTAREA
-
+// STYLE PROPOSAL
 article.container-message {
     display: flex;
     justify-content: center;
@@ -270,6 +267,9 @@ section.container-alert {
     position: relative;
     top: 16px;
     padding-bottom: 0px !important;
+    -webkit-box-shadow: inset 0 0 0 2px #76ad2e;
+    -moz-box-shadow: inset 0 0 0 2px #76ad2e;
+    box-shadow: inset 0px 0px 0px 2px #76ad2e;
 }
 
 .positive {
@@ -294,6 +294,103 @@ section.container-alert {
 
 h4.message, p.message {
     margin:0px;
+}
+
+// max-width: 1366px
+@media screen and (max-width: 1366px) {
+    h1.title {
+        font-weight: 100; 
+        font-size: 1.6em; 
+        margin-top: 40px;  
+        width: 440px;
+        margin-top: 0px 0px;
+    }
+    h2.result {
+        
+        font-size: 20px;
+    }
+    img.element, img.image-final {
+        width: 71%;
+        height: 71%;
+    }
+    img.emoyi {
+     width: 80px;
+     height: 80px;
+    }
+    article.container-message {      
+        width: 266px;       
+        height: 288px; 
+        margin-top: 0px;
+        top: 78px;      
+    }
+    .timer-icon {
+        font-size: 30px;        
+        margin-top: 14px;
+    }
+    .timer-message {      
+        font-size: 14px; 
+        margin-bottom: 70px;     
+    }
+    .textarea-test {
+        font-family: 'Roboto', sans-serif;    
+        font-size: 16px;
+        width: 250px;
+        max-width: 250px;
+        min-width: 250px;
+        height: 150px;
+        max-height: 150px;
+        min-height: 150px;
+        border: transparent;
+        padding: 10px;
+        color: #4a4067;
+    }
+    .container-clock-finalized, .container-clock {      
+        width: 263px;
+        height: 108px;
+        padding-bottom: 20px;
+    }
+    h1.clock {
+        font-size: 30px;
+        margin: 20px 0px 14px 0px;
+    }
+    h1.message-final {
+        font-size: 24px;
+        margin-top: 10px;
+        margin-bottom: 10px;  
+    }
+    .backToInit, .desert {          
+        font-size: small;
+        padding: 3px 30px 3px 30px; 
+    }
+    section.container-alert {     
+        width: 270px;
+        height: 128px;      
+        top: 16px;
+        padding-bottom: 0px !important;
+      
+    }
+    
+    .message {
+        position: relative;
+        bottom: 5px;   
+    }
+    
+    .positive , .negative {
+        margin: 5px;
+        padding-top: 0px;
+        margin-bottom: 0px !important;
+        font-size: small;    
+    }
+
+}
+@media screen and (max-width: 1024px) {
+    .container-element {
+        position: relative;
+        left: 100px;
+    }   
+
+
+    
 }
 
 

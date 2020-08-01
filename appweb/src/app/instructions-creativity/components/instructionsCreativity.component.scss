@@ -4,28 +4,28 @@
 // 1366 x 768
 // 1024 x 600
 
-.button-back { 
+.button-back {
     color: #e33b88;
-    padding: 5px 40px 5px 15px; 
-    border: 0.5px solid #e33b88; 
+    padding: 5px 40px 5px 15px;
+    border: 0.5px solid #e33b88;
 }
 
 .button-back:hover {
     background-color: #e33b881b;
 }
 
-.icon-back { 
-    background-color: #e33b88; 
+.icon-back {
+    background-color: #e33b88;
     color: white;
     border-radius: 50%;
-    margin-right: 20px; 
+    margin-right: 20px;
 }
 
 .container-title {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; 
+    flex-direction: column;
 }
 .container {
     background-color: #eeeeee;
@@ -38,23 +38,25 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    // height: 100%;
+    // padding-bottom: 50px;
 }
 
 hr { margin-bottom: 25px; }
 
 li { margin: 15px; }
 
-h1.title { 
-    text-align: center; font-weight: 400; font-size: 3em; 
-    margin-top: 30px; 
+h1.title {
+    text-align: center; font-weight: 400; font-size: 3em;
+    margin-top: 30px;
     margin-bottom: 30px;
-    color: #4A4067; 
+    color: #4A4067;
 }
 
 h1>span {
-    font-weight: 400; 
-    margin-top: 12px; color: #e33b88; 
-    
+    font-weight: 400;
+    margin-top: 12px; color: #e33b88;
+
 }
 .instructions {
     display: flex;
@@ -64,34 +66,34 @@ h1>span {
     width: 40%;
 }
 @media screen and (max-width: 1600px) {
-    
-    h1.title { 
-        margin-top: 20px; 
+
+    h1.title {
+        margin-top: 20px;
         margin-bottom: 20px;
     }
 }
 
 @media screen and (max-width: 1366px) {
-    
-    h1.title { 
-        text-align: center; font-weight: 400; font-size: 2em; 
-        margin-top: 20px; 
+
+    h1.title {
+        text-align: center; font-weight: 400; font-size: 2em;
+        margin-top: 20px;
         margin-bottom: 20px;
-        color: #4A4067; 
-    }
-    
-    h1>span {
-        font-weight: 400; 
-        margin-top: 12px; color: #e33b88; 
-        
+        color: #4A4067;
     }
 
-    .button-back { 
-        padding: 0px 20px 0px 10px; 
+    h1>span {
+        font-weight: 400;
+        margin-top: 12px; color: #e33b88;
+
     }
-   
-    .icon-back { 
-        margin-right: 7px; 
+
+    .button-back {
+        padding: 0px 20px 0px 10px;
+    }
+
+    .icon-back {
+        margin-right: 7px;
     }
 
     h1.title {

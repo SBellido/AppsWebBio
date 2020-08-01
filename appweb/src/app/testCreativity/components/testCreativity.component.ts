@@ -39,14 +39,16 @@ export class TestCreativityComponent implements OnInit {
         // variable codigo
         id: 1,
         name: 'Clip',
-        image: 'assets/images/clip.jpg'
+        image: 'assets/images/clip.jpg',
+        code: '1a2b3c'
     };
 
     elementJournal: Element = {
         // variable codigo
         id: 2,
         name: 'Diario',
-        image: 'assets/images/diario.jpg'
+        image: 'assets/images/diario.jpg',
+        code: '4d5e6f'
     };
 
     // PROPOSAL
