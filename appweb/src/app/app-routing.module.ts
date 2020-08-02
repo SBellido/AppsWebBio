@@ -20,7 +20,7 @@ const routes: Routes = [
     .then(m => m.SelectTestModule)
   },
   {
-    path: 'instructions-creativity',
+    path: 'instructions-creativity/:code',
     loadChildren:  () => import('./instructions-creativity/instructions-creativity.module')
     .then(m => m.InstructionsCreativityModule)
   },

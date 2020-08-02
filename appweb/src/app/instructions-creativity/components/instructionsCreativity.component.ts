@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
-import { InstructionsCreativity } from '../../core/models/instructionsCreativity.module';
+import { Element } from './../../core/models/element.module';
+import { ActivatedRoute, Params  } from '@angular/router';
+
 import Swiper from 'swiper';
 
 @Component({
@@ -12,15 +14,47 @@ export class InstructionsCreativityComponent implements OnInit, AfterViewInit {
 
   mySwiper: Swiper;
 
-  constructor() {  }
+  constructor(private route: ActivatedRoute) {  }
 
-  instructionsCrativity: InstructionsCreativity = {
-    title: 'Instrucciones',
-    description: 'Test de Creatividad'
-  };
+  elementFinal: Element;
+  elementClip: Element;
+  elementJournal: Element;
+
+  boxObjects = [
+    this.elementClip = {
+      id: 1,
+      name: 'Clip',
+      image: 'assets/images/clip.jpg',
+      code: '3171023'
+  },
+    this.elementJournal = {
+        id: 2,
+        name: 'Diario',
+        image: 'assets/images/diario.jpg',
+        code: '1017232015112'
+    }
+  ];
 
   ngOnInit(): void {
-  
+    let auxCode = '';
+    this.route.params.subscribe(
+      (params: Params) => {
+        auxCode = params.code;
+        console.log(auxCode);
+        this.elementFinal = this.detectCodeToObject(auxCode);
+        console.log(this.elementFinal);
+      }
+    );
+  }
+
+  detectCodeToObject(code: string){
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.boxObjects.length; i++) {
+      const object = this.boxObjects[i];
+      if (object.code === code) {
+        return object;
+      }
+    }
   }
 
   ngAfterViewInit() {
