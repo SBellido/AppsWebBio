@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DataDbService } from '../../../core/services/db/data-db.service';
 import { FormControl, FormGroup, Validators, PatternValidator } from '@angular/forms';
 import { Router } from '@angular/router';
+// import { AngularFire } from '@angular/fire/';
 
 
 @Component({
@@ -12,11 +13,14 @@ import { Router } from '@angular/router';
 @Input('formControlName')
 
 export class FormComponent implements OnInit {
+  users: any;
 
   constructor(
     private router: Router,
-    private dbData: DataDbService) {
-    this.dataUser = this.getDataUser();
+    private dbData: DataDbService,
+    // private afs: AngularFire
+    ) {
+      this.dataUser = this.getDataUser();
   }
 
   dataUser: FormGroup;
@@ -65,7 +69,6 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     // localStorage.clear();
-    console.log(this.dataUser.value);
     localStorage.removeItem('creative-user');
   }
 
@@ -86,6 +89,31 @@ export class FormComponent implements OnInit {
     }
   }
 
+//   registerUser(email: string, element: string) {
+//     const user = this.af.database.object(`creative-user/${email}`);
+//     user.subscribe(data => {
+//       if(data.$value !== null) {
+//         console.log('User does not exist');
+//       } else {
+//         console.log('User does exist');
+//       }
+//     });
+// }
+//   getSavedUser() {
+//       const creativeUser =  JSON.parse(localStorage.getItem('creative-user'));
+
+
+//       const user = this.afs.collection. object(`creative-user/${creativeUser}`);
+//       user.subscribe(data => {
+//         if (data.$value !== null) {
+//           console.log('User does not exist');
+//         } else {
+//           console.log('User does exist');
+//         }
+//       });
+//  }
+  // }
+
   // setDataInStorage(formData: FormGroup) {
   //   localStorage.setItem('nameLastName', formData.value(this.nameLastName));
   //   localStorage.setItem('age', formData.value(this.age));
@@ -100,4 +128,3 @@ export class FormComponent implements OnInit {
   get course() { return this.dataUser.get('course'); }
 
 }
-

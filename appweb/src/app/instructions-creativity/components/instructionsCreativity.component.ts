@@ -19,19 +19,26 @@ export class InstructionsCreativityComponent implements OnInit, AfterViewInit {
   elementFinal: Element;
   elementClip: Element;
   elementJournal: Element;
+  elementCup: Element;
 
   boxObjects = [
     this.elementClip = {
       id: 1,
       name: 'Clip',
       image: 'assets/images/clip.jpg',
-      code: '3171023'
+      code: '312917'
   },
     this.elementJournal = {
-        id: 2,
-        name: 'Diario',
-        image: 'assets/images/diario.jpg',
-        code: '1017232015112'
+      id: 2,
+      name: 'Diario',
+      image: 'assets/images/diario.jpg',
+      code: '1016221914112'
+    },
+    this.elementCup = {
+      id: 3,
+      name: 'Vaso',
+      image: 'assets/images/vaso.jpg',
+      code: '32217'
     }
   ];
 
