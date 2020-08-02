@@ -71,6 +71,9 @@ export class TestCreativityComponent implements OnInit {
 
     ngOnInit(): void {
         const creativeUser = this.getUser();
+        const finalElement = this.getElement();
+        console.log(finalElement);
+
         if (!creativeUser) {
             this.router.navigate(['select-test']);
         }
@@ -80,6 +83,10 @@ export class TestCreativityComponent implements OnInit {
     getUser() {
         const creativeUser = JSON.parse(localStorage.getItem('creative-user'));
         return creativeUser;
+    }
+    getElement() {
+        const finalElement = JSON.parse(localStorage.getItem('final-element'));
+        return finalElement;
     }
 
     countdown() {

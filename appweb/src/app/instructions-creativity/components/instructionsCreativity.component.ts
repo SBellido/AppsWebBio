@@ -42,6 +42,7 @@ export class InstructionsCreativityComponent implements OnInit, AfterViewInit {
         auxCode = params.code;
         console.log(auxCode);
         this.elementFinal = this.detectCodeToObject(auxCode);
+        localStorage.setItem('final-element', JSON.stringify(this.elementFinal));
         console.log(this.elementFinal);
       }
     );

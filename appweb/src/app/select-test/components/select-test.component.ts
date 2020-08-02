@@ -10,7 +10,9 @@ export class SelectTestComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.removeItem('creative-user');
+
   }
 
 }

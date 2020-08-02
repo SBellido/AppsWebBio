@@ -64,9 +64,9 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    localStorage.clear();
+    // localStorage.clear();
     console.log(this.dataUser.value);
-    // localStorage.removeItem('creative-user');
+    localStorage.removeItem('creative-user');
   }
 
   onResetForm() {
