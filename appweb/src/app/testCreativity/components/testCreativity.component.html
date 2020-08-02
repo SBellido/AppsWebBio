@@ -12,8 +12,8 @@
     <section class="container">
         <article *ngIf="clock.state != 'finalized'"
             class="container-element">
-            <h1 class="title"><span>¿Qué usos le darías a un {{ elementClip.name }}?</span></h1>
-            <img class="element" [src]="elementClip.image" alt="">
+            <h1 class="title"><span>¿Qué usos le darías a un {{ element.name }}?</span></h1>
+            <img class="element" [src]="element.image" alt="">
         </article>
         <article *ngIf="clock.state == 'finalized'"
             class="container-element"> 

@@ -35,21 +35,7 @@ export class TestCreativityComponent implements OnInit {
     };
 
     // OBJECT
-    elementClip: Element = {
-        // variable codigo
-        id: 1,
-        name: 'Clip',
-        image: 'assets/images/clip.jpg',
-        code: '1a2b3c'
-    };
-
-    elementJournal: Element = {
-        // variable codigo
-        id: 2,
-        name: 'Diario',
-        image: 'assets/images/diario.jpg',
-        code: '4d5e6f'
-    };
+    element: Element;
 
     // PROPOSAL
     empty = '';
@@ -72,8 +58,7 @@ export class TestCreativityComponent implements OnInit {
     ngOnInit(): void {
         const creativeUser = this.getUser();
         const finalElement = this.getElement();
-        console.log(finalElement);
-
+        this.element = finalElement;
         if (!creativeUser) {
             this.router.navigate(['select-test']);
         }
@@ -146,7 +131,7 @@ export class TestCreativityComponent implements OnInit {
     assingDataToUser() {
         this.user = JSON.parse(localStorage.getItem('creative-user'));
         this.user.proposal = this.finalProposals;
-        this.user.object = this.elementClip.name;
+        this.user.object = this.element.name;
     }
 
     getFinalScore() {
