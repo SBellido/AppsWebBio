@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule, DocumentData, QuerySnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { CreativeUser } from './../../models/creative-user.interface';
 
@@ -16,6 +16,13 @@ export class DataDbService {
 
   saveContact(newCreativeUser: any): void {
     this.creativesCollection.add(newCreativeUser);
+  }
+
+  getAllUser(): Observable<QuerySnapshot<DocumentData>> {
+    // tslint:disable-next-line: prefer-const
+    let collection: Observable<QuerySnapshot<DocumentData>>;
+    collection = this.creativesCollection.get();
+    return collection;
   }
 
 }

@@ -7,6 +7,8 @@ import { Element } from './../../core/models/element.module';
 import { DataDbService } from '../../core/services/db/data-db.service';
 
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { DocumentData, QuerySnapshot } from '@angular/fire/firestore';
 
 @Component({
     // usaré ese selector como una etiqueta HTML en el template
@@ -23,6 +25,8 @@ export class TestCreativityComponent implements OnInit {
     started = false;
     countDown = 4;
     alertDesert = false;
+    dateStart: Date;
+    dateEnd: Date;
 
     // CLOCK
     controlTime = 59;
@@ -91,6 +95,8 @@ export class TestCreativityComponent implements OnInit {
     }
 
     startTest() {
+        this.dateStart = new Date();
+        console.log(this.dateStart);
         const test = setInterval(() => {
             if (this.clock.state === 'started') {
                 this.clock.seconds--;
@@ -116,6 +122,7 @@ export class TestCreativityComponent implements OnInit {
     }
 
     finalizedTest() {
+        this.dateEnd = new Date();
         this.resetClock();
         let arrayProposal: any;
         arrayProposal = this.proposals.split('\n');
@@ -123,15 +130,26 @@ export class TestCreativityComponent implements OnInit {
         this.showProposal(this.finalProposals);
         const finalScore = this.getFinalScore();
         this.points = finalScore + this.finalProposals.length;
-        this.assingDataToUser();
+        this.assingDataToUser(this.dateStart, this.dateEnd);
         this.saveInBBDD();
         localStorage.clear();
     }
 
-    assingDataToUser() {
+    assingDataToUser(dateStart: Date, dateEnd: Date) {
         this.user = JSON.parse(localStorage.getItem('creative-user'));
         this.user.proposal = this.finalProposals;
         this.user.object = this.element.name;
+        this.user.dateStart = dateStart;
+        this.user.dateEnd = dateEnd;
+    }
+
+    getFinalTime(dateStart: Date, dateEnd: Date) {
+        // tslint:disable-next-line: new-parens
+        const a = new Date;
+        // tslint:disable-next-line: new-parens
+        const b = new Date;
+        const finalTime = a.getSeconds() - b.getSeconds();
+        console.log(finalTime);
     }
 
     getFinalScore() {

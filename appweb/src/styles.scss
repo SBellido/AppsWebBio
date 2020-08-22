@@ -1,19 +1,4 @@
-// .test-grid {
-//     display: grid;
-//     grid-template-columns: repeat(1, 1fr);
-// }
-
-// @media (min-wdth:576px) {
-//     .test-grid {
-//         grid-template-columns: repeat(3, 1fr);
-//     }
-// }
-// @media (min-wdth:1024px) {
-//     .test-grid {
-//         grid-template-columns: repeat(3, 1fr);
-//     }
-// }
-html, body { height: 100%; }
+html, body { height: 100%; max-height: auto; }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 

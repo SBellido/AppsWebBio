@@ -2,8 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DataDbService } from '../../../core/services/db/data-db.service';
 import { FormControl, FormGroup, Validators, PatternValidator } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { AngularFire } from '@angular/fire/';
-
 
 @Component({
   selector: 'app-form',
@@ -18,20 +16,19 @@ export class FormComponent implements OnInit {
   constructor(
     private router: Router,
     private dbData: DataDbService,
-    // private afs: AngularFire
     ) {
       this.dataUser = this.getDataUser();
   }
 
   dataUser: FormGroup;
-  private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  private stringPattern: any = /^[a-zA-ZñÑáéíóú ]*$/;
 
+  private stringPattern: any = /^[a-zA-ZñÑáéíóú ]*$/;
+  private characterPattern: any = /[A-Za-z]/;
+  // private characterPattern: any = /^[A-Z]+$/i;
   getDataUser() {
     const formData = new FormGroup({
       nameLastName: new FormControl('', [
         Validators.required,
-        Validators.minLength(3),
         Validators.maxLength(30),
         Validators.pattern(this.stringPattern)
       ]),
@@ -40,30 +37,31 @@ export class FormComponent implements OnInit {
         Validators.min(10),
         Validators.max(100),
       ]),
-      email: new FormControl('', [
+      city: new FormControl('', [
         Validators.required,
-        Validators.minLength(7),
-        Validators.pattern(this.emailPattern)
+        Validators.maxLength(30),
+        Validators.pattern(this.stringPattern)
       ]),
       educationLevel: new FormControl('', [
         Validators.required
       ]),
+      educationStatus: new FormControl('', []),
       school: new FormControl('', [
-        // Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(30),
+        Validators.maxLength(40),
+      ]),
+      degree: new FormControl('', [
+        Validators.maxLength(40),
         Validators.pattern(this.stringPattern)
       ]),
-      year: new FormControl('', [
-        // Validators.required,
-      ]),
+      year: new FormControl('', []),
+      grade: new FormControl('', []),
       course: new FormControl('', [
-        // Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(1),
+        Validators.pattern(this.characterPattern)
       ]),
     });
     console.log(formData.value);
-
-    // this.setDataInStorage(formData);
     return formData;
   }
 
@@ -89,42 +87,15 @@ export class FormComponent implements OnInit {
     }
   }
 
-//   registerUser(email: string, element: string) {
-//     const user = this.af.database.object(`creative-user/${email}`);
-//     user.subscribe(data => {
-//       if(data.$value !== null) {
-//         console.log('User does not exist');
-//       } else {
-//         console.log('User does exist');
-//       }
-//     });
-// }
-//   getSavedUser() {
-//       const creativeUser =  JSON.parse(localStorage.getItem('creative-user'));
-
-
-//       const user = this.afs.collection. object(`creative-user/${creativeUser}`);
-//       user.subscribe(data => {
-//         if (data.$value !== null) {
-//           console.log('User does not exist');
-//         } else {
-//           console.log('User does exist');
-//         }
-//       });
-//  }
-  // }
-
-  // setDataInStorage(formData: FormGroup) {
-  //   localStorage.setItem('nameLastName', formData.value(this.nameLastName));
-  //   localStorage.setItem('age', formData.value(this.age));
-  // }
-
   get nameLastName() { return this.dataUser.get('nameLastName'); }
   get age() { return this.dataUser.get('age'); }
-  get email() { return this.dataUser.get('email'); }
+  get city() { return this.dataUser.get('city'); }
   get educationLevel() { return this.dataUser.get('educationLevel'); }
+  get educationStatus() { return this.dataUser.get('educationStatus'); }
   get school() { return this.dataUser.get('school'); }
+  get degree() { return this.dataUser.get('degree'); }
   get year() { return this.dataUser.get('year'); }
+  get grade() { return this.dataUser.get('grade'); }
   get course() { return this.dataUser.get('course'); }
 
 }
