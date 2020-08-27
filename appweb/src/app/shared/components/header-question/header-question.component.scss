@@ -94,7 +94,7 @@ mat-toolbar.container-header {
 @media screen and (max-width: 1024px) {
 
     .container-question-link {        
-        left: 75%;   
+    left: 79%;   
     }
 
 }
@@ -103,7 +103,7 @@ mat-toolbar.container-header {
     .container-question-link {
         padding: 6px 11px;
     }
-    
+
     .question {
         margin-top: 10px;
         text-align: center;
@@ -118,11 +118,6 @@ mat-toolbar.container-header {
     
 }
  @media screen and (max-width: 425px) { 
-
-    // .question {
-    //     margin-top: 16px;
-    //     margin-bottom: 5px;
-    // }
 
     h4.type-activity {
         font-size: 14px;
