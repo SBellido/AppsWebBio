@@ -66,3 +66,36 @@ mat-toolbar.container-header {
         left: 83%;
     }
  }
+ 
+ @media screen and (max-width: 768px) { 
+    .question {
+        margin-top: 16px;
+        margin-bottom: 10px;
+        width: 50%;
+        height: 50%;
+    }
+
+    h4.type-activity {
+        font-size: 1rem;
+    }
+    .container-icon-creativity {
+        left: 80%;
+    }
+}
+ @media screen and (max-width: 425px) { 
+
+    .question {
+        margin-top: 16px;
+        margin-bottom: 5px;
+    }
+
+    h4.type-activity {
+        font-size: 14px;
+    }
+    .container-icon-creativity {
+        left: 75%;
+    }
+   
+
+}
+
