@@ -76,7 +76,7 @@
    
     .logo-home {
         width: 50%;
-        height: 50%;
+        height: 5%;
     }
     .text-home {
         font-size: 20px;
@@ -128,7 +128,7 @@
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
     .text-home {
         font-size: 14px;
     }
