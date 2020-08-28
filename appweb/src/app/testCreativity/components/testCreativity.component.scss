@@ -160,14 +160,6 @@ span.mat-button-wrapper {
     position: absolute;
     right: 50px;
 }
-
-// .cancel-icon { 
-//     color: #af3434;
-//     border-radius: 50%;
-//     position: relative;
-//     top: 11px;
-//     glyph-orientation-horizontal: initial;
-// }
   
 .backToInit:hover, .desert:hover {
     background-color: #ffffffcc;
@@ -394,10 +386,22 @@ h4.message, p.message {
         left: 5px;
     }   
   
+}
 
+@media screen and (max-width: 800px) {
 
+    .container {
+        width: 50%;
+    }
+    .container-element {
+        margin-left: 50px;
+    }
+    .container-right {
+        margin-right: 50px;
+    }
     
 }
+    
 
 
  

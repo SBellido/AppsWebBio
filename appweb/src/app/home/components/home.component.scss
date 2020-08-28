@@ -75,11 +75,15 @@
 @media screen and (max-width: 1440px) {
    
     .logo-home {
-        width: 55%;
-        height: 55%;
+        width: 50%;
+        height: 50%;
     }
     .text-home {
-        font-size: 18px;
+        font-size: 20px;
+    }
+    .logo-container {    
+        padding: 20px 160px 0px 150px;
+        margin-bottom: 80px;
     }
     .button-home {    
         font-size: large;
@@ -106,12 +110,48 @@
     .text-home {
         font-size: 16px;
     }
+
+    .logo-container {
+        padding: 20px 70px 0px 70px;
+    }
+    .container-logos {
+        padding: 0px 80px 0px 80px;
     
+    }
+    .logo-home {
+        width: 60%;
+        height: 60%;
+    }
+
     .button-home {    
         padding: 8px 60px;
     }
 }
 
+@media screen and (max-width: 800px) {
+    .text-home {
+        font-size: 14px;
+    }
+
+    .container-button-description {
+        margin-left: 50px;
+    }
+    .logo-container {
+        padding: 20px 50px 0px 50px;
+    }
+    .button-home {    
+        padding: 6px 50px;
+    }
+    .logo-home {
+        width: 50%;
+        height: 50%;
+    }
+   .container-logos {
+    padding: 0px 60px 0px 60px;
+
+   }
+
+}
 // MOBILE
 
 // @media (min-width: 411px) and (max-width: 767px) {
