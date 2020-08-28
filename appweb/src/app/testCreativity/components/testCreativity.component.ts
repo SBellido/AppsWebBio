@@ -96,7 +96,6 @@ export class TestCreativityComponent implements OnInit {
 
     startTest() {
         this.dateStart = new Date();
-        console.log(this.dateStart);
         const test = setInterval(() => {
             if (this.clock.state === 'started') {
                 this.clock.seconds--;
@@ -149,7 +148,6 @@ export class TestCreativityComponent implements OnInit {
         // tslint:disable-next-line: new-parens
         const b = new Date;
         const finalTime = a.getSeconds() - b.getSeconds();
-        console.log(finalTime);
     }
 
     getFinalScore() {
@@ -184,7 +182,6 @@ export class TestCreativityComponent implements OnInit {
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < finalProposals.length; i++) {
             const proposal = finalProposals[i];
-            console.log('Propuesta ' + i + ': ' + proposal);
             // this.user.proposal.push(proposal);
         }
     }

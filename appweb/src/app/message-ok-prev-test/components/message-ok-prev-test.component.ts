@@ -14,7 +14,6 @@ export class MessageOkPrevTestComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() =>  {
       const creativeUser =  JSON.parse(localStorage.getItem('creative-user'));
-      console.log(creativeUser);
       if (creativeUser == null) {
           this.router.navigate(['personal-info']);
       }

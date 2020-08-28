@@ -10,7 +10,6 @@ import { DataDbService } from '../../core/services/db/data-db.service';
 })
 export class UsersComponent implements OnInit {
 
-  // users: User[] = [];
   users = [];
   displayedColumns: string[] = ['name', 'lastName', 'age', 'points'];
 
@@ -18,21 +17,7 @@ export class UsersComponent implements OnInit {
     private dataDbService: DataDbService // inyecta dependencia
   ) { }
 
-  ngOnInit() {
-    // this.fetchUsers();
-  }
-
-  // fetchUsers() {
-  //   this.dataDbService.saveContact(); // devuelve un observable de tipo object
-
-  // }
-
-  // deleteUser(id: number) {
-  //   this.usersService.deleteUser(3)
-  //   .subscribe((user: any) => {
-  //     console.log(user);
-  //   });
-  // }
+  ngOnInit() { }
 
 
 }

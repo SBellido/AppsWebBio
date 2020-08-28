@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
   dataUser: FormGroup;
   
   private stringPattern: any = /^[a-zA-ZñÑáéíóú ]*$/;
-  private stringAndNumberPattern: any = /^[a-zA-ZñÑáéíóú 0-9 ]*$/;
+  private stringAndNumberPattern: any = /^[a-zA-ZñÑáéíóú 0-9 °]*$/;
   private characterPattern: any = /[A-Za-z]/;
   // private characterPattern: any = /^[A-Z]+$/i;
   getDataUser() {
@@ -63,7 +63,6 @@ export class FormComponent implements OnInit {
         Validators.pattern(this.characterPattern)
       ]),
     });
-    console.log(formData.value);
     return formData;
   }
 
@@ -76,16 +75,77 @@ export class FormComponent implements OnInit {
     this.dataUser.reset();
   }
 
+  resetFirstControl(educationLevel: any) {
+    if(educationLevel.value == 'Ninguna') {
+      this.degree.reset();
+      this.educationStatus.reset();
+      this.year.reset();
+      this.grade.reset();
+      this.course.reset();
+      this.school.reset();
+    }
+  }
+
+  resetSecondControl(educationLevel: any, educationStatus: any) {
+    if((educationLevel.value == 'Primaria' || educationLevel.value == 'Secundaria') 
+      && educationStatus.value != 'En curso') {
+      this.degree.reset();
+      this.grade.reset();
+      this.year.reset();
+      this.course.reset();
+      this.school.reset();
+    }
+  }
+
+  resetThirdControl(educationLevel: any, educationStatus: any) {
+    if((educationLevel.value == 'Universitaria' || educationLevel.value == 'Terciaria') 
+      && educationStatus.value != 'En curso') {
+      this.grade.reset();
+      this.year.reset();
+      this.course.reset();
+      this.school.reset();
+    }
+  }
+
+  resetFourthControl(educationLevel: any, educationStatus: any) {
+    if(educationLevel.value == 'Primaria' && educationStatus.value == 'En curso') {
+      this.degree.reset();
+      this.year.reset();
+    }
+  }
+
+  resetFifthControl(educationLevel: any, educationStatus: any) {
+    if(educationLevel.value == 'Secundaria' && educationStatus.value == 'En curso') {
+      this.degree.reset();
+      this.course.reset();
+    }
+  }
+
+  resetSixthControl(educationLevel: any, educationStatus: any) {
+    if((educationLevel.value == 'Universitaria' || educationLevel.value == 'Terciaria') 
+      && educationStatus.value == 'En curso') {
+      this.year.reset();
+      this.grade.reset();
+      this.course.reset();
+    }
+  }
+
   onSaveForm($event: any) {
     $event.preventDefault();
-    if (this.dataUser.valid) {
-      console.log('Valid');
-      console.log(this.dataUser.value);
+
+    if(this.dataUser.valid) {
+      this.resetFirstControl(this.educationLevel);
+      this.resetSecondControl(this.educationLevel, this.educationStatus);
+      this.resetThirdControl(this.educationLevel, this.educationStatus);
+      this.resetFourthControl(this.educationLevel, this.educationStatus);
+      this.resetFifthControl(this.educationLevel, this.educationStatus);
+      this.resetSixthControl(this.educationLevel, this.educationStatus);
+
       localStorage.setItem('creative-user', JSON.stringify(this.dataUser.value));
       this.onResetForm();
       this.router.navigate(['message-ok-prev-test']);
     } else {
-      console.log('Not valid');
+      this.router.navigate(['personal-info']);
     }
   }
 
