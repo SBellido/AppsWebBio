@@ -21,8 +21,9 @@ export class FormComponent implements OnInit {
   }
 
   dataUser: FormGroup;
-
+  
   private stringPattern: any = /^[a-zA-ZñÑáéíóú ]*$/;
+  private stringAndNumberPattern: any = /^[a-zA-ZñÑáéíóú 0-9 ]*$/;
   private characterPattern: any = /[A-Za-z]/;
   // private characterPattern: any = /^[A-Z]+$/i;
   getDataUser() {
@@ -40,7 +41,7 @@ export class FormComponent implements OnInit {
       city: new FormControl('', [
         Validators.required,
         Validators.maxLength(30),
-        Validators.pattern(this.stringPattern)
+        Validators.pattern(this.stringAndNumberPattern)
       ]),
       educationLevel: new FormControl('', [
         Validators.required
@@ -48,6 +49,7 @@ export class FormComponent implements OnInit {
       educationStatus: new FormControl('', []),
       school: new FormControl('', [
         Validators.maxLength(40),
+        Validators.pattern(this.stringAndNumberPattern)
       ]),
       degree: new FormControl('', [
         Validators.maxLength(40),

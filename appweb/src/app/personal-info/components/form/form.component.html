@@ -137,9 +137,14 @@
               <input matNativeControl type="text" matInput #schoolInput 
                 class="input" maxlength="40" placeholder="Nombre de la Institución o Escuela donde estudias" formControlName="school">
               <mat-hint align="end">{{ schoolInput.value.length }}/40</mat-hint>
-              <div class="alert-danger" *ngIf="school.invalid || ((school.dirty || school.touched) && school.value == '')">
+              <div class="alert-danger" *ngIf="(school.dirty || school.touched) && school.value == ''">
                 <div class="container-error-message">
                   Escuela/Institución es un dato requerido.
+                </div>
+              </div>
+              <div lass="alert-danger" *ngIf="school.invalid">
+                <div class="container-error-message">
+                  El dato ingresado no es válido.
                 </div>
               </div>
             </mat-form-field>
@@ -240,22 +245,48 @@
             GUARDAR DATOS
           </button>   
         </mat-card-actions>
+
         <mat-card-actions *ngIf="dataUser.valid && (educationLevel.value == 'Universitaria' 
-          || educationLevel.value == 'Terciaria') && (degree.value == '' || educationStatus.value == '')"  
+          || educationLevel.value == 'Terciaria') && 
+          ((degree.value == '' || degree.invalid) || educationStatus.value == '')"  
           class="container-button">
           <button mat-raised-button class="buttonForm-off" 
             type="submit" [disabled]="dataUser.valid">
             GUARDAR DATOS
           </button>   
         </mat-card-actions>
-        <mat-card-actions *ngIf="dataUser.valid && (educationLevel.value == 'Universitaria' 
-          || educationLevel.value == 'Terciaria') && degree.value != '' && educationStatus.value != ''"  
+        <mat-card-actions *ngIf="(dataUser.valid && (educationLevel.value == 'Universitaria' 
+        || educationLevel.value == 'Terciaria') && 
+        (degree.invalid || degree.value != '' ) && educationStatus.value == 'En curso' 
+        && (school.value == '' || school.invalid))"  
+        class="container-button">
+        <button mat-raised-button class="buttonForm-off" 
+          type="submit" [disabled]="dataUser.valid">
+          GUARDAR DATOS
+        </button>   
+      </mat-card-actions>
+        <mat-card-actions *ngIf="(dataUser.valid && (educationLevel.value == 'Universitaria' 
+          || educationLevel.value == 'Terciaria') && 
+          (degree.value != '' && degree.valid) && educationStatus.value == 'En curso' 
+          && (school.value != '' && school.valid))"  
           class="container-button">
           <button mat-raised-button class="buttonForm" 
             type="submit" [disabled]="!dataUser.valid">
             GUARDAR DATOS
           </button>   
         </mat-card-actions>
+        
+        <mat-card-actions *ngIf="(dataUser.valid && (educationLevel.value == 'Universitaria' 
+          || educationLevel.value == 'Terciaria') && (degree.value != '' 
+          && ((educationStatus.value == 'Completa' || educationStatus.value == 'Incompleta')
+          && school.valid)))"  
+          class="container-button">
+          <button mat-raised-button class="buttonForm" 
+            type="submit" [disabled]="!dataUser.valid">
+            GUARDAR DATOS
+          </button>   
+        </mat-card-actions>
+        
         <mat-card-actions *ngIf="(dataUser.valid && (educationLevel.value == 'Primaria' 
           || educationLevel.value == 'Secundaria') && (educationStatus.value == ''))"  
           class="container-button">
@@ -274,7 +305,7 @@
         </mat-card-actions>
         <mat-card-actions *ngIf="(dataUser.valid && (educationLevel.value == 'Primaria') 
           && (educationStatus.value == 'En curso' && 
-          ((grade.value == '') || (course.value == ''))))"  
+          ((grade.value == '') || (course.value == '') || (school.value == ''))))"  
           class="container-button">
           <button mat-raised-button class="buttonForm-off" 
             type="submit" [disabled]="dataUser.valid">
@@ -283,16 +314,16 @@
         </mat-card-actions>
         <mat-card-actions *ngIf="(dataUser.valid && (educationLevel.value == 'Primaria') 
           && (educationStatus.value == 'En curso' && 
-          ((grade.value != '') && (course.value != ''))))"  
+          ((grade.value != '') && (course.value != '') && (school.value != ''))))"  
           class="container-button">
-          <button mat-raised-button class="buttonForm-off" 
+          <button mat-raised-button class="buttonForm" 
             type="submit" [disabled]="!dataUser.valid">
             GUARDAR DATOS
           </button>   
         </mat-card-actions>
         <mat-card-actions *ngIf="(dataUser.valid && (educationLevel.value == 'Secundaria') 
           && (educationStatus.value == 'En curso' && 
-          ((year.value == '') || (course.value == ''))))"  
+          ((year.value == '') || (course.value == '') || (school.value == ''))))"  
           class="container-button">
           <button mat-raised-button class="buttonForm-off" 
             type="submit" [disabled]="dataUser.valid">
@@ -301,7 +332,7 @@
         </mat-card-actions>
         <mat-card-actions *ngIf="(dataUser.valid && (educationLevel.value == 'Secundaria') 
           && (educationStatus.value == 'En curso' && 
-          ((year.value != '') && (course.value != ''))))"  
+          ((year.value != '') && (course.value != '') && (school.value != ''))))"  
           class="container-button">
           <button mat-raised-button class="buttonForm-off" 
             type="submit" [disabled]="!dataUser.valid">
