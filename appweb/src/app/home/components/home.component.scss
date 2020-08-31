@@ -70,7 +70,12 @@
 }
 
 @media screen and (max-width: 1440px) {
-   
+    .container-all {
+        min-height: 600px;
+    } 
+    .container-logoAndText {
+        padding: 110px 0px;
+    }
     .logo-home {
         width: 50%;
         height: 50%;
@@ -91,7 +96,10 @@
 
 
 @media screen and (max-width: 1024px) {
-
+    .container-all {
+        min-height: 620px;
+    }
+    
     .text-home {
         font-size: 16px;
     }
