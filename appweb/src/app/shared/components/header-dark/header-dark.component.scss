@@ -1,5 +1,10 @@
+.container-header {
+   flex: 1 1 auto;
+}
 .nav_logo { 
    padding: 55px 50px 25px 50px; 
+   display: flex;
+   justify-content: start;
 }
 
 .logo:focus { 
@@ -30,6 +35,14 @@ mat-toolbar.container-header {
    img.logo {
       width: 170px;
       height: 85px;
+   }
+}
+
+@media screen and (max-width: 425px) {
+   .nav_logo { 
+      display: flex;
+      justify-content: center;
+      width: inherit;
    }
  
 }

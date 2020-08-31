@@ -1,6 +1,7 @@
 .container-all {
     background: #4a4067 !important;
     height: 100%;
+    min-height: 800px;
 }
 
 h1.title {
@@ -26,12 +27,7 @@ h1.title {
     color: white;
     background-color:#e33b88;
 }
-.button-back:hover {
-    margin-top: 25px;
-    font-size: larger;
-    padding: 10px 116px;
-    font-weight: 600;
-    color: white;
+.button-back:hover { 
     background-color:#e33b8880; 
 }
 .image-calendar {
@@ -52,7 +48,60 @@ h1.title {
     border: 2px solid #E33B88;
 }
 
-h1.test {
+h1.text {
     font-weight: bold;
     color: #E33B88;
+}
+
+@media screen and (max-width: 1440px) {
+    .container-all {
+        min-height: 600px;
+    }
+    h1.title {
+        font-size: 1.7em;
+        margin-top: 30px;
+    }
+    .image-calendar {
+        width: 200px;
+    }
+    .container-icon {
+        width: 280px;
+        height: 280px;
+    }
+    .button-back {
+        margin-top: 10px;
+        font-size: 1.2rem;
+        padding: 10px 106px;
+    }
+
+}
+
+@media screen and (max-width: 800px) {
+    h1.title {
+        font-size: 1.4em;
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }
+    .container-icon {
+        width: 250px;
+        height: 250px;
+        padding-bottom: 30px;
+    }
+ 
+    .image-calendar {
+        width: 196px;
+    }
+    h1.text {
+        font-size: 1.2rem;
+        margin: 10px 0px;
+    }
+  
+    
+}
+
+@media screeen and(max-width: 425px) {
+    .container-all {
+        height: auto;
+        min-height: 800px !important;
+    } 
 }

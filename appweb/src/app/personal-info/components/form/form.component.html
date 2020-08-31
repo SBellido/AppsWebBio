@@ -5,12 +5,12 @@
       </mat-card-header>
       <mat-card-content>
         <div class="container-message">
-          <p class="message">Todos los campos con asterisco (*) son requeridos</p>
+          <p class="message">Todos los campos son requeridos</p>
         </div>
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 30 caracteres">
-              <mat-label>Nombre y Apellido *</mat-label>
+              <mat-label>Nombre y Apellido</mat-label>
               <input matNativeControl type="text" formControlName="nameLastName" 
                 matInput #nameLastNameInput maxlength="30" placeholder="Ingresá tu nombre y apellido"
                 class="input">
@@ -29,7 +29,7 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width" appearance="fill" hintLabel="Mínimo 10 / Máximo 100">
-              <mat-label>Edad *</mat-label>
+              <mat-label>Edad</mat-label>
                 <input matNativeControl type="number" min="10" matInput placeholder="Ingresá tu edad" formControlName="age"
                   class="input">
                 <div class="alert-danger" *ngIf="age.invalid && (age.dirty || age.touched)">
@@ -49,7 +49,7 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 30 caracteres">
-              <mat-label>Ciudad *</mat-label>
+              <mat-label>Ciudad</mat-label>
               <input matNativeControl type="text" formControlName="city" 
                 matInput #cityInput maxlength="30" placeholder="Ingresá la ciudad donde vivís"
                 class="input">
@@ -68,7 +68,7 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Máxima educación alcanzada *</mat-label>
+              <mat-label>Máxima educación alcanzada</mat-label>
               <mat-select matNativeControl type="text" matInput 
                 class="input" formControlName="educationLevel"  placeholder="Máxima educación alcanzada">
                 <mat-option value="Primaria">Primaria</mat-option>
@@ -113,7 +113,7 @@
         <div class="row" *ngIf="educationLevel.value != 'Ninguna' && educationLevel.value != ''">
           <div class="col">
             <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Estado actual de tu formación *</mat-label>
+              <mat-label>Estado actual de tu formación</mat-label>
               <mat-select matNativeControl type="text" matInput 
                 class="input" formControlName="educationStatus"  placeholder="Estado actual">
                 <mat-option value="Completa">Completa</mat-option>
@@ -133,7 +133,7 @@
         <div class="row" *ngIf="(educationLevel.value != 'Ninguna' && educationLevel.value != '') && educationStatus.value == 'En curso'">
           <div class="col">
             <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 40 caracteres">
-              <mat-label>Escuela/Institución *</mat-label>
+              <mat-label>Escuela/Institución</mat-label>
               <input matNativeControl type="text" matInput #schoolInput 
                 class="input" maxlength="40" placeholder="Nombre de la Institución o Escuela donde estudias" formControlName="school">
               <mat-hint align="end">{{ schoolInput.value.length }}/40</mat-hint>
@@ -152,8 +152,8 @@
         </div>
         <div class="row" *ngIf="educationLevel.value == 'Secundaria' && educationStatus.value == 'En curso'">
           <div class="col">
-            <mat-form-field class="year" appearance="fill">
-              <mat-label>Año *</mat-label>
+            <mat-form-field class="year full-width" appearance="fill">
+              <mat-label>Año</mat-label>
               <mat-select matNativeControl type="text" matInput 
                 #yearInput formControlName="year"  placeholder="Año de cursada"
                 class="input">
@@ -174,7 +174,7 @@
           </div>
           <div class="col">
             <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Curso *</mat-label>
+              <mat-label>Curso</mat-label>
               <input matNativeControl type="text" matInput #schoolInput 
                 class="input" maxlength="1" placeholder="Ingresá tu curso" formControlName="course">
               <mat-hint align="end">{{ course.value.length }}/1</mat-hint>
@@ -193,8 +193,8 @@
         </div>
         <div class="row" *ngIf="educationLevel.value == 'Primaria' && educationStatus.value == 'En curso'">
           <div class="col">
-            <mat-form-field class="year" appearance="fill">
-              <mat-label>Grado *</mat-label>
+            <mat-form-field class="grade full-width" appearance="fill">
+              <mat-label>Grado</mat-label>
               <mat-select matNativeControl type="text" matInput 
                 #gradeInput formControlName="grade"  placeholder="Grado de cursada"
                 class="input">
@@ -215,9 +215,9 @@
           </div>
           <div class="col">
             <mat-form-field class="full-width" appearance="fill">
-              <mat-label>Curso *</mat-label>
+              <mat-label>Curso</mat-label>
               <input matNativeControl type="text" matInput #schoolInput 
-                class="input" maxlength="1" placeholder="Ingresá tu curso" formControlName="course">
+                class="course" maxlength="1" placeholder="Ingresá tu curso" formControlName="course">
               <mat-hint align="end">{{ course.value.length }}/1</mat-hint>
               <div class="alert-danger" *ngIf="course.value == '' && (course.dirty || course.touched)">
                 <div class="container-error-message">

@@ -102,6 +102,13 @@ hr.title-line {
     margin-bottom: 50px;
 }
 
+@media screen and (max-width: 1440px) {
+    .container-all {
+        min-height: 600px;
+    } 
+
+}
+
 @media screen and (max-width: 1366px) {
     .test-icon, .test-icon-off {
         width: 175px;
@@ -148,5 +155,39 @@ hr.title-line {
  }
 
 }
+
+@media screen and (max-width: 320px) {
+    .container-all {
+        min-height: 800px;
+    } 
+    hr.title-line {
+        width: 300px;
+    }
+    .test-icon, .test-icon-off {
+        width:  140px !important;
+        height: 127px !important;
+        margin: 10px !important;
+    }
+  
+    h1.title {
+        font-size: 1.2em;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .container-all {      
+        padding-bottom: 0px;
+    }
+    h3.test,  h3.test-off {
+        font-size: inherit;
+    }
+   
+    img.icon,  img.icon-off {
+        width: 60px;
+        height: 60px;
+        margin-top: 20px;
+    }
+
+}
+
 
  

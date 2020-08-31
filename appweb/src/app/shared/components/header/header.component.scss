@@ -48,7 +48,7 @@ nav > a.active {
     cursor: pointer;
 } 
 
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1440px) {
 
     mat-toolbar.container-header {
        height: 100px;
@@ -57,10 +57,18 @@ nav > a.active {
     .nav_logo { 
        padding: 50px 50px 25px 50px; 
     }
- 
+    
     img.logo {
-       width: 170px;
-       height: 85px;
-    }
-  
- }
+        width: 170px;
+        height: 85px;
+     } 
+}
+
+@media screen and(max-width: 425px) {
+    .nav_logo { 
+        display: flex;
+        justify-content: center;
+        width: inherit;
+     }
+
+}

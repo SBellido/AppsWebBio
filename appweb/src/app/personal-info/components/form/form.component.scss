@@ -6,8 +6,12 @@
 
 .full-width {
     width: 100%;
-  }
-  
+}
+.container-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 mat-card.shipping-card {
   min-width: 410px;
   color: #4a4067;
@@ -127,6 +131,69 @@ div.container-error-message {
   .container-button, .container-button-off {
     padding: 0px 4px 10px 4px;
   }
+}
+
+
+@media screen and (max-width: 425px) {
+
+  mat-card.shipping-card {
+    padding: 10px 10px 0px 10px;
+    margin: 5px 25px 20px 25px;
+  }
+
+  app-form {
+    margin: auto;
+  }
+
+  mat-card.shipping-card {
+    min-width: 300px; 
+    margin: 5px auto; 
+  }
+  
+  .buttonForm, .buttonForm-off {
+    padding: 10px 85px;
+  }
+ 
+  div.row, div.ng-star-inserted {
+    display: block !important;  
+
+  }
+  .year, .grade {
+    margin-bottom: 10px;
+  }
+  .input {
+    width: 290px !important;
+  }
+  
+}
+
+@media screen and (max-width: 320px) { 
+  .container-form {
+    width: 320px;
+  }
+  mat-card.shipping-card {
+    padding: 10px 5px 0px 5px;
+    width: 230px !important; 
+    margin: 5px 0px 20px 0px;
+
+  }
+  .row {
+    width: 300px;
+   
+  }
+  div.row {
+    padding: 6px 5px;
+    margin: auto;
+  }
+  .input {
+    width: 270px !important;
+
+  }
+  .buttonForm, .buttonForm-off {
+    padding: 10px 80px;
+    margin-top: 10px !important;
+  }
+ 
 }
 
 

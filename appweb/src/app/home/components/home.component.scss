@@ -5,12 +5,14 @@
 // 1024 x 600
     .container-all {
         background: #4a4067 !important;
-        width: 100%;
         height: 100%;
+        min-height: 942px;
     }
-
+    .container-logos-mobile {
+        display: none;
+    }
     .container-logoAndText {
-        padding-top: 120px;
+        padding: 180px 0px;
     }
 
     .container-logos {
@@ -25,8 +27,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 70px 200px 0px 150px;
-        margin-bottom: 180px;
+        padding: 0px 200px 0px 150px;
     }
     .text-home {
         color: white;
@@ -45,10 +46,6 @@
         -moz-box-shadow: inset 0 0 0 2px #ffcf02;
         box-shadow: inset 0px 0px 0px 2px #ffcf02;
     }
-    .container-logos-mobile {
-        display: none;
-    }
-
 
 @media screen and (max-width: 1600px) {
     
@@ -76,34 +73,22 @@
    
     .logo-home {
         width: 50%;
-        height: 5%;
+        height: 50%;
     }
     .text-home {
         font-size: 20px;
     }
+    
     .logo-container {    
-        padding: 20px 160px 0px 150px;
-        margin-bottom: 80px;
+        padding: 0px 150px;
     }
     .button-home {    
         font-size: large;
         padding: 8px 70px;
     }
-
     
 }
 
-@media screen and (max-width: 1366px) {
-    .container-logoAndText {
-        padding-top: 100px;
-    }
-
-    .logo-container {    
-        padding: 20px 200px 0px 150px;
-        margin-bottom: 80px;
-    }
-
-}
 
 @media screen and (max-width: 1024px) {
 
@@ -112,7 +97,7 @@
     }
 
     .logo-container {
-        padding: 20px 70px 0px 70px;
+        padding: 0px 70px 0px 70px;
     }
     .container-logos {
         padding: 0px 80px 0px 80px;
@@ -132,12 +117,14 @@
     .text-home {
         font-size: 14px;
     }
-
+    .container-logoAndText {
+        padding: 150px 0px;
+    }    
     .container-button-description {
         margin-left: 50px;
     }
     .logo-container {
-        padding: 20px 50px 0px 50px;
+        padding: 0px 50px;
     }
     .button-home {    
         padding: 6px 50px;
@@ -147,12 +134,98 @@
         height: 50%;
     }
    .container-logos {
-    padding: 0px 60px 0px 60px;
+    padding: 0px 50px;
 
    }
 
 }
+
+@media screen and (max-width: 650px) {
+    .container-all {
+        width: 100%;
+        height: 100%;
+    }
+    .logo-container {
+        flex-direction: column;
+        margin: auto;
+    }
+    .container-logoAndText {
+        padding: 50px 0px;
+    }
+    .logo-container {
+        width: 76%;
+        height: 76%;
+        text-align: center;
+    }
+    .container-button-description {
+        margin-left: 0px;
+    }
+    .logo-home {
+        width: 80%;
+        height: 80%;
+    }
+    .text-home {
+        margin-top: 40px;
+    }
+    .button-home {
+        font-size: large;
+        margin-top: 20px;
+        padding: 10px 90px;
+    }
+    .container-logos {
+        display: none;
+    }
+    .container-logos-mobile {
+        display: flex;
+        flex-direction: column;
+    }
+    .logos-inst {
+        width: 28%;
+        height: 28%;
+    }
+    .logo-itba {
+        width: 32%;
+        height: 32%;
+    }
+    .logo-lab {
+        width: 60%;
+        height: 60%;
+    }
+    .logo-tuxdi {
+        width: 25%;
+        height: 25%;
+    }
+    .logos-a {
+        display: flex;
+        justify-content: space-around;
+    }
+ 
+    .logos-b {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+    }
+}
+@media screen and (max-width: 375px) {
+    .container-all {
+        min-height: 550px;
+    } 
+    .logo-container {
+        padding: 0px;
+        margin: auto;
+    }
+    .logo-home {
+        width: 100%;
+        height: 100%;
+    }
+   
+}
+
+
 // MOBILE
+
+
 
 // @media (min-width: 411px) and (max-width: 767px) {
 
