@@ -124,9 +124,24 @@ mat-toolbar.container-header {
     h4.type-activity {
         display: none;
     }
+    
     .container-question-link {
         left: 77%;
+        height: 100px;
+        width: 70px;
+        margin: auto;
+        justify-content: center;
+        padding: 0px;  
     }  
+    .container-col {
+        margin: 30px 10px 0px 10px;
+    }
+    .question {
+        height: 40px;
+        width: 50px;
+        margin: 0px;
+    }
+    
 
 }
 

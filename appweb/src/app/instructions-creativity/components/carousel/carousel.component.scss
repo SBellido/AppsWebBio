@@ -131,7 +131,7 @@ li>h3 {
     }
 
     .container-items {
-        width: 246px;
+        width: 260px;
         height: 90px;
         padding: 12px 10px 0px 10px;
         font-size: 16px;
@@ -142,7 +142,7 @@ li>h3 {
 
     li {
         font-size: 13px;
-        width: 246px;
+        width: 260px;
         margin: 0px;
     }
     li>h3 {
@@ -153,13 +153,7 @@ li>h3 {
     }
 }
 @media screen and (max-width: 1024px){
-    // img {
-    //     width: 270px;     
-    // }
-    // .swiper-container {
-    //     width: 290px;
-    //     // height: 360px;
-    // }
+ 
     div.swiper-button-next,  div.swiper-button-prev {
         margin-top: 18px;
        
