@@ -83,19 +83,24 @@ h1.text {
         margin-bottom: 0px;
     }
     .container-icon {
-        width: 250px;
-        height: 250px;
-        padding-bottom: 30px;
+        width: 220px;
+        height: 220px;
+        padding-bottom: 10px;
     }
  
     .image-calendar {
-        width: 196px;
+        width: 150px;
     }
     h1.text {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         margin: 10px 0px;
     }
-  
+    .button-back {
+        margin-top: 0px;
+        font-size: large;
+        padding: 10px 78px;
+        font-weight: 600;
+    }
     
 }
 
