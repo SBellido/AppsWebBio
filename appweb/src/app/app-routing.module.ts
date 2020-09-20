@@ -45,6 +45,11 @@ const routes: Routes = [
     .then(m => m.TestResultModule)
   },
   {
+    path: 'more-info',
+    loadChildren: () => import('./more-info/more-info.module')
+    .then(m => m.MoreInfoModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./page-not-found/page-not-found.module')
       .then(m => m.PageNotFoundModule)
