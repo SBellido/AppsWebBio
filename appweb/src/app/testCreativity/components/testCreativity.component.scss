@@ -409,6 +409,7 @@ h4.message, p.message {
 
     .container {
         width: 50%;
+        height: 350px;
     }
     .container-element {
         margin-left: 50px;
@@ -416,7 +417,17 @@ h4.message, p.message {
     .container-right {
         margin-right: 50px;
     }
+    h1.title {
+        margin-bottom: 10px;
+    }
+    .mat-button-wrapper {
+        font-size: 13px !important;
+    }
     
+    .swiper-slide,
+    .swiper-slide-activel {
+        height: 300px;
+    }
 }
 
 @media screen and (max-width: 425px) {
@@ -429,14 +440,20 @@ h4.message, p.message {
         width: 400px;
     }
     h1.title {
-        font-size: 1.4rem;
+        margin: 20px 0px;
+        font-size: 1.2rem;
+        width: 320px;
         text-align: center;
     }
     .container-right {
+        height: 300px;
         margin: 0px;
         top: 0px;
     }
+
+   
     .container-element {
+        width: 375px;
         display: flex  ;
         justify-content: center;
         align-items: center;
@@ -452,13 +469,27 @@ h4.message, p.message {
     h1.title {
         width: 375px;
     }
+    
+    .container-button {
+        margin-bottom: 20px;
+    }
+    p.message {
+        margin-top: 20px;
+    }
 }
 
 @media screen and (max-width: 320px) {
     h1.title {
-        font-size: 1.2rem;
-        width: 320px;
+        width: 315px;
     }
+    h1.countdown {
+        margin-top: 60px;
+    }
+    .container-element {
+        width: 375px;
+    }
+    
+
 }
     
 

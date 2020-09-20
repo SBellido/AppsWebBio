@@ -16,15 +16,16 @@
     left: 88%;
     width: auto;
     cursor: pointer;
-    padding: 11px;  
+    padding: 11px 20px;  
 }
 
 .container-question-link:hover {
+    cursor: pointer;
     -webkit-box-shadow: 0px 2px 5px 0px rgba(74,64,103,0.3);
     -moz-box-shadow: 0px 2px 5px 0px rgba(74,64,103,0.3);
     box-shadow: 0px 2px 5px 0px rgba(74,64,103,0.3);
-    background-color: #4a40673f;
-    outline: none;  
+    background-color: rgba(255,255,255,0.8);
+    outline: none;    
 }
 .question {
     color: #4a4067;
@@ -61,10 +62,10 @@ mat-toolbar.container-header {
     box-shadow: 0px 2px 5px 0px rgba(74,64,103,0.3);
 }
 
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1440px) {
 
     .container-question-link {        
-        left: 85%;  
+        left: 87%;  
         padding: 11px 11px;   
     }
     mat-toolbar.container-header {
@@ -89,62 +90,64 @@ mat-toolbar.container-header {
 @media screen and (max-width: 1024px) {
 
     .container-question-link {        
-        left: 79%;   
-    }
-
-}
-
-@media screen and (max-width: 800px) { 
-    .container-question-link {
+        left: 79%; 
         padding: 6px 11px;
     }
+          
     .question {
         margin-top: 10px;
         text-align: center;
-        width: 50%;
-        height: 50%;
+        width: 45%;
+        height: 45%;
     }
     h4.type-activity {
         font-size: 1rem;
     }
-        
+
 }
- @media screen and (max-width: 425px) { 
-    .nav_logo { 
-        display: flex;
-        justify-content: center;
-        width: inherit;
-     }
+
+@media screen and (max-width: 700px) {
+    h4.type-activity {
+        display: none;
+    }
     .question {
         margin-top: 25px;
         margin-left: 20px;
         margin-bottom: 0px;
         font-size: 40px;
     }
-    h4.type-activity {
-        display: none;
+    .container-col {
+        margin: 30px 10px 0px 10px;
     }
-    
     .container-question-link {
-        left: 77%;
+        left: 74%;
         height: 100px;
         width: 70px;
         margin: auto;
         justify-content: center;
         padding: 0px;  
     }  
-    .container-col {
-        margin: 30px 10px 0px 10px;
-    }
+    
     .question {
         height: 40px;
         width: 50px;
         margin: 0px;
     }
-    
-
 }
 
+ @media screen and (max-width: 425px) { 
+    .nav_logo { 
+        display: flex;
+        justify-content: center;
+        width: inherit;
+     }
+
+}
+@media screen and (max-width: 375px) { 
+    .container-question-link {
+        left: 77%;
+    }
+}
 
  
   

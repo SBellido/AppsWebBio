@@ -75,19 +75,19 @@ h1.text {
     }
 
 }
-
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1024px) {
+    
     h1.title {
         font-size: 1.4em;
         margin-top: 20px;
-        margin-bottom: 0px;
+        margin-bottom: 10px;
     }
     .container-icon {
         width: 220px;
         height: 220px;
         padding-bottom: 10px;
     }
- 
+
     .image-calendar {
         width: 150px;
     }
@@ -96,9 +96,9 @@ h1.text {
         margin: 10px 0px;
     }
     .button-back {
-        margin-top: 0px;
-        font-size: large;
-        padding: 10px 78px;
+        margin-top: 10px;
+        font-size: medium;
+        padding: 5px 80px;
         font-weight: 600;
     }
     
