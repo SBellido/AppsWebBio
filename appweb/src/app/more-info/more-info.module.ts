@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { MoreInfoRoutingModule } from './more-info-routing.module';
 import { MoreInfoComponent } from './components/more-info.component';
+import { BioComponent } from './components/bio/bio.component';
 
 
 @NgModule({
-  declarations: [MoreInfoComponent],
+  declarations: [MoreInfoComponent, BioComponent],
   imports: [
     CommonModule,
     MoreInfoRoutingModule,

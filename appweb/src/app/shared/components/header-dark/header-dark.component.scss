@@ -6,7 +6,9 @@
    display: flex;
    justify-content: start;
 }
-
+img.logo {
+   width: 12%;
+}
 .logo:focus { 
    outline: none;    
 }

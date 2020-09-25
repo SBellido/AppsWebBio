@@ -13,7 +13,9 @@
  .logo:hover {
     cursor: pointer;
  }
-
+img.logo {
+    width: 12%;
+}
 .container-icon-creativity {
     display: flex;
     justify-content: left;
