@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderDarkComponent } from './components/header-dark/header-dark.component';
+import { HeaderDarkIsologoComponent } from './components/header-dark-isologo/header-dark-isologo.component';
+
 import { HeaderQuestionComponent } from './components/header-question/header-question.component';
 import { HeaderCreativityComponent } from './components/header-creativity/header-creativitycomponent';
 
@@ -14,6 +16,7 @@ import { MaterialModule } from './../material/material.module';
   declarations: [
     HeaderComponent,
     HeaderDarkComponent,
+    HeaderDarkIsologoComponent,
     HeaderQuestionComponent,
     HeaderCreativityComponent
 
@@ -21,6 +24,7 @@ import { MaterialModule } from './../material/material.module';
   exports: [
     HeaderComponent,
     HeaderDarkComponent,
+    HeaderDarkIsologoComponent,
     HeaderQuestionComponent,
     HeaderCreativityComponent
   ],
