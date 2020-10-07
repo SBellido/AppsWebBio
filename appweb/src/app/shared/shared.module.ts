@@ -10,6 +10,7 @@ import { HeaderDarkIsologoComponent } from './components/header-dark-isologo/hea
 import { HeaderQuestionComponent } from './components/header-question/header-question.component';
 import { HeaderCreativityComponent } from './components/header-creativity/header-creativitycomponent';
 
+import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from './../material/material.module';
 
 @NgModule({
@@ -18,15 +19,16 @@ import { MaterialModule } from './../material/material.module';
     HeaderDarkComponent,
     HeaderDarkIsologoComponent,
     HeaderQuestionComponent,
-    HeaderCreativityComponent
-
+    HeaderCreativityComponent,
+    FooterComponent
   ],
   exports: [
     HeaderComponent,
     HeaderDarkComponent,
     HeaderDarkIsologoComponent,
     HeaderQuestionComponent,
-    HeaderCreativityComponent
+    HeaderCreativityComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
