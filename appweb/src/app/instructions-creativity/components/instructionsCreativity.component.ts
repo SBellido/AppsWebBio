@@ -17,29 +17,32 @@ export class InstructionsCreativityComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute) {  }
 
   elementFinal: Element;
-  elementClip: Element;
-  elementJournal: Element;
-  elementCup: Element;
+
+
+  elementClip: Element = {
+    id: 1,
+    name: 'Clip',
+    image: 'assets/images/clip.jpg',
+    code: '312917'
+};
+  elementJournal: Element = {
+    id: 2,
+    name: 'Diario',
+    image: 'assets/images/diario.jpg',
+    code: '1016221914112'
+  };
+  elementCup: Element = {
+    id: 3,
+    name: 'Vaso',
+    image: 'assets/images/vaso.jpg',
+    code: '32217'
+  };
+
 
   boxObjects = [
-    this.elementClip = {
-      id: 1,
-      name: 'Clip',
-      image: 'assets/images/clip.jpg',
-      code: '312917'
-  },
-    this.elementJournal = {
-      id: 2,
-      name: 'Diario',
-      image: 'assets/images/diario.jpg',
-      code: '1016221914112'
-    },
-    this.elementCup = {
-      id: 3,
-      name: 'Vaso',
-      image: 'assets/images/vaso.jpg',
-      code: '32217'
-    }
+    this.elementClip,
+    this.elementJournal,
+    this.elementCup
   ];
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InstructionCreativity } from '../../instruccionCreativity.module';
+// import { InstructionCreativity } from '../../instruccionsCreativity.module';
 import { InstructionsCreativityComponent } from './instructionsCreativity.component';
 
 describe('InstructionsCreativityComponent', () => {
