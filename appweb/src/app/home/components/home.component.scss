@@ -279,6 +279,10 @@
 }
 
 @media screen and (max-width: 425px) {
+    .container-all {
+        min-height: 800px;
+        width: auto;
+    }
     .container-button-description {
         margin-top: 40px;
     }
@@ -304,6 +308,10 @@
 
 @media screen and (max-width: 375px) {
     .container-all {
+        height: 812px;
+        width: 375px;
+    }
+    .container-all {
         min-height: 550px;
     } 
     .logo-container {
@@ -326,7 +334,7 @@
 @media screen and (max-width: 320px) {
     .container-all {
         height: auto;
-        width: 100%;
+        width: 320px;
     }
     .container-logoAndText {
         padding: 30px 0px;
