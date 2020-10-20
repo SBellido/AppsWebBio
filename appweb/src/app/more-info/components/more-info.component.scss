@@ -133,11 +133,14 @@ p.info {
 
 @media screen and (max-width: 320px) {
     .container-all {
-        height: 100%;
-        width: 100%;
+        height: auto;
+        width: 320px;
     }
 
     img.investigarLogo {
         width: 60vw;
-    }    
+    }   
+    .moreInfo {
+        margin: auto;
+    } 
 }
