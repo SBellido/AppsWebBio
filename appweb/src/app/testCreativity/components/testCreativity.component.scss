@@ -466,6 +466,9 @@ h4.message, p.message {
 }
 
 @media screen and (max-width: 375px) {
+    .container-all {
+        width: 375px;
+    }
     h1.title {
         width: 375px;
     }
@@ -479,6 +482,9 @@ h4.message, p.message {
 }
 
 @media screen and (max-width: 320px) {
+    .container-all {
+        width: 320px;
+    }
     h1.title {
         width: 315px;
     }
@@ -486,7 +492,11 @@ h4.message, p.message {
         margin-top: 60px;
     }
     .container-element {
-        width: 375px;
+        width: 320px;
+    }
+    img.element {
+        margin: auto;
+        width: 83%;
     }
     
 

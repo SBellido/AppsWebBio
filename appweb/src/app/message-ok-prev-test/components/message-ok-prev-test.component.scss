@@ -114,8 +114,13 @@ section.container {
         min-height: 620px;
     }
 }
-
+@media screen and (max-width: 425px) {
+    div.container-message {
+        padding-top: 30px;
+    }
+}
 @media screen and (max-width: 320px){
+   
     .buttonInit {
         padding: 8px 50px;
         font-size: large;
