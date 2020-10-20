@@ -450,8 +450,16 @@ h4.message, p.message {
         margin: 0px;
         top: 0px;
     }
-
-   
+    p.message {
+        padding-top: 20px;
+    }
+    section.container-alert {     
+        width: 270px;
+        height: 108px;      
+        top: 16px;
+        padding-bottom: 20px !important;
+      
+    }
     .container-element {
         width: 375px;
         display: flex  ;
