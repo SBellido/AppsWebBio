@@ -22,7 +22,10 @@ export class DataDbService {
     // tslint:disable-next-line: prefer-const
     let collection: Observable<QuerySnapshot<DocumentData>>;
     collection = this.creativesCollection.get();
+    console.log(collection);
     return collection;
   }
+
+
 
 }

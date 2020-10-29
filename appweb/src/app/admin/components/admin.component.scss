@@ -1,0 +1,36 @@
+.container-all {
+    background: #eeeeee;
+    height: 100%;
+}
+.contains-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button-getData {
+    font-size: larger;
+    padding: 10px 80px;
+    font-weight: 600;
+    color: #E33B88;
+}
+.button-getData:hover {
+    background-color: #ffffffcc;
+    -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
+    -moz-box-shadow: inset 0 0 0 2px #ffcf02;
+    box-shadow: inset 0px 0px 0px 2px #ffcf02;
+}
+
+@media screen and (max-width: 1440px) {
+    .container-all {
+        min-height: 600px;
+    } 
+
+}
+
+@media screen and (max-width: 320px) {
+    .container-all {
+        min-height: 800px;
+        padding-bottom: 0px;
+    }
+   
+}

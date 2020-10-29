@@ -8,7 +8,8 @@ import { HeaderDarkComponent } from './components/header-dark/header-dark.compon
 import { HeaderDarkIsologoComponent } from './components/header-dark-isologo/header-dark-isologo.component';
 
 import { HeaderQuestionComponent } from './components/header-question/header-question.component';
-import { HeaderCreativityComponent } from './components/header-creativity/header-creativitycomponent';
+import { HeaderCreativityComponent } from './components/header-creativity/header-creativity.component';
+import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 
 import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from './../material/material.module';
@@ -20,6 +21,7 @@ import { MaterialModule } from './../material/material.module';
     HeaderDarkIsologoComponent,
     HeaderQuestionComponent,
     HeaderCreativityComponent,
+    HeaderAdminComponent,
     FooterComponent
   ],
   exports: [
@@ -28,6 +30,7 @@ import { MaterialModule } from './../material/material.module';
     HeaderDarkIsologoComponent,
     HeaderQuestionComponent,
     HeaderCreativityComponent,
+    HeaderAdminComponent,
     FooterComponent
   ],
   imports: [

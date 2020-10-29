@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderCreativityComponent } from './header-creativitycomponent';
+import { HeaderCreativityComponent } from './header-creativity.component';
 
 describe('HeaderCreativityComponent', () => {
   let component: HeaderCreativityComponent;
