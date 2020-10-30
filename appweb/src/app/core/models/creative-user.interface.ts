@@ -5,6 +5,7 @@ export interface CreativeUser {
     educationLevel: any;
     educationStatus: any;
     school: any;
+    degree: any;
     year: any;
     grade: any;
     course: any;

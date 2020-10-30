@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 import { DocumentData, QuerySnapshot } from '@angular/fire/firestore';
 
 @Component({
-    // usaré ese selector como una etiqueta HTML en el template
     selector: 'app-testcreativity',
     templateUrl: './testCreativity.component.html',
     styleUrls: ['testCreativity.component.scss']

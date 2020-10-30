@@ -2,8 +2,57 @@
 <div class="container-all">
     <app-header-admin></app-header-admin>
     <div class="contains-body">
-        <!-- <button mat-raised-button class="button-getData" (click)="myFunc()">OBTENER DATOS</button> -->
-        
+        <div class="titleAndButton">
+            <h1>Datos de Test de creatividad</h1>
+            <button mat-raised-button class="button-getData">
+                <a href="creativesUsers.data()" download="DatosTestCreatividad">
+                    DESCARGAR
+                </a>
+            </button>
+        </div>
+        <div class="media" *ngFor="let user of creativesUsers | slice:0, let count = index"> 
+            <div class="contains-tables">
+                <table>                    
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Ciudad</th>
+                            <th>Máxima_educación_alcanzada</th>
+                            <th *ngIf="user.data.value != null">Carrera</th>
+                            <th *ngIf="user.data.value != null">Estado_actual_de_formación</th>
+                            <th *ngIf="user.data.value != null">Escuela/Institución</th>
+                            <th *ngIf="user.data.value != null">Año</th>
+                            <th *ngIf="user.data.value != null">Curso</th>
+                            <th *ngIf="user.data.value != null">Grado</th>
+                            <th>Propuestas</th>
+                            <th>Tiempo_inicio</th>
+                            <th>Tiempo_fin</th>
+                            <th>Usuario_N°</th>
+                        </tr>
+                    </thead>
+                    <tbody>              
+                        <tr>
+                            <td>{{user.data.nameLastName}}</td>
+                            <td>{{user.data.age}}</td>
+                            <td>{{user.data.city}}</td> 
+                            <td>{{user.data.educationLevel}}</td>
+                            <td *ngIf="user.data.value != null">{{user.data.degree}}</td>
+                            <td *ngIf="user.data.value != null">{{user.data.educationStatus}}</td>
+                            <td *ngIf="user.data.value != null">{{user.data.school}}</td>
+                            <td *ngIf="user.data.value != null">{{user.data.year}}</td>
+                            <td *ngIf="user.data.value != null">{{user.data.course}}</td>
+                            <td *ngIf="user.data.value != null">{{user.data.grade}}</td>
+                            <td>{{user.data.proposal}}</td>
+                            <td>{{user.data.dateStart.toDate() | date:'mediumTime'}}</td>
+                            <td>{{user.data.dateEnd.toMillis() | date:'mediumTime'}}</td>
+                            <td>{{count + 1}}</td>
+                        </tr>
+                    </tbody>                     
+                </table><br><br>
+            </div>
+        </div>
     </div>
-
 </div>
+
+
