@@ -17,15 +17,23 @@ export class DataDbService {
   saveContact(newCreativeUser: any): void {
     this.creativesCollection.add(newCreativeUser);
   }
-
-  getAllUser(): Observable<QuerySnapshot<DocumentData>> {
-    // tslint:disable-next-line: prefer-const
-    let collection: Observable<QuerySnapshot<DocumentData>>;
-    collection = this.creativesCollection.get();
-    console.log(collection);
-    return collection;
+  public getAllUser() {
+    console.log(this.afs.collection('creatives-users').snapshotChanges());   
+    return this.afs.collection('creatives-users').snapshotChanges();
   }
-
-
-
+  // getAllUser(): Observable<QuerySnapshot<DocumentData>> {
+  //   // tslint:disable-next-line: prefer-const
+  //   let collection: Observable<QuerySnapshot<DocumentData>>;
+  //   collection = this.creativesCollection.get();
+  //   return collection;
+  // }
+  
+  // getAllUser():  Observable<QuerySnapshot<DocumentData>> {
+  //   // tslint:disable-next-line: prefer-const
+  //   let collection:  Observable<QuerySnapshot<DocumentData>>;
+  //   collection = this.creativesCollection.get();
+  //   console.log(collection);
+    
+  //   return collection;
+  // }
 }
