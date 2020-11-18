@@ -55,6 +55,11 @@ const routes: Routes = [
     .then(m => m.AdminModule)
   },
   {
+    path: 'after-test',
+    loadChildren: () => import('./after-test/after-test.module')
+    .then(m => m.AfterTestModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./page-not-found/page-not-found.module')
       .then(m => m.PageNotFoundModule)
