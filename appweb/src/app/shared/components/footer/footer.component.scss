@@ -68,9 +68,12 @@ img.logo-itba {
 }
 
 @media screen and (max-width: 1440px) {
-.container_itba_conicet, .container_unicen_pladema, .container_tuxdi {
-    height: 100px;          
-}
+    .container_itba_conicet, .container_unicen_pladema, .container_tuxdi {
+        height: 100px;          
+    }
+    .container-footer {
+        padding-bottom: 10px;
+    }
 
 }
 

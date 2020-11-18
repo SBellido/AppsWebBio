@@ -7,14 +7,26 @@ import { AdminComponent } from './components/admin.component';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../material/material.module';
 
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FileSaverModule } from 'ngx-filesaver';
+
+import { DataDbService } from '../core/services/db/data-db.service';
 
 @NgModule({
-  declarations: [AdminComponent],
+  providers: [
+    DataDbService
+  ],
+  declarations: [
+    AdminComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule,
+    FileSaverModule
   ]
 })
+
 export class AdminModule { }
