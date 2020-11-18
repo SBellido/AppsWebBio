@@ -1,3 +1,5 @@
 [0914/223058.650:ERROR:process_reader_win.cc(123)] NtOpenThread: {Acceso denegado} Un proceso ha solicitado acceso a un objeto, pero no se le han concedido esos derechos de acceso. (0xc0000022)
 [0914/223058.775:ERROR:exception_snapshot_win.cc(99)] thread ID 11416 not found in process
 [1019/180403.033:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
+[1109/122826.459:ERROR:directory_reader_win.cc(43)] FindFirstFile: El sistema no puede encontrar la ruta especificada. (0x3)
+[1109/152658.769:ERROR:file_io.cc(90)] ReadExactly: expected 36, observed 0
