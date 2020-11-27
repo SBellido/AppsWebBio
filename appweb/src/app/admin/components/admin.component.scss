@@ -48,10 +48,12 @@ td {
     text-align: left;
     padding: 20px;
 }
-.proposal, .timeInit {
+.proposal {
     max-width: 400px;
 }
-
+.timeInit {
+    max-width: 300px !important;
+}
 h1, h2 {
     text-align: center;
     color: #E33B88;
