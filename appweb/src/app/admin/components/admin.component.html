@@ -21,12 +21,12 @@
                             <th>Edad</th>
                             <th>Ciudad</th>
                             <th>Máxima_educación_alcanzada</th>
-                            <th *ngIf="user.data.value != null">Carrera</th>
-                            <th id="formation" *ngIf="user.data.value != null">Estado_actual_de_formación</th>
-                            <th *ngIf="user.data.value != null">Escuela/Institución</th>
-                            <th *ngIf="user.data.value != null">Año</th>
-                            <th *ngIf="user.data.value != null">Curso</th>
-                            <th *ngIf="user.data.value != null">Grado</th>
+                            <th *ngIf="user.data.degree != null">Carrera</th>
+                            <th id="formation" *ngIf="user.data.educationStatus != null">Estado_actual_de_formación</th>
+                            <th *ngIf="user.data.school != null">Escuela/Institución</th>
+                            <th *ngIf="user.data.year != null">Año</th>
+                            <th *ngIf="user.data.course != null">Curso</th>
+                            <th *ngIf="user.data.grade != null">Grado</th>
                             <th class="proposal">Propuestas</th>
                             <th class="timeInit">Tiempo_inicio</th>
                             <th>Tiempo_fin</th>
@@ -39,12 +39,12 @@
                             <td>{{user.data.age}}</td>
                             <td>{{user.data.city}}</td> 
                             <td>{{user.data.educationLevel}}</td>
-                            <td *ngIf="user.data.value != null">{{user.data.degree}}</td>
-                            <td *ngIf="user.data.value != null">{{user.data.educationStatus}}</td>
-                            <td *ngIf="user.data.value != null">{{user.data.school}}</td>
-                            <td *ngIf="user.data.value != null">{{user.data.year}}</td>
-                            <td *ngIf="user.data.value != null">{{user.data.course}}</td>
-                            <td *ngIf="user.data.value != null">{{user.data.grade}}</td>
+                            <td *ngIf="user.data.degree != null">{{user.data.degree}}</td>
+                            <td *ngIf="user.data.educationStatus != null">{{user.data.educationStatus}}</td>
+                            <td *ngIf="user.data.school != null">{{user.data.school}}</td>
+                            <td *ngIf="user.data.year != null">{{user.data.year}}</td>
+                            <td *ngIf="user.data.course != null">{{user.data.course}}</td>
+                            <td *ngIf="user.data.grade != null">{{user.data.grade}}</td>
                             <td class="proposal">{{user.data.proposal}}</td>
                             <td class="timeInit">{{user.data.dateStart.toDate() | date:'long'}}</td>
                             <td>{{user.data.dateEnd.toMillis() | date:'mediumTime'}}</td>
