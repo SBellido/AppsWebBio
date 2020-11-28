@@ -70,9 +70,14 @@ export class AdminComponent implements OnInit {
       document.body.appendChild(dwldLink);
       dwldLink.click();
       document.body.removeChild(dwldLink);
-    }
+  }
     
     ConvertToCSV(objArray : any, headerList : any) {
+      objArray.forEach(data => {
+        data.dateStart = data.dateStart.toDate();
+        data.dateEnd = data.dateEnd.toDate();
+      });
+      
        let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
        let str = '';
        let row = 'S.No,';

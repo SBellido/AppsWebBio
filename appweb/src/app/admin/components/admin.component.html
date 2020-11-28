@@ -46,7 +46,9 @@
                             <td *ngIf="user.data.course != null">{{user.data.course}}</td>
                             <td *ngIf="user.data.grade != null">{{user.data.grade}}</td>
                             <td class="proposal">{{user.data.proposal}}</td>
-                            <td class="timeInit">{{user.data.dateStart.toDate() | date:'long'}}</td>
+                            <!-- <td class="timeInit">{{user.data.dateStart.toDate() | date:'long'}}</td>
+                            <td>{{user.data.dateEnd.toMillis() | date:'mediumTime'}}</td> -->
+                            <td class="timeInit">{{user.data.dateStart.toDate()}}</td>
                             <td>{{user.data.dateEnd.toMillis() | date:'mediumTime'}}</td>
                             <td>{{count + 1}}</td>
                         </tr>

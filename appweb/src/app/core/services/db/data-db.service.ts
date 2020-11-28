@@ -10,33 +10,31 @@ import { AdminComponent } from 'src/app/admin/components/admin.component';
 })
 
 export class DataDbService {
-  private creativesCollection: AngularFirestoreCollection<CreativeUser>;
+  private creativesCollectionRef: AngularFirestoreCollection<CreativeUser>;
   public creativesUsers = [];
 
-  constructor(private afs: AngularFirestore, private http: HttpClient) {  
-    this.creativesCollection = afs.collection<any>('creatives-users');
-  } 
-  
+  constructor(private afs: AngularFirestore, private http: HttpClient) {  } 
 
   saveContact(newCreativeUser: any): void {
-    this.creativesCollection.add(newCreativeUser);
+    this.creativesCollectionRef.add(newCreativeUser);
   }
 
   public getAllUser() {
-    return this.afs.collection('creatives-users').snapshotChanges();
+    this.creativesCollectionRef = this.afs.collection<CreativeUser>('creatives-users', ref => ref.orderBy('dateStart', 'desc'));
+    return this.creativesCollectionRef.snapshotChanges()   
   }
 
   public getCreativesUsersData(admin: AdminComponent) {
   // Asigna la instantánea para incluir el ID del documento
-  this.afs.collection('creatives-users').snapshotChanges().subscribe((usersSnapshop) => {
+  this.creativesCollectionRef.snapshotChanges().subscribe((usersSnapshop) => {
     usersSnapshop.forEach((usersData: any) => {
       this.creativesUsers.push(
         usersData.payload.doc.data()       
       );
-    });
+      });
     admin.downloadFile(this.creativesUsers);
-  });
-}  
+    });
+  }  
 
 
 
