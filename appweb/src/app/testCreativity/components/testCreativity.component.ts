@@ -153,7 +153,7 @@ export class TestCreativityComponent implements OnInit {
         return this.minRandom + Math.floor((this.maxRandom - this.minRandom) * Math.random());
     }
 
-    resetClock(){
+    resetClock() {
         this.clock.minutes = 0;
         this.clock.seconds = 0;
         this.alertDesert = false;

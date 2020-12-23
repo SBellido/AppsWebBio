@@ -52,7 +52,7 @@ export class AdminComponent implements OnInit {
   }
 
   downloadFile(data: any) {
-    let csvData = this.ConvertToCSV(data, ['nameLastName','age', 'city', 'aducationLevel', 'educationStatus', 
+    let csvData = this.ConvertToCSV(data, ['nameLastName','age', 'city', 'educationLevel', 'educationStatus', 
     'school', 'degree', 'year', 'grade', 'course', 'object', 'proposal', 'dateStart', 'dateEnd']);
      
       let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
@@ -73,6 +73,8 @@ export class AdminComponent implements OnInit {
   }
     
     ConvertToCSV(objArray : any, headerList : any) {
+     
+      
       objArray.forEach(data => {
         data.dateStart = data.dateStart.toDate();
         data.dateEnd = data.dateEnd.toDate();
