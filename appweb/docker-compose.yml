@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  node:
+    build: .docker/angular-cli
+    image: angular-cli
+    container_name: node-investigar
+    user: node
+    working_dir: /home/node/app 
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/home/node/app
+    command: ng serve --host 0.0.0.0 --disable-host-check
+
