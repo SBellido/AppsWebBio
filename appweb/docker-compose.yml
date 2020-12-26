@@ -11,4 +11,14 @@ services:
     volumes:
       - .:/home/node/app
     command: ng serve --host 0.0.0.0 --disable-host-check
+  web:
+    build: .docker/nginx
+    image: nginx-investigar
+    container_name: web-investigar
+    ports:
+      - "4280:80"
+    volumes:
+      - ./dist/appweb:/usr/share/nginx/html
+
+
 
