@@ -7,14 +7,15 @@
             <button mat-raised-button class="button-getData" (click)="getData()">
                DESCARGAR
             </button>
-            <button mat-raised-button class="button-getData">
-                CANTIDAD DE USUARIOS TESTEADOS
-            </button>
+            <div *ngIf="end == false">
+                <h2  id="usersCount" class="subtitle">Total de usuarios testeados {{ creativesUsers.length }}</h2>
+            </div>
         </div>
         <div class="media"> 
            
             <div class="contains-tables">
-                <table>                    
+                
+                <!-- <table>                    
                     <thead>
                         <tr>
                             <th id="name">Nombre</th>
@@ -27,12 +28,6 @@
                             <th>Año</th>
                             <th>Curso</th>
                             <th>Grado</th>
-                            <!-- <th *ngIf="user.data.degree != null">Carrera</th>
-                            <th id="formation" *ngIf="user.data.educationStatus != null">Estado_actual_de_formación</th>
-                            <th *ngIf="user.data.school != null">Escuela/Institución</th>
-                            <th *ngIf="user.data.year != null">Año</th>
-                            <th *ngIf="user.data.course != null">Curso</th>
-                            <th *ngIf="user.data.grade != null">Grado</th> -->
                             <th class="proposal">Propuestas</th>
                             <th class="timeInit">Tiempo_inicio</th>
                             <th>Tiempo_fin</th>
@@ -51,12 +46,6 @@
                             <td>{{user.year}}</td>
                             <td>{{user.course}}</td>
                             <td>{{user.grade}}</td>
-                            <!-- <td *ngIf="user.data.degree != null">{{user.data.degree}}</td>
-                            <td *ngIf="user.data.educationStatus != null">{{user.data.educationStatus}}</td>
-                            <td *ngIf="user.data.school != null">{{user.data.school}}</td>
-                            <td *ngIf="user.data.year != null">{{user.data.year}}</td>
-                            <td *ngIf="user.data.course != null">{{user.data.course}}</td>
-                            <td *ngIf="user.data.grade != null">{{user.data.grade}}</td> -->
                             <td class="proposal">{{user.proposal}}</td>
                             <td class="timeInit">{{user.dateStart.toDate() | date:'long'}}</td>
                             <td>{{user.dateEnd.toMillis() | date:'mediumTime'}}</td>
@@ -64,15 +53,101 @@
                         </tr>
                     </tbody>                     
                    
-                </table><br><br>
-                <!-- <div>{{end.value = !end}}</div> -->
-               
-                <div *ngIf="end == false">
-                    <h2  id="usersCount" class="subtitle">Total de usuarios testeados {{ creativesUsers.length }}</h2>
-                </div>
-                <!-- <div *ngIf="end == false">
-                    <h2  id="usersCount" class="subtitle">Total de usuarios testeados {{count + 1}}</h2>
-                </div> -->
+                </table>
+                <br><br> -->
+    
+                <mat-table [dataSource]="creativesUsers" class="mat-elevation-z8">
+                  
+                    <!-- NameLastName Column -->
+                    <ng-container matColumnDef="nameLastName">
+                      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.nameLastName }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- Age Column -->
+                    <ng-container matColumnDef="age">
+                      <mat-header-cell *matHeaderCellDef> Edad </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.age }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- City Column -->
+                    <ng-container matColumnDef="city">
+                      <mat-header-cell *matHeaderCellDef> Ciudad </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.city }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- EducationLevel Column -->
+                    <ng-container matColumnDef="educationLevel">
+                      <mat-header-cell *matHeaderCellDef> Educación </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.educationLevel }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- EducationStatus Column -->
+                    <ng-container matColumnDef="educationStatus">
+                      <mat-header-cell *matHeaderCellDef> Estado de Formación </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.educationStatus | replaceNullWithText }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- School Column -->
+                    <ng-container matColumnDef="school">
+                      <mat-header-cell *matHeaderCellDef> Escuela/Institución </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.school | replaceNullWithText }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- Degree Column -->
+                    <ng-container matColumnDef="degree">
+                      <mat-header-cell *matHeaderCellDef> Grado </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.degree | replaceNullWithText }} </mat-cell>
+                    </ng-container>
+
+                    <!-- Year Column -->
+                    <ng-container matColumnDef="year">
+                      <mat-header-cell *matHeaderCellDef> Año </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.year | replaceNullWithText }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- Grade Column -->
+                    <ng-container matColumnDef="grade">
+                      <mat-header-cell *matHeaderCellDef> Grade </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.grade | replaceNullWithText }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- Course Column -->
+                    <ng-container matColumnDef="course">
+                      <mat-header-cell *matHeaderCellDef> Curso </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.course | replaceNullWithText }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- Object Column -->
+                    <ng-container matColumnDef="object">
+                      <mat-header-cell *matHeaderCellDef> Objeto </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.object | replaceNullWithText }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- Proposal Column -->
+                    <ng-container matColumnDef="proposal">
+                      <mat-header-cell *matHeaderCellDef> Propuestas </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.proposal | replaceNullWithText }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- DateStart Column -->
+                    <ng-container matColumnDef="dateStart">
+                      <mat-header-cell *matHeaderCellDef> Tiempo Inicio </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.dateStart.toDate() | date:'long' }} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- DateEnd Column -->
+                    <ng-container matColumnDef="dateEnd">
+                      <mat-header-cell *matHeaderCellDef> Tiempo Fin </mat-header-cell>
+                      <mat-cell *matCellDef="let user"> {{ user.dateEnd.toMillis() | date:'mediumTime' }} </mat-cell>
+                    </ng-container>
+                  
+                  
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                
+                </mat-table>
+
             </div>
             
         </div>

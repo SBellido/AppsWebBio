@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule, HttpResponse } from '@angular/common/http';
 import { DataDbService } from '../../core/services/db/data-db.service';
@@ -12,6 +12,8 @@ import {
 
 import { FileSaverService } from 'ngx-filesaver';
 import { CreativeUser } from 'src/app/core/models/creative-user.interface';
+import { MatTable } from '@angular/material/table';
+import { SharedModule } from "../../shared/shared.module";
 
 @Component({
   selector: 'app-admin',
@@ -19,10 +21,16 @@ import { CreativeUser } from 'src/app/core/models/creative-user.interface';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  public creativesUsers : CreativeUser[] = new Array;
+  public creativesUsers : CreativeUser[] = [];
   public count = 1;
   public end = false;
   // public admin: AdminComponent
+
+  // Columnas de la tabla que se van a mostrar
+  displayedColumns: string[] = ["nameLastName", "age", "city", "educationLevel", "educationStatus", "school", "degree",
+                                  "year", "grade", "course" , "object", "proposal", "dateStart", "dateEnd" ];
+  // Referencia a la tabla de usuarios
+  @ViewChild(MatTable) table: MatTable<CreativeUser>;
 
   constructor(
     private http: HttpClient,
@@ -30,7 +38,7 @@ export class AdminComponent implements OnInit {
     private dbData: DataDbService,
     private FileSaverService: FileSaverService,
     private afStorage: AngularFirestore,
-
+    private SharedModule: SharedModule
     
   ) { }
 
@@ -41,6 +49,8 @@ export class AdminComponent implements OnInit {
       usersSnapshop.forEach((usersData: any) => {
         this.creativesUsers.push(usersData.payload.doc.data());
       });
+      // Refresco la tabla despues de cargarle los usuarios
+      this.table.renderRows();
     });
   }
 

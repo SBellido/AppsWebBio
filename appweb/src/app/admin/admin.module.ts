@@ -6,6 +6,7 @@ import { AdminComponent } from './components/admin.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../material/material.module';
+import { MatTableModule } from '@angular/material/table';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FileSaverModule } from 'ngx-filesaver';
@@ -24,6 +25,7 @@ import { DataDbService } from '../core/services/db/data-db.service';
     AdminRoutingModule,
     SharedModule,
     MaterialModule,
+    MatTableModule,
     HttpClientModule,
     FileSaverModule
   ]

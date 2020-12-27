@@ -1,59 +1,69 @@
 .container-all {
     background: #eeeeee;
-    height: auto;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
+    // width: 100%;
+    // justify-content: center;
+    // align-items: center;
 }
+
 .contains-body {
     display: flex;
-    justify-content: center;
+    flex-flow: column;
+    // justify-content: center;
     align-items: center;
-
 }
+
 .button-getData {
-    font-size: larger;
-    padding: 10px 80px;
-    font-weight: 600;
+    // font-size: larger;
+    // padding: 10px 80px;
+    // font-weight: 600;
     color: #E33B88;
 }
+
 .button-getData:hover {
     background-color: #ffffffcc;
     -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
     -moz-box-shadow: inset 0 0 0 2px #ffcf02;
     box-shadow: inset 0px 0px 0px 2px #ffcf02;
 }
-.title {
-    margin-bottom: 50px;
-}
-.contains-tables {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-}
 
-th {
-    background-color:  #4a4067;
-    color: #eeeeee;
-    text-align: center;
-    padding: 10px 20px;
-}  
-td {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 20px;
-}
-.proposal {
-    max-width: 400px;
-}
-.timeInit {
-    max-width: 300px !important;
-}
+// .title {
+//     margin-bottom: 50px;
+// }
+
+// .contains-tables {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+// table {
+//     font-family: arial, sans-serif;
+//     border-collapse: collapse;
+// }
+
+// th {
+//     background-color:  #4a4067;
+//     color: #eeeeee;
+//     text-align: center;
+//     padding: 10px 20px;
+// }
+
+
+// td {
+//     border: 1px solid #dddddd;
+//     text-align: left;
+//     padding: 20px;
+// }
+
+// .proposal {
+//     max-width: 400px;
+// }
+
+// .timeInit {
+//     max-width: 300px !important;
+// }
+
 h1, h2 {
     text-align: center;
     color: #E33B88;
@@ -61,42 +71,43 @@ h1, h2 {
 
 .titleAndButton {
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.contains-body, .contains-tables {
-    display: block;
-    justify-content: center;
-    align-items: center;
-}
-.media {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   
-}
 
-@media screen and (max-width: 1440px) {
-   .contains-body {
-       width: fit-content;
-   }
-   .media {
-       width: 80%;
-       display: block;
-       justify-content: center;
-       align-items: center;
-   }
+// .contains-body, .contains-tables {
+//     display: block;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+// .media {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+// @media screen and (max-width: 1440px) {
+//    .contains-body {
+//        width: fit-content;
+//    }
+//    .media {
+//        width: 80%;
+//        display: block;
+//        justify-content: center;
+//        align-items: center;
+//    }
 
 
   
 
-}
+// }
 
-@media screen and (max-width: 320px) {
-    .container-all {
-        min-height: 800px;
-        padding-bottom: 0px;
-    }
+// @media screen and (max-width: 320px) {
+//     .container-all {
+//         min-height: 800px;
+//         padding-bottom: 0px;
+//     }
    
-}
+// }
