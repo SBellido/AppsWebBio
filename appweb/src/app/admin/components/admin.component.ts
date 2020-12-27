@@ -11,6 +11,7 @@ import {
 } from '@angular/fire/firestore';
 
 import { FileSaverService } from 'ngx-filesaver';
+import { CreativeUser } from 'src/app/core/models/creative-user.interface';
 
 @Component({
   selector: 'app-admin',
@@ -18,7 +19,7 @@ import { FileSaverService } from 'ngx-filesaver';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  public creativesUsers = [];
+  public creativesUsers : CreativeUser[] = new Array;
   public count = 1;
   public end = false;
   // public admin: AdminComponent
@@ -38,10 +39,7 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.dbData.getAllUser().subscribe((usersSnapshop) => {
       usersSnapshop.forEach((usersData: any) => {
-        this.creativesUsers.push({
-          id: usersData.payload.doc.id,
-          data: usersData.payload.doc.data()         
-        });
+        this.creativesUsers.push(usersData.payload.doc.data());
       });
     });
   }

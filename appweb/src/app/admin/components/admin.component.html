@@ -11,7 +11,7 @@
                 CANTIDAD DE USUARIOS TESTEADOS
             </button>
         </div>
-        <div class="media" *ngFor="let user of creativesUsers | slice:0, let count = index"> 
+        <div class="media"> 
            
             <div class="contains-tables">
                 <table>                    
@@ -21,12 +21,18 @@
                             <th>Edad</th>
                             <th>Ciudad</th>
                             <th>Máxima_educación_alcanzada</th>
-                            <th *ngIf="user.data.degree != null">Carrera</th>
+                            <th>Carrera</th>
+                            <th id="formation">Estado_actual_de_formación</th>
+                            <th>Escuela/Institución</th>
+                            <th>Año</th>
+                            <th>Curso</th>
+                            <th>Grado</th>
+                            <!-- <th *ngIf="user.data.degree != null">Carrera</th>
                             <th id="formation" *ngIf="user.data.educationStatus != null">Estado_actual_de_formación</th>
                             <th *ngIf="user.data.school != null">Escuela/Institución</th>
                             <th *ngIf="user.data.year != null">Año</th>
                             <th *ngIf="user.data.course != null">Curso</th>
-                            <th *ngIf="user.data.grade != null">Grado</th>
+                            <th *ngIf="user.data.grade != null">Grado</th> -->
                             <th class="proposal">Propuestas</th>
                             <th class="timeInit">Tiempo_inicio</th>
                             <th>Tiempo_fin</th>
@@ -34,20 +40,26 @@
                         </tr>
                     </thead>
                     <tbody>              
-                        <tr>
-                            <td>{{user.data.nameLastName}}</td>
-                            <td>{{user.data.age}}</td>
-                            <td>{{user.data.city}}</td> 
-                            <td>{{user.data.educationLevel}}</td>
-                            <td *ngIf="user.data.degree != null">{{user.data.degree}}</td>
+                        <tr  *ngFor="let user of creativesUsers | slice:0, let count = index">
+                            <td>{{user.nameLastName}}</td>
+                            <td>{{user.age}}</td>
+                            <td>{{user.city}}</td> 
+                            <td>{{user.educationLevel}}</td>
+                            <td>{{user.degree}}</td>
+                            <td>{{user.educationStatus}}</td>
+                            <td>{{user.school}}</td>
+                            <td>{{user.year}}</td>
+                            <td>{{user.course}}</td>
+                            <td>{{user.grade}}</td>
+                            <!-- <td *ngIf="user.data.degree != null">{{user.data.degree}}</td>
                             <td *ngIf="user.data.educationStatus != null">{{user.data.educationStatus}}</td>
                             <td *ngIf="user.data.school != null">{{user.data.school}}</td>
                             <td *ngIf="user.data.year != null">{{user.data.year}}</td>
                             <td *ngIf="user.data.course != null">{{user.data.course}}</td>
-                            <td *ngIf="user.data.grade != null">{{user.data.grade}}</td>
-                            <td class="proposal">{{user.data.proposal}}</td>
-                            <td class="timeInit">{{user.data.dateStart.toDate() | date:'long'}}</td>
-                            <td>{{user.data.dateEnd.toMillis() | date:'mediumTime'}}</td>
+                            <td *ngIf="user.data.grade != null">{{user.data.grade}}</td> -->
+                            <td class="proposal">{{user.proposal}}</td>
+                            <td class="timeInit">{{user.dateStart.toDate() | date:'long'}}</td>
+                            <td>{{user.dateEnd.toMillis() | date:'mediumTime'}}</td>
                             <td>{{count + 1}}</td>
                         </tr>
                     </tbody>                     
@@ -56,7 +68,7 @@
                 <!-- <div>{{end.value = !end}}</div> -->
                
                 <div *ngIf="end == false">
-                    <h2  id="usersCount" class="subtitle">Total de usuarios testeados {{count + 1}}</h2>
+                    <h2  id="usersCount" class="subtitle">Total de usuarios testeados {{ creativesUsers.length }}</h2>
                 </div>
                 <!-- <div *ngIf="end == false">
                     <h2  id="usersCount" class="subtitle">Total de usuarios testeados {{count + 1}}</h2>
