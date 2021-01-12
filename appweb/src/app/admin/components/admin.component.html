@@ -51,12 +51,12 @@
                             <td>{{user.data.age}}</td>
                             <td>{{user.data.city}}</td> 
                             <td>{{user.data.educationLevel}}</td>
-                            <td>{{user.data.degree}}</td>
-                            <td>{{user.data.educationStatus}}</td>
-                            <td>{{user.data.school}}</td>
-                            <td>{{user.data.year}}</td>
-                            <td>{{user.data.course}}</td>
-                            <td>{{user.data.grade}}</td>
+                            <td>{{user.data.degree | replaceNullWithText }}</td>
+                            <td>{{user.data.educationStatus | replaceNullWithText }}</td>
+                            <td>{{user.data.school | replaceNullWithText }}</td>
+                            <td>{{user.data.year | replaceNullWithText }}</td>
+                            <td>{{user.data.course | replaceNullWithText }}</td>
+                            <td>{{user.data.grade | replaceNullWithText }}</td>
                             <td class="proposal">{{user.data.proposal}}</td>
                             <td class="timeInit">{{user.data.dateStart.toDate() | date:'long'}}</td>
                             <td>{{user.data.dateEnd.toMillis() | date:'mediumTime'}}</td>

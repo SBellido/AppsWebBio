@@ -13,6 +13,8 @@ import { HeaderAdminComponent } from './components/header-admin/header-admin.com
 
 import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from './../material/material.module';
+import { ReplaceNullWithTextPipe } from './pipes/replace-null-with-text.pipe';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { MaterialModule } from './../material/material.module';
     HeaderQuestionComponent,
     HeaderCreativityComponent,
     HeaderAdminComponent,
-    FooterComponent
+    FooterComponent,
+    ReplaceNullWithTextPipe
   ],
   exports: [
     HeaderComponent,
@@ -31,7 +34,8 @@ import { MaterialModule } from './../material/material.module';
     HeaderQuestionComponent,
     HeaderCreativityComponent,
     HeaderAdminComponent,
-    FooterComponent
+    FooterComponent,
+    ReplaceNullWithTextPipe
   ],
   imports: [
     CommonModule,

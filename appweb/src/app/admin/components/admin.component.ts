@@ -12,6 +12,7 @@ import {
 
 import { FileSaverService } from 'ngx-filesaver';
 
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -28,9 +29,7 @@ export class AdminComponent implements OnInit {
     private router: Router,
     private dbData: DataDbService,
     private FileSaverService: FileSaverService,
-    private afStorage: AngularFirestore,
-
-    
+    private afStorage: AngularFirestore
   ) { }
 
 

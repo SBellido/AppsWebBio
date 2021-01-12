@@ -12,6 +12,7 @@ import { FileSaverModule } from 'ngx-filesaver';
 
 import { DataDbService } from '../core/services/db/data-db.service';
 
+
 @NgModule({
   providers: [
     DataDbService

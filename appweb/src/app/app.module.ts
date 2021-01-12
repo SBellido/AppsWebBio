@@ -18,7 +18,7 @@ import { MyDialogComponent } from './my-dialog/my-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MyDialogComponent,
+    MyDialogComponent
   ],
   imports: [
     BrowserModule,
