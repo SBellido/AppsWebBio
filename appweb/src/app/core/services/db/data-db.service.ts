@@ -34,7 +34,12 @@ export class DataDbService {
       });
     admin.downloadFile(this.creativesUsers);
     });
-  }  
+  }
+
+  public getCreativesMetadata(){
+    let metadataCollection = this.afs.collection('creatives-meta');
+    return metadataCollection.snapshotChanges();
+  }
 
 
 
