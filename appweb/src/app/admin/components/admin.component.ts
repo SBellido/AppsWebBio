@@ -22,6 +22,7 @@ export class AdminComponent implements OnInit {
   public creativesUsers = [];
   public count = 1;
   public end = false;
+  public totalTestsCounter: any = { count: -1};
   // public admin: AdminComponent
 
   constructor(
@@ -33,7 +34,7 @@ export class AdminComponent implements OnInit {
   ) { }
 
 
-//al iniciar esta sección, se obtienen todos los datos de la colección 'creativesUsers'
+  //al iniciar esta sección, se obtienen todos los datos de la colección 'creativesUsers'
   ngOnInit(): void {
     this.dbData.getAllUser().subscribe((usersSnapshop) => {
       usersSnapshop.forEach((usersData: any) => {
@@ -43,6 +44,16 @@ export class AdminComponent implements OnInit {
         });
       });
     });
+
+    // Get total number of creative tests users using creative-metadata collection
+    this.dbData.getCreativesMetadata().subscribe(creativeTestsMetadata => {
+      creativeTestsMetadata.forEach( item => {
+        if (item.payload.doc.id == 'tests-counter'){
+          this.totalTestsCounter = item.payload.doc.data();
+        }
+      });
+    });
+
   }
 
   public getData() {
