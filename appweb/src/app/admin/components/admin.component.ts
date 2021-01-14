@@ -22,7 +22,7 @@ export class AdminComponent implements OnInit {
   public creativesUsers = [];
   public count = 1;
   public end = false;
-  public totalTestsCounter: any = { count: -1};
+  public totalTestsCounter: any = { count: -1 };
   // public admin: AdminComponent
 
   constructor(
@@ -46,12 +46,8 @@ export class AdminComponent implements OnInit {
     });
 
     // Get total number of creative tests users using creative-metadata collection
-    this.dbData.getCreativesMetadata().subscribe(creativeTestsMetadata => {
-      creativeTestsMetadata.forEach( item => {
-        if (item.payload.doc.id == 'tests-counter'){
-          this.totalTestsCounter = item.payload.doc.data();
-        }
-      });
+    this.dbData.getCreativesMetadataCounter().snapshotChanges().subscribe( counterData => {
+      this.totalTestsCounter = counterData.payload.data();
     });
 
   }
