@@ -11,17 +11,29 @@ import { AdminComponent } from 'src/app/admin/components/admin.component';
 
 export class DataDbService {
   private creativesCollectionRef: AngularFirestoreCollection<CreativeUser>;
+  private creativesMetadataRef: AngularFirestoreCollection;
   public creativesUsers = [];
 
-  constructor(private afs: AngularFirestore, private http: HttpClient) {  } 
+  constructor(private afs: AngularFirestore, private http: HttpClient) { 
+    this.creativesCollectionRef = afs.collection<CreativeUser>('creatives-users', ref => ref.orderBy('dateStart', 'desc'));
+    this.creativesMetadataRef = afs.collection('creatives-meta');
+   } 
 
-  saveContact(newCreativeUser: any): void {
+  async saveContact(newCreativeUser: any): Promise<void> {
     this.creativesCollectionRef.add(newCreativeUser);
+
+    // get actual counter
+    let prevCounter = await this.getCreativesMetadataCounter().ref.get();
+    // increment counter
+    let newCounter = prevCounter.data().count + 1;
+    // update tests counter
+    this.getCreativesMetadataCounter().update({ "count": newCounter });
+
   }
 
   public getAllUser() {
-    this.creativesCollectionRef = this.afs.collection<CreativeUser>('creatives-users', ref => ref.orderBy('dateStart', 'desc'));
-    return this.creativesCollectionRef.snapshotChanges()   
+    // this.creativesCollectionRef = this.afs.collection<CreativeUser>('creatives-users', ref => ref.orderBy('dateStart', 'desc'));
+    return this.creativesCollectionRef.snapshotChanges();   
   }
 
   public getCreativesUsersData(admin: AdminComponent) {
@@ -36,11 +48,9 @@ export class DataDbService {
     });
   }
 
-  public getCreativesMetadata(){
-    let metadataCollection = this.afs.collection('creatives-meta');
-    return metadataCollection.snapshotChanges();
+  public getCreativesMetadataCounter(){
+    return this.creativesMetadataRef.doc('tests-counter');
   }
-
 
 
 }
