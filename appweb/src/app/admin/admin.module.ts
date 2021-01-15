@@ -13,6 +13,10 @@ import { FileSaverModule } from 'ngx-filesaver';
 import { DataDbService } from '../core/services/db/data-db.service';
 
 
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+
+
 @NgModule({
   providers: [
     DataDbService
@@ -26,7 +30,9 @@ import { DataDbService } from '../core/services/db/data-db.service';
     SharedModule,
     MaterialModule,
     HttpClientModule,
-    FileSaverModule
+    FileSaverModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 

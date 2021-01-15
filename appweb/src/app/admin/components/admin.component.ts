@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule, HttpResponse } from '@angular/common/http';
 import { DataDbService } from '../../core/services/db/data-db.service';
@@ -11,6 +11,10 @@ import {
 } from '@angular/fire/firestore';
 
 import { FileSaverService } from 'ngx-filesaver';
+import { CreativeUser } from '../../core/models/creative-user.interface';
+
+import { MatTable } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -19,11 +23,19 @@ import { FileSaverService } from 'ngx-filesaver';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  public creativesUsers = [];
+  public creativesUsers: CreativeUser[] = [];
   public count = 1;
   public end = false;
   public totalTestsCounter: any = { count: -1 };
   // public admin: AdminComponent
+
+  // Columnas de la tabla que se van a mostrar
+  displayedColumns: string[] = ["nameLastName", "age", "city", "educationLevel", "educationStatus", "school", "degree",
+                                  "year", "grade", "course" , "object", "proposal", "dateStart", "dateEnd" ];
+  
+  // Referencia a la tabla de usuarios
+  @ViewChild(MatTable) table: MatTable<CreativeUser>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private http: HttpClient,
@@ -38,11 +50,10 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.dbData.getAllUser().subscribe((usersSnapshop) => {
       usersSnapshop.forEach((usersData: any) => {
-        this.creativesUsers.push({
-          id: usersData.payload.doc.id,
-          data: usersData.payload.doc.data()         
-        });
+        this.creativesUsers.push(usersData.payload.doc.data());
       });
+      // Refresco la tabla despues de cargarle los usuarios
+      this.table.renderRows();
     });
 
     // Get total number of creative tests users using creative-metadata collection
