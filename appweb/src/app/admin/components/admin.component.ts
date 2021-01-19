@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule, HttpResponse } from '@angular/common/http';
 import { DataDbService } from '../../core/services/db/data-db.service';
@@ -15,6 +15,8 @@ import { CreativeUser } from '../../core/models/creative-user.interface';
 
 import { MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { CreativityTestsDataSource } from 'src/app/core/models/creativityTestsDataSource';
+import { tap } from 'rxjs/operators';
 
 
 @Component({
@@ -22,7 +24,10 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements AfterViewInit, OnInit {
+
+  testsDataSource: CreativityTestsDataSource;
+
   public creativesUsers: CreativeUser[] = [];
   public count = 1;
   public end = false;
@@ -32,6 +37,9 @@ export class AdminComponent implements OnInit {
   // Columnas de la tabla que se van a mostrar
   displayedColumns: string[] = ["nameLastName", "age", "city", "educationLevel", "educationStatus", "school", "degree",
                                   "year", "grade", "course" , "object", "proposal", "dateStart", "dateEnd" ];
+
+  pageSize: number = 1;
+  pageIndex: number = 0;
   
   // Referencia a la tabla de usuarios
   @ViewChild(MatTable) table: MatTable<CreativeUser>;
@@ -48,19 +56,38 @@ export class AdminComponent implements OnInit {
 
   //al iniciar esta sección, se obtienen todos los datos de la colección 'creativesUsers'
   ngOnInit(): void {
-    this.dbData.getAllUser().subscribe((usersSnapshop) => {
-      usersSnapshop.forEach((usersData: any) => {
-        this.creativesUsers.push(usersData.payload.doc.data());
-      });
+    
+    this.testsDataSource = new CreativityTestsDataSource(this.dbData);
+    this.testsDataSource.loadTests(this.pageSize);
+
+    // this.dbData.getAllUser().subscribe((usersSnapshop) => {
+      // usersSnapshop.forEach((usersData: any) => {
+        // this.creativesUsers.push(usersData.payload.doc.data());
+      // });
       // Refresco la tabla despues de cargarle los usuarios
-      this.table.renderRows();
-    });
+      // this.table.renderRows();
+    // });
 
     // Get total number of creative tests users using creative-metadata collection
     this.dbData.getCreativesMetadataCounter().snapshotChanges().subscribe( counterData => {
       this.totalTestsCounter = counterData.payload.data();
     });
 
+  }
+
+  ngAfterViewInit() {
+    this.paginator.page
+        .pipe(
+            tap(() => this.loadTestsPage())
+        )
+        .subscribe();
+  }
+  
+  loadTestsPage() {
+    if (this.pageIndex < this.paginator.pageIndex){
+      this.testsDataSource.loadNextTestsPage(this.pageSize);
+    }
+    this.testsDataSource.loadPrevTestsPage(this.pageSize);
   }
 
   public getData() {
