@@ -15,6 +15,7 @@ import { DataDbService } from '../core/services/db/data-db.service';
 
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
     HttpClientModule,
     FileSaverModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ]
 })
 

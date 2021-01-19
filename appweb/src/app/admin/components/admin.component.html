@@ -15,7 +15,7 @@
         
            
         <div class="contains-tables mat-elevation-z8">
-            <mat-table [dataSource]="creativesUsers">
+            <mat-table [dataSource]="testsDataSource">
 
                 <!-- NameLastName Column -->
                 <ng-container matColumnDef="nameLastName">
@@ -102,12 +102,12 @@
                 </ng-container>
 
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
             </mat-table>
             
-            <mat-paginator [length]="totalTestsCounter.count" [pageSize]="1"
+            <mat-paginator [length]="totalTestsCounter.count" [pageSize]="pageSize"
                     [pageSizeOptions]="[1, 2, 3]"></mat-paginator>
 
             
