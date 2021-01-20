@@ -10,8 +10,9 @@ export class CreativityTestsDataSource implements DataSource<CreativeUser> {
     private loadingSubject = new BehaviorSubject<boolean>(false);
 
     public loading$ = this.loadingSubject.asObservable();
-    private firstUserInPage: firebase.firestore.DocumentSnapshot<DocumentData> = null;
-    private lastUserInPage: firebase.firestore.DocumentSnapshot<DocumentData> = null;
+    private actualFirstInPage: firebase.firestore.DocumentSnapshot<DocumentData> = null;
+    private actualLastInPage: firebase.firestore.DocumentSnapshot<DocumentData> = null;
+    private prevFirstQueue: Array<firebase.firestore.DocumentSnapshot<DocumentData>> = [];
 
     constructor(private dbService: DataDbService) {}
 
@@ -25,18 +26,20 @@ export class CreativityTestsDataSource implements DataSource<CreativeUser> {
     }
   
     loadTests(pageSize: number) {
-        // console.log(this.lastestUser);
+        
         this.loadingSubject.next(true);
 
         this.dbService.getTestsFirstPage(pageSize).subscribe( async tests => {
-            // console.log(tests);
+            
             let arrUsers: CreativeUser[] = [];
-            tests.forEach( test => {
-                arrUsers.push(test.payload.doc.data());
+            
+            tests.docs.forEach( test => {
+                arrUsers.push(test.data());
             });
-            this.firstUserInPage = await tests[0].payload.doc.ref.get();
-            this.lastUserInPage = await tests[tests.length - 1].payload.doc.ref.get();
-            // console.log(this.lastUserInPage);
+
+            this.actualFirstInPage = await tests.docs[0].ref.get();
+            this.actualLastInPage = await tests.docs[tests.size - 1].ref.get();
+            
             this.testsSubject.next(arrUsers);
             this.loadingSubject.next(false);
         });
@@ -46,14 +49,19 @@ export class CreativityTestsDataSource implements DataSource<CreativeUser> {
         
         this.loadingSubject.next(true);
 
-        this.dbService.getTestsNextPage(this.lastUserInPage, pageSize).subscribe( async tests => {
-            // console.log(tests);
+        this.prevFirstQueue.push(this.actualFirstInPage);
+
+        this.dbService.getTestsNextPage(this.actualLastInPage, pageSize).subscribe( async tests => {
+            
             let arrUsers: CreativeUser[] = [];
-            tests.forEach( test => {
-                arrUsers.push(test.payload.doc.data());
+            
+            tests.docs.forEach( test => {
+                arrUsers.push(test.data());
             });
-            this.firstUserInPage = await tests[0].payload.doc.ref.get();
-            this.lastUserInPage = await tests[tests.length - 1].payload.doc.ref.get();
+            
+            this.actualFirstInPage = await tests.docs[0].ref.get();
+            this.actualLastInPage = await tests.docs[tests.size - 1].ref.get();
+            
             this.testsSubject.next(arrUsers);
             this.loadingSubject.next(false);
         });
@@ -63,14 +71,19 @@ export class CreativityTestsDataSource implements DataSource<CreativeUser> {
         
         this.loadingSubject.next(true);
 
-        this.dbService.getTestsPrevPage(this.firstUserInPage, pageSize).subscribe( async tests => {
-            // console.log(tests);
+        let prevFirst = this.prevFirstQueue.pop();
+
+        this.dbService.getTestsPrevPage( prevFirst,this.actualFirstInPage, pageSize).subscribe( async tests => {
+
             let arrUsers: CreativeUser[] = [];
-            tests.forEach( test => {
-                arrUsers.push(test.payload.doc.data());
+            tests.docs.forEach( test => {
+                arrUsers.push(test.data());
             });
-            this.firstUserInPage = await tests[0].payload.doc.ref.get();
-            this.lastUserInPage = await tests[tests.length - 1].payload.doc.ref.get();
+            
+            this.actualFirstInPage = await tests.docs[0].ref.get();
+            this.actualLastInPage = await tests.docs[tests.size - 1].ref.get();
+
+
             this.testsSubject.next(arrUsers);
             this.loadingSubject.next(false);
         });

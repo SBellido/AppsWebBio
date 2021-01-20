@@ -17,7 +17,7 @@ export class DataDbService {
   public creativesUsers = [];
 
   constructor(private afs: AngularFirestore, private http: HttpClient) { 
-    this.creativesCollectionRef = afs.collection<CreativeUser>('creatives-users');
+    this.creativesCollectionRef = afs.collection<CreativeUser>('creatives-users', ref => ref.orderBy('dateStart', 'desc'));
     this.creativesMetadataRef = afs.collection('creatives-meta');
    } 
 
@@ -33,30 +33,25 @@ export class DataDbService {
 
   }
 
-  public getAllUser() {
-    // this.creativesCollectionRef = this.afs.collection<CreativeUser>('creatives-users', ref => ref.orderBy('dateStart', 'desc'));
-    return this.creativesCollectionRef.snapshotChanges();   
-  }
-
-  public getTestsFirstPage(pageSize: number = 3):  Observable<DocumentChangeAction<CreativeUser>[]> {
+  public getTestsFirstPage(pageSize: number = 3):  Observable<QuerySnapshot<CreativeUser>> {
     const testsRef = this.afs.collection<CreativeUser>('creatives-users', 
       ref => ref.orderBy('dateStart', 'desc').limit(pageSize));
     
-    return testsRef.snapshotChanges();
+    return testsRef.get();
   }
 
-  public getTestsNextPage(lastUser, pageSize: number = 3):  Observable<DocumentChangeAction<CreativeUser>[]> {
+  public getTestsNextPage(actualLast, pageSize: number = 3):  Observable<QuerySnapshot<CreativeUser>> {
     const testsRef = this.afs.collection<CreativeUser>('creatives-users', 
-      ref => ref.orderBy('dateStart', 'desc').startAfter(lastUser).limit(pageSize));
+      ref => ref.orderBy('dateStart', 'desc').startAfter(actualLast).limit(pageSize));
     
-    return testsRef.snapshotChanges();
+    return testsRef.get();
   }
   
-  public getTestsPrevPage(firstUser, pageSize: number = 3):  Observable<DocumentChangeAction<CreativeUser>[]> {
+  public getTestsPrevPage(prevFirst,actualFirst, pageSize: number = 3):  Observable<QuerySnapshot<CreativeUser>> {
     const testsRef = this.afs.collection<CreativeUser>('creatives-users', 
-      ref => ref.orderBy('dateStart', 'desc').endBefore(firstUser).limit(pageSize));
+      ref => ref.orderBy('dateStart', 'desc').startAt(prevFirst).endBefore(actualFirst).limit(pageSize));
     
-    return testsRef.snapshotChanges();
+    return testsRef.get();
   }
 
   public getCreativesUsersData(admin: AdminComponent) {
