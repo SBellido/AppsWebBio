@@ -60,14 +60,6 @@ export class AdminComponent implements AfterViewInit, OnInit {
     this.testsDataSource = new CreativityTestsDataSource(this.dbData);
     this.testsDataSource.loadTests(this.pageSize);
 
-    // this.dbData.getAllUser().subscribe((usersSnapshop) => {
-      // usersSnapshop.forEach((usersData: any) => {
-        // this.creativesUsers.push(usersData.payload.doc.data());
-      // });
-      // Refresco la tabla despues de cargarle los usuarios
-      // this.table.renderRows();
-    // });
-
     // Get total number of creative tests users using creative-metadata collection
     this.dbData.getCreativesMetadataCounter().snapshotChanges().subscribe( counterData => {
       this.totalTestsCounter = counterData.payload.data();
@@ -86,8 +78,11 @@ export class AdminComponent implements AfterViewInit, OnInit {
   loadTestsPage() {
     if (this.pageIndex < this.paginator.pageIndex){
       this.testsDataSource.loadNextTestsPage(this.pageSize);
+      this.pageIndex = this.paginator.pageIndex;
+      return
     }
     this.testsDataSource.loadPrevTestsPage(this.pageSize);
+    this.pageIndex = this.paginator.pageIndex;
   }
 
   public getData() {
