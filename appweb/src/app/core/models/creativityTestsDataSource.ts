@@ -1,6 +1,7 @@
-import {CollectionViewer, DataSource} from "@angular/cdk/collections";
+import { CollectionViewer, DataSource } from "@angular/cdk/collections";
 import { DocumentData, QuerySnapshot } from "@angular/fire/firestore";
 import { BehaviorSubject, Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
 import { DataDbService } from "../services/db/data-db.service";
 import { CreativeUser } from "./creative-user.interface";
 
@@ -29,7 +30,9 @@ export class CreativityTestsDataSource implements DataSource<CreativeUser> {
         
         this.loadingSubject.next(true);
 
-        this.dbService.getTestsFirstPage(pageSize).subscribe( tests => this.loadNewResults(tests));
+        this.dbService.getTestsFirstPage(pageSize)
+            .pipe( finalize(() => this.loadingSubject.next(false)) )
+            .subscribe( tests => this.loadNewResults(tests));
 
     }
 
@@ -39,7 +42,9 @@ export class CreativityTestsDataSource implements DataSource<CreativeUser> {
 
         this.prevFirstQueue.push(this.actualFirstInPage);
 
-        this.dbService.getTestsNextPage(this.actualLastInPage, pageSize).subscribe( tests => this.loadNewResults(tests));
+        this.dbService.getTestsNextPage(this.actualLastInPage, pageSize)
+            .pipe( finalize(() => this.loadingSubject.next(false)) )
+            .subscribe( tests => this.loadNewResults(tests));
     }
     
     loadPrevTestsPage(pageSize: number){
@@ -48,11 +53,15 @@ export class CreativityTestsDataSource implements DataSource<CreativeUser> {
 
         let prevFirst = this.prevFirstQueue.pop();
 
-        this.dbService.getTestsPrevPage( prevFirst,this.actualFirstInPage, pageSize).subscribe( tests => this.loadNewResults(tests));
+        this.dbService.getTestsPrevPage( prevFirst, this.actualFirstInPage, pageSize)
+            .pipe( finalize(() => this.loadingSubject.next(false)) )
+            .subscribe( tests => this.loadNewResults(tests));
     }
 
     private async loadNewResults(results: QuerySnapshot<CreativeUser>): Promise<void>{
+        
         let arrUsers: CreativeUser[] = [];
+        this.testsSubject.next(arrUsers);
             
         results.docs.forEach( test => {
             arrUsers.push(test.data());
@@ -62,6 +71,7 @@ export class CreativityTestsDataSource implements DataSource<CreativeUser> {
         this.actualLastInPage = await results.docs[results.size - 1].ref.get();
         
         this.testsSubject.next(arrUsers);
-        this.loadingSubject.next(false);
+        // this.loadingSubject.next(false);
     }
+
 }

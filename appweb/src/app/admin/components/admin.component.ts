@@ -38,7 +38,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ["nameLastName", "age", "city", "educationLevel", "educationStatus", "school", "degree",
                                   "year", "grade", "course" , "object", "proposal", "dateStart", "dateEnd" ];
 
-  pageSize: number = 1;
+  pageSize: number = 10;
   pageIndex: number = 0;
   
   // Referencia a la tabla de usuarios
@@ -70,7 +70,11 @@ export class AdminComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {
     this.paginator.page
         .pipe(
-            tap(() => this.loadTestsPage())
+            tap(() => {
+              this.paginator._nextButtonsDisabled()
+              this.paginator._previousButtonsDisabled()
+              this.loadTestsPage()
+            })
         )
         .subscribe();
   }
