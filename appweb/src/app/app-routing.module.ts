@@ -60,6 +60,11 @@ const routes: Routes = [
     .then(m => m.AfterTestModule)
   },
   {
+    path: 'test-rulit',
+    loadChildren: () => import('./test-rulit/testRulit.module')
+    .then(m => m.TestRulitModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./page-not-found/page-not-found.module')
       .then(m => m.PageNotFoundModule)
