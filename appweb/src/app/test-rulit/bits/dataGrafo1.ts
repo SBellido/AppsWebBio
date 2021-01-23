@@ -1,4 +1,4 @@
-export const dataGrafo = [
+export const GRAFO = [
     {
         id: 1,
         esNodoInicial: false,
