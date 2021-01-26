@@ -1,16 +1,26 @@
-import { Injectable } from "@angular/core";
 import { Graph } from "./Graph";
+import { Vertex } from "./Vertex";
 
-@Injectable({
-    providedIn: 'root'
-})
+interface INodeData {
+    id: number,
+    esNodoInicial: boolean,
+    esNodoFinal: boolean,
+    vecinos: Array<number>
+}
 
 export class GraphService {
     
-    public build(GRAPH_DATA: Array<any>): Graph{
+    buildGraph(GRAPH_DATA: Array<INodeData>, theContext: CanvasRenderingContext2D): Graph{
         console.log('contruyendo grafo: ');
         console.log(GRAPH_DATA);
-        return new Graph();
+        let newGraph = new Graph(theContext);
+        GRAPH_DATA.forEach( nodeData => newGraph.addVertex(this.buildNode(nodeData, theContext)) );
+        return newGraph;
     }
+    
+    private buildNode( nodeData: INodeData, theContext: CanvasRenderingContext2D): Vertex{
+        return new Vertex(nodeData.id,nodeData.esNodoInicial, nodeData.esNodoFinal,false,0,0,theContext);
+    }
+
 
 }

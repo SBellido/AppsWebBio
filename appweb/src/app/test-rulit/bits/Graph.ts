@@ -1,31 +1,49 @@
 import { Vertex } from './Vertex';
 
-export class Graph {
+interface IGraph{
+    nodes: Array<Vertex>,
+    getNodeById(theId: number): Vertex,
+    addVertex(theVertex: Vertex): void | boolean,
+    draw(): void
+}
+
+export class Graph implements IGraph{
     
     private _nodes: Array<Vertex>;
     private _adjList: Map<Number,Array<Number>>;
 
-    constructor(){
+    constructor( private _context: CanvasRenderingContext2D ){
         this._nodes = new Array<Vertex>();
         this._adjList = new Map<Number,Array<Number>>();
     }
 
-    public addVertex(newVertex: Vertex){
+    addVertex(theVertex: Vertex) {
         // If the vertex already exists, do nothing.
-        if (this._nodes.find(v => v.id === newVertex.id)) {
+        if (this._nodes.find(v => v.id === theVertex.id)) {
             return true;
         }
 
-        this._nodes.push(newVertex);
+        this._nodes.push(theVertex);
     }
 
-    public addEdge(idV1: number, idV2: number){
+    addEdge(idV1: number, idV2: number){
         // if ( this._adjList.)
     }
 
-    // get vertex
-    private belongsToGraph(vertex: Vertex){
+    get nodes(){
+        return this._nodes;
+    }
 
+    getNodeById(theId: number): Vertex{
+        return this._nodes.find( node => node.id == theId );
+    }
+
+    // private belongsToGraph(vertex: Vertex){
+
+    // }
+
+    draw() {
+        this._nodes.forEach(node => node.circle.draw());
     }
 
 }
