@@ -1,7 +1,7 @@
 import { Graph } from "./Graph";
 import { Vertex } from "./Vertex";
 
-interface INodeData {
+export interface INodeData {
     id: number,
     esNodoInicial: boolean,
     esNodoFinal: boolean,

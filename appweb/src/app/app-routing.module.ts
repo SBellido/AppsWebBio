@@ -60,9 +60,9 @@ const routes: Routes = [
     .then(m => m.AfterTestModule)
   },
   {
-    path: 'test-rulit',
-    loadChildren: () => import('./test-rulit/testRulit.module')
-    .then(m => m.TestRulitModule)
+    path: 'rulit',
+    loadChildren: () => import('./rulit/rulit.module')
+    .then(m => m.RulitModule)
   },
   {
     path: '**',

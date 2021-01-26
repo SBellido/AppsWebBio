@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Graph } from '../../bits/Graph';
-import { GraphService } from '../../bits/GraphService';
+import { GraphService, INodeData } from '../../bits/GraphService';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { GraphService } from '../../bits/GraphService';
 
 export class RulitLabComponent implements OnInit {
 
-    @Input() GRAPH_DATA: Array<any>;
+    @Input() GRAPH_DATA: Array<INodeData>;
     private graph: Graph;
 
     constructor(private graphService: GraphService) { 
@@ -19,7 +19,7 @@ export class RulitLabComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.graph = this.graphService.build(this.GRAPH_DATA);
+        // this.graph = this.graphService.buildGraph(this.GRAPH_DATA,context);
     }
 
 }

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TestRulitComponent } from './components/testRulit.component';
+import { RulitComponent } from './components/rulit.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: TestRulitComponent
+        component: RulitComponent
     },
 
 ];
@@ -20,4 +20,4 @@ const routes: Routes = [
     ]
 })
 
-export class TestRulitRoutingModule {}
+export class RulitRoutingModule {}

@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 //
 import { GRAFO as GRAPH_DATA } from "../bits/dataGrafo1";
+import { INodeData } from "../bits/GraphService";
 
 
 @Component({
-    selector: 'app-test-rulit',
-    templateUrl: './testRulit.component.html',
-    styleUrls: ['testRulit.component.scss']
+    selector: 'app-rulit',
+    templateUrl: './rulit.component.html',
+    styleUrls: ['rulit.component.scss']
 })
 
 // Este componente se encarga de llevar adelante los ensayos
@@ -24,9 +25,9 @@ import { GRAFO as GRAPH_DATA } from "../bits/dataGrafo1";
 //
 // Guardar resultados.
 
-export class TestRulitComponent implements OnInit {
+export class RulitComponent implements OnInit {
 
-    private GRAPH_DATA: Array<any>;
+    private GRAPH_DATA: Array<INodeData>;
 
     constructor() { 
         this.GRAPH_DATA = GRAPH_DATA;
