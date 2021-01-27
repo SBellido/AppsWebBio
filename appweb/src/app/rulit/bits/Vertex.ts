@@ -16,7 +16,7 @@ export class Vertex implements IVertex {
                 private _esNodoFinal: boolean, private _visitado: boolean,
                 theX: number, theY: number, theContext: CanvasRenderingContext2D){
                     
-                    this._circle = new Circle(70,theX,theY,"#000",theContext);
+                    this._circle = new Circle(20,theX,theY,"#000",theContext);
                 
                 }
     

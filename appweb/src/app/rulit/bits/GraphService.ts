@@ -12,7 +12,12 @@ export class GraphService {
     
     buildGraph(GRAPH_DATA: Array<INodeData>, theContext: CanvasRenderingContext2D): Graph{
         let newGraph = new Graph(theContext);
-        GRAPH_DATA.forEach( nodeData => newGraph.addVertex(this.buildNode(nodeData, theContext)) );
+        
+        GRAPH_DATA.forEach( nodeData => 
+            // Agrego los nodos y las aristas
+            newGraph.addVertex(this.buildNode(nodeData, theContext), nodeData.vecinos)
+        );
+        
         return newGraph;
     }
     
