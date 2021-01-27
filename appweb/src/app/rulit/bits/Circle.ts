@@ -29,8 +29,6 @@ export class Circle extends Figure2d implements ICircle{
 
         super.draw();
 
-        this.context.save();
-
         this.context.beginPath();
         this.context.arc(this.posX,this.posY,this.radius, 0, 2 * Math.PI);
         this.context.fill();
@@ -43,8 +41,19 @@ export class Circle extends Figure2d implements ICircle{
 
     isPointInside(thePoint: { x: number, y: number}): boolean{
         
+        // console.log("the node");
+        // console.log(this.posX);
+        // console.log(this.posY);
+
+        // console.log("the point");
+        // console.log(thePoint.x);
+        // console.log(thePoint.y);
+
         let distance =  (thePoint.x - this.posX) * (thePoint.x - this.posX) +
         (thePoint.y - this.posY) * (thePoint.y - this.posY);
+        
+
+        // console.log(distance);
         
         if (distance < (this.radius) * (this.radius)) {
             return true;

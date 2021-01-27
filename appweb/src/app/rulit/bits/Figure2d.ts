@@ -8,7 +8,12 @@ interface IFigure2d {
 
 export class Figure2d implements IFigure2d {
 
-    constructor (private _posX: number, private _posY: number, private _fill, private _context: CanvasRenderingContext2D){}
+    constructor (
+        private _posX: number, 
+        private _posY: number, 
+        private _fill, 
+        private _context: CanvasRenderingContext2D
+    ){}
 
     get posX () {
         return this._posX;

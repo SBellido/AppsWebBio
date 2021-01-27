@@ -8,6 +8,12 @@ export interface INodeData {
     vecinos: Array<number>
 }
 
+export interface INodeCoordinate {
+    id: number,
+    posX: number,
+    posY: number
+}
+
 export class GraphService {
     
     buildGraph(GRAPH_DATA: Array<INodeData>, theContext: CanvasRenderingContext2D): Graph{
@@ -28,8 +34,8 @@ export class GraphService {
             nodeData.esNodoInicial, 
             nodeData.esNodoFinal,
             false,
-            Math.random() * 700,
-            Math.random() * 500,
+            Math.random() * 600,
+            Math.random() * 450,
             theContext
         );
     }
