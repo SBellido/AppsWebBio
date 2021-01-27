@@ -13,10 +13,11 @@ export class GraphService {
     buildGraph(GRAPH_DATA: Array<INodeData>, theContext: CanvasRenderingContext2D): Graph{
         let newGraph = new Graph(theContext);
         
-        GRAPH_DATA.forEach( nodeData => 
+        GRAPH_DATA.forEach( nodeData => { 
             // Agrego los nodos y las aristas
-            newGraph.addVertex(this.buildNode(nodeData, theContext), nodeData.vecinos)
-        );
+            let newNode = this.buildNode(nodeData, theContext);
+            newGraph.addVertex(newNode, nodeData.vecinos);
+        });
         
         return newGraph;
     }
@@ -27,8 +28,8 @@ export class GraphService {
             nodeData.esNodoInicial, 
             nodeData.esNodoFinal,
             false,
-            Math.random() * 600,
-            Math.random() * 300,
+            Math.random() * 700,
+            Math.random() * 500,
             theContext
         );
     }

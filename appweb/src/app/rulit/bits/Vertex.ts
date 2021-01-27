@@ -5,7 +5,8 @@ interface IVertex {
     esNodoInicial: boolean,
     esNodoFinal: boolean,
     visitado: boolean,
-    circle: Circle
+    circle: Circle,
+    drawEdgeTo(connectedNode: Vertex): void
 }
 
 export class Vertex implements IVertex {
@@ -44,4 +45,11 @@ export class Vertex implements IVertex {
     get circle(): Circle {
         return this._circle;
     }
+
+    drawEdgeTo(connectedNode: Vertex) {
+        this._circle.context.moveTo(this._circle.posX,this._circle.posY);
+        this._circle.context.lineTo(connectedNode.circle.posX,connectedNode.circle.posY);
+        this._circle.context.stroke();
+    }
+
 }
