@@ -29,8 +29,6 @@ export class Graph implements IGraph{
         for (const [theNode, edges] of this._adjList.entries()) {
             edges.forEach( connectedNodeId => {
                 let connectedNode = this.findNode(connectedNodeId);
-                // console.log(theNode);
-                // console.log(connectedNode);
                 theNode.drawEdgeTo(connectedNode);
             });
         }

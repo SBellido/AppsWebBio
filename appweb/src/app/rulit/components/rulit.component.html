@@ -1,7 +1,18 @@
-<p>Rulit test</p>
 
-<app-rulit-lab
-    [GRAPH_DATA]="this.GRAPH_DATA"
-    [GRAPH_COORDINATES]="this.GRAPH_COORDINATES">
-</app-rulit-lab>
+<section class="container">
+    
+    <app-header-dark></app-header-dark>
 
+    <div class="container__component">
+
+        <app-rulit-lab
+            [GRAPH_DATA]="this.GRAPH_DATA"
+            [GRAPH_COORDINATES]="this.GRAPH_COORDINATES">
+        </app-rulit-lab>
+        
+    </div>    
+
+
+</section>
+
+<router-outlet></router-outlet>

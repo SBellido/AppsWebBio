@@ -5,6 +5,8 @@ import { RulitComponent } from './components/rulit.component';
 import { RulitLabComponent } from './components/laberinto/rulit-lab.component';
 import { GraphService } from './bits/GraphService';
 
+import { SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
     declarations: [
@@ -12,7 +14,8 @@ import { GraphService } from './bits/GraphService';
         RulitLabComponent
     ],
     imports: [
-        RulitRoutingModule
+        RulitRoutingModule,
+        SharedModule
     ],
     exports: [
         RulitComponent

@@ -1,0 +1,13 @@
+
+.container {
+    background-color: #eeeeee;
+    width: 100%;
+    height: 100%;
+}
+
+.container__component{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-top: 2em;
+}

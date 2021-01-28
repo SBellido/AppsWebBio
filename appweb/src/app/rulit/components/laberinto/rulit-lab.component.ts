@@ -7,8 +7,7 @@ const CANVAS_HEIGHT = 450;
 
 @Component({
     selector: 'app-rulit-lab',
-    templateUrl: './rulit-lab.component.html',
-    styleUrls: ['rulit-lab.component.scss']
+    template: '<canvas #labCanvas (click)="handleClick($event)"></canvas>'
 })
 
 export class RulitLabComponent implements OnInit {
