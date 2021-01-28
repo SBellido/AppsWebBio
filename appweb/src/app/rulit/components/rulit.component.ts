@@ -6,6 +6,7 @@ import { GRAFO as GRAPH_DATA } from "../bits/dataGrafo1";
 import { GRAPH_COORDINATES } from "../bits/coordinatesGrafo1";
 import { INodeData, INodeCoordinate } from "../bits/GraphService";
 
+
 // Este componente se encarga de llevar adelante los ensayos
 // 
 // Ensayo 1:
