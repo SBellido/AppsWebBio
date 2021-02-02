@@ -41,5 +41,9 @@ export class RulitComponent implements OnInit {
        
     }
 
+    handleNewNode(theNode: number){
+        console.log('Node to be handle: ' + theNode);
+    }
+
 }
 

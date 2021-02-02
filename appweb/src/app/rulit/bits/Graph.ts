@@ -3,7 +3,7 @@ import { Vertex } from './Vertex';
 interface IGraph{
     nodes: Array<Vertex>
     addVertex(theVertex: Vertex, edges: Array<number>): void | boolean
-    findNode(theNodeId: number): Vertex
+    searchNodeById(theNodeId: number): Vertex | undefined
     draw(): void
 }
 
@@ -28,7 +28,7 @@ export class Graph implements IGraph{
     draw() {
         for (const [theNode, edges] of this._adjList.entries()) {
             edges.forEach( connectedNodeId => {
-                let connectedNode = this.findNode(connectedNodeId);
+                let connectedNode = this.searchNodeById(connectedNodeId);
                 theNode.drawEdgeTo(connectedNode);
             });
         }
@@ -36,8 +36,20 @@ export class Graph implements IGraph{
     }
 
     // Searchs for a node using an id as key
-    findNode(theNodeId: number): Vertex {
+    searchNodeById(theNodeId: number): Vertex | undefined {
         return this.nodes.find( node => theNodeId == node.id );
     }
+
+    // Searchs for a node using a point as key
+    // searchNodeInPosition(thePosition: { x: number, y: number} ): number | undefined {
+        
+    //     this.nodes.forEach( node => {
+    //         if ( node.circle.isPointInside(thePosition) ) {
+    //             console.log(node.id);
+    //             return node.id;
+    //         }
+    //     });
+    //     return undefined;
+    // }
 
 }

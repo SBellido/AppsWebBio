@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+
 import { Graph } from '../../bits/Graph';
 import { GraphService, INodeCoordinate, INodeData } from '../../bits/GraphService';
 
@@ -14,13 +15,17 @@ export class RulitLabComponent implements OnInit {
 
     @Input() GRAPH_DATA: Array<INodeData>;
     @Input() GRAPH_COORDINATES: Array<INodeCoordinate>;
+    @Output() currentNode: EventEmitter<number>;
+
     @ViewChild('labCanvas', { static: true }) 
     
     labCanvas: ElementRef<HTMLCanvasElement>;
     private context: CanvasRenderingContext2D;
     private graph: Graph;
 
-    constructor(private graphService: GraphService) {}
+    constructor(private graphService: GraphService) {
+        this.currentNode = new EventEmitter<number>();
+    }
 
     ngOnInit(): void {
         this.labCanvas.nativeElement.width = CANVAS_WIDTH;
@@ -32,13 +37,18 @@ export class RulitLabComponent implements OnInit {
         this.graph.draw();
     }
 
+    // Outputs the node clicked by the user
     handleClick(event: MouseEvent){
         let bx = this.labCanvas.nativeElement.getBoundingClientRect();
         let mousePosition = {
             x: event.clientX - bx.left,
             y: event.clientY - bx.top
         }
-        console.log( this.graph.nodes.map( node => node.circle.isPointInside( mousePosition ) ));
+        // Agregarle al grafo una funcion que devuelva el nodo clickeado y despues emitirlo.
+        
+        // this.currentNode.emit( this.graph.searchNodeInPosition(mousePosition) );
+
+        // this.graph.nodes.map( node => node.circle.isPointInside( mousePosition ));
     }
 
 }
