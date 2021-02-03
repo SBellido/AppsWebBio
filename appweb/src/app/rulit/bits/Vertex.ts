@@ -16,9 +16,12 @@ export class Vertex implements IVertex {
     constructor (private _id: number, private _esNodoInicial: boolean, 
                 private _esNodoFinal: boolean, private _visitado: boolean,
                 theX: number, theY: number, theContext: CanvasRenderingContext2D){
-                    this._circle = new Circle(25,theX,theY,"#000",theContext);
+                    this._circle = new Circle(20,theX,theY,"#000",theContext);
                     if (_esNodoInicial){
                         this._circle.fill = "#008F39"; // verde
+                    }
+                    if (_esNodoFinal){
+                        this._circle.fill = "#ffcf02"; // amarillo
                     }
                 }
     

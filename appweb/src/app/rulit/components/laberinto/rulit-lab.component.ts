@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 
-import { Graph } from '../../bits/Graph';
-import { GraphService, INodeCoordinate, INodeData } from '../../bits/GraphService';
+import { Graph, IGraphNode } from '../../bits/Graph';
+import { GraphService } from '../../bits/GraphService';
 
-const CANVAS_WIDTH = 650;
-const CANVAS_HEIGHT = 450;
+const CANVAS_WIDTH = 652;
+const CANVAS_HEIGHT = 472;
 
 @Component({
     selector: 'app-rulit-lab',
@@ -13,8 +13,7 @@ const CANVAS_HEIGHT = 450;
 
 export class RulitLabComponent implements OnInit {
 
-    @Input() GRAPH_DATA: Array<INodeData>;
-    @Input() GRAPH_COORDINATES: Array<INodeCoordinate>;
+    @Input() GRAPH_DATA: Array<IGraphNode>;
     @Output() currentNode: EventEmitter<number>;
 
     @ViewChild('labCanvas', { static: true }) 
@@ -31,8 +30,8 @@ export class RulitLabComponent implements OnInit {
         this.labCanvas.nativeElement.width = CANVAS_WIDTH;
         this.labCanvas.nativeElement.height = CANVAS_HEIGHT;
         this.context = this.labCanvas.nativeElement.getContext('2d');
-        this.context.moveTo(0,0);
-        this.context.save();
+        // this.context.moveTo(2,2);
+        // this.context.save();
         this.graph = this.graphService.buildGraph(this.GRAPH_DATA,this.context);
         this.graph.draw();
     }

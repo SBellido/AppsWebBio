@@ -1,41 +1,29 @@
-import { Graph } from "./Graph";
+import { Graph, IGraphNode } from "./Graph";
 import { Vertex } from "./Vertex";
 
-export interface INodeData {
-    id: number,
-    esNodoInicial: boolean,
-    esNodoFinal: boolean,
-    vecinos: Array<number>
-}
-
-export interface INodeCoordinate {
-    id: number,
-    posX: number,
-    posY: number
-}
 
 export class GraphService {
     
-    buildGraph(GRAPH_DATA: Array<INodeData>, theContext: CanvasRenderingContext2D): Graph{
+    buildGraph(GRAPH_DATA: Array<IGraphNode>, theContext: CanvasRenderingContext2D): Graph{
         let newGraph = new Graph(theContext);
         
         GRAPH_DATA.forEach( nodeData => { 
             // Agrego los nodos y las aristas
             let newNode = this.buildNode(nodeData, theContext);
-            newGraph.addVertex(newNode, nodeData.vecinos);
+            newGraph.addVertex(newNode, nodeData.edges);
         });
         
         return newGraph;
     }
     
-    private buildNode( nodeData: INodeData, theContext: CanvasRenderingContext2D): Vertex{
+    private buildNode( nodeData: IGraphNode, theContext: CanvasRenderingContext2D): Vertex{
         return new Vertex(
             nodeData.id,
-            nodeData.esNodoInicial, 
-            nodeData.esNodoFinal,
+            nodeData.isFirstNode, 
+            nodeData.isLastNode,
             false,
-            Math.random() * 600,
-            Math.random() * 450,
+            nodeData.column * 34,
+            nodeData.row * 34,
             theContext
         );
     }

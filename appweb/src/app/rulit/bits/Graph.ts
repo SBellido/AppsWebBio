@@ -1,6 +1,21 @@
 import { Vertex } from './Vertex';
 
-interface IGraph{
+// Coordinates types for a 13 rows x 18 columns grid
+type GraphRowNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 ;
+type GraphColumnNumber =  1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18;
+
+// Graphs nodes fields
+export interface IGraphNode {
+    id: number,
+    isFirstNode: boolean,
+    isLastNode: boolean,
+    edges: Array<number>,
+    row: GraphRowNumber,
+    column: GraphColumnNumber
+}
+
+// Graph
+interface IGraph {
     nodes: Array<Vertex>
     addVertex(theVertex: Vertex, edges: Array<number>): void | boolean
     searchNodeById(theNodeId: number): Vertex | undefined
@@ -24,7 +39,7 @@ export class Graph implements IGraph{
         return Array.from(this._adjList.keys());
     }
 
-    // Draws edges first and then the nodes
+    // Draws edges first and then nodes
     draw() {
         for (const [theNode, edges] of this._adjList.entries()) {
             edges.forEach( connectedNodeId => {

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { IGraphNode } from '../bits/Graph';
 
 //
-import { GRAFO as GRAPH_DATA } from "../bits/dataGrafo1";
-// import { GRAFO as GRAPH_DATA } from "../bits/dataGrafo1_testing";
-import { GRAPH_COORDINATES } from "../bits/coordinatesGrafo1";
-import { INodeData, INodeCoordinate } from "../bits/GraphService";
+// import { GRAPH as GRAPH_DATA } from "../bits/graphs_available/Graph1_data";
+import { GRAPH as GRAPH_DATA } from "../bits/graphs_available/Graph1_data_testing";
 
 
 // Este componente se encarga de llevar adelante los ensayos
@@ -29,12 +28,10 @@ import { INodeData, INodeCoordinate } from "../bits/GraphService";
 
 export class RulitComponent implements OnInit {
 
-    GRAPH_DATA: Array<INodeData>;
-    GRAPH_COORDINATES: Array<INodeCoordinate>;
+    GRAPH_DATA: Array<IGraphNode>;
 
     constructor() { 
         this.GRAPH_DATA = GRAPH_DATA;
-        this.GRAPH_COORDINATES = GRAPH_COORDINATES;
     }
 
     ngOnInit(): void {
