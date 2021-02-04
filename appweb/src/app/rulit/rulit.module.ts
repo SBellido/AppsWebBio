@@ -8,6 +8,7 @@ import { RulitInstructionsComponent } from './components/instructions/rulit-inst
 import { GraphService } from './bits/GraphService';
 
 import { SharedModule } from '../shared/shared.module';
+import { TestService } from './bits/TestService';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { SharedModule } from '../shared/shared.module';
         RulitComponent,
         RulitInstructionsComponent
     ],
-    providers: [GraphService]
+    providers: [GraphService, TestService]
 })
 
 export class RulitModule {}

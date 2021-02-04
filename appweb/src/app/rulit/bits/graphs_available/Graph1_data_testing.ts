@@ -6,23 +6,23 @@ export const GRAPH: Array<IGraphNode> = [
         isFirstNode: false,
         isLastNode: false,
         edges: [2, 11],
-        row: 1,
-        column: 3
+        row: 2,
+        column: 4
     },
     {
         id: 2,
         isFirstNode: false,
         isLastNode: false,
-        edges: [1,3],
-        row: 2,
-        column: 5
+        edges: [1, 3, 11, 12],
+        row: 3,
+        column: 6
     },
     {
         id: 3,
         isFirstNode: false,
         isLastNode: false,
         edges: [2, 4, 12, 17],
-        row: 4,
+        row: 5,
         column: 8
     },
     {
@@ -39,13 +39,13 @@ export const GRAPH: Array<IGraphNode> = [
         isLastNode: false,
         edges: [4, 6],
         row: 1,
-        column: 12
+        column: 11
     },
     {
         id: 6,
         isFirstNode: false,
         isLastNode: false,      
-        edges: [5],
+        edges: [5, 7, 8],
         row: 4,
         column: 14
     },
@@ -53,8 +53,8 @@ export const GRAPH: Array<IGraphNode> = [
         id: 7,
         isFirstNode: false,
         isLastNode: true,
-        edges: [6],
-        row: 6,
+        edges: [6, 8],
+        row: 7,
         column: 14
     },
     {
@@ -78,23 +78,23 @@ export const GRAPH: Array<IGraphNode> = [
         isFirstNode: false,
         isLastNode: false,
         edges: [9, 19],
-        row: 4,
+        row: 3,
         column: 18
     },
     {
         id: 11,
         isFirstNode: false,
         isLastNode: false,
-        edges: [1, 2, 14],
-        row: 4,
-        column: 3
+        edges: [1, 2, 12, 14, 15],
+        row: 5,
+        column: 4
     },
     {
         id: 12,
         isFirstNode: false,
         isLastNode: false,
         edges: [2, 3, 11, 13],
-        row: 5,
+        row: 6,
         column: 6
     },
     {
@@ -110,7 +110,7 @@ export const GRAPH: Array<IGraphNode> = [
         isFirstNode: false,
         isLastNode: false,
         edges: [11, 15, 20, 21],
-        row: 7,
+        row: 8,
         column: 2
     },
     {
@@ -118,16 +118,16 @@ export const GRAPH: Array<IGraphNode> = [
         isFirstNode: false,
         isLastNode: false,
         edges: [11, 14, 16, 21],
-        row: 8,
-        column: 4
+        row: 9,
+        column: 5
     },
     {
         id: 16,
         isFirstNode: false,
         isLastNode: false,
-        edges: [15, 16, 17, 22],
+        edges: [15, 17, 22],
         row: 10,
-        column: 9
+        column: 10
     },
     {
         id: 17,
@@ -135,7 +135,7 @@ export const GRAPH: Array<IGraphNode> = [
         isLastNode: false,
         edges: [3, 16, 18],
         row: 7,
-        column: 10
+        column: 11
     },
     {
         id: 18,
@@ -151,23 +151,23 @@ export const GRAPH: Array<IGraphNode> = [
         isLastNode: false,
         edges: [8, 10, 18, 23],
         row: 9,
-        column: 18
+        column: 17
     },
     {
         id: 20,
         isFirstNode: false,
         isLastNode: false,
         edges: [14, 21],
-        row: 10,
-        column: 1
+        row: 11,
+        column: 2
     },
     {
         id: 21,
         isFirstNode: false,
         isLastNode: false,
         edges: [14, 15, 20],
-        row: 11,
-        column: 3
+        row: 12,
+        column: 4
     },
     {
         id: 22,
@@ -175,7 +175,7 @@ export const GRAPH: Array<IGraphNode> = [
         isLastNode: false,
         edges: [16, 18, 23],
         row: 13,
-        column: 10
+        column: 9
     },
     {
         id: 23,

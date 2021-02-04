@@ -17,14 +17,17 @@ export interface IGraphNode {
 // Graph
 interface IGraph {
     nodes: Array<Vertex>
+    currentNode: Vertex
     addVertex(theVertex: Vertex, edges: Array<number>): void | boolean
-    searchNodeById(theNodeId: number): Vertex | undefined
+    getNodeById(theNodeId: number): Vertex | undefined
+    getNodeAtPosition(thePosition: { x: number, y: number} ): number | undefined
     draw(): void
 }
 
 export class Graph implements IGraph{
     
     private _adjList: Map<Vertex,Array<number>>;
+    private _currentNode: Vertex;
 
     constructor( private _context: CanvasRenderingContext2D ){
         this._adjList = new Map<Vertex,Array<number>>();
@@ -39,11 +42,23 @@ export class Graph implements IGraph{
         return Array.from(this._adjList.keys());
     }
 
+    // Return the current active node
+    get currentNode(){
+        return this._currentNode;
+    }
+
+    set currentNode( theNode: Vertex ){
+        // Set active to false for all nodes
+        this.nodes.map( node => node.active = false);
+        // Set current node
+        this._currentNode = theNode;
+    }
+
     // Draws edges first and then nodes
     draw() {
         for (const [theNode, edges] of this._adjList.entries()) {
             edges.forEach( connectedNodeId => {
-                let connectedNode = this.searchNodeById(connectedNodeId);
+                let connectedNode = this.getNodeById(connectedNodeId);
                 theNode.drawEdgeTo(connectedNode);
             });
         }
@@ -51,20 +66,23 @@ export class Graph implements IGraph{
     }
 
     // Searchs for a node using an id as key
-    searchNodeById(theNodeId: number): Vertex | undefined {
+    getNodeById(theNodeId: number): Vertex | undefined {
         return this.nodes.find( node => theNodeId == node.id );
     }
 
     // Searchs for a node using a point as key
-    // searchNodeInPosition(thePosition: { x: number, y: number} ): number | undefined {
+    getNodeAtPosition(thePosition: { x: number, y: number} ): number | undefined{
         
-    //     this.nodes.forEach( node => {
-    //         if ( node.circle.isPointInside(thePosition) ) {
-    //             console.log(node.id);
-    //             return node.id;
-    //         }
-    //     });
-    //     return undefined;
-    // }
+        let theNode: number;
+
+        this.nodes.forEach( node => {
+            if ( node.circle.isPointInside(thePosition) ) {
+                theNode = node.id;
+            }
+        });
+
+        return theNode ? theNode : undefined;
+
+    }
 
 }

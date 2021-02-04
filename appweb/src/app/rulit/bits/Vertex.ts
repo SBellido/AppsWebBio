@@ -2,9 +2,9 @@ import { Circle } from "./Circle";
 
 interface IVertex {
     id: number,
-    esNodoInicial: boolean,
-    esNodoFinal: boolean,
-    visitado: boolean,
+    isFirstNode: boolean,
+    isLastNode: boolean,
+    active: boolean,
     circle: Circle,
     drawEdgeTo(connectedNode: Vertex): void
 }
@@ -13,14 +13,14 @@ export class Vertex implements IVertex {
 
     private _circle: Circle;
 
-    constructor (private _id: number, private _esNodoInicial: boolean, 
-                private _esNodoFinal: boolean, private _visitado: boolean,
+    constructor (private _id: number, private _isFirstNode: boolean, 
+                private _isLastNode: boolean, private _active: boolean,
                 theX: number, theY: number, theContext: CanvasRenderingContext2D){
                     this._circle = new Circle(20,theX,theY,"#000",theContext);
-                    if (_esNodoInicial){
+                    if (_isFirstNode){
                         this._circle.fill = "#008F39"; // verde
                     }
-                    if (_esNodoFinal){
+                    if (_isLastNode){
                         this._circle.fill = "#ffcf02"; // amarillo
                     }
                 }
@@ -29,21 +29,21 @@ export class Vertex implements IVertex {
         return this._id;
     }
 
-    get visitado(): boolean {
-        return this._visitado;
+    get active(): boolean {
+        return this._active;
     }
 
-    set visitado(e:boolean) {
+    set active(e:boolean) {
         this._circle.fill = "#008F39"; // verde
-        this._visitado = e;
+        this._active = e;
     }
 
-    get esNodoInicial(): boolean {
-        return this._esNodoInicial;
+    get isFirstNode(): boolean {
+        return this._isFirstNode;
     }
 
-    get esNodoFinal(): boolean {
-        return this._esNodoFinal;
+    get isLastNode(): boolean {
+        return this._isLastNode;
     }
     
     get circle(): Circle {
