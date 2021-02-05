@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { Graph, IGraphNode } from "./Graph";
-import { GraphService } from "./GraphService";
+import { Graph } from "./Graph";
 
 
 
@@ -10,21 +8,24 @@ export class TestService {
 
     private _graph: Graph;
 
-    constructor (private graphService: GraphService){}
+    constructor(){}
 
-    buildGraph(graphData: Array<IGraphNode>, theContext: CanvasRenderingContext2D): void {
-        this._graph = this.graphService.buildGraph(graphData,theContext);
+    get graph(): Graph{
+        return this._graph;
     }
 
-    drawGraph(): void{
-        this._graph.draw();
+    set graph(theGraph: Graph){
+        this._graph = theGraph;
     }
 
-    handleNewMove(thePosition: { x: number, y: number }): void {
+    handleNewMove(clientX: number, clientY: number ): void {
         
-        let node = this._graph.getNodeAtPosition(thePosition);
-        this._graph.currentNode = node;
-        this.drawGraph();
+        let node = this._graph.getNodeAtPosition(clientX,clientY);
+
+        if (node){
+            this._graph.currentNode = node;
+            this._graph.draw();
+        }
 
     }
 

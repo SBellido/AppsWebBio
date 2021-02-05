@@ -2,8 +2,7 @@ interface IFigure2d {
     posX: number,
     posY: number,
     fill,
-    context: CanvasRenderingContext2D,
-    draw(): void
+    draw(theContext: CanvasRenderingContext2D): void
 }
 
 export class Figure2d implements IFigure2d {
@@ -11,8 +10,7 @@ export class Figure2d implements IFigure2d {
     constructor (
         private _posX: number, 
         private _posY: number, 
-        private _fill, 
-        private _context: CanvasRenderingContext2D
+        private _fill
     ){}
 
     get posX () {
@@ -38,13 +36,9 @@ export class Figure2d implements IFigure2d {
     set fill (theFill) {
         this._fill = theFill;
     }
-
-    get context(){
-        return this._context;
-    }
     
-    draw () {
-        this._context.fillStyle = this._fill;
+    draw (theContext: CanvasRenderingContext2D) {
+        theContext.fillStyle = this._fill;
     }
 
 }

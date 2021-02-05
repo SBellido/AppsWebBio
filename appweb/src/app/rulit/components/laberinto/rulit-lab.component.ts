@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { IGraphNode } from '../../bits/Graph';
+import { GraphService } from '../../bits/GraphService';
 import { TestService } from '../../bits/TestService';
 
 const CANVAS_WIDTH = 652;
@@ -17,31 +18,27 @@ export class RulitLabComponent implements OnInit {
 
     @ViewChild('labCanvas', { static: true }) 
     
-    labCanvas: ElementRef<HTMLCanvasElement>;
-    private context: CanvasRenderingContext2D;
+    private _labCanvas: ElementRef<HTMLCanvasElement>;
 
-    constructor(private testService: TestService) {}
+    constructor(private _testService: TestService,
+                private _graphService: GraphService) {}
 
     ngOnInit(): void {
 
-        this.labCanvas.nativeElement.width = CANVAS_WIDTH;
-        this.labCanvas.nativeElement.height = CANVAS_HEIGHT;
-        this.context = this.labCanvas.nativeElement.getContext('2d');
+        this._labCanvas.nativeElement.width = CANVAS_WIDTH;
+        this._labCanvas.nativeElement.height = CANVAS_HEIGHT;
         
-        this.testService.buildGraph(this.GRAPH_DATA,this.context);
-        this.testService.drawGraph();
+        let newGraph = this._graphService.buildGraph(this.GRAPH_DATA,this._labCanvas);
+        
+        this._testService.graph = newGraph;
+
+        this._testService.graph.draw();
+        
     }
 
     // Handles user new move
     handleClick(event: MouseEvent){
-        let bx = this.labCanvas.nativeElement.getBoundingClientRect();
-        let mousePosition = {
-            x: event.clientX - bx.left,
-            y: event.clientY - bx.top
-        }
-
-        this.testService.handleNewMove(mousePosition);
-
+        this._testService.handleNewMove(event.clientX,event.clientY);
     }
 
 }

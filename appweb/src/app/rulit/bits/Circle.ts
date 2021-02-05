@@ -5,14 +5,14 @@ interface ICircle {
     posY: number,
     radius: number,
     fill,
-    draw(): void,
+    draw(theContext: CanvasRenderingContext2D): void,
     isPointInside(thePoint: { x: number, y: number}): boolean
 }
 
 export class Circle extends Figure2d implements ICircle{
 
-    constructor(private _radius: number, theX: number, theY: number, theFill, theContext: CanvasRenderingContext2D){
-        super(theX,theY,theFill,theContext);
+    constructor(private _radius: number, theX: number, theY: number, theFill){
+        super(theX,theY,theFill);
     }
 
     get radius(){
@@ -25,17 +25,17 @@ export class Circle extends Figure2d implements ICircle{
         }
     }
 
-    draw(){
+    draw(theContext: CanvasRenderingContext2D){
 
-        super.draw();
+        super.draw(theContext);
 
-        this.context.beginPath();
-        this.context.arc(this.posX,this.posY,this.radius, 0, 2 * Math.PI);
-        this.context.fill();
+        theContext.beginPath();
+        theContext.arc(this.posX,this.posY,this.radius, 0, 2 * Math.PI);
+        theContext.fill();
 
-        this.context.closePath();
+        theContext.closePath();
 
-        this.context.restore();
+        theContext.restore();
 
     }
 

@@ -1,3 +1,4 @@
+import { ElementRef } from '@angular/core';
 import { Vertex } from './Vertex';
 
 // Coordinates types for a 13 rows x 18 columns grid
@@ -20,7 +21,7 @@ interface IGraph {
     currentNode: Vertex
     addVertex(theVertex: Vertex, edges: Array<number>): void | boolean
     getNodeById(theNodeId: number): Vertex | undefined
-    getNodeAtPosition(thePosition: { x: number, y: number} ): Vertex | undefined
+    getNodeAtPosition(clientX: number,clientY: number ): Vertex | undefined
     draw(): void
 }
 
@@ -28,9 +29,11 @@ export class Graph implements IGraph{
     
     private _adjList: Map<Vertex,Array<number>>;
     private _currentNode: Vertex; 
+    private _context: CanvasRenderingContext2D;
 
-    constructor( private _context: CanvasRenderingContext2D ){
+    constructor( private _canvas: ElementRef<HTMLCanvasElement> ){
         this._adjList = new Map<Vertex,Array<number>>();
+        this._context = this._canvas.nativeElement.getContext("2d");
     }
 
     addVertex(theVertex: Vertex, edges: Array<number>) {
@@ -56,15 +59,30 @@ export class Graph implements IGraph{
 
     // Draws edges first and then nodes
     draw() {
-        this._context.clearRect(0, 0, 652, 472);
 
+        // Clear canvas
+        let canvasRect = this._canvas.nativeElement.getBoundingClientRect();
+        this._context.clearRect(0, 0, canvasRect.width, canvasRect.height);
+
+        // Draw edges of each node
         for (const [theNode, edges] of this._adjList.entries()) {
             edges.forEach( connectedNodeId => {
                 let connectedNode = this.getNodeById(connectedNodeId);
-                theNode.drawEdgeTo(connectedNode);
+                this.drawEdgeBetween(theNode,connectedNode);
             });
         }
-        this.nodes.forEach(node => node.circle.draw());
+
+        // Draw nodes
+        this.nodes.forEach(node => node.circle.draw(this._context));
+    }
+    
+    private drawEdgeBetween(theNode: Vertex, connectedNode: Vertex) {
+        this._context.beginPath();
+        this._context.moveTo(theNode.circle.posX, theNode.circle.posY);
+        this._context.lineTo(connectedNode.circle.posX,connectedNode.circle.posY);
+        this._context.stroke();
+        this._context.closePath();
+        this._context.restore();
     }
 
     // Searchs for a node using an id as key
@@ -72,9 +90,16 @@ export class Graph implements IGraph{
         return this.nodes.find( node => theNodeId == node.id );
     }
 
-    // Searchs for a node using a point as key
-    getNodeAtPosition(thePosition: { x: number, y: number} ): Vertex | undefined{
+    // Searchs canvas for a node using event absolute coordinates
+    getNodeAtPosition( clientX: number, clientY: number ): Vertex | undefined {
         
+        let canvasRect = this._canvas.nativeElement.getBoundingClientRect();
+
+        let thePosition = {
+            x: clientX - canvasRect.left,
+            y: clientY - canvasRect.top
+        }
+
         let theNode: Vertex;
 
         this.nodes.forEach( node => {

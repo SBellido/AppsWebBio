@@ -5,24 +5,20 @@ interface IVertex {
     isFirstNode: boolean,
     isLastNode: boolean,
     isActive: boolean,
-    circle: Circle,
-    drawEdgeTo(connectedNode: Vertex): void
+    circle: Circle
 }
 
 export class Vertex implements IVertex {
 
     private _circle: Circle;
 
-    constructor (private _id: number, private _isFirstNode: boolean, 
-                private _isLastNode: boolean, private _isActive: boolean,
-                theX: number, theY: number, theContext: CanvasRenderingContext2D){
-                    this._circle = new Circle(20,theX,theY,"#000",theContext);
-                    // if (_isFirstNode){
-                    //     this._circle.fill = "#008F39"; // verde
-                    // }
-                    // if (_isLastNode){
-                    //     this._circle.fill = "#ffcf02"; // amarillo
-                    // }
+    constructor (   private _id: number, 
+                    private _isFirstNode: boolean, 
+                    private _isLastNode: boolean, 
+                    private _isActive: boolean,
+                    theX: number, 
+                    theY: number ){
+                    this._circle = new Circle(20,theX,theY,"#000");
                 }
     
     get id(): number {
@@ -48,15 +44,6 @@ export class Vertex implements IVertex {
     
     get circle(): Circle {
         return this._circle;
-    }
-
-    drawEdgeTo(connectedNode: Vertex) {
-        this._circle.context.moveTo(this._circle.posX,this._circle.posY);
-        this._circle.context.lineTo(connectedNode.circle.posX,connectedNode.circle.posY);
-        this._circle.context.lineWidth = 1;
-        this._circle.context.stroke();
-        this._circle.context.closePath();
-        this._circle.context.restore();
     }
 
 }
