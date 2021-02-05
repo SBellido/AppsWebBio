@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { Graph, IGraphNode } from "./Graph";
 import { GraphService } from "./GraphService";
 
@@ -20,7 +21,11 @@ export class TestService {
     }
 
     handleNewMove(thePosition: { x: number, y: number }): void {
-        console.log( this._graph.getNodeAtPosition(thePosition) );
+        
+        let node = this._graph.getNodeAtPosition(thePosition);
+        this._graph.currentNode = node;
+        this.drawGraph();
+
     }
 
 }

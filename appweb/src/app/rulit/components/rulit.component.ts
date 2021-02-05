@@ -4,6 +4,7 @@ import { IGraphNode } from '../bits/Graph';
 //
 // import { GRAPH as GRAPH_DATA } from "../bits/graphs_available/Graph1_data";
 import { GRAPH as GRAPH_DATA } from "../bits/graphs_available/Graph1_data_testing";
+import { TestService } from '../bits/TestService';
 
 
 // Este componente se encarga de llevar adelante los ensayos
@@ -30,16 +31,11 @@ export class RulitComponent implements OnInit {
 
     GRAPH_DATA: Array<IGraphNode>;
 
-    constructor() { 
+    constructor(private testService: TestService) { 
         this.GRAPH_DATA = GRAPH_DATA;
     }
 
     ngOnInit(): void {
-       
-    }
-
-    handleNewNode(theNode: number){
-        console.log('Node to be handle: ' + theNode);
     }
 
 }

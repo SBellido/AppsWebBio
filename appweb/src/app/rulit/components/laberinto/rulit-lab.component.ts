@@ -23,6 +23,7 @@ export class RulitLabComponent implements OnInit {
     constructor(private testService: TestService) {}
 
     ngOnInit(): void {
+
         this.labCanvas.nativeElement.width = CANVAS_WIDTH;
         this.labCanvas.nativeElement.height = CANVAS_HEIGHT;
         this.context = this.labCanvas.nativeElement.getContext('2d');

@@ -20,14 +20,14 @@ interface IGraph {
     currentNode: Vertex
     addVertex(theVertex: Vertex, edges: Array<number>): void | boolean
     getNodeById(theNodeId: number): Vertex | undefined
-    getNodeAtPosition(thePosition: { x: number, y: number} ): number | undefined
+    getNodeAtPosition(thePosition: { x: number, y: number} ): Vertex | undefined
     draw(): void
 }
 
 export class Graph implements IGraph{
     
     private _adjList: Map<Vertex,Array<number>>;
-    private _currentNode: Vertex;
+    private _currentNode: Vertex; 
 
     constructor( private _context: CanvasRenderingContext2D ){
         this._adjList = new Map<Vertex,Array<number>>();
@@ -49,13 +49,15 @@ export class Graph implements IGraph{
 
     set currentNode( theNode: Vertex ){
         // Set active to false for all nodes
-        this.nodes.map( node => node.active = false);
+        this.nodes.map( node => node.id == theNode.id ? node.isActive = true : node.isActive = false);
         // Set current node
         this._currentNode = theNode;
     }
 
     // Draws edges first and then nodes
     draw() {
+        this._context.clearRect(0, 0, 652, 472);
+
         for (const [theNode, edges] of this._adjList.entries()) {
             edges.forEach( connectedNodeId => {
                 let connectedNode = this.getNodeById(connectedNodeId);
@@ -71,13 +73,13 @@ export class Graph implements IGraph{
     }
 
     // Searchs for a node using a point as key
-    getNodeAtPosition(thePosition: { x: number, y: number} ): number | undefined{
+    getNodeAtPosition(thePosition: { x: number, y: number} ): Vertex | undefined{
         
-        let theNode: number;
+        let theNode: Vertex;
 
         this.nodes.forEach( node => {
             if ( node.circle.isPointInside(thePosition) ) {
-                theNode = node.id;
+                theNode = node;
             }
         });
 

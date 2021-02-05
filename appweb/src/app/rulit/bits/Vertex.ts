@@ -4,7 +4,7 @@ interface IVertex {
     id: number,
     isFirstNode: boolean,
     isLastNode: boolean,
-    active: boolean,
+    isActive: boolean,
     circle: Circle,
     drawEdgeTo(connectedNode: Vertex): void
 }
@@ -14,28 +14,28 @@ export class Vertex implements IVertex {
     private _circle: Circle;
 
     constructor (private _id: number, private _isFirstNode: boolean, 
-                private _isLastNode: boolean, private _active: boolean,
+                private _isLastNode: boolean, private _isActive: boolean,
                 theX: number, theY: number, theContext: CanvasRenderingContext2D){
                     this._circle = new Circle(20,theX,theY,"#000",theContext);
-                    if (_isFirstNode){
-                        this._circle.fill = "#008F39"; // verde
-                    }
-                    if (_isLastNode){
-                        this._circle.fill = "#ffcf02"; // amarillo
-                    }
+                    // if (_isFirstNode){
+                    //     this._circle.fill = "#008F39"; // verde
+                    // }
+                    // if (_isLastNode){
+                    //     this._circle.fill = "#ffcf02"; // amarillo
+                    // }
                 }
     
     get id(): number {
         return this._id;
     }
 
-    get active(): boolean {
-        return this._active;
+    get isActive(): boolean {
+        return this._isActive;
     }
 
-    set active(e:boolean) {
-        this._circle.fill = "#008F39"; // verde
-        this._active = e;
+    set isActive(e:boolean) {
+        e ? this._circle.fill = "#008F39" : this._circle.fill = "#000"; 
+        this._isActive = e;
     }
 
     get isFirstNode(): boolean {
