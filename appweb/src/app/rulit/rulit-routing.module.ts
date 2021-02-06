@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { RulitComponent } from './components/rulit.component';
+import { RulitTestComponent } from './components/rulit-test/rulit-test.component';
 import { RulitInstructionsComponent } from './components/instructions/rulit-instructions.component';
 
 const routes: Routes = [
@@ -21,7 +21,7 @@ const routes: Routes = [
     },
     {
         path: 'test',
-        component: RulitComponent
+        component: RulitTestComponent
     }
 ];
 

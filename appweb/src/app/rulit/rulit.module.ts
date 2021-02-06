@@ -3,18 +3,28 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 
 import { RulitRoutingModule } from './rulit-routing.module';
-import { RulitComponent } from './components/rulit.component';
-import { RulitLabComponent } from './components/laberinto/rulit-lab.component';
+import { RulitTestComponent } from './components/rulit-test/rulit-test.component';
 import { RulitInstructionsComponent } from './components/instructions/rulit-instructions.component';
 
-import { TestService } from './bits/TestService';
 import { Graph } from './bits/Graph';
 
+// Este modulo se encarga de llevar adelante los test RULIT
+// 
+// Ensayo 1:
+//          - Mostrar instrucciones (instructions component)
+//          - Datos usuario
+//          - Aprendizaje
+//          - Test 1 (memoria a corto plazo)
+//
+// Ensayo 2: 
+//          - Buscar datos de usuario (segun url ej. /rulit/<<idUsuario>>)
+//          - Test 2 (memoria a largo plazo)
+//
+// Guardar resultados.
 
 @NgModule({
     declarations: [
-        RulitComponent,
-        RulitLabComponent,
+        RulitTestComponent,
         RulitInstructionsComponent
     ],
     imports: [
@@ -22,10 +32,10 @@ import { Graph } from './bits/Graph';
         SharedModule
     ],
     exports: [
-        RulitComponent,
+        RulitTestComponent,
         RulitInstructionsComponent
     ],
-    providers: [TestService, Graph]
+    providers: [Graph]
 })
 
 export class RulitModule {}

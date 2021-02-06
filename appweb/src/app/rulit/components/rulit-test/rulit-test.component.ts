@@ -1,21 +1,24 @@
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 
 import { IGraphNode } from '../../bits/Graph';
 import { buildGraph } from '../../bits/GraphUtils';
 import { TestService } from '../../bits/TestService';
 
+import { GRAPH as GRAPH_DATA } from "../../bits/graphs_available/Graph1_data_testing";
+
 const CANVAS_WIDTH = 652;
 const CANVAS_HEIGHT = 472;
 
 @Component({
-    selector: 'app-rulit-lab',
-    template: '<canvas #labCanvas></canvas>'
+    selector: 'app-rulit-test',
+    templateUrl: './rulit-test.component.html',
+    styleUrls: ['../rulit.component.scss']
 })
 
-export class RulitLabComponent implements OnInit {
+export class RulitTestComponent implements OnInit {
 
-    @Input() GRAPH_DATA: Array<IGraphNode>;
+    private GRAPH_DATA: Array<IGraphNode>;
 
     @ViewChild('labCanvas', { static: true }) 
     
@@ -24,7 +27,9 @@ export class RulitLabComponent implements OnInit {
 
     private clickCanvas: Observable<Event>;
     
-    constructor() {}
+    constructor() {
+        this.GRAPH_DATA = GRAPH_DATA;
+    }
 
     ngOnInit(): void {
 

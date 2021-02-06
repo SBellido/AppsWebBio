@@ -1,5 +1,10 @@
 import { IGraphNode } from "../Graph";
 
+// This file exports two objects:
+//      - Graph: represented by an array of nodes.
+//      - Solution: represented by (TBC)
+//          - TODO: accept multiple solutions
+
 export const GRAPH: Array<IGraphNode> = [
     {
         id: 1,
@@ -186,3 +191,6 @@ export const GRAPH: Array<IGraphNode> = [
         column: 15
     }
 ]
+
+export const SOLUTION: Array<number> = [13,12,11,2,3,17,18,22,16,17,18,19,10,9,8,7];
+
