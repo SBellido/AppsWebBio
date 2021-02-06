@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 
 import { IGraphNode } from '../../bits/Graph';
-import { GraphService } from '../../bits/GraphService';
+import { buildGraph } from '../../bits/GraphUtils';
 import { TestService } from '../../bits/TestService';
 
 const CANVAS_WIDTH = 652;
@@ -21,7 +21,6 @@ export class RulitLabComponent implements OnInit {
     
     private labCanvas: ElementRef<HTMLCanvasElement>;
     private testService: TestService;
-    private graphService: GraphService = new GraphService();
 
     private clickCanvas: Observable<Event>;
     
@@ -32,7 +31,7 @@ export class RulitLabComponent implements OnInit {
         this.labCanvas.nativeElement.width = CANVAS_WIDTH;
         this.labCanvas.nativeElement.height = CANVAS_HEIGHT;
         
-        let newGraph = this.graphService.buildGraph(this.GRAPH_DATA,this.labCanvas);
+        let newGraph = buildGraph(this.GRAPH_DATA,this.labCanvas);
         
         this.testService = new TestService(newGraph);
         

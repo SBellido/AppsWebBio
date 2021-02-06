@@ -8,12 +8,12 @@ import { Vertex } from "./Vertex";
 export class TestService {
 
     // Test Service depends on:
-    //      - A graph
-    //      - A user
-    constructor(private _graph: Graph){}
+    //      - Graph
+    //      - User
+    constructor(private graph: Graph){}
 
     get graphCurrentNode$(): Observable<Vertex>{
-        return this._graph.currentNode$;
+        return this.graph.currentNode$;
     }
 
     // Handles user move:
@@ -26,14 +26,14 @@ export class TestService {
     //      - Update current active node in graph. (Done)
     handleNewMove(clientX: number, clientY: number ): void {
         
-        let newNode = this._graph.getNodeAtPosition(clientX,clientY);
+        let newNode = this.graph.getNodeAtPosition(clientX,clientY);
 
         if (newNode){
-            if ( ! this._graph.currentNode ) {
-                newNode.isFirstNode ? this._graph.currentNode = newNode 
+            if ( ! this.graph.currentNode ) {
+                newNode.isFirstNode ? this.graph.currentNode = newNode 
                     : console.log("Must click first node"); // TBC
             } else {
-                this._graph.isCurrentNodeConnectedTo(newNode) ? this._graph.currentNode = newNode 
+                this.graph.isCurrentNodeConnectedTo(newNode) ? this.graph.currentNode = newNode 
                     : console.log("New node isnt connected"); // TBC
             }
         }
@@ -41,7 +41,7 @@ export class TestService {
     }
 
     drawGraph(): void {
-        this._graph.draw();
+        this.graph.draw();
     }
 
 }

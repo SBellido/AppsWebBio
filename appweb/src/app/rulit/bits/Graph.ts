@@ -32,30 +32,30 @@ interface IGraph {
 @Injectable()
 export class Graph implements IGraph{
     
-    private _adjList: Map<Vertex,Array<number>>;
+    private adjList: Map<Vertex,Array<number>>;
     private _currentNode: Vertex;
     private currentNodeChange$ = new Subject<Vertex>();
     public currentNode$ = this.currentNodeChange$.asObservable();
     
     private _canvas: ElementRef<HTMLCanvasElement>;
-    private _context: CanvasRenderingContext2D;
+    private context: CanvasRenderingContext2D;
 
     constructor(){
-        this._adjList = new Map<Vertex,Array<number>>();
+        this.adjList = new Map<Vertex,Array<number>>();
     }
 
     set canvas(theCanvas: ElementRef<HTMLCanvasElement>){
         this._canvas = theCanvas;
-        this._context = this._canvas.nativeElement.getContext("2d");
+        this.context = this._canvas.nativeElement.getContext("2d");
     }
 
     addVertex(theVertex: Vertex, edges: Array<number>) {
-        this._adjList.set(theVertex,edges);
+        this.adjList.set(theVertex,edges);
     }
 
     // Returns all nodes in an array
     get nodes(): Array<Vertex> {
-        return Array.from(this._adjList.keys());
+        return Array.from(this.adjList.keys());
     }
 
     // Return the current active node
@@ -78,10 +78,10 @@ export class Graph implements IGraph{
 
         // Clear canvas
         let canvasRect = this._canvas.nativeElement.getBoundingClientRect();
-        this._context.clearRect(0, 0, canvasRect.width, canvasRect.height);
+        this.context.clearRect(0, 0, canvasRect.width, canvasRect.height);
 
         // Draw edges of each node
-        for (const [theNode, edges] of this._adjList.entries()) {
+        for (const [theNode, edges] of this.adjList.entries()) {
             edges.forEach( connectedNodeId => {
                 let connectedNode = this.getNodeById(connectedNodeId);
                 this.drawEdgeBetweenNodes(theNode,connectedNode);
@@ -89,16 +89,16 @@ export class Graph implements IGraph{
         }
 
         // Draw nodes
-        this.nodes.forEach(node => node.circle.draw(this._context));
+        this.nodes.forEach(node => node.circle.draw(this.context));
     }
     
     private drawEdgeBetweenNodes(theNode: Vertex, connectedNode: Vertex) {
-        this._context.beginPath();
-        this._context.moveTo(theNode.circle.posX, theNode.circle.posY);
-        this._context.lineTo(connectedNode.circle.posX,connectedNode.circle.posY);
-        this._context.stroke();
-        this._context.closePath();
-        this._context.restore();
+        this.context.beginPath();
+        this.context.moveTo(theNode.circle.posX, theNode.circle.posY);
+        this.context.lineTo(connectedNode.circle.posX,connectedNode.circle.posY);
+        this.context.stroke();
+        this.context.closePath();
+        this.context.restore();
     }
 
     // Searchs for a node using an id as key
@@ -129,7 +129,7 @@ export class Graph implements IGraph{
     }
 
     isCurrentNodeConnectedTo(theNode: Vertex): boolean {
-        return this._adjList.get(this._currentNode).includes(theNode.id);
+        return this.adjList.get(this._currentNode).includes(theNode.id);
     }
 
 }
