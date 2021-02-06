@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { fromEvent, Observable } from 'rxjs';
 
 import { IGraphNode } from '../../bits/Graph';
 import { GraphService } from '../../bits/GraphService';
@@ -9,7 +10,7 @@ const CANVAS_HEIGHT = 472;
 
 @Component({
     selector: 'app-rulit-lab',
-    template: '<canvas #labCanvas (click)="handleClick($event)"></canvas>'
+    template: '<canvas #labCanvas></canvas>'
 })
 
 export class RulitLabComponent implements OnInit {
@@ -18,28 +19,32 @@ export class RulitLabComponent implements OnInit {
 
     @ViewChild('labCanvas', { static: true }) 
     
-    private _labCanvas: ElementRef<HTMLCanvasElement>;
-    private _testService: TestService;
+    private labCanvas: ElementRef<HTMLCanvasElement>;
+    private testService: TestService;
+    private graphService: GraphService = new GraphService();
+
+    private clickCanvas: Observable<Event>;
     
-    constructor(private _graphService: GraphService) {}
+    constructor() {}
 
     ngOnInit(): void {
 
-        this._labCanvas.nativeElement.width = CANVAS_WIDTH;
-        this._labCanvas.nativeElement.height = CANVAS_HEIGHT;
+        this.labCanvas.nativeElement.width = CANVAS_WIDTH;
+        this.labCanvas.nativeElement.height = CANVAS_HEIGHT;
         
-        let newGraph = this._graphService.buildGraph(this.GRAPH_DATA,this._labCanvas);
+        let newGraph = this.graphService.buildGraph(this.GRAPH_DATA,this.labCanvas);
         
-        this._testService = new TestService(newGraph);
+        this.testService = new TestService(newGraph);
         
-        this._testService.graphCurrentNode$.subscribe(() => { this._testService.drawGraph() });
-        this._testService.drawGraph();
+        this.clickCanvas = fromEvent(this.labCanvas.nativeElement,'click');
+        
+        // Handles user new move
+        this.clickCanvas.subscribe(( event: MouseEvent) => { this.testService.handleNewMove(event.clientX,event.clientY) });
 
-    }
+        // Redraw canvas when current node changes
+        this.testService.graphCurrentNode$.subscribe(() => { this.testService.drawGraph() });
+        this.testService.drawGraph();
 
-    // Handles user new move
-    handleClick(event: MouseEvent){
-        this._testService.handleNewMove(event.clientX,event.clientY);
     }
 
 }

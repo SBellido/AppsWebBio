@@ -7,10 +7,13 @@ import { Vertex } from "./Vertex";
 @Injectable()
 export class TestService {
 
-    public graphCurrentNode$: Observable<Vertex>;
+    // Test Service depends on:
+    //      - A graph
+    //      - A user
+    constructor(private _graph: Graph){}
 
-    constructor(private _graph: Graph){
-        this.graphCurrentNode$ = this._graph.currentNode$;
+    get graphCurrentNode$(): Observable<Vertex>{
+        return this._graph.currentNode$;
     }
 
     // Handles user move:
@@ -23,10 +26,16 @@ export class TestService {
     //      - Update current active node in graph. (Done)
     handleNewMove(clientX: number, clientY: number ): void {
         
-        let node = this._graph.getNodeAtPosition(clientX,clientY);
+        let newNode = this._graph.getNodeAtPosition(clientX,clientY);
 
-        if (node){
-            this._graph.currentNode = node;
+        if (newNode){
+            if ( ! this._graph.currentNode ) {
+                newNode.isFirstNode ? this._graph.currentNode = newNode 
+                    : console.log("Must click first node"); // TBC
+            } else {
+                this._graph.isCurrentNodeConnectedTo(newNode) ? this._graph.currentNode = newNode 
+                    : console.log("New node isnt connected"); // TBC
+            }
         }
 
     }

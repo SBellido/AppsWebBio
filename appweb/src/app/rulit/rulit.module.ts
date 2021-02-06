@@ -7,7 +7,6 @@ import { RulitComponent } from './components/rulit.component';
 import { RulitLabComponent } from './components/laberinto/rulit-lab.component';
 import { RulitInstructionsComponent } from './components/instructions/rulit-instructions.component';
 
-import { GraphService } from './bits/GraphService';
 import { TestService } from './bits/TestService';
 import { Graph } from './bits/Graph';
 
@@ -26,7 +25,7 @@ import { Graph } from './bits/Graph';
         RulitComponent,
         RulitInstructionsComponent
     ],
-    providers: [GraphService, TestService, Graph]
+    providers: [TestService, Graph]
 })
 
 export class RulitModule {}

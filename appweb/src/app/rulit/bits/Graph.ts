@@ -22,6 +22,8 @@ interface IGraph {
     currentNode: Vertex
     currentNode$: Observable<Vertex>
     addVertex(theVertex: Vertex, edges: Array<number>): void | boolean
+    isCurrentNodeConnectedTo(theNode: Vertex): boolean;
+    // Canvas related methods
     getNodeById(theNodeId: number): Vertex | undefined
     getNodeAtPosition(clientX: number,clientY: number ): Vertex | undefined
     draw(): void
@@ -124,6 +126,10 @@ export class Graph implements IGraph{
 
         return theNode ? theNode : undefined;
 
+    }
+
+    isCurrentNodeConnectedTo(theNode: Vertex): boolean {
+        return this._adjList.get(this._currentNode).includes(theNode.id);
     }
 
 }
