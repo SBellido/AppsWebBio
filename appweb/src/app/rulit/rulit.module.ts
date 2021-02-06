@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 
+import { SharedModule } from '../shared/shared.module';
+
 import { RulitRoutingModule } from './rulit-routing.module';
 import { RulitComponent } from './components/rulit.component';
 import { RulitLabComponent } from './components/laberinto/rulit-lab.component';
 import { RulitInstructionsComponent } from './components/instructions/rulit-instructions.component';
 
 import { GraphService } from './bits/GraphService';
-
-import { SharedModule } from '../shared/shared.module';
 import { TestService } from './bits/TestService';
+import { Graph } from './bits/Graph';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { TestService } from './bits/TestService';
         RulitComponent,
         RulitInstructionsComponent
     ],
-    providers: [GraphService, TestService]
+    providers: [GraphService, TestService, Graph]
 })
 
 export class RulitModule {}

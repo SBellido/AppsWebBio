@@ -19,9 +19,9 @@ export class RulitLabComponent implements OnInit {
     @ViewChild('labCanvas', { static: true }) 
     
     private _labCanvas: ElementRef<HTMLCanvasElement>;
-
-    constructor(private _testService: TestService,
-                private _graphService: GraphService) {}
+    private _testService: TestService;
+    
+    constructor(private _graphService: GraphService) {}
 
     ngOnInit(): void {
 
@@ -30,10 +30,11 @@ export class RulitLabComponent implements OnInit {
         
         let newGraph = this._graphService.buildGraph(this.GRAPH_DATA,this._labCanvas);
         
-        this._testService.graph = newGraph;
-
-        this._testService.graph.draw();
+        this._testService = new TestService(newGraph);
         
+        this._testService.graphCurrentNode$.subscribe(() => { this._testService.drawGraph() });
+        this._testService.drawGraph();
+
     }
 
     // Handles user new move

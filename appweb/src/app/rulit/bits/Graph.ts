@@ -1,11 +1,12 @@
-import { ElementRef } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { Vertex } from './Vertex';
 
 // Coordinates types for a 13 rows x 18 columns grid
 type GraphRowNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 ;
 type GraphColumnNumber =  1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18;
 
-// Graphs nodes fields
+// Graph nodes fields
 export interface IGraphNode {
     id: number,
     isFirstNode: boolean,
@@ -19,20 +20,30 @@ export interface IGraphNode {
 interface IGraph {
     nodes: Array<Vertex>
     currentNode: Vertex
+    currentNode$: Observable<Vertex>
     addVertex(theVertex: Vertex, edges: Array<number>): void | boolean
     getNodeById(theNodeId: number): Vertex | undefined
     getNodeAtPosition(clientX: number,clientY: number ): Vertex | undefined
     draw(): void
 }
 
+@Injectable()
 export class Graph implements IGraph{
     
     private _adjList: Map<Vertex,Array<number>>;
-    private _currentNode: Vertex; 
+    private _currentNode: Vertex;
+    private currentNodeChange$ = new Subject<Vertex>();
+    public currentNode$ = this.currentNodeChange$.asObservable();
+    
+    private _canvas: ElementRef<HTMLCanvasElement>;
     private _context: CanvasRenderingContext2D;
 
-    constructor( private _canvas: ElementRef<HTMLCanvasElement> ){
+    constructor(){
         this._adjList = new Map<Vertex,Array<number>>();
+    }
+
+    set canvas(theCanvas: ElementRef<HTMLCanvasElement>){
+        this._canvas = theCanvas;
         this._context = this._canvas.nativeElement.getContext("2d");
     }
 
@@ -41,20 +52,23 @@ export class Graph implements IGraph{
     }
 
     // Returns all nodes in an array
-    get nodes(){
+    get nodes(): Array<Vertex> {
         return Array.from(this._adjList.keys());
     }
 
     // Return the current active node
-    get currentNode(){
+    get currentNode(): Vertex {
         return this._currentNode;
     }
 
-    set currentNode( theNode: Vertex ){
-        // Set active to false for all nodes
+    // Set the current active node
+    set currentNode( theNode: Vertex ) {
+        // Set active flag to false for all nodes
         this.nodes.map( node => node.id == theNode.id ? node.isActive = true : node.isActive = false);
         // Set current node
         this._currentNode = theNode;
+        //
+        this.currentNodeChange$.next();
     }
 
     // Draws edges first and then nodes
@@ -68,7 +82,7 @@ export class Graph implements IGraph{
         for (const [theNode, edges] of this._adjList.entries()) {
             edges.forEach( connectedNodeId => {
                 let connectedNode = this.getNodeById(connectedNodeId);
-                this.drawEdgeBetween(theNode,connectedNode);
+                this.drawEdgeBetweenNodes(theNode,connectedNode);
             });
         }
 
@@ -76,7 +90,7 @@ export class Graph implements IGraph{
         this.nodes.forEach(node => node.circle.draw(this._context));
     }
     
-    private drawEdgeBetween(theNode: Vertex, connectedNode: Vertex) {
+    private drawEdgeBetweenNodes(theNode: Vertex, connectedNode: Vertex) {
         this._context.beginPath();
         this._context.moveTo(theNode.circle.posX, theNode.circle.posY);
         this._context.lineTo(connectedNode.circle.posX,connectedNode.circle.posY);

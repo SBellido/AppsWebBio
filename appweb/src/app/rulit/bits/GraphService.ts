@@ -7,13 +7,15 @@ export class GraphService {
     
     buildGraph(GRAPH_DATA: Array<IGraphNode>, theCanvas: ElementRef<HTMLCanvasElement>): Graph{
         
-        let newGraph = new Graph(theCanvas);
+        let newGraph = new Graph();
         
         GRAPH_DATA.forEach( nodeData => { 
             // Agrego los nodos y las aristas
             let newNode = this.buildNode(nodeData);
             newGraph.addVertex(newNode, nodeData.edges);
         });
+        
+        newGraph.canvas = theCanvas;
         
         return newGraph;
     }
