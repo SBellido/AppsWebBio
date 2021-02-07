@@ -70,7 +70,7 @@ export class Graph implements IGraph{
         // Set current node
         this._currentNode = theNode;
         //
-        this.currentNodeChange$.next();
+        this.currentNodeChange$.next(theNode);
     }
 
     // Draws edges first and then nodes
