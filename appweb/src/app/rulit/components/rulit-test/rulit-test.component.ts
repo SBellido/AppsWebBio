@@ -1,10 +1,15 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+
 import { fromEvent, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { buildGraph } from '../../bits/GraphUtils';
 import { TestService } from '../../bits/TestService';
 
 import { GRAPH as GRAPH_DATA, SOLUTION } from "../../bits/graphs_available/Graph1_data_testing";
+import { RulitUserService } from '../../bits/RulitUserService';
+
 
 const CANVAS_WIDTH = 652;
 const CANVAS_HEIGHT = 472;
@@ -22,12 +27,31 @@ export class RulitTestComponent implements OnInit {
     private labCanvas: ElementRef<HTMLCanvasElement>;
     private testService: TestService;
 
+    private user$: Observable<any>;
     private clickCanvas$: Observable<Event>;
     
-    constructor(private ngZone: NgZone) {}
+    constructor(
+        private ngZone: NgZone,
+        private route: ActivatedRoute,
+        private router: Router,
+        private userService: RulitUserService ) {}
 
     ngOnInit(): void {
 
+        this.user$ = this.route.paramMap.pipe(
+            switchMap((params: ParamMap) =>
+                this.userService.getUser(params.get('id')))
+        );
+
+        this.user$.subscribe( (theUser) => {
+            console.log(theUser);
+            this.initTest();
+        });
+
+    }
+
+    private initTest(): void {
+        
         this.labCanvas.nativeElement.width = CANVAS_WIDTH;
         this.labCanvas.nativeElement.height = CANVAS_HEIGHT;
         

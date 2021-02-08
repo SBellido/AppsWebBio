@@ -27,7 +27,7 @@ interface IGraph {
     getNodeById(theNodeId: number): Vertex | undefined
 }
 
-@Injectable()
+
 export class Graph implements IGraph{
     
     private _adjList: Map<Vertex,Array<number>>;

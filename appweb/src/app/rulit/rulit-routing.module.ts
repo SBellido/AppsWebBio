@@ -11,17 +11,12 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: ':id',
-        redirectTo: 'test', 
-        pathMatch: 'full'
+        path: 'test/:id',
+        component: RulitTestComponent
     },
     {
         path: 'instrucciones',
         component: RulitInstructionsComponent
-    },
-    {
-        path: 'test',
-        component: RulitTestComponent
     }
 ];
 

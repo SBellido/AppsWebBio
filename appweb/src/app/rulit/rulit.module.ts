@@ -5,8 +5,9 @@ import { SharedModule } from '../shared/shared.module';
 import { RulitRoutingModule } from './rulit-routing.module';
 import { RulitTestComponent } from './components/rulit-test/rulit-test.component';
 import { RulitInstructionsComponent } from './components/instructions/rulit-instructions.component';
+import { RulitUserService } from './bits/RulitUserService';
 
-import { Graph } from './bits/Graph';
+// import { Graph } from './bits/Graph';
 
 // Este modulo se encarga de llevar adelante los test RULIT
 // 
@@ -28,14 +29,14 @@ import { Graph } from './bits/Graph';
         RulitInstructionsComponent
     ],
     imports: [
-        RulitRoutingModule,
-        SharedModule
+        SharedModule,
+        RulitRoutingModule
     ],
     exports: [
         RulitTestComponent,
         RulitInstructionsComponent
     ],
-    providers: [Graph]
+    providers: [ RulitUserService ]
 })
 
 export class RulitModule {}

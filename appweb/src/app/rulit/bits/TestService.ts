@@ -42,31 +42,13 @@ export class TestService {
             if ( ! this.graph.currentNode ) {
                 newNode.isFirstNode ? this.graph.currentNode = newNode 
                     : console.log("First move must be start node"); // TBC
-                
-                console.log("==========================="); // TODO
-                console.log("Sums a CORRECT START decision:"); // TODO
-                // console.log("From: " + this.graph.currentNode.id ); // TODO
-                console.log("To: " + newNode.id ); // TODO
-                console.log("Solution: " + this.SOLUTION ); // TODO
             } else {
                 if ( this.graph.isCurrentNodeConnectedTo(newNode) ) {
                     if ( this.isSelectedNodeNextInSolution(newNode) ) {
                         this.graph.currentNode = newNode;
-                        
-                        console.log("==========================="); // TODO
-                        console.log("Sums a CORRECT decision:"); // TODO
-                        console.log("From: " + this.graph.currentNode.id ); // TODO
-                        console.log("To: " + newNode.id ); // TODO
-                        console.log("Solution: " + this.SOLUTION ); // TODO
                     } else {
                         // Selected node flickers in red
                         this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
-                        
-                        console.log("==========================="); // TODO
-                        console.log("Sums a INCORRECT decision:"); // TODO
-                        console.log("From: " + this.graph.currentNode.id ); // TODO
-                        console.log("To: " + newNode.id ); // TODO
-                        console.log("Solution: " + this.SOLUTION ); // TODO
                     }
                 } else {
                     // TBC: sums a incorrect decision
