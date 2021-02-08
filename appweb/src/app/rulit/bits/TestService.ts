@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, NgZone } from "@angular/core";
 import { Observable } from "rxjs";
 import { Graph } from "./Graph";
 import { Vertex } from "./Vertex";
@@ -11,7 +11,7 @@ export class TestService {
     //      - Graph
     //      - Solution
     //      - User
-    constructor(private graph: Graph, private SOLUTION: Array<number>){
+    constructor(private graph: Graph, private SOLUTION: Array<number>, private ngZone: NgZone){
         // Reverse solutions array to be used as a stack
         this.SOLUTION.reverse();
     }
@@ -38,10 +38,11 @@ export class TestService {
                     : console.log("First move must be start node"); // TBC
             } else {
                 if ( this.graph.isCurrentNodeConnectedTo(newNode) ) {
-                    if ( this.isSelectedNodeNextInSolution(newNode) ){
+                    if ( this.isSelectedNodeNextInSolution(newNode) ) {
                         this.graph.currentNode = newNode;
                     } else {
-                        console.log("Selected node flickers in red");
+                        this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
+                        console.log("Selected node flickers in red"); // TBC
                     }
                 } else {
                     console.log("Selected node isnt connected"); // TBC "display a error message for 5 - 7 sec."
@@ -56,7 +57,7 @@ export class TestService {
         return this.SOLUTION[this.SOLUTION.length - 1] == theNode.id;
     }
 
-    markAsVisited (theNode: Vertex) {
+    markAsVisited () {
         this.SOLUTION.pop();
     }
 

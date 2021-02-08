@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 
 import { buildGraph } from '../../bits/GraphUtils';
@@ -22,9 +22,9 @@ export class RulitTestComponent implements OnInit {
     private labCanvas: ElementRef<HTMLCanvasElement>;
     private testService: TestService;
 
-    private clickCanvas: Observable<Event>;
+    private clickCanvas$: Observable<Event>;
     
-    constructor() {}
+    constructor(private ngZone: NgZone) {}
 
     ngOnInit(): void {
 
@@ -33,19 +33,23 @@ export class RulitTestComponent implements OnInit {
         
         let newGraph = buildGraph(GRAPH_DATA,this.labCanvas);
         
-        this.testService = new TestService(newGraph, SOLUTION);
+        this.testService = new TestService(newGraph, SOLUTION, this.ngZone);
         
-        this.clickCanvas = fromEvent(this.labCanvas.nativeElement,'click');
+        this.clickCanvas$ = fromEvent(this.labCanvas.nativeElement,'click');
         
         // Handles user new move
-        this.clickCanvas.subscribe( ( event: MouseEvent ) => { this.testService.handleNewMove(event.clientX,event.clientY) });
+        this.clickCanvas$.subscribe( ( event: MouseEvent ) => { this.testService.handleNewMove(event.clientX,event.clientY) });
 
-        // Draw canvas when current node changes
+        // When current node changes:
+        //      - Update the solution array (markAsVisited)
+        //      - Draw canvas
         this.testService.graphCurrentNode$
-            .subscribe( ( theNode ) => { 
+            .subscribe( () => { 
+                this.testService.markAsVisited();
                 this.testService.drawGraph();
-                this.testService.markAsVisited(theNode);
             });
+        
+        // First Draw
         this.testService.drawGraph();
 
     }

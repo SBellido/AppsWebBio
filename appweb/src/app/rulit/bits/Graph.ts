@@ -132,4 +132,29 @@ export class Graph implements IGraph{
         return this.adjList.get(this._currentNode).includes(theNode.id);
     }
 
+    flickerNode(newNode: Vertex): void {
+        
+        let frame = 0;
+        this.currentNode.circle.fill = "#000";
+        
+        const i = setInterval( () => {
+            if (Math.abs(frame % 2) == 1){
+                newNode.circle.fill = "#f00";
+            } else {
+                newNode.circle.fill = "#000";
+            }
+            this.draw();
+            frame++;
+            let requestId = requestAnimationFrame(() => this.flickerNode );
+
+            if (frame >= 5) {
+                this.currentNode.circle.fill = "#008F39";
+                this.draw();
+                cancelAnimationFrame(requestId);
+                clearInterval(i);
+            }
+        } , 100);
+        
+    }
+
 }
