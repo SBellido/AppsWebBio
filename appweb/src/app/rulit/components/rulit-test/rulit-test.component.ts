@@ -38,16 +38,14 @@ export class RulitTestComponent implements OnInit {
         this.clickCanvas$ = fromEvent(this.labCanvas.nativeElement,'click');
         
         // Handles user new move
-        this.clickCanvas$.subscribe( ( event: MouseEvent ) => { this.testService.handleNewMove(event.clientX,event.clientY) });
+        this.clickCanvas$.subscribe( ( event: MouseEvent ) => { 
+            this.testService.handleNewMove(event.clientX,event.clientY);
+        });
 
-        // When current node changes:
-        //      - Update the solution array (markAsVisited)
-        //      - Draw canvas
-        this.testService.graphCurrentNode$
-            .subscribe( () => { 
-                this.testService.markAsVisited();
-                this.testService.drawGraph();
-            });
+        // Draw canvas when current node changes
+        this.testService.graphCurrentNode$.subscribe( () => { 
+            this.testService.drawGraph(); 
+        });
         
         // First Draw
         this.testService.drawGraph();

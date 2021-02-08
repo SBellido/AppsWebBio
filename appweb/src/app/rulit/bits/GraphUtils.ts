@@ -1,11 +1,12 @@
 import { ElementRef } from "@angular/core";
-import { Graph, IGraphNode } from "./Graph";
+import { CanvasGraph } from "./CanvasGraph";
+import { IGraphNode } from "./Graph";
 import { Vertex } from "./Vertex";
 
 // Creates a new graph and adds nodes, edges and canvas.
-export function buildGraph(GRAPH_DATA: Array<IGraphNode>, theCanvas: ElementRef<HTMLCanvasElement>): Graph{
+export function buildGraph(GRAPH_DATA: Array<IGraphNode>, theCanvas: ElementRef<HTMLCanvasElement>): CanvasGraph{
     
-    let newGraph = new Graph();
+    let newGraph = new CanvasGraph();
     
     // Add nodes and edges from GRAPH_DATA object
     GRAPH_DATA.forEach( nodeData => { 

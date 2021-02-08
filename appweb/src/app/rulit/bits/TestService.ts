@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from "@angular/core";
 import { Observable } from "rxjs";
-import { Graph } from "./Graph";
+import { CanvasGraph } from "./CanvasGraph";
 import { Vertex } from "./Vertex";
 
 
@@ -10,12 +10,18 @@ export class TestService {
     // Test Service depends on:
     //      - Graph
     //      - Solution
+    //      - NgZone of the component
     //      - User
-    constructor(private graph: Graph, private SOLUTION: Array<number>, private ngZone: NgZone){
+    constructor(private graph: CanvasGraph, private SOLUTION: Array<number>, private ngZone: NgZone){
         // Reverse solutions array to be used as a stack
         this.SOLUTION.reverse();
+        // Remove element from solutions after a new node is visited.
+        this.graph.currentNode$.subscribe( () => { 
+            this.SOLUTION.pop();
+        });
     }
 
+    // Expose changes in current node.
     get graphCurrentNode$(): Observable<Vertex>{
         return this.graph.currentNode$;
     }
@@ -36,15 +42,34 @@ export class TestService {
             if ( ! this.graph.currentNode ) {
                 newNode.isFirstNode ? this.graph.currentNode = newNode 
                     : console.log("First move must be start node"); // TBC
+                
+                console.log("==========================="); // TODO
+                console.log("Sums a CORRECT START decision:"); // TODO
+                // console.log("From: " + this.graph.currentNode.id ); // TODO
+                console.log("To: " + newNode.id ); // TODO
+                console.log("Solution: " + this.SOLUTION ); // TODO
             } else {
                 if ( this.graph.isCurrentNodeConnectedTo(newNode) ) {
                     if ( this.isSelectedNodeNextInSolution(newNode) ) {
                         this.graph.currentNode = newNode;
+                        
+                        console.log("==========================="); // TODO
+                        console.log("Sums a CORRECT decision:"); // TODO
+                        console.log("From: " + this.graph.currentNode.id ); // TODO
+                        console.log("To: " + newNode.id ); // TODO
+                        console.log("Solution: " + this.SOLUTION ); // TODO
                     } else {
+                        // Selected node flickers in red
                         this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
-                        console.log("Selected node flickers in red"); // TBC
+                        
+                        console.log("==========================="); // TODO
+                        console.log("Sums a INCORRECT decision:"); // TODO
+                        console.log("From: " + this.graph.currentNode.id ); // TODO
+                        console.log("To: " + newNode.id ); // TODO
+                        console.log("Solution: " + this.SOLUTION ); // TODO
                     }
                 } else {
+                    // TBC: sums a incorrect decision
                     console.log("Selected node isnt connected"); // TBC "display a error message for 5 - 7 sec."
                 }
             }
@@ -55,10 +80,6 @@ export class TestService {
     private isSelectedNodeNextInSolution(theNode: Vertex): boolean {
         // Compare the node to the last element in the array
         return this.SOLUTION[this.SOLUTION.length - 1] == theNode.id;
-    }
-
-    markAsVisited () {
-        this.SOLUTION.pop();
     }
 
     drawGraph(): void {
