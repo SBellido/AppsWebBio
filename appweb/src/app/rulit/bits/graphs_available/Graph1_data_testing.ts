@@ -190,7 +190,7 @@ export const GRAPH: Array<IGraphNode> = [
         row: 12,
         column: 15
     }
-]
+];
 
 export const SOLUTION: Array<number> = [13,12,11,2,3,17,18,22,16,17,18,19,10,9,8,7];
 

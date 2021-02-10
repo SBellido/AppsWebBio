@@ -1,0 +1,60 @@
+<section class="container">
+    
+    <app-header-dark></app-header-dark>
+
+    <div class="container__component">
+
+        <form [formGroup]="userFormData" novalidate (ngSubmit)="onSaveForm($event)">
+            
+            <mat-card class="shipping-card">
+              
+                <mat-card-header class="container-title">
+                    <mat-card-title>Datos personales</mat-card-title>
+                </mat-card-header>
+              
+                <mat-card-content>
+                    
+                    <div class="container-message">
+                        <p class="message">Todos los campos son requeridos</p>
+                    </div>
+                    
+                    <!-- Nombre y Apellido -->
+                    <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 30 caracteres">
+                        
+                        <mat-label>Nombre y Apellido</mat-label>
+                        
+                        <input matNativeControl type="text" formControlName="name" 
+                        matInput #nameLastNameInput maxlength="30" placeholder="Ingresá tu nombre y apellido"
+                        class="input">
+                        
+                        <!-- <mat-hint align="end">{{ name.value.length }}/30</mat-hint>  -->
+                        
+                        <!-- Validaciones -->
+                        <!-- <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+                            <div class="container-error-message" *ngIf="name.errors.required">
+                                Tu nombre y apellido son un dato requerido.
+                            </div>
+                            <div class="container-error-message" *ngIf="name.errors.pattern">
+                                El dato ingresado debe ser válido
+                            </div>
+                        </div> -->
+
+                    </mat-form-field>
+
+                    <mat-card-actions class="container-button">
+                        <button mat-raised-button class="buttonForm" type="submit">
+                            GUARDAR DATOS
+                        </button>   
+                    </mat-card-actions>
+
+                </mat-card-content>
+
+            </mat-card>
+
+        </form>
+
+        <a [routerLink]="['../test', 1]">Next (To test)</a>
+    
+    </div>
+
+</section>
