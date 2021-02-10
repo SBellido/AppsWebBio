@@ -12,13 +12,19 @@ export class TestService {
     //      - Solution
     //      - NgZone of the component
     //      - User
-    constructor(private graph: CanvasGraph, private SOLUTION: Array<number>, private ngZone: NgZone){
+    constructor(
+        private graph: CanvasGraph, 
+        private solution: Array<number>, 
+        private ngZone: NgZone) {
+
         // Reverse solutions array to be used as a stack
-        this.SOLUTION.reverse();
-        // Remove element from solutions after a new node is visited.
+        this.solution.reverse();
+
+        // Observe when current node changes in order to remove the last element in solutions.
         this.graph.currentNode$.subscribe( () => { 
-            this.SOLUTION.pop();
+            this.solution.pop();
         });
+        
     }
 
     // Expose changes in current node.
@@ -44,7 +50,7 @@ export class TestService {
                     : console.log("First move must be start node"); // TBC
             } else {
                 if ( this.graph.isCurrentNodeConnectedTo(newNode) ) {
-                    if ( this.isSelectedNodeNextInSolution(newNode) ) {
+                    if ( this.isSelectedNodeNextInsolution(newNode) ) {
                         this.graph.currentNode = newNode;
                     } else {
                         // Selected node flickers in red
@@ -59,9 +65,9 @@ export class TestService {
 
     }
     
-    private isSelectedNodeNextInSolution(theNode: Vertex): boolean {
+    private isSelectedNodeNextInsolution(theNode: Vertex): boolean {
         // Compare the node to the last element in the array
-        return this.SOLUTION[this.SOLUTION.length - 1] == theNode.id;
+        return this.solution[this.solution.length - 1] == theNode.id;
     }
 
     drawGraph(): void {

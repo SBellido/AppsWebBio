@@ -12,7 +12,7 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'test/:id',
+        path: 'test/:id/:test/:exercise',
         component: RulitTestComponent
     },
     {

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { fromEvent, Observable } from 'rxjs';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { buildGraph } from '../../bits/GraphUtils';
@@ -27,26 +27,28 @@ export class RulitTestComponent implements OnInit {
     private labCanvas: ElementRef<HTMLCanvasElement>;
     private testService: TestService;
 
-    private user$: Observable<any>;
     private clickCanvas$: Observable<Event>;
+    
+    // URL Parameters
+    private userParam: number;
+    private testNumberParam: number;
+    private exerciseNumberParam: number;
     
     constructor(
         private ngZone: NgZone,
         private route: ActivatedRoute,
         private router: Router,
-        private userService: RulitUserService ) {}
+        private userService: RulitUserService ) {
+
+            this.userParam = +this.route.snapshot.paramMap.get('id');
+            this.testNumberParam = +this.route.snapshot.paramMap.get('test');
+            this.exerciseNumberParam = +this.route.snapshot.paramMap.get('exercise');
+
+        }
 
     ngOnInit(): void {
-
-        this.user$ = this.route.paramMap.pipe(
-            switchMap((params: ParamMap) =>
-                this.userService.getUser(params.get('id')))
-        );
-
-        this.user$.subscribe( (theUser) => {
-            console.log(theUser);
-            this.initTest();
-        });
+        
+        this.initTest();
 
     }
 
@@ -57,7 +59,10 @@ export class RulitTestComponent implements OnInit {
         
         let newGraph = buildGraph(GRAPH_DATA,this.labCanvas);
         
-        this.testService = new TestService(newGraph, SOLUTION, this.ngZone);
+        // Copies solutions to a new array 
+        let currentSolution = Object.assign([],SOLUTION);
+        
+        this.testService = new TestService(newGraph, currentSolution , this.ngZone);
         
         this.clickCanvas$ = fromEvent(this.labCanvas.nativeElement,'click');
         
@@ -74,6 +79,13 @@ export class RulitTestComponent implements OnInit {
         // First Draw
         this.testService.drawGraph();
 
+    }
+
+    goNextExercise(){
+        let nexEN = this.exerciseNumberParam + 1;
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate(['rulit/test',this.userParam,this.testNumberParam,nexEN]);
     }
 
 }
