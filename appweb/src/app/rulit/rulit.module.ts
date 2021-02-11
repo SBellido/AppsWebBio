@@ -9,6 +9,8 @@ import { RulitInstructionsComponent } from './components/rulit-instructions/ruli
 import { RulitUserService } from './bits/RulitUserService';
 import { RulitUserFormComponent } from './components/rulit-user-form/rulit-user-form.component';
 import { MaterialModule } from '../material/material.module';
+import { CommonModule } from '@angular/common';
+
 
 // import { Graph } from './bits/Graph';
 
@@ -36,7 +38,8 @@ import { MaterialModule } from '../material/material.module';
         SharedModule,
         RulitRoutingModule,
         ReactiveFormsModule,
-        MaterialModule
+        MaterialModule,
+        CommonModule
     ],
     exports: [],
     providers: [ RulitUserService ]

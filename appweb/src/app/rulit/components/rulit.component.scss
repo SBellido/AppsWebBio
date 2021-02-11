@@ -5,9 +5,47 @@
     height: 100%;
 }
 
-.container__component{
+.container__component {
     display: flex;
     flex-flow: column;
     align-items: center;
     margin-top: 1.5em;
+}
+
+// Card in RulitUserFormComponent
+mat-card {
+    display: flex;
+    flex-flow: column;
+    min-width: 20em;
+    color: #4a4067;
+}
+
+mat-card-header {
+    justify-content: center;
+    background-color: #4a4067;
+    color: white;
+    padding: 1em;
+}
+
+.mat-card-title {
+    margin: 0 !important;
+}
+
+mat-card-content {
+    display: flex;
+    flex-flow: column;
+    row-gap: 1em;
+}
+
+mat-card-content span{
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    font-weight: bold;
+    color: #e33b88;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: center;
 }

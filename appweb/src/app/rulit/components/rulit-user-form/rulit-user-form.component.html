@@ -4,45 +4,57 @@
 
     <div class="container__component">
 
-        <form [formGroup]="userFormData" novalidate (ngSubmit)="onSaveForm($event)">
+        <form [formGroup]="userFormData" (ngSubmit)="onSaveForm($event)">
             
             <mat-card class="shipping-card">
               
-                <mat-card-header class="container-title">
+                <mat-card-header>
                     <mat-card-title>Datos personales</mat-card-title>
                 </mat-card-header>
-              
+                
                 <mat-card-content>
                     
-                    <div class="container-message">
-                        <p class="message">Todos los campos son requeridos</p>
-                    </div>
-                    
+                    <span>Todos los campos son requeridos</span>
+
                     <!-- Nombre y Apellido -->
                     <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 30 caracteres">
                         
                         <mat-label>Nombre y Apellido</mat-label>
                         
-                        <input matNativeControl type="text" formControlName="name" 
-                        matInput #nameLastNameInput maxlength="30" placeholder="Ingresá tu nombre y apellido"
-                        class="input">
+                        <input matInput type="text" formControlName="name" 
+                        maxlength="30" placeholder="Ingresá tu nombre y apellido">
                         
-                        <!-- <mat-hint align="end">{{ name.value.length }}/30</mat-hint>  -->
-                        
+                        <mat-hint align="end">{{ name.value.length }}/30</mat-hint> 
+
                         <!-- Validaciones -->
-                        <!-- <div class="alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
-                            <div class="container-error-message" *ngIf="name.errors.required">
-                                Tu nombre y apellido son un dato requerido.
-                            </div>
-                            <div class="container-error-message" *ngIf="name.errors.pattern">
-                                El dato ingresado debe ser válido
-                            </div>
-                        </div> -->
+                        <mat-error *ngIf="name.invalid && !name.hasError('required')">
+                            El dato ingresado debe ser válido
+                        </mat-error>
+                        <mat-error *ngIf="name.hasError('required')">
+                            Tu nombre y apellido son un dato <strong>requerido</strong>.
+                        </mat-error>
 
                     </mat-form-field>
 
-                    <mat-card-actions class="container-button">
-                        <button mat-raised-button class="buttonForm" type="submit">
+                    <!-- Email -->
+                    <mat-form-field class="full-width" appearance="fill">
+                        
+                        <mat-label>Email</mat-label>
+                        
+                        <input type="email" matInput formControlName="email">
+                        
+                        <!-- Validaciones -->
+                        <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+                            Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="email.hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <mat-card-actions>
+                        <button mat-raised-button type="submit">
                             GUARDAR DATOS
                         </button>   
                     </mat-card-actions>
