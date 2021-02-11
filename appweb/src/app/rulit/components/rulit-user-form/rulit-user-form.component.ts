@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 // Allows use of ngif in template
 import { CommonModule } from '@angular/common';  
 
@@ -17,7 +18,7 @@ export class RulitUserFormComponent implements OnInit {
     
     userFormData: FormGroup;
 
-    constructor( private userService: RulitUserService ){
+    constructor( private userService: RulitUserService, private router: Router ){
         this.userFormData = this.buildUserFormData();
     }
     
@@ -50,8 +51,12 @@ export class RulitUserFormComponent implements OnInit {
 
     onSaveForm($event: any){
         if ( this.userFormData.valid ) {
-             
-            console.log("save form");
+
+            // console.log("save form: ");
+            // console.log(this.userFormData.getRawValue());
+
+            this.userService.storeNewUser(this.userFormData.getRawValue());
+            this.router.navigate(['rulit/test', this.userService.user.userId]);
         } else {
             console.log("error in form");
         }

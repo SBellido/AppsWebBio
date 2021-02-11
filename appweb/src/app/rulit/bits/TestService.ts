@@ -1,11 +1,26 @@
-import { Injectable, NgZone } from "@angular/core";
-import { Observable } from "rxjs";
+import { NgZone } from "@angular/core";
+import { Observable, Subject } from "rxjs";
 import { CanvasGraph } from "./CanvasGraph";
+import { RulitUserService, IRulitExercise, IRulitStep } from "./RulitUserService";
 import { Vertex } from "./Vertex";
 
+interface IRulitTestStep extends IRulitStep {
+    initialTime: number,
+    toDataStep(testStep: IRulitTestStep): IRulitStep
+}
 
-@Injectable()
+interface IRulitTestExercise extends IRulitExercise {
+    currentStep: IRulitTestStep,
+    toDataExercise(testExercise: IRulitTestExercise): IRulitExercise
+}
+
 export class TestService {
+
+    private currentExercise: IRulitTestExercise;
+    // private isExerciseOver: boolean;
+    private isExerciseOver$: Subject<boolean> = new Subject<boolean>();
+    exerciseChange$: Observable<boolean> = this.isExerciseOver$.asObservable();
+    
 
     // Test Service depends on:
     //      - Graph
@@ -15,7 +30,8 @@ export class TestService {
     constructor(
         private graph: CanvasGraph, 
         private solution: Array<number>, 
-        private ngZone: NgZone) {
+        private ngZone: NgZone,
+        private userService: RulitUserService) {
 
         // Reverse solutions array to be used as a stack
         this.solution.reverse();
@@ -25,11 +41,21 @@ export class TestService {
             this.solution.pop();
         });
         
+        this.currentExercise = this.buildNewExercise();
+
     }
 
     // Expose changes in current node.
     get graphCurrentNode$(): Observable<Vertex>{
         return this.graph.currentNode$;
+    }
+
+    private get currentStep(): IRulitTestStep {
+        return this.currentExercise.currentStep;
+    }
+    
+    private set currentStep( theStep: IRulitTestStep ) {
+        this.currentExercise.currentStep = theStep;
     }
 
     // Handles user move:
@@ -44,23 +70,65 @@ export class TestService {
         
         let newNode = this.graph.getNodeAtPosition(clientX,clientY);
 
+        // Theres a node clicked
         if ( newNode ) {
+            // Is the first move in the exercise
             if ( ! this.graph.currentNode ) {
-                newNode.isFirstNode ? this.graph.currentNode = newNode 
-                    : console.log("First move must be start node"); // TBC
+                // Clicked node is first node
+                if ( newNode.isFirstNode ) {
+                    this.currentStep = this.buildNewStep();
+                    this.graph.currentNode = newNode;
+                } else {
+                    console.log("First move must be start node"); // TBC
+                }
             } else {
                 if ( this.graph.isCurrentNodeConnectedTo(newNode) ) {
                     if ( this.isSelectedNodeNextInsolution(newNode) ) {
+                        
+                        // Update current step variables
+                        let currentTimeInMilliseconds = new Date().getTime();
+                        this.currentStep.timeEnlapsed = new Date(currentTimeInMilliseconds - this.currentStep.initialTime).getMilliseconds();
+                        this.currentStep.correctMoves++;
+                        // 
+                        this.currentExercise.steps.push(this.currentStep.toDataStep(this.currentStep));
+                        
+                        // Update current node
                         this.graph.currentNode = newNode;
+
+                        // Check if exercise is over
+                        if ( newNode.isLastNode ) {
+                            if ( this.isTestOver() ) { 
+                                console.log("test is over");
+                            } else {
+                                
+                                // TODO add total for the exercise
+                                // for (const [] of this.currentExercise.steps) {
+                                    
+                                // }
+
+                                this.isExerciseOver$.next(true);
+                                console.log("exercise is over");
+                                console.log(this.currentExercise);
+                            }
+                        } else {
+                            this.currentStep = this.buildNewStep();
+                        }
+                        
                     } else {
+                        // Update current step variables
+                        this.currentStep.incorrectMoves++;
+
                         // Selected node flickers in red
                         this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
                     }
                 } else {
+                    // Update current step variables
+                    this.currentStep.incorrectMoves++;
                     // TBC: sums a incorrect decision
-                    console.log("Selected node isnt connected"); // TBC "display a error message for 5 - 7 sec."
+                    console.log("Selected node isnt connected"); // TODO "display a error message for 5 - 7 sec."
                 }
             }
+
         }
 
     }
@@ -72,6 +140,47 @@ export class TestService {
 
     drawGraph(): void {
         this.graph.draw();
+    }
+
+    private buildNewStep = (): IRulitTestStep  => {
+        
+        let currentTimeInMilliseconds = new Date().getTime();
+        
+        return {
+            initialTime: currentTimeInMilliseconds,
+            timeEnlapsed: 0,
+            correctMoves: 0,
+            incorrectMoves: 0,
+            toDataStep: function( testStep: IRulitTestStep ): IRulitStep {
+                return {
+                    timeEnlapsed: testStep.timeEnlapsed,
+                    correctMoves: testStep.correctMoves,
+                    incorrectMoves: testStep.incorrectMoves
+                }
+            }
+        };
+    }
+    
+    private buildNewExercise = (): IRulitTestExercise  => {
+        return {
+            totalCorrectMoves: 0,
+            totalIncorrectMoves: 0,
+            totalExerciseTime: 0,
+            steps: new Array<IRulitStep>(),
+            currentStep: null,
+            toDataExercise: function( testExercise: IRulitTestExercise ): IRulitExercise {
+                return {
+                    totalCorrectMoves: testExercise.totalCorrectMoves,
+                    totalIncorrectMoves: testExercise.totalIncorrectMoves,
+                    totalExerciseTime: testExercise.totalExerciseTime,
+                    steps : testExercise.steps
+                }
+            }
+        };
+    }
+
+    private isTestOver(): boolean {
+        return false;
     }
 
 }

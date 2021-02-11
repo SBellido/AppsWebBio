@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { fromEvent, Observable, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { fromEvent, Observable } from 'rxjs';
 
 import { buildGraph } from '../../bits/GraphUtils';
 import { TestService } from '../../bits/TestService';
@@ -29,20 +28,24 @@ export class RulitTestComponent implements OnInit {
 
     private clickCanvas$: Observable<Event>;
     
-    // URL Parameters
-    private userParam: number;
-    private testNumberParam: number;
-    private exerciseNumberParam: number;
-    
     constructor(
         private ngZone: NgZone,
         private route: ActivatedRoute,
         private router: Router,
         private userService: RulitUserService ) {
 
-            this.userParam = +this.route.snapshot.paramMap.get('id');
-            this.testNumberParam = +this.route.snapshot.paramMap.get('test');
-            this.exerciseNumberParam = +this.route.snapshot.paramMap.get('exercise');
+            let userIdParam = +this.route.snapshot.paramMap.get('id');
+
+            // When user enters the URL to make the long term memory test.
+            //      - eg. /rulit/test/<<userId>>
+            if ( ! this.userService.user ) {
+                this.userService.loadUserFromDB(userIdParam);
+            }
+
+            // User in the service must be the same as the param 
+            if ( ! ( this.userService.user.userId == userIdParam ) ) {
+                this.router.navigate(['/']);
+            }
 
         }
 
@@ -62,7 +65,7 @@ export class RulitTestComponent implements OnInit {
         // Copies solutions to a new array 
         let currentSolution = Object.assign([],SOLUTION);
         
-        this.testService = new TestService(newGraph, currentSolution , this.ngZone);
+        this.testService = new TestService(newGraph, currentSolution , this.ngZone, this.userService);
         
         this.clickCanvas$ = fromEvent(this.labCanvas.nativeElement,'click');
         
@@ -75,6 +78,11 @@ export class RulitTestComponent implements OnInit {
         this.testService.graphCurrentNode$.subscribe( () => { 
             this.testService.drawGraph(); 
         });
+
+        // When exercise is over go to next
+        this.testService.exerciseChange$.subscribe( (isExerciseOver) => {
+            if (isExerciseOver) this.goNextExercise(); 
+        });
         
         // First Draw
         this.testService.drawGraph();
@@ -82,10 +90,9 @@ export class RulitTestComponent implements OnInit {
     }
 
     goNextExercise(){
-        let nexEN = this.exerciseNumberParam + 1;
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['rulit/test',this.userParam,this.testNumberParam,nexEN]);
+        this.router.navigate(['rulit/test',this.userService.user.userId]);
     }
 
 }

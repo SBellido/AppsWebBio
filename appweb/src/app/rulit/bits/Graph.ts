@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Vertex } from './Vertex';
 
@@ -28,7 +27,7 @@ interface IGraph {
 }
 
 
-export class Graph implements IGraph{
+export class Graph implements IGraph {
     
     private _adjList: Map<Vertex,Array<number>>;
     private _currentNode: Vertex;
