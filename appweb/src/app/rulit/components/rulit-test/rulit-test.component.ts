@@ -22,12 +22,11 @@ const CANVAS_HEIGHT = 472;
 export class RulitTestComponent implements OnInit {
 
     @ViewChild('labCanvas', { static: true }) 
-    
     private labCanvas: ElementRef<HTMLCanvasElement>;
-    private testService: TestService;
-
     private clickCanvas$: Observable<Event>;
     
+    private testService: TestService;
+
     constructor(
         private ngZone: NgZone,
         private route: ActivatedRoute,
@@ -65,7 +64,8 @@ export class RulitTestComponent implements OnInit {
         // Copies solutions to a new array 
         let currentSolution = Object.assign([],SOLUTION);
         
-        this.testService = new TestService(newGraph, currentSolution , this.ngZone, this.userService);
+        // Build the test 
+        this.testService = new TestService(newGraph, currentSolution , this.ngZone, this.userService); 
         
         this.clickCanvas$ = fromEvent(this.labCanvas.nativeElement,'click');
         
@@ -75,8 +75,8 @@ export class RulitTestComponent implements OnInit {
         });
 
         // Draw canvas when current node changes
-        this.testService.graphCurrentNode$.subscribe( () => { 
-            this.testService.drawGraph(); 
+        this.testService.graph.currentNode$.subscribe( () => { 
+            this.testService.graph.draw(); 
         });
 
         // When exercise is over go to next
@@ -85,7 +85,7 @@ export class RulitTestComponent implements OnInit {
         });
         
         // First Draw
-        this.testService.drawGraph();
+        this.testService.graph.draw();
 
     }
 

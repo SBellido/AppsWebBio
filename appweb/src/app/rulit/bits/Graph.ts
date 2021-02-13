@@ -22,7 +22,7 @@ interface IGraph {
     currentNode: Vertex
     currentNode$: Observable<Vertex>
     addVertex(theVertex: Vertex, edges: Array<number>): void | boolean
-    isCurrentNodeConnectedTo(theNode: Vertex): boolean;
+    isCurrentNodeNextTo(theNode: Vertex): boolean;
     getNodeById(theNodeId: number): Vertex | undefined
 }
 
@@ -33,11 +33,10 @@ export class Graph implements IGraph {
     private _currentNode: Vertex;
     private currentNodeChange$ = new Subject<Vertex>();
     
-    public currentNode$ = this.currentNodeChange$.asObservable();
-    
-    
     constructor(){
         this._adjList = new Map<Vertex,Array<number>>();
+
+        this.currentNode$.subscribe( (theNode) => { this._currentNode = theNode } );
     }
 
     addVertex(theVertex: Vertex, edges: Array<number>) {
@@ -59,13 +58,16 @@ export class Graph implements IGraph {
         return this._currentNode;
     }
 
+    //
+    get currentNode$(){
+        return this.currentNodeChange$.asObservable();
+    }
+
     // Set the current active node
     set currentNode( theNode: Vertex ) {
         // Set active flag to false for all nodes
         this.nodes.map( node => node.id == theNode.id ? node.isActive = true : node.isActive = false);
         // Set current node
-        this._currentNode = theNode;
-        //
         this.currentNodeChange$.next(theNode);
     }
 
@@ -74,7 +76,7 @@ export class Graph implements IGraph {
         return this.nodes.find( node => theNodeId == node.id );
     }
 
-    isCurrentNodeConnectedTo(theNode: Vertex): boolean {
+    isCurrentNodeNextTo(theNode: Vertex): boolean {
         return this._adjList.get(this._currentNode).includes(theNode.id);
     }
 

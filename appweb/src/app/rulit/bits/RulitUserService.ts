@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
+import { TestName } from "./TestService";
+
 
 // Step stored in DB
 export interface IRulitStep {
-    timeEnlapsed: number,
+    elapsedTime: number,
     correctMoves: number,
     incorrectMoves: number
 }
@@ -22,7 +24,8 @@ interface IRulitUser {
     name: string,
     test1: Array<IRulitExercise>,
     test2: Array<IRulitExercise>
-    stepErrors: Array<number>
+    stepErrors: Array<number>,
+    nextTest: TestName
     // add stepErrorsTest2
 }
 
@@ -43,9 +46,10 @@ export class RulitUserService {
             userId: 1,
             email: newUserData.email,
             name: newUserData.name,
-            test1: null,
-            test2: null,
-            stepErrors: new Array<number>()
+            test1: new Array<IRulitExercise>(),
+            test2: new Array<IRulitExercise>(),
+            stepErrors: new Array<number>(),
+            nextTest: "learning"
         };
     }
 
@@ -58,7 +62,8 @@ export class RulitUserService {
             name: "newUserData.name",
             test1: null,
             test2: null,
-            stepErrors: new Array<number>()
+            stepErrors: new Array<number>(),
+            nextTest: "short_memory_test"
         };
     }
 
