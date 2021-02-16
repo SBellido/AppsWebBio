@@ -56,15 +56,37 @@ export class RulitUserService {
     // Refactor to load user from db
     loadUserFromDB(userId: number): void {
         console.log("Getting user " + userId);
-        this._user = {
-            userId: 1,
-            email: "newUserData@email.com",
-            name: "newUserData.name",
-            test1: null,
-            test2: null,
-            stepErrors: new Array<number>(),
-            nextTest: "short_memory_test"
-        };
+        if (userId == 1) {
+            this._user = {
+                userId: 1,
+                email: "testuser1@email.com",
+                name: "test user 1",
+                test1: new Array<IRulitExercise>(),
+                test2: new Array<IRulitExercise>(),
+                stepErrors: new Array<number>(),
+                nextTest: "learning"
+            };
+        }
+        if (userId == 2) {
+            this._user = {
+                userId: 2,
+                email: "testuser2@email.com",
+                name: "test user 2",
+                test1: new Array<IRulitExercise>(),
+                test2: new Array<IRulitExercise>(),
+                stepErrors: new Array<number>(),
+                nextTest: "long_memory_test"
+            };
+        }
+
+    }
+
+    haveFinishedTheTest( exercisesArray: Array<IRulitExercise>, MAX_EXERCISES: number ) {
+        let exercisesWithoutMistakes = 0;
+        exercisesArray.forEach( (exercise) => {
+            if ( exercise.totalIncorrectMoves == 0 ) exercisesWithoutMistakes++; 
+        });
+        return exercisesArray.length == MAX_EXERCISES || exercisesWithoutMistakes >= 2 ;
     }
 
 }

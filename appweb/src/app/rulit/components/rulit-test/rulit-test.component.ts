@@ -79,9 +79,18 @@ export class RulitTestComponent implements OnInit {
             this.testService.graph.draw(); 
         });
 
-        // When exercise is over go to next
+        // When exercise is over go to next one
         this.testService.exerciseChange$.subscribe( (isExerciseOver) => {
             if (isExerciseOver) this.goNextExercise(); 
+        });
+        
+        // When test is over
+        this.testService.testChange$.subscribe( (isTestOver) => {
+            if ( isTestOver && this.userService.user.nextTest == "long_memory_test" ) { 
+                alert("Current test is over, next test URL will be send by email.");
+            } else {
+                alert("All tests done.");
+            }
         });
         
         // First Draw

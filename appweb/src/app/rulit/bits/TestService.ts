@@ -2,11 +2,12 @@ import { NgZone } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { CanvasGraph } from "./CanvasGraph";
 import { ExerciseService, IRulitTestExercise } from "./ExerciseService";
-import { RulitUserService, IRulitExercise, IRulitStep } from "./RulitUserService";
+import { IRulitExercise, RulitUserService } from "./RulitUserService";
 import { Vertex } from "./Vertex";
 
-export type TestName = "learning" | "short_memory_test" | "long_memory_test";
+export type TestName = "learning" | "short_memory_test" | "long_memory_test" | "no_next_test";
 
+const MAX_EXERCISES = 10;
 
 export class TestService {
 
@@ -14,8 +15,9 @@ export class TestService {
     
     private currentExercise: IRulitTestExercise;
     private isExerciseOver$ = new Subject<boolean>();
+    private isTestOver$ = new Subject<boolean>();
     
-    private newNode: Vertex;
+    // private newNode: Vertex;
     private newNodeChange$ = new Subject<Vertex>();    
 
     // Test Service depends on:
@@ -39,15 +41,57 @@ export class TestService {
         this.solution.reverse();
 
         // Observe when current node changes in order to remove the last element in solutions array.
-        this.graph.currentNode$.subscribe( () => { 
+        this.graph.currentNode$.subscribe( (theNode) => { 
+            
             this.solution.pop();
-            // TODO: Observe to finish the test or exercise
+            
+            // When the node is the last in graph: 
+            //      - Check if test has finished
+            //      - or, go to the next exercise.
+            if ( theNode.isLastNode ) {
+
+                let currentExercisesArray: Array<IRulitExercise>;
+
+                if ( this.testName == "learning" || this.testName == "short_memory_test" ) currentExercisesArray = this.userService.user.test1;
+                if ( this.testName == "long_memory_test" ) currentExercisesArray = this.userService.user.test2;
+                
+                currentExercisesArray.push(this.currentExercise.toDataExercise());
+                
+                if ( this.userService.haveFinishedTheTest( currentExercisesArray , MAX_EXERCISES ) ) { 
+                    
+                    if ( this.testName == "short_memory_test" ) {
+                        this.userService.user.nextTest = "long_memory_test";
+                        this.isTestOver$.next(true);
+                        console.log("Short memory test is over");
+                    }
+                    
+                    if ( this.testName == "long_memory_test" ) {
+                        this.userService.user.nextTest = "no_next_test";
+                        this.isTestOver$.next(true);
+                        console.log("Long memory test is over"); 
+                    }
+
+                } else {
+
+                    this.isExerciseOver$.next(true); 
+
+                    if ( this.testName == "learning" ) { 
+                        this.userService.user.nextTest = "short_memory_test";
+                        console.log("Lerning exercise is over"); 
+                    }
+
+                }
+
+                console.log(this.userService.user);
+
+            }
+
         });
 
-        // When theres a clicked node
+        // When theres a new clicked node
         this.newNode$.subscribe({ 
             next: (newNode) => { 
-                // If is the first move in the exercise
+                // Can be the first move in the exercise
                 if ( newNode.isFirstNode && ! this.currentExercise.currentStep ) {
                     this.currentExercise.initNewStep();
                     this.graph.currentNode = newNode;
@@ -74,21 +118,17 @@ export class TestService {
                         console.log("Selected node isnt connected"); // TODO "display a error message for 5 - 7 sec."
                     }
                 }
-                
-            } });
+            } 
+        });
 
     }
 
-    // private get currentStep(): IRulitTestStep {
-    //     return this.currentExercise.currentStep;
-    // }
-    
-    // private set currentStep( theStep: IRulitTestStep ) {
-    //     this.currentExercise.currentStep = theStep;
-    // }
-
     get exerciseChange$(): Observable<boolean> {
         return this.isExerciseOver$.asObservable();
+    }
+    
+    get testChange$(): Observable<boolean> {
+        return this.isTestOver$.asObservable();
     }
 
     private get newNode$(): Observable<Vertex> {
@@ -96,80 +136,14 @@ export class TestService {
     }
 
     // Handles user move:
-    //      - Searchs for a node in clicked area. (Done)
-    //      - Validates that the node is conected with previous one.
-    //          . when not "display a error message for 5 - 7 sec."
-    //      - Checks if the move is part of the solution.
-    //          . when not "selected node flickers in red for X sec."
-    //      - Add valid move to users current test
-    //      - Update current active node in graph. (Done)
+    //      - Searchs for a node in clicked area.
+    //      - Emits the new node change.
     handleNewMove(clientX: number, clientY: number ): void {
         
         let newNode = this.graph.getNodeAtPosition(clientX,clientY);
 
         // Theres a node clicked
         if ( newNode ) this.newNodeChange$.next(newNode);
-            
-            // Is the first move in the exercise
-            // if ( ! this.graph.currentNode ) {
-                
-                // Clicked node is first node
-                // if ( newNode.isFirstNode ) {
-                    // this.currentStep = this.buildNewStep();
-                    // this.graph.currentNode = newNode;
-                // } else {
-                    // console.log("First move must be start node"); // TBC
-                // }
-
-            // } else { // Having a clicked node other than the firstone
-                
-            //     if ( this.graph.isCurrentNodeNextTo(newNode) ) {
-            //         if ( this.isSelectedNodeNextInsolution(newNode) ) {
-                        
-                        // Update current step variables
-                        // let currentTimeInMilliseconds = new Date().getTime();
-                        // this.currentStep.timeEnlapsed = new Date(currentTimeInMilliseconds - this.currentStep.initialTime).getMilliseconds();
-                        // this.currentStep.correctMoves++;
-                        // 
-                        // this.currentExercise.steps.push(this.currentStep.toDataStep(this.currentStep));
-                        
-                        // Update current node
-                        // this.graph.currentNode = newNode;
-
-                        // this.currentStep = this.buildNewStep();
-                        
-                    // } else {
-                        // Update current step variables
-                        // this.currentStep.incorrectMoves++;
-
-                        // Selected node flickers in red
-                        // this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
-                    // }
-                // } else {
-                    // Sums a incorrect decision to this step
-                    // this.currentStep.incorrectMoves++;
-                    // console.log("Selected node isnt connected"); // TODO "display a error message for 5 - 7 sec."
-                // }
-
-                // if ( this.currentTestName == "learning" && this.graph.currentNode.isLastNode ) {
-                //     this.userService.user.nextTest = "short_memory_test";
-                //     this.userService.user.test1.push(this.currentExercise.toDataExercise(this.currentExercise));
-                //     this.isExerciseOver$.next(true);
-                //     console.log(this.userService.user);
-                //     console.log("lerning test is over");
-                // }
-
-                // if ( this.currentTestName == "short_memory_test" && this.graph.currentNode.isLastNode ) {
-                    // TODO: check if this is the second win
-                //     this.userService.user.test1.push(this.currentExercise.toDataExercise(this.currentExercise));
-                //     this.isExerciseOver$.next(true);
-                //     console.log(this.userService.user);
-                //     console.log("lerning test is over");
-                // }
-
-
-
-            // }
 
     }
     
