@@ -92,10 +92,16 @@ export class TestService {
         this.newNode$.subscribe({ 
             next: (newNode) => { 
                 // Can be the first move in the exercise
-                if ( newNode.isFirstNode && ! this.currentExercise.currentStep ) {
-                    this.currentExercise.initNewStep();
-                    this.graph.currentNode = newNode;
-                } else {
+                if ( ! this.currentExercise.currentStep ) {
+                    if ( newNode.isFirstNode ) {
+                        this.currentExercise.initNewStep();
+                        this.graph.currentNode = newNode;
+                    } else {
+                        console.log("Must start form initial node"); // TODO 
+                    }
+                }
+                if ( this.currentExercise.currentStep && ! newNode.isFirstNode ) {
+
                     if ( this.graph.isCurrentNodeNextTo(newNode) ) {
                         if ( this.isSelectedNodeNextInsolution(newNode) ) {
                             // Update exercise by completing current step
@@ -103,13 +109,13 @@ export class TestService {
                             
                             // Update current node in the graph
                             this.graph.currentNode = newNode;
-
+    
                             // Build a new step
                             this.currentExercise.initNewStep();
                         } else {
                             // Update step and exercise variables
                             this.currentExercise.addIncorrectMove();
-
+    
                             // Selected node flickers in red
                             this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
                         }
@@ -117,8 +123,9 @@ export class TestService {
                         this.currentExercise.addIncorrectMove();
                         console.log("Selected node isnt connected"); // TODO "display a error message for 5 - 7 sec."
                     }
+
                 }
-            } 
+            }
         });
 
     }
