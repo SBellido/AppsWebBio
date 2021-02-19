@@ -64,7 +64,7 @@ export class RulitTestComponent implements OnInit {
         let orientation = window.screen.orientation.type;
         let screenWidth = window.screen.width;
 
-        if (orientation === "landscape-primary" || 
+        if (orientation === "landscape-primary" || orientation === "landscape-secondary" ||
                 (screenWidth >= 768) && (orientation === "portrait-secondary" || orientation === "portrait-primary") ) {
             console.log("That looks good.");
             // alert(orientation);
