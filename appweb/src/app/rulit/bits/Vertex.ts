@@ -17,8 +17,9 @@ export class Vertex implements IVertex {
                     private _isLastNode: boolean, 
                     private _isActive: boolean,
                     theX: number, 
-                    theY: number ){
-                    this._circle = new Circle(20,theX,theY,"#000");
+                    theY: number,
+                    radius ){
+                    this._circle = new Circle(radius,theX,theY,"#000");
                 }
     
     get id(): number {

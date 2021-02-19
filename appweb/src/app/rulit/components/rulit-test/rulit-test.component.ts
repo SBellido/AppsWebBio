@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { fromEvent, Observable } from 'rxjs';
+import { BehaviorSubject, fromEvent, Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { buildGraph } from '../../bits/GraphUtils';
 import { TestService } from '../../bits/TestService';
 
 import { GRAPH as GRAPH_DATA, SOLUTION } from "../../bits/graphs_available/Graph1_data_testing";
 import { RulitUserService } from '../../bits/RulitUserService';
+import { fakeAsync } from '@angular/core/testing';
 
-
-const CANVAS_WIDTH = 652;
-const CANVAS_HEIGHT = 472;
+const MAX_CANVAS_HEIGHT = 480;
 
 @Component({
     selector: 'app-rulit-test',
@@ -24,7 +24,8 @@ export class RulitTestComponent implements OnInit {
     @ViewChild('labCanvas', { static: true }) 
     private labCanvas: ElementRef<HTMLCanvasElement>;
     private clickCanvas$: Observable<Event>;
-    
+    // private screenOrientationChange$: Observable<OrientationType>;
+
     private testService: TestService;
 
     constructor(
@@ -46,26 +47,84 @@ export class RulitTestComponent implements OnInit {
                 this.router.navigate(['/']);
             }
 
+            // this.screenOrientationChange$ = fromEvent(window,"orientationchange").pipe(
+            //     map( e => e.target.screen.orientation.type )
+            // );
+
         }
 
     ngOnInit(): void {
         
-        this.initTest();
+        if (this.isScreenOrientationValid()) this.initTest();
+
+    }
+    
+    private isScreenOrientationValid(): boolean {
+
+        let orientation = window.screen.orientation.type;
+        let screenWidth = window.screen.width;
+
+        if (orientation === "landscape-primary" || 
+                (screenWidth >= 768) && (orientation === "portrait-secondary" || orientation === "portrait-primary") ) {
+            console.log("That looks good.");
+            // alert(orientation);
+            return true;
+        } 
+        
+        // alert(orientation);
+        return false;
+        
+        // else {
+
+        //     let isScreenLandscape = false;
+        //     let messageText;
+
+        //     this.screenOrientationChange$.subscribe( orientation => {
+        //         console.log(orientation);
+        //     });
+            
+
+            // while ( ! isScreenLandscape ) {
+                
+                
+            //     this.screenOrientationChange$.subscribe( (orientation) => {   
+                
+            //         // TODO: si esta con el celular:
+            //         //      - aparezca el cartelito que aparece al principio. 
+    
+            //         // let orientation = (e.target.screen.orientation || {}).type ;
+    
+            //         if (orientation === "landscape-primary" ) {
+            //             isScreenLandscape = true;
+            //         } else if (orientation === "landscape-secondary") {
+            //             messageText = "Mmmh... the screen is upside down!";
+            //         } else if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
+            //             messageText = "Mmmh... you should rotate your device to landscape";
+            //         } else if (orientation === undefined) {
+            //             messageText = "The orientation API isn't supported in this browser :(";
+            //         }
+                    
+            //     // });
+
+            //     console.log(messageText);
+
+            // }
+
+        // }
 
     }
 
     private initTest(): void {
+
+        this.setCanvasSize();
         
-        this.labCanvas.nativeElement.width = CANVAS_WIDTH;
-        this.labCanvas.nativeElement.height = CANVAS_HEIGHT;
-        
-        let newGraph = buildGraph(GRAPH_DATA,this.labCanvas);
+        let theGraph = buildGraph(GRAPH_DATA,this.labCanvas);
         
         // Copies solutions to a new array 
         let currentSolution = Object.assign([],SOLUTION);
         
         // Build the test 
-        this.testService = new TestService(newGraph, currentSolution , this.ngZone, this.userService); 
+        this.testService = new TestService(theGraph, currentSolution , this.ngZone, this.userService); 
         
         this.clickCanvas$ = fromEvent(this.labCanvas.nativeElement,'click');
         
@@ -97,8 +156,27 @@ export class RulitTestComponent implements OnInit {
         this.testService.graph.draw();
 
     }
+    
+    // Based on window size, sets the canvas used for the graph
+    private setCanvasSize() {
+        
+        let screenHeight = screen.height;
+        
+        if ( screenHeight >= MAX_CANVAS_HEIGHT ) {
 
-    goNextExercise(){
+            this.labCanvas.nativeElement.width = 672;
+            this.labCanvas.nativeElement.height = 480;
+
+        } else {
+
+            this.labCanvas.nativeElement.width = (screenHeight * 0.9) * 1.4;
+            this.labCanvas.nativeElement.height = screenHeight * 0.9;
+
+        }
+
+    }
+
+    private goNextExercise(){
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate(['rulit/test',this.userService.user.userId]);

@@ -63,9 +63,7 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
         let theNode: Vertex;
 
         this.nodes.forEach( node => {
-            if ( node.circle.isPointInside(thePosition) ) {
-                theNode = node;
-            }
+            if ( node.circle.isPointInside(thePosition) ) theNode = node;
         });
 
         return theNode ? theNode : undefined;
@@ -79,11 +77,7 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
         this.currentNode.circle.fill = "#000";
         
         const i = setInterval( () => {
-            if (Math.abs(frame % 2) == 1){
-                newNode.circle.fill = "#f00";
-            } else {
-                newNode.circle.fill = "#000";
-            }
+            (Math.abs(frame % 2) == 1) ? newNode.circle.fill = "#f00" : newNode.circle.fill = "#000";
             this.draw();
             frame++;
             let requestId = requestAnimationFrame(() => this.flickerNode );

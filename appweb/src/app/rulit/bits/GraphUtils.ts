@@ -5,12 +5,17 @@ import { Vertex } from "./Vertex";
 
 // Creates a new graph and adds nodes, edges and canvas.
 export function buildGraph(GRAPH_DATA: Array<IGraphNode>, theCanvas: ElementRef<HTMLCanvasElement>): CanvasGraph{
-    
+
     let newGraph = new CanvasGraph();
-    
+
+    let nodeSpacing = theCanvas.nativeElement.width * 0.052;
+    let nodeRadius = nodeSpacing * 0.6;
+
+    console.log(nodeRadius);
+
     // Add nodes and edges from GRAPH_DATA object
     GRAPH_DATA.forEach( nodeData => { 
-        let newNode = buildNode(nodeData);
+        let newNode = buildNode(nodeData, nodeSpacing, nodeRadius);
         newGraph.addVertex(newNode, nodeData.edges);
     });
     
@@ -19,13 +24,14 @@ export function buildGraph(GRAPH_DATA: Array<IGraphNode>, theCanvas: ElementRef<
     return newGraph;
 }
 
-function buildNode( nodeData: IGraphNode ): Vertex {
+function buildNode( nodeData: IGraphNode, nodeSpacing: number, nodeRadius: number ): Vertex {
     return new Vertex(
         nodeData.id,
         nodeData.isFirstNode, 
         nodeData.isLastNode,
         false,
-        nodeData.column * 34,
-        nodeData.row * 34
+        nodeData.column * nodeSpacing,
+        nodeData.row * nodeSpacing,
+        nodeRadius
     );
 }
