@@ -48,10 +48,16 @@ mat-header-cell {
     color: #eeeeee;
     padding: 0 1em !important;
 }  
+
 mat-cell {
     // border: 1px solid #dddddd;
     // text-align: left;
     padding: 1em !important;
+}
+
+mat-paginator {
+    background-color:  #4a4067;
+    color: #eeeeee;
 }
 
 // .spinner-container {
