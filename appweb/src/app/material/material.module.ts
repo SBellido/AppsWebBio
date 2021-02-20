@@ -14,8 +14,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorIntlES } from './custom/mat-paginator-intl_ES';
 
 @NgModule({
   declarations: [],
@@ -53,6 +54,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     LayoutModule,
     MatPaginatorModule,
     MatDialogModule
-  ]
+  ],
+  providers: [{ provide: MatPaginatorIntl, useClass: MatPaginatorIntlES}]
 })
 export class MaterialModule { }
