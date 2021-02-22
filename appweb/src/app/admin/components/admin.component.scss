@@ -56,9 +56,13 @@ mat-cell {
 }
 
 mat-paginator {
-    background-color:  #4a4067;
+    background-color:  #E33B88;
     color: #eeeeee;
 }
+
+// mat-paginator>span.mat-button-wrapper{
+//     color: #ffcf02 !important;
+// }
 
 // .spinner-container {
 //     height: 360px;
