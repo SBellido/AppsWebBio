@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { fromEvent, Observable } from 'rxjs';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 
 import { buildGraph } from '../../bits/GraphUtils';
 import { TestService } from '../../bits/TestService';
@@ -21,11 +21,13 @@ const MAX_MOBILE_SCREEN_WIDTH = 768;
     styleUrls: ['../rulit.component.scss']
 })
 
-export class RulitTestComponent implements OnInit {
+export class RulitTestComponent implements OnInit, OnDestroy {
 
     @ViewChild('labCanvas', { static: true }) 
     private labCanvas: ElementRef<HTMLCanvasElement>;
     private clickCanvas$: Observable<Event>;
+    private orientationChange$: Subscription;
+    
 
     private testService: TestService;
 
@@ -62,7 +64,7 @@ export class RulitTestComponent implements OnInit {
             dialogRef = this.openScreenOrientationDialog();
         }
         
-        fromEvent(window,"orientationchange").subscribe( () => {
+        this.orientationChange$ = fromEvent(window,"orientationchange").subscribe( () => {
             if (this.isScreenOrientationValid(screen.orientation) && dialogRef ) {
                 this.closeScreenOrientationDialog(dialogRef);
                 if ( ! this.testService) this.initTest();
@@ -161,6 +163,10 @@ export class RulitTestComponent implements OnInit {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate(['rulit/test',this.userService.user.userId]);
+    }
+
+    ngOnDestroy(): void {
+        this.orientationChange$.unsubscribe();
     }
 
 }
