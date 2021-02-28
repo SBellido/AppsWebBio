@@ -1,17 +1,19 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { BehaviorSubject, fromEvent, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { fromEvent, Observable } from 'rxjs';
 
 import { buildGraph } from '../../bits/GraphUtils';
 import { TestService } from '../../bits/TestService';
 
 import { GRAPH as GRAPH_DATA, SOLUTION } from "../../bits/graphs_available/Graph1_data_testing";
 import { RulitUserService } from '../../bits/RulitUserService';
-import { fakeAsync } from '@angular/core/testing';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ScreenOrientationDialogComponent } from './dialog-components/orientation-dialog.component';
+
 
 const MAX_CANVAS_HEIGHT = 480;
+const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 @Component({
     selector: 'app-rulit-test',
@@ -24,7 +26,6 @@ export class RulitTestComponent implements OnInit {
     @ViewChild('labCanvas', { static: true }) 
     private labCanvas: ElementRef<HTMLCanvasElement>;
     private clickCanvas$: Observable<Event>;
-    // private screenOrientationChange$: Observable<OrientationType>;
 
     private testService: TestService;
 
@@ -32,7 +33,8 @@ export class RulitTestComponent implements OnInit {
         private ngZone: NgZone,
         private route: ActivatedRoute,
         private router: Router,
-        private userService: RulitUserService ) {
+        private userService: RulitUserService,
+        public dialog: MatDialog ) {
 
             let userIdParam = +this.route.snapshot.paramMap.get('id');
 
@@ -47,71 +49,50 @@ export class RulitTestComponent implements OnInit {
                 this.router.navigate(['/']);
             }
 
-            // this.screenOrientationChange$ = fromEvent(window,"orientationchange").pipe(
-            //     map( e => e.target.screen.orientation.type )
-            // );
-
         }
 
     ngOnInit(): void {
+
+        let screen = window.screen;
+        let dialogRef = null;
+
+        if ( this.isScreenOrientationValid(screen.orientation) ) {
+            this.initTest(); 
+        } else {
+            dialogRef = this.openScreenOrientationDialog();
+        }
         
-        if (this.isScreenOrientationValid()) this.initTest();
+        fromEvent(window,"orientationchange").subscribe( () => {
+            if (this.isScreenOrientationValid(screen.orientation) && dialogRef ) {
+                this.closeScreenOrientationDialog(dialogRef);
+                if ( ! this.testService) this.initTest();
+            } else if ( ! dialogRef || dialogRef.getState() === 2 ){
+                dialogRef = this.openScreenOrientationDialog();
+            }
+        });
 
     }
+
+    private openScreenOrientationDialog(): MatDialogRef<ScreenOrientationDialogComponent, any> {
+         return this.dialog.open(ScreenOrientationDialogComponent);
+    }
     
-    private isScreenOrientationValid(): boolean {
+    private closeScreenOrientationDialog(dialogRef: MatDialogRef<ScreenOrientationDialogComponent, any>): void {
+        dialogRef.close();
+    }
+    
+    // Checks if the mobile screen is in the correct position.
+    private isScreenOrientationValid(orientation : ScreenOrientation): boolean {
 
-        let orientation = window.screen.orientation.type;
-        let screenWidth = window.screen.width;
+        let orientationType = orientation.type;
 
-        if (orientation === "landscape-primary" || orientation === "landscape-secondary" ||
-                (screenWidth >= 768) && (orientation === "portrait-secondary" || orientation === "portrait-primary") ) {
-            console.log("That looks good.");
-            // alert(orientation);
+        if (orientationType === "landscape-primary" || orientationType === "landscape-secondary" ||
+            (screen.width >= MAX_MOBILE_SCREEN_WIDTH) && ( screen.orientation.type === "portrait-secondary" || screen.orientation.type === "portrait-primary" ) ) {
             return true;
         } 
         
-        // alert(orientation);
         return false;
         
-        // else {
-
-        //     let isScreenLandscape = false;
-        //     let messageText;
-
-        //     this.screenOrientationChange$.subscribe( orientation => {
-        //         console.log(orientation);
-        //     });
-            
-
-            // while ( ! isScreenLandscape ) {
-                
-                
-            //     this.screenOrientationChange$.subscribe( (orientation) => {   
-                
-            //         // TODO: si esta con el celular:
-            //         //      - aparezca el cartelito que aparece al principio. 
-    
-            //         // let orientation = (e.target.screen.orientation || {}).type ;
-    
-            //         if (orientation === "landscape-primary" ) {
-            //             isScreenLandscape = true;
-            //         } else if (orientation === "landscape-secondary") {
-            //             messageText = "Mmmh... the screen is upside down!";
-            //         } else if (orientation === "portrait-secondary" || orientation === "portrait-primary") {
-            //             messageText = "Mmmh... you should rotate your device to landscape";
-            //         } else if (orientation === undefined) {
-            //             messageText = "The orientation API isn't supported in this browser :(";
-            //         }
-                    
-            //     // });
-
-            //     console.log(messageText);
-
-            // }
-
-        // }
-
     }
 
     private initTest(): void {
