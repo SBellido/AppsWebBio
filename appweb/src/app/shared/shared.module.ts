@@ -14,6 +14,7 @@ import { HeaderAdminComponent } from './components/header-admin/header-admin.com
 import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from './../material/material.module';
 import { ReplaceNullWithTextPipe } from './pipes/replace-null-with-text.pipe';
+import { HeaderRulitComponent } from './components/header-rulit/header-rulit.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ReplaceNullWithTextPipe } from './pipes/replace-null-with-text.pipe';
     HeaderCreativityComponent,
     HeaderAdminComponent,
     FooterComponent,
-    ReplaceNullWithTextPipe
+    ReplaceNullWithTextPipe,
+    HeaderRulitComponent
   ],
   exports: [
     HeaderComponent,
@@ -35,7 +37,8 @@ import { ReplaceNullWithTextPipe } from './pipes/replace-null-with-text.pipe';
     HeaderCreativityComponent,
     HeaderAdminComponent,
     FooterComponent,
-    ReplaceNullWithTextPipe
+    ReplaceNullWithTextPipe,
+    HeaderRulitComponent
   ],
   imports: [
     CommonModule,
