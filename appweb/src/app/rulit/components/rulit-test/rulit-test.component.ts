@@ -27,6 +27,7 @@ export class RulitTestComponent implements OnInit, OnDestroy {
     private labCanvas: ElementRef<HTMLCanvasElement>;
     private clickCanvas$: Observable<Event>;
     private orientationChange$: Subscription;
+    private metaviewport: HTMLMetaElement = document.querySelector('meta[name="viewport"]');
     
 
     private testService: TestService;
@@ -76,7 +77,8 @@ export class RulitTestComponent implements OnInit, OnDestroy {
     }
 
     private openScreenOrientationDialog(): MatDialogRef<ScreenOrientationDialogComponent, any> {
-         return this.dialog.open(ScreenOrientationDialogComponent);
+        this.metaviewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0';
+        return this.dialog.open(ScreenOrientationDialogComponent);
     }
     
     private closeScreenOrientationDialog(dialogRef: MatDialogRef<ScreenOrientationDialogComponent, any>): void {
@@ -166,6 +168,7 @@ export class RulitTestComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.metaviewport.content = 'width=device-width, initial-scale=1.0';
         this.orientationChange$.unsubscribe();
     }
 
