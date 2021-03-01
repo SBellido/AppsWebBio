@@ -37,6 +37,10 @@ export class Figure2d implements IFigure2d {
         this._fill = theFill;
     }
     
+    get fill () {
+        return this._fill;
+    }
+    
     draw (theContext: CanvasRenderingContext2D) {
         theContext.fillStyle = this._fill;
     }

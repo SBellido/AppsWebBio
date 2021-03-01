@@ -192,6 +192,6 @@ export const GRAPH: Array<IGraphNode> = [
     }
 ];
 
-// export const SOLUTION: Array<number> = [13,12,11,14,21,15,16,17,18,22,23,19,10,9,8,7];
-   export const SOLUTION: Array<number> = [13,12,2,1,11,15,21,20,14,11,12,3,4,5,6,7];
+export const SOLUTION: Array<number> = [13,12,11,14,15,16,17,18,22,23,19,10,9,8,6,7];
+//    export const SOLUTION: Array<number> = [13,12,2,1,11,15,21,20,14,11,12,3,4,5,6,7];
 

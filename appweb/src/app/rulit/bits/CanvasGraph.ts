@@ -2,9 +2,15 @@ import { ElementRef } from "@angular/core";
 import { Graph } from "./Graph";
 import { Vertex } from "./Vertex";
 
+export const COLOR_WHITE = "#FFF";
+export const COLOR_GREEN = "#90C14B";
+export const COLOR_RED = "#E52F2D";
+export const COLOR_VIOLET = "#4A4067";
+
+
 interface ICanvasGraph {
-    draw(): void
-    getNodeAtPosition(clientX: number,clientY: number ): Vertex | undefined
+    draw(): void,
+    getNodeAtPosition(clientX: number,clientY: number ): Vertex | undefined,
     flickerNode(newNode: Vertex): void
 }
 
@@ -38,13 +44,14 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
         }
 
         // Draw nodes
-        this.nodes.forEach(node => node.circle.draw(this.context));
+        this.nodes.forEach(node => node.draw(this.context));
     }
 
     private drawEdgeBetweenNodes(theNode: Vertex, connectedNode: Vertex) {
         this.context.beginPath();
         this.context.moveTo(theNode.circle.posX, theNode.circle.posY);
         this.context.lineTo(connectedNode.circle.posX,connectedNode.circle.posY);
+        this.context.strokeStyle = COLOR_VIOLET;
         this.context.stroke();
         this.context.closePath();
         this.context.restore();
@@ -74,16 +81,17 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
     flickerNode(newNode: Vertex): void {
         
         let frame = 0;
-        this.currentNode.circle.fill = "#000";
+        this.currentNode.circle.fill = COLOR_WHITE;
         
         const i = setInterval( () => {
-            (Math.abs(frame % 2) == 1) ? newNode.circle.fill = "#f00" : newNode.circle.fill = "#000";
+            (Math.abs(frame % 2) == 1) ? newNode.circle.fill = COLOR_RED : newNode.resetColor();
             this.draw();
             frame++;
             let requestId = requestAnimationFrame(() => this.flickerNode );
 
             if (frame >= 5) {
-                this.currentNode.circle.fill = "#008F39";
+                this.currentNode.resetColor();
+                newNode.resetColor();
                 this.draw();
                 cancelAnimationFrame(requestId);
                 clearInterval(i);

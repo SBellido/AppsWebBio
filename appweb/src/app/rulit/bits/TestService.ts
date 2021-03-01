@@ -101,7 +101,7 @@ export class TestService {
                         console.log("Must start form initial node"); // TODO 
                     }
                 }
-                if ( this.currentExercise.currentStep && ! newNode.isFirstNode ) {
+                if ( this.currentExercise.currentStep ) {
 
                     if ( this.graph.isCurrentNodeNextTo(newNode) ) {
                         if ( this.isSelectedNodeNextInsolution(newNode) ) {
@@ -120,7 +120,7 @@ export class TestService {
                             // Selected node flickers in red
                             this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
                         }
-                    } else {
+                    } else if ( ! newNode.isFirstNode ) {
                         this.currentExercise.addIncorrectMove();
                         console.log("Selected node isnt connected"); // TODO "display a error message for 5 - 7 sec."
                     }
@@ -139,6 +139,10 @@ export class TestService {
         return this.isTestOver$.asObservable();
     }
 
+    setCurrentNode(newNode: Vertex){
+        this.newNodeChange$.next(newNode);
+    }
+
     private get newNode$(): Observable<Vertex> {
         return this.newNodeChange$.asObservable();
     }
@@ -151,7 +155,7 @@ export class TestService {
         let newNode = this.graph.getNodeAtPosition(clientX,clientY);
 
         // Theres a node clicked
-        if ( newNode ) this.newNodeChange$.next(newNode);
+        if ( newNode ) this.setCurrentNode(newNode);
 
     }
     

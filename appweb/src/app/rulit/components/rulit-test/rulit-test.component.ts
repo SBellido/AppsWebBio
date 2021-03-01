@@ -30,7 +30,8 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     private orientationChange$: Subscription;
     private metaviewport: HTMLMetaElement = document.querySelector('meta[name="viewport"]');
     
-    private countDown:number = 3;
+    countDown: number = 3;
+    testStarted: boolean = false;
 
     private testService: TestService;
 
@@ -108,7 +109,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         this.setCanvasSize();
         
-        let theGraph = buildGraph(GRAPH_DATA,this.labCanvas);
+        let theGraph = await buildGraph(GRAPH_DATA,this.labCanvas);
         
         // Copies solutions to a new array 
         let currentSolution = Object.assign([],SOLUTION);
@@ -141,9 +142,14 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
                 alert("All tests done.");
             }
         });
-        
+
+        // Test starts with first node selected
+        this.testService.setCurrentNode(this.testService.graph.firstNode);
+
         // First Draw
         this.testService.graph.draw();
+
+        this.testStarted = true;
 
     }
     

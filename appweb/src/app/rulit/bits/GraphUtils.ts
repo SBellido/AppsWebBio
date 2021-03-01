@@ -3,19 +3,28 @@ import { CanvasGraph } from "./CanvasGraph";
 import { IGraphNode } from "./Graph";
 import { Vertex } from "./Vertex";
 
+const NODE_IMAGE_URL = "../../assets/images/rulit-node.svg"
+const NODE_START_IMAGE_URL = "../../assets/images/rulit-node-start.svg"
+const NODE_END_IMAGE_URL = "../../assets/images/rulit-node-end.svg"
+
 // Creates a new graph and adds nodes, edges and canvas.
-export function buildGraph(GRAPH_DATA: Array<IGraphNode>, theCanvas: ElementRef<HTMLCanvasElement>): CanvasGraph{
+export async function buildGraph(GRAPH_DATA: Array<IGraphNode>, theCanvas: ElementRef<HTMLCanvasElement>): Promise<CanvasGraph>{
 
     let newGraph = new CanvasGraph();
 
     let nodeSpacing = theCanvas.nativeElement.width * 0.052;
     let nodeRadius = nodeSpacing * 0.6;
-
-    console.log(nodeRadius);
+    
+    let nodeImg = await loadImage(NODE_IMAGE_URL);
+    let nodeStartImg = await loadImage(NODE_START_IMAGE_URL);
+    let nodeEndImg = await loadImage(NODE_END_IMAGE_URL);
 
     // Add nodes and edges from GRAPH_DATA object
-    GRAPH_DATA.forEach( nodeData => { 
-        let newNode = buildNode(nodeData, nodeSpacing, nodeRadius);
+    GRAPH_DATA.forEach( nodeData => {
+        let image = nodeImg;
+        if (nodeData.isFirstNode) image = nodeStartImg;
+        if (nodeData.isLastNode) image = nodeEndImg;
+        let newNode = buildNode(nodeData, nodeSpacing, nodeRadius, image);
         newGraph.addVertex(newNode, nodeData.edges);
     });
     
@@ -24,7 +33,7 @@ export function buildGraph(GRAPH_DATA: Array<IGraphNode>, theCanvas: ElementRef<
     return newGraph;
 }
 
-function buildNode( nodeData: IGraphNode, nodeSpacing: number, nodeRadius: number ): Vertex {
+function buildNode( nodeData: IGraphNode, nodeSpacing: number, nodeRadius: number, nodeImg: HTMLImageElement ): Vertex {
     return new Vertex(
         nodeData.id,
         nodeData.isFirstNode, 
@@ -32,6 +41,16 @@ function buildNode( nodeData: IGraphNode, nodeSpacing: number, nodeRadius: numbe
         false,
         nodeData.column * nodeSpacing,
         nodeData.row * nodeSpacing,
-        nodeRadius
+        nodeRadius,
+        nodeImg
     );
+}
+
+function loadImage(src): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+        let img = new Image();
+        img.src = src;
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+    });
 }

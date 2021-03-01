@@ -17,12 +17,13 @@ export interface IGraphNode {
 
 // Graph
 interface IGraph {
-    nodes: Array<Vertex>
-    adjList: Map<Vertex,Array<number>>
-    currentNode: Vertex
-    currentNode$: Observable<Vertex>
-    addVertex(theVertex: Vertex, edges: Array<number>): void | boolean
-    isCurrentNodeNextTo(theNode: Vertex): boolean;
+    nodes: Array<Vertex>,
+    adjList: Map<Vertex,Array<number>>,
+    currentNode: Vertex,
+    currentNode$: Observable<Vertex>,
+    firstNode: Vertex,
+    addVertex(theVertex: Vertex, edges: Array<number>): void | boolean,
+    isCurrentNodeNextTo(theNode: Vertex): boolean,
     getNodeById(theNodeId: number): Vertex | undefined
 }
 
@@ -70,6 +71,14 @@ export class Graph implements IGraph {
         // Set current node
         this.currentNodeChange$.next(theNode);
     }
+
+    get firstNode(): Vertex{
+        let node: Vertex;
+        this.nodes.forEach( n => {
+            if (n.isFirstNode) node = n;
+        })
+        return node;
+    };
 
     // Searchs for a node using an id as key
     getNodeById(theNodeId: number): Vertex | undefined {
