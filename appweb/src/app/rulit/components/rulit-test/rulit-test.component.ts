@@ -1,14 +1,15 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { fromEvent, interval, Observable, Subscription } from 'rxjs';
+import { map, take, tap } from "rxjs/operators";
 
 import { buildGraph } from '../../bits/GraphUtils';
 import { TestService } from '../../bits/TestService';
 
 import { GRAPH as GRAPH_DATA, SOLUTION } from "../../bits/graphs_available/Graph1_data_testing";
 import { RulitUserService } from '../../bits/RulitUserService';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ScreenOrientationDialogComponent } from './dialog-components/orientation-dialog.component';
 
 
@@ -29,6 +30,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     private orientationChange$: Subscription;
     private metaviewport: HTMLMetaElement = document.querySelector('meta[name="viewport"]');
     
+    private countDown:number = 3;
 
     private testService: TestService;
 
@@ -100,7 +102,9 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         
     }
 
-    private initTest(): void {
+    private async initTest() {
+
+        await this.countdown();
 
         this.setCanvasSize();
         
@@ -168,9 +172,22 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.router.navigate(['rulit/test',this.userService.user.userId]);
     }
 
+    private countdown() {
+        
+        let countdownStart = 3;
+        
+        return interval(1000).pipe(
+            take(countdownStart + 1),
+            map(i => countdownStart - i),
+            tap( i => { this.countDown = i } )
+        ).toPromise();
+
+    }
+
     ngAfterViewChecked(): void {
         // scrool to the graph
-        this.labCanvas.nativeElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        if (this.testService)
+            this.labCanvas.nativeElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     }
 
     ngOnDestroy(): void {
