@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { fromEvent, Observable, Subscription } from 'rxjs';
@@ -21,7 +21,7 @@ const MAX_MOBILE_SCREEN_WIDTH = 768;
     styleUrls: ['../rulit.component.scss']
 })
 
-export class RulitTestComponent implements OnInit, OnDestroy {
+export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     @ViewChild('labCanvas', { static: true }) 
     private labCanvas: ElementRef<HTMLCanvasElement>;
@@ -68,6 +68,7 @@ export class RulitTestComponent implements OnInit, OnDestroy {
         this.orientationChange$ = fromEvent(window,"orientationchange").subscribe( () => {
             if (this.isScreenOrientationValid(screen.orientation) && dialogRef ) {
                 this.closeScreenOrientationDialog(dialogRef);
+                
                 if ( ! this.testService) this.initTest();
             } else if ( ! dialogRef || dialogRef.getState() === 2 ){
                 dialogRef = this.openScreenOrientationDialog();
@@ -165,6 +166,11 @@ export class RulitTestComponent implements OnInit, OnDestroy {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate(['rulit/test',this.userService.user.userId]);
+    }
+
+    ngAfterViewChecked(): void {
+        // scrool to the graph
+        this.labCanvas.nativeElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     }
 
     ngOnDestroy(): void {

@@ -40,9 +40,10 @@ export class TestService {
         // Reverse solutions array to be used as a stack
         this.solution.reverse();
 
-        // Observe when current node changes in order to remove the last element in solutions array.
+        // Observe when current node changes.
         this.graph.currentNode$.subscribe( (theNode) => { 
             
+            // Remove the last element in solutions array.
             this.solution.pop();
             
             // When the node is the last in graph: 
