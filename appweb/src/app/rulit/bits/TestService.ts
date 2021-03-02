@@ -1,4 +1,5 @@
 import { NgZone } from "@angular/core";
+import { MatSnackBar, MatSnackBarRef, MatSnackBarConfig } from "@angular/material/snack-bar";
 import { Observable, Subject } from "rxjs";
 import { CanvasGraph } from "./CanvasGraph";
 import { ExerciseService, IRulitTestExercise } from "./ExerciseService";
@@ -18,7 +19,9 @@ export class TestService {
     private isTestOver$ = new Subject<boolean>();
     
     // private newNode: Vertex;
-    private newNodeChange$ = new Subject<Vertex>();    
+    private newNodeChange$ = new Subject<Vertex>();
+    
+    private _snackBarRef: MatSnackBarRef<any>;
 
     // Test Service depends on:
     //      - Graph
@@ -29,7 +32,8 @@ export class TestService {
         public graph: CanvasGraph, 
         private solution: Array<number>, 
         private ngZone: NgZone,
-        private userService: RulitUserService) {
+        private userService: RulitUserService,
+        private _snackBar: MatSnackBar ) {
 
         // Set current test name
         this.testName = this.userService.user.nextTest;
@@ -120,8 +124,10 @@ export class TestService {
                             // Selected node flickers in red
                             this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
                         }
+                        this.closeAdjacentSnackBar();
                     } else if ( ! newNode.isFirstNode ) {
                         this.currentExercise.addIncorrectMove();
+                        this.openAdjacentSnackBar();
                         console.log("Selected node isnt connected"); // TODO "display a error message for 5 - 7 sec."
                     }
 
@@ -162,6 +168,17 @@ export class TestService {
     private isSelectedNodeNextInsolution(theNode: Vertex): boolean {
         // Compare the node to the last element in the array
         return this.solution[this.solution.length - 1] == theNode.id;
+    }
+
+    private openAdjacentSnackBar() {
+        const config = new MatSnackBarConfig();
+        config.panelClass = ['custom-class'];
+        config.duration = 5000;
+        this._snackBarRef = this._snackBar.open("Recuerde que tiene que seguir un camino. Solo puede continuar por los nodos adyacentes.", "Cerrar", config);
+    }
+    
+    private closeAdjacentSnackBar() {
+        if ( this._snackBarRef ) this._snackBarRef.dismiss();
     }
 
 }

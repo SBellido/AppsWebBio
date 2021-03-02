@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { fromEvent, interval, Observable, Subscription } from 'rxjs';
 import { map, take, tap } from "rxjs/operators";
@@ -10,7 +11,7 @@ import { TestService } from '../../bits/TestService';
 
 import { GRAPH as GRAPH_DATA, SOLUTION } from "../../bits/graphs_available/Graph1_data_testing";
 import { RulitUserService } from '../../bits/RulitUserService';
-import { ScreenOrientationDialogComponent } from './dialog-components/orientation-dialog.component';
+import { ScreenOrientationDialogComponent } from './dialogs/orientation-dialog.component';
 
 
 const MAX_CANVAS_HEIGHT = 480;
@@ -40,7 +41,8 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         private userService: RulitUserService,
-        public dialog: MatDialog ) {
+        private _dialog: MatDialog,
+        private _snackBar: MatSnackBar ) {
 
             let userIdParam = +this.route.snapshot.paramMap.get('id');
 
@@ -82,7 +84,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     private openScreenOrientationDialog(): MatDialogRef<ScreenOrientationDialogComponent, any> {
         this.metaviewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0';
-        return this.dialog.open(ScreenOrientationDialogComponent);
+        return this._dialog.open(ScreenOrientationDialogComponent);
     }
     
     private closeScreenOrientationDialog(dialogRef: MatDialogRef<ScreenOrientationDialogComponent, any>): void {
@@ -115,7 +117,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         let currentSolution = Object.assign([],SOLUTION);
         
         // Build the test 
-        this.testService = new TestService(theGraph, currentSolution , this.ngZone, this.userService); 
+        this.testService = new TestService(theGraph, currentSolution , this.ngZone, this.userService, this._snackBar); 
         
         this.clickCanvas$ = fromEvent(this.labCanvas.nativeElement,'click');
         

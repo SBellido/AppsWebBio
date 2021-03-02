@@ -59,3 +59,10 @@ h1.countdown {
     font-size: 200px;
     color: #e33b88;    
 }
+
+// Snack
+
+::ng-deep snack-bar-container.custom-class {
+    background: #eeeeee;
+    color: #4a4067;
+}

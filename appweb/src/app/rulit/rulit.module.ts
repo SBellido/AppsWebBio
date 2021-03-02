@@ -10,7 +10,8 @@ import { RulitUserService } from './bits/RulitUserService';
 import { RulitUserFormComponent } from './components/rulit-user-form/rulit-user-form.component';
 import { MaterialModule } from '../material/material.module';
 import { CommonModule } from '@angular/common';
-import { ScreenOrientationDialogComponent } from './components/rulit-test/dialog-components/orientation-dialog.component';
+import { ScreenOrientationDialogComponent } from './components/rulit-test/dialogs/orientation-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 // import { Graph } from './bits/Graph';
@@ -47,7 +48,7 @@ import { ScreenOrientationDialogComponent } from './components/rulit-test/dialog
     entryComponents: [
         ScreenOrientationDialogComponent
     ],
-    providers: [ RulitUserService ]
+    providers: [ RulitUserService, MatSnackBar ]
 })
 
 export class RulitModule {}
