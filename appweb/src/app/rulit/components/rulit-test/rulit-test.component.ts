@@ -25,8 +25,8 @@ const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
-    @ViewChild('labCanvas', { static: true }) 
-    private labCanvas: ElementRef<HTMLCanvasElement>;
+    @ViewChild('canvas', { static: true }) 
+    private canvas: ElementRef<HTMLCanvasElement>;
     private clickCanvas$: Observable<Event>;
     private orientationChange$: Subscription;
     private metaviewport: HTMLMetaElement = document.querySelector('meta[name="viewport"]');
@@ -111,7 +111,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         this.setCanvasSize();
         
-        let theGraph = await buildGraph(GRAPH_DATA,this.labCanvas);
+        let theGraph = await buildGraph(GRAPH_DATA,this.canvas);
         
         // Copies solutions to a new array 
         let currentSolution = Object.assign([],SOLUTION);
@@ -119,11 +119,11 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         // Build the test 
         this.testService = new TestService(theGraph, currentSolution , this.ngZone, this.userService, this._snackBar); 
         
-        this.clickCanvas$ = fromEvent(this.labCanvas.nativeElement,'click');
+        this.clickCanvas$ = fromEvent(this.canvas.nativeElement,"click");
         
-        // Handles user new move
+        // Handles user new click
         this.clickCanvas$.subscribe( ( event: MouseEvent ) => { 
-            this.testService.handleNewMove(event.clientX,event.clientY);
+            this.testService.handleNewClick(event.clientX,event.clientY);
         });
 
         // Draw canvas when current node changes
@@ -145,6 +145,32 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
             }
         });
 
+        // On desktop screens, when mouse move:
+        //      - set cursor to pointer if over a node
+        if (screen.width >= MAX_MOBILE_SCREEN_WIDTH){
+            fromEvent(this.canvas.nativeElement,"mousemove")
+                .subscribe( (event: MouseEvent ) => { this.ngZone.runOutsideAngular( () => { 
+
+                        let newNode = this.testService.graph.getNodeAtPosition(event.clientX,event.clientY);
+        
+                        // Theres a node
+                        if ( newNode ) {
+                            this.canvas.nativeElement.style.cursor = "pointer";
+                            this.testService.graph.highlightPathTo(newNode);
+                            this.testService.graph.draw();
+                        } 
+                        else 
+                        {
+                            this.canvas.nativeElement.style.cursor = "default";
+                            this.testService.graph.resetHighlights();
+                            this.testService.graph.draw();
+                        }
+                    }
+
+                )}
+            );
+        }
+
         // Test starts with first node selected
         this.testService.setCurrentNode(this.testService.graph.firstNode);
 
@@ -162,13 +188,13 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         
         if ( screenHeight >= MAX_CANVAS_HEIGHT ) {
 
-            this.labCanvas.nativeElement.width = 672;
-            this.labCanvas.nativeElement.height = 480;
+            this.canvas.nativeElement.width = 672;
+            this.canvas.nativeElement.height = 480;
 
         } else {
 
-            this.labCanvas.nativeElement.width = (screenHeight * 0.9) * 1.4;
-            this.labCanvas.nativeElement.height = screenHeight * 0.9;
+            this.canvas.nativeElement.width = (screenHeight * 0.9) * 1.4;
+            this.canvas.nativeElement.height = screenHeight * 0.9;
 
         }
 
@@ -195,7 +221,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     ngAfterViewChecked(): void {
         // scrool to the graph
         if (this.testService)
-            this.labCanvas.nativeElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+            this.canvas.nativeElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     }
 
     ngOnDestroy(): void {

@@ -11,7 +11,9 @@ export const COLOR_VIOLET = "#4A4067";
 interface ICanvasGraph {
     draw(): void,
     getNodeAtPosition(clientX: number,clientY: number ): Vertex | undefined,
-    flickerNode(newNode: Vertex): void
+    flickerNode(newNode: Vertex): void,
+    highlightPathTo(newNode: Vertex): void,
+    resetHighlights(): void
 }
 
 export class CanvasGraph extends Graph implements ICanvasGraph {
@@ -51,6 +53,7 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
         this.context.beginPath();
         this.context.moveTo(theNode.circle.posX, theNode.circle.posY);
         this.context.lineTo(connectedNode.circle.posX,connectedNode.circle.posY);
+        (theNode.isActive && connectedNode.isHighlighted) ? this.context.lineWidth = 3 : this.context.lineWidth = 1;
         this.context.strokeStyle = COLOR_VIOLET;
         this.context.stroke();
         this.context.closePath();
@@ -98,6 +101,20 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
             }
         } , 100);
         
+    }
+
+    highlightPathTo(theNode: Vertex): void {
+        if (this.isCurrentNodeNextTo(theNode)) {
+            theNode.isHighlighted = true;
+        } 
+        else 
+        {
+            theNode.isHighlighted = false;
+        }
+    }
+
+    resetHighlights(): void {
+        this.nodes.forEach ( node => { if (node.isHighlighted) node.isHighlighted = false; });
     }
 
 }

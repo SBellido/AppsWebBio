@@ -101,8 +101,10 @@ export class TestService {
                     if ( newNode.isFirstNode ) {
                         this.currentExercise.initNewStep();
                         this.graph.currentNode = newNode;
-                    } else {
-                        console.log("Must start form initial node"); // TODO 
+                    } 
+                    else 
+                    {
+                        console.log("Must start form initial node"); // TODO
                     }
                 }
                 if ( this.currentExercise.currentStep ) {
@@ -117,7 +119,9 @@ export class TestService {
     
                             // Build a new step
                             this.currentExercise.initNewStep();
-                        } else {
+                        } 
+                        else 
+                        {
                             // Update step and exercise variables
                             this.currentExercise.addIncorrectMove();
     
@@ -125,12 +129,13 @@ export class TestService {
                             this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
                         }
                         this.closeAdjacentSnackBar();
-                    } else if ( ! newNode.isFirstNode ) {
+                    } 
+                    else if ( ! newNode.isFirstNode ) 
+                    {
                         this.currentExercise.addIncorrectMove();
                         this.openAdjacentSnackBar();
-                        console.log("Selected node isnt connected"); // TODO "display a error message for 5 - 7 sec."
                     }
-
+                    
                 }
             }
         });
@@ -153,10 +158,10 @@ export class TestService {
         return this.newNodeChange$.asObservable();
     }
 
-    // Handles user move:
+    // Handles user click:
     //      - Searchs for a node in clicked area.
     //      - Emits the new node change.
-    handleNewMove(clientX: number, clientY: number ): void {
+    handleNewClick(clientX: number, clientY: number ): void {
         
         let newNode = this.graph.getNodeAtPosition(clientX,clientY);
 
@@ -174,7 +179,7 @@ export class TestService {
         const config = new MatSnackBarConfig();
         config.panelClass = ['custom-class'];
         config.duration = 5000;
-        this._snackBarRef = this._snackBar.open("Recuerde que tiene que seguir un camino. Solo puede continuar por los nodos adyacentes.", "Cerrar", config);
+        this._snackBarRef = this._snackBar.open("Recuerde que tiene que seguir un camino.Solo puede continuar por los nodos adyacentes.", "Cerrar", config);
     }
     
     private closeAdjacentSnackBar() {
