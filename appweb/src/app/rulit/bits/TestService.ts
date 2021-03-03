@@ -10,7 +10,7 @@ import { Vertex } from "./Vertex";
 
 export type TestName = "learning" | "short_memory_test" | "long_memory_test" | "no_next_test";
 
-const MAX_EXERCISES = 10;
+const MAX_EXERCISES = 9;
 
 export class TestService {
 
@@ -20,7 +20,6 @@ export class TestService {
     private isExerciseOver$ = new Subject<boolean>();
     private isTestOver$ = new Subject<boolean>();
     
-    // private newNode: Vertex;
     private newNodeChange$ = new Subject<Vertex>();
     
     private _snackBarRef: MatSnackBarRef<any>;
@@ -59,25 +58,32 @@ export class TestService {
             if ( theNode.isLastNode ) {
 
                 let currentTestExercisesArray: Array<IRulitExercise>;
+                let maxExercicesInArray: number;
 
-                if ( this.testName == "learning" || this.testName == "short_memory_test" ) 
+                if ( this.testName == "learning" || this.testName == "short_memory_test" ) {
                     currentTestExercisesArray = this.userService.user.test1;
-                
-                if ( this.testName == "long_memory_test" ) 
+                    // test1 has one more exercise (learning)
+                    maxExercicesInArray = MAX_EXERCISES + 1;
+                } 
+                else if ( this.testName == "long_memory_test" ) {
                     currentTestExercisesArray = this.userService.user.test2;
+                    maxExercicesInArray = MAX_EXERCISES;
+                }
                 
                 currentTestExercisesArray.push(this.currentExercise.toDataExercise());
                 
-                let correctExercisesInTest = this.userService.getTotalCorrectExercises(currentTestExercisesArray);
+                let correctExercisesInTest = this.userService.getTotalCorrectExercises(currentTestExercisesArray, this.testName);
+                console.log("total correct exercises:");
+                console.log(correctExercisesInTest);
                 
-                if ( correctExercisesInTest >=2 || currentTestExercisesArray.length == MAX_EXERCISES ) { 
+                if ( correctExercisesInTest >=2 || currentTestExercisesArray.length == maxExercicesInArray ) { 
                     
                     if ( this.testName == "short_memory_test" ) {
                         this.userService.user.nextTest = "long_memory_test";
                         
                         if ( correctExercisesInTest >= 2 )
                             this.openFinishTestDialog("Completaste la prueba","Perfecto has terminado el laberinto sin ayuda dos veces. Mañana nos encontramos nuevamente.");
-                        if ( currentTestExercisesArray.length == MAX_EXERCISES )
+                        if ( currentTestExercisesArray.length == maxExercicesInArray )
                             this.openFinishTestDialog("Completaste la prueba","Muchas gracias por participar, ya ha practicado suficiente. Mañana nos encontramos nuevamente.");
                          
                         this.isTestOver$.next(true);

@@ -81,20 +81,31 @@ export class RulitUserService {
 
     }
 
-    haveFinishedTheTest( exercisesArray: Array<IRulitExercise>, MAX_EXERCISES: number ) {
-        let exercisesWithoutMistakes = 0;
-        exercisesArray.forEach( (exercise) => {
-            if ( exercise.totalIncorrectMoves == 0 ) exercisesWithoutMistakes++; 
-        });
-        return exercisesArray.length == MAX_EXERCISES || exercisesWithoutMistakes >= 2 ;
-    }
+    getTotalCorrectExercises(exercisesArray: Array<IRulitExercise>, testName: TestName): number {
+        
+        // In this context _user.nextTest has the name of the current test
+        console.log(testName)
 
-    getTotalCorrectExercises(exercisesArray: IRulitExercise[]): number {
+        if ( testName == "learning" ) return -1;
+
+        let exercises: Array<IRulitExercise>;
+        
+        if ( testName == "short_memory_test" ) {
+            // Exclude the "learning" exercise from the count.
+            exercises = Object.assign([],exercisesArray.slice(1,exercisesArray.length));
+        } 
+        else if ( testName == "long_memory_test" )
+            exercises = exercisesArray;
+        
+        console.log("counting in:");
+        console.log(exercises);
+
         let exercisesWithoutMistakes = 0;
-        exercisesArray.forEach( (exercise) => {
+        exercises.forEach( (exercise) => {
             if ( exercise.totalIncorrectMoves == 0 ) exercisesWithoutMistakes++; 
         });
         return exercisesWithoutMistakes;
+
     }
 
 }

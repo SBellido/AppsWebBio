@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { fromEvent, interval, Observable, Subscription } from 'rxjs';
@@ -87,7 +87,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     private openScreenOrientationDialog(): MatDialogRef<ScreenOrientationDialogComponent, any> {
         this.metaviewport.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0";
-        // No aplica la clase custom
+        // No aplica la clase custom (Fixearlo)
         // const config = new MatDialogConfig();
         // config.panelClass = ["custom-dialog"];
         // return this._dialog.open(ScreenOrientationDialogComponent, config);
