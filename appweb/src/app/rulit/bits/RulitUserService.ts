@@ -89,4 +89,12 @@ export class RulitUserService {
         return exercisesArray.length == MAX_EXERCISES || exercisesWithoutMistakes >= 2 ;
     }
 
+    getTotalCorrectExercises(exercisesArray: IRulitExercise[]): number {
+        let exercisesWithoutMistakes = 0;
+        exercisesArray.forEach( (exercise) => {
+            if ( exercise.totalIncorrectMoves == 0 ) exercisesWithoutMistakes++; 
+        });
+        return exercisesWithoutMistakes;
+    }
+
 }

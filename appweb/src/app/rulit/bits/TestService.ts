@@ -1,6 +1,8 @@
 import { NgZone } from "@angular/core";
+import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar, MatSnackBarRef, MatSnackBarConfig } from "@angular/material/snack-bar";
 import { Observable, Subject } from "rxjs";
+import { FinishTestDialogComponent } from "../components/rulit-test/dialogs/finish-test-dialog.component";
 import { CanvasGraph } from "./CanvasGraph";
 import { ExerciseService, IRulitTestExercise } from "./ExerciseService";
 import { IRulitExercise, RulitUserService } from "./RulitUserService";
@@ -33,7 +35,8 @@ export class TestService {
         private solution: Array<number>, 
         private ngZone: NgZone,
         private userService: RulitUserService,
-        private _snackBar: MatSnackBar ) {
+        private _snackBar: MatSnackBar,
+        private _dialog: MatDialog ) {
 
         // Set current test name
         this.testName = this.userService.user.nextTest;
@@ -55,17 +58,28 @@ export class TestService {
             //      - or, go to the next exercise.
             if ( theNode.isLastNode ) {
 
-                let currentExercisesArray: Array<IRulitExercise>;
+                let currentTestExercisesArray: Array<IRulitExercise>;
 
-                if ( this.testName == "learning" || this.testName == "short_memory_test" ) currentExercisesArray = this.userService.user.test1;
-                if ( this.testName == "long_memory_test" ) currentExercisesArray = this.userService.user.test2;
+                if ( this.testName == "learning" || this.testName == "short_memory_test" ) 
+                    currentTestExercisesArray = this.userService.user.test1;
                 
-                currentExercisesArray.push(this.currentExercise.toDataExercise());
+                if ( this.testName == "long_memory_test" ) 
+                    currentTestExercisesArray = this.userService.user.test2;
                 
-                if ( this.userService.haveFinishedTheTest( currentExercisesArray , MAX_EXERCISES ) ) { 
+                currentTestExercisesArray.push(this.currentExercise.toDataExercise());
+                
+                let correctExercisesInTest = this.userService.getTotalCorrectExercises(currentTestExercisesArray);
+                
+                if ( correctExercisesInTest >=2 || currentTestExercisesArray.length == MAX_EXERCISES ) { 
                     
                     if ( this.testName == "short_memory_test" ) {
                         this.userService.user.nextTest = "long_memory_test";
+                        
+                        if ( correctExercisesInTest >= 2 )
+                            this.openFinishTestDialog("Completaste la prueba","Perfecto has terminado el laberinto sin ayuda dos veces. Mañana nos encontramos nuevamente.");
+                        if ( currentTestExercisesArray.length == MAX_EXERCISES )
+                            this.openFinishTestDialog("Completaste la prueba","Muchas gracias por participar, ya ha practicado suficiente. Mañana nos encontramos nuevamente.");
+                         
                         this.isTestOver$.next(true);
                         console.log("Short memory test is over");
                     }
@@ -177,13 +191,20 @@ export class TestService {
 
     private openAdjacentSnackBar() {
         const config = new MatSnackBarConfig();
-        config.panelClass = ['custom-class'];
+        config.panelClass = ["custom-snack-bar"];
         config.duration = 5000;
         this._snackBarRef = this._snackBar.open("Recuerde que tiene que seguir un camino.Solo puede continuar por los nodos adyacentes.", "Cerrar", config);
     }
     
     private closeAdjacentSnackBar() {
         if ( this._snackBarRef ) this._snackBarRef.dismiss();
+    }
+
+    private openFinishTestDialog(theTitle: string, theMessage: string): MatDialogRef<FinishTestDialogComponent, any> {
+        const config = new MatDialogConfig();
+        config.data = { title: theTitle, message: theMessage };
+        config.panelClass = ["custom-dialog"];
+        return this._dialog.open(FinishTestDialogComponent,config);
     }
 
 }

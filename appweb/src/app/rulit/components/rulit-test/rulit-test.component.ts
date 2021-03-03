@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { fromEvent, interval, Observable, Subscription } from 'rxjs';
@@ -12,7 +12,6 @@ import { TestService } from '../../bits/TestService';
 import { GRAPH as GRAPH_DATA, SOLUTION } from "../../bits/graphs_available/Graph1_data_testing";
 import { RulitUserService } from '../../bits/RulitUserService';
 import { ScreenOrientationDialogComponent } from './dialogs/orientation-dialog.component';
-
 
 const MAX_CANVAS_HEIGHT = 480;
 const MAX_MOBILE_SCREEN_WIDTH = 768;
@@ -62,28 +61,36 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     ngOnInit(): void {
 
         let screen = window.screen;
-        let dialogRef = null;
+        let orientationDialogRef = null;
 
         if ( this.isScreenOrientationValid(screen.orientation) ) {
             this.initTest(); 
         } else {
-            dialogRef = this.openScreenOrientationDialog();
+            orientationDialogRef = this.openScreenOrientationDialog();
         }
         
         this.orientationChange$ = fromEvent(window,"orientationchange").subscribe( () => {
-            if (this.isScreenOrientationValid(screen.orientation) && dialogRef ) {
-                this.closeScreenOrientationDialog(dialogRef);
-                
+            if (this.isScreenOrientationValid(screen.orientation) && orientationDialogRef )
+            {
+                this.closeScreenOrientationDialog(orientationDialogRef);
                 if ( ! this.testService) this.initTest();
-            } else if ( ! dialogRef || dialogRef.getState() === 2 ){
-                dialogRef = this.openScreenOrientationDialog();
+            } 
+            else if ( ! orientationDialogRef || orientationDialogRef.getState() === 2 ) 
+            {
+                orientationDialogRef = this.openScreenOrientationDialog();
             }
         });
 
     }
 
+    // Dialogs
+
     private openScreenOrientationDialog(): MatDialogRef<ScreenOrientationDialogComponent, any> {
-        this.metaviewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0';
+        this.metaviewport.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0";
+        // No aplica la clase custom
+        // const config = new MatDialogConfig();
+        // config.panelClass = ["custom-dialog"];
+        // return this._dialog.open(ScreenOrientationDialogComponent, config);
         return this._dialog.open(ScreenOrientationDialogComponent);
     }
     
@@ -117,7 +124,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         let currentSolution = Object.assign([],SOLUTION);
         
         // Build the test 
-        this.testService = new TestService(theGraph, currentSolution , this.ngZone, this.userService, this._snackBar); 
+        this.testService = new TestService(theGraph, currentSolution , this.ngZone, this.userService, this._snackBar, this._dialog); 
         
         this.clickCanvas$ = fromEvent(this.canvas.nativeElement,"click");
         
@@ -139,7 +146,8 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         // When test is over
         this.testService.testChange$.subscribe( (isTestOver) => {
             if ( isTestOver && this.userService.user.nextTest == "long_memory_test" ) { 
-                alert("Current test is over, next test URL will be send by email.");
+                // alert("Current test is over, next test URL will be send by email.");
+                // TODO: save test in db
             } else {
                 alert("All tests done.");
             }

@@ -62,7 +62,14 @@ h1.countdown {
 
 // Snack
 
-::ng-deep snack-bar-container.custom-class {
+::ng-deep snack-bar-container.custom-snack-bar {
     background: #eeeeee;
     color: #4a4067;
 }
+
+// Dialog
+
+::ng-deep mat-dialog-container.custom-dialog {
+    color: #4a4067;
+}
+
