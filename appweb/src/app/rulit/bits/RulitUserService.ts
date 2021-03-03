@@ -84,7 +84,6 @@ export class RulitUserService {
     getTotalCorrectExercises(exercisesArray: Array<IRulitExercise>, testName: TestName): number {
         
         // In this context _user.nextTest has the name of the current test
-        console.log(testName)
 
         if ( testName == "learning" ) return -1;
 
@@ -96,9 +95,6 @@ export class RulitUserService {
         } 
         else if ( testName == "long_memory_test" )
             exercises = exercisesArray;
-        
-        console.log("counting in:");
-        console.log(exercises);
 
         let exercisesWithoutMistakes = 0;
         exercises.forEach( (exercise) => {

@@ -73,8 +73,6 @@ export class TestService {
                 currentTestExercisesArray.push(this.currentExercise.toDataExercise());
                 
                 let correctExercisesInTest = this.userService.getTotalCorrectExercises(currentTestExercisesArray, this.testName);
-                console.log("total correct exercises:");
-                console.log(correctExercisesInTest);
                 
                 if ( correctExercisesInTest >=2 || currentTestExercisesArray.length == maxExercicesInArray ) { 
                     
@@ -127,7 +125,7 @@ export class TestService {
                         console.log("Must start form initial node"); // TODO
                     }
                 }
-                if ( this.currentExercise.currentStep ) {
+                if ( this.currentExercise.currentStep && newNode !== this.graph.currentNode ) {
 
                     if ( this.graph.isCurrentNodeNextTo(newNode) ) {
                         if ( this.isSelectedNodeNextInsolution(newNode) ) {
@@ -150,7 +148,7 @@ export class TestService {
                         }
                         this.closeAdjacentSnackBar();
                     } 
-                    else if ( ! newNode.isFirstNode ) 
+                    else
                     {
                         this.currentExercise.addIncorrectMove();
                         this.openAdjacentSnackBar();
