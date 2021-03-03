@@ -3,9 +3,9 @@ import { CanvasGraph } from "./CanvasGraph";
 import { IGraphNode } from "./Graph";
 import { Vertex } from "./Vertex";
 
-const NODE_IMAGE_URL = "../../assets/images/rulit-node.svg"
-const NODE_START_IMAGE_URL = "../../assets/images/rulit-node-start.svg"
-const NODE_END_IMAGE_URL = "../../assets/images/rulit-node-end.svg"
+const NODE_IMAGE_URL = "./assets/images/rulit-node.svg"
+const NODE_START_IMAGE_URL = "./assets/images/rulit-node-start.svg"
+const NODE_END_IMAGE_URL = "./assets/images/rulit-node-end.svg"
 
 // Creates a new graph and adds nodes, edges and canvas.
 export async function buildGraph(GRAPH_DATA: Array<IGraphNode>, theCanvas: ElementRef<HTMLCanvasElement>): Promise<CanvasGraph>{
