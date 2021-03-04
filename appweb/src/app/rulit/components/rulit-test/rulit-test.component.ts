@@ -43,17 +43,12 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         private _dialog: MatDialog,
         private _snackBar: MatSnackBar ) {
 
-            let userIdParam = +this.route.snapshot.paramMap.get('id');
+            let userIdParam = this.route.snapshot.paramMap.get('id');
 
             // When user enters the URL to make the long term memory test.
             //      - eg. /rulit/test/<<userId>>
             if ( ! this.userService.user ) {
                 this.userService.loadUserFromDB(userIdParam);
-            }
-
-            // User in the service must be the same as the param 
-            if ( ! ( this.userService.user.userId == userIdParam ) ) {
-                this.router.navigate(['/']);
             }
 
         }
@@ -145,12 +140,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         
         // When test is over
         this.testService.testChange$.subscribe( (isTestOver) => {
-            if ( isTestOver && this.userService.user.nextTest == "long_memory_test" ) { 
-                // alert("Current test is over, next test URL will be send by email.");
-                // TODO: save test in db
-            } else {
-                alert("All tests done.");
-            }
+            this.userService.saveTestData();
         });
 
         // On desktop screens, when mouse move:

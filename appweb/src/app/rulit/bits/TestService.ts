@@ -91,6 +91,7 @@ export class TestService {
                     if ( this.testName == "long_memory_test" ) {
                         this.userService.user.nextTest = "no_next_test";
                         this.isTestOver$.next(true);
+                        // TODO: Add a dialog   
                         console.log("Long memory test is over"); 
                     }
 

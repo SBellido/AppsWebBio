@@ -49,13 +49,13 @@ export class RulitUserFormComponent implements OnInit {
         return this.userFormData.get('email');
     }
 
-    onSaveForm($event: any){
+    async onSaveForm($event: any){
         if ( this.userFormData.valid ) {
 
             // console.log("save form: ");
             // console.log(this.userFormData.getRawValue());
 
-            this.userService.storeNewUser(this.userFormData.getRawValue());
+            await this.userService.storeNewUser(this.userFormData.getRawValue());
             this.router.navigate(['rulit/test', this.userService.user.userId]);
         } else {
             console.log("error in form");

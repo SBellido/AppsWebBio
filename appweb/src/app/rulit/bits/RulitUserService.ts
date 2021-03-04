@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { DataDbService } from "src/app/core/services/db/data-db.service";
 import { TestName } from "./TestService";
 
 
@@ -18,15 +19,14 @@ export interface IRulitExercise {
 }
 
 // RulitUser stored in DB
-interface IRulitUser {
-    userId: number,
+export interface IRulitUser {
+    userId?: string,
     email: string,
     name: string,
     test1: Array<IRulitExercise>,
     test2: Array<IRulitExercise>
     stepErrors: Array<number>,
     nextTest: TestName
-    // add stepErrorsTest2
 }
 
 @Injectable({
@@ -36,14 +36,15 @@ export class RulitUserService {
 
     private _user: IRulitUser;
 
+    constructor(private _dbService: DataDbService){}
+
     get user(){
         return this._user;
     }
 
     // TODO: Store in DB
-    storeNewUser(newUserData: {name: string, email: string}){
+    async storeNewUser(newUserData: {name: string, email: string}) {
         this._user = {
-            userId: 1,
             email: newUserData.email,
             name: newUserData.name,
             test1: new Array<IRulitExercise>(),
@@ -52,35 +53,14 @@ export class RulitUserService {
             nextTest: "learning"
         };
         for (var i = 0; i < 15; i++) this._user.stepErrors.push(0);
+        
+        this._user.userId = await this._dbService.saveRulitUserData(this._user);
+
     }
 
-    // Refactor to load user from db
-    loadUserFromDB(userId: number): void {
-        console.log("Getting user " + userId);
-        if (userId == 1) {
-            this._user = {
-                userId: 1,
-                email: "testuser1@email.com",
-                name: "test user 1",
-                test1: new Array<IRulitExercise>(),
-                test2: new Array<IRulitExercise>(),
-                stepErrors: new Array<number>(),
-                nextTest: "learning"
-            };
-            for (var i = 0; i < 15; i++) this._user.stepErrors.push(0);
-        }
-        if (userId == 2) {
-            this._user = {
-                userId: 2,
-                email: "testuser2@email.com",
-                name: "test user 2",
-                test1: new Array<IRulitExercise>(),
-                test2: new Array<IRulitExercise>(),
-                stepErrors: new Array<number>(),
-                nextTest: "long_memory_test"
-            };
-        }
-
+    // Load user from db
+    async loadUserFromDB(userId: string): Promise<void> {
+        this._user = await this._dbService.getRulitUserData(userId);
     }
 
     getTotalCorrectExercises(exercisesArray: Array<IRulitExercise>, testName: TestName): number {
@@ -104,6 +84,10 @@ export class RulitUserService {
         });
         return exercisesWithoutMistakes;
 
+    }
+
+    saveTestData() {
+        this._dbService.updateRulitUserData(this._user);
     }
 
 }
