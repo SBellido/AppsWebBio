@@ -51,6 +51,7 @@ export class RulitUserService {
             stepErrors: new Array<number>(),
             nextTest: "learning"
         };
+        for (var i = 0; i < 15; i++) this._user.stepErrors.push(0);
     }
 
     // Refactor to load user from db
@@ -66,6 +67,7 @@ export class RulitUserService {
                 stepErrors: new Array<number>(),
                 nextTest: "learning"
             };
+            for (var i = 0; i < 15; i++) this._user.stepErrors.push(0);
         }
         if (userId == 2) {
             this._user = {

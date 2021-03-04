@@ -141,6 +141,7 @@ export class TestService {
                         else 
                         {
                             // Update step and exercise variables
+                            this.updateStepErrors();
                             this.currentExercise.addIncorrectMove();
     
                             // Selected node flickers in red
@@ -150,6 +151,7 @@ export class TestService {
                     } 
                     else
                     {
+                        this.updateStepErrors();
                         this.currentExercise.addIncorrectMove();
                         this.openAdjacentSnackBar();
                     }
@@ -158,6 +160,11 @@ export class TestService {
             }
         });
 
+    }
+    
+    private updateStepErrors(): void {
+        const stepIndex = this.currentExercise.steps.length;
+        this.userService.user.stepErrors[stepIndex] += 1;
     }
 
     get exerciseChange$(): Observable<boolean> {
