@@ -3,10 +3,10 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule, D
 
 import { CreativeUser } from './../../models/creative-user.interface';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { AdminComponent } from 'src/app/admin/components/admin.component';
 import { Observable } from 'rxjs';
 import { registerLocaleData } from '@angular/common';
 import { IRulitUser } from 'src/app/rulit/bits/RulitUserService';
+import { AdminCreativityComponent } from 'src/app/admin/components/admin-creativity/admin-creativity.component';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +58,7 @@ export class DataDbService {
     return testsRef.get();
   }
 
-  public getCreativesUsersData(admin: AdminComponent) {
+  public getCreativesUsersData(admin: AdminCreativityComponent) {
   // Asigna la instantánea para incluir el ID del documento
   this.creativesCollectionRef.snapshotChanges().subscribe((usersSnapshop) => {
     usersSnapshop.forEach((usersData: any) => {
