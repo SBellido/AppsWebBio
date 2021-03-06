@@ -6,11 +6,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { fromEvent, interval, Observable, Subscription } from 'rxjs';
 import { map, take, tap } from "rxjs/operators";
 
-import { buildGraph } from '../../bits/GraphUtils';
-import { TestService } from '../../bits/TestService';
+import { buildGraph } from 'src/app/rulit/bits/GraphUtils';
+import { RulitTestService } from 'src/app/rulit/bits/RulitTestService';
 
-import { GRAPH as GRAPH_DATA, SOLUTION } from "../../bits/graphs_available/Graph1_data_testing";
-import { RulitUserService } from '../../bits/RulitUserService';
+import { GRAPH as GRAPH_DATA, SOLUTION } from "src/app/rulit/bits/graphs_available/Graph1_data_testing";
+import { RulitUserService } from 'src/app/rulit/bits/RulitUserService';
 import { ScreenOrientationDialogComponent } from './dialogs/orientation-dialog.component';
 
 const MAX_CANVAS_HEIGHT = 480;
@@ -33,7 +33,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     countDown: number = 3;
     testStarted: boolean = false;
 
-    private testService: TestService;
+    private testService: RulitTestService;
 
     constructor(
         private ngZone: NgZone,
@@ -119,7 +119,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         let currentSolution = Object.assign([],SOLUTION);
         
         // Build the test 
-        this.testService = new TestService(theGraph, currentSolution , this.ngZone, this.userService, this._snackBar, this._dialog); 
+        this.testService = new RulitTestService(theGraph, currentSolution , this.ngZone, this.userService, this._snackBar, this._dialog); 
         
         this.clickCanvas$ = fromEvent(this.canvas.nativeElement,"click");
         

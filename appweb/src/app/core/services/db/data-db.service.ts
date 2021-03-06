@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule, DocumentChangeAction, DocumentData, DocumentReference, QuerySnapshot } from '@angular/fire/firestore';
+import { firestore } from 'firebase/app';
 
 import { CreativeUser } from './../../models/creative-user.interface';
 import { HttpClient, HttpResponse } from '@angular/common/http';
@@ -23,7 +24,7 @@ export class DataDbService {
     this.creativesCollectionRef = afs.collection<CreativeUser>('creatives-users', ref => ref.orderBy('dateStart', 'desc'));
     this.creativesMetadataRef = afs.collection('creatives-meta');
     this.rulitUserCollectionRef = afs.collection('rulit-users');
-   } 
+  } 
 
   async saveContact(newCreativeUser: any): Promise<void> {
     this.creativesCollectionRef.add(newCreativeUser);
@@ -74,10 +75,8 @@ export class DataDbService {
     return this.creativesMetadataRef.doc('tests-counter');
   }
 
-
-  async saveRulitUserData(testUser: IRulitUser): Promise<string> {
-    let newUserDocument = await this.rulitUserCollectionRef.add(testUser);
-    return newUserDocument.id;
+  getNewRulitDocumentRef(): DocumentReference {
+    return this.rulitUserCollectionRef.ref.doc();
   }
 
   async getRulitUserData(userId: string): Promise<IRulitUser> {
@@ -86,10 +85,10 @@ export class DataDbService {
     return userData.data();
   }
   
-  async updateRulitUserData(testUser: IRulitUser): Promise<void> {
+  async saveRulitUserData(testUser: IRulitUser): Promise<void> {
+    testUser.timestamp = firestore.FieldValue.serverTimestamp();
     await this.rulitUserCollectionRef.doc(testUser.userId).set(testUser);
   }
-
 
 }
 

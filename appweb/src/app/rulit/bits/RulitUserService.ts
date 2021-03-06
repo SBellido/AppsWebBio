@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
+import { DocumentReference } from "@angular/fire/firestore";
 import { DataDbService } from "src/app/core/services/db/data-db.service";
-import { TestName } from "./TestService";
+import { TestName } from "./RulitTestService";
 
 
 // Step stored in DB
@@ -20,13 +21,14 @@ export interface IRulitExercise {
 
 // RulitUser stored in DB
 export interface IRulitUser {
-    userId?: string,
+    userId: string,
     email: string,
     name: string,
-    test1: Array<IRulitExercise>,
-    test2: Array<IRulitExercise>
+    shortMemoryTest: Array<IRulitExercise>,
+    longMemoryTest: Array<IRulitExercise>,
     stepErrors: Array<number>,
-    nextTest: TestName
+    nextTest: TestName,
+    timestamp?: any
 }
 
 @Injectable({
@@ -35,6 +37,7 @@ export interface IRulitUser {
 export class RulitUserService {
 
     private _user: IRulitUser;
+    private _userDbRef: DocumentReference;
 
     constructor(private _dbService: DataDbService){}
 
@@ -42,19 +45,21 @@ export class RulitUserService {
         return this._user;
     }
 
-    // TODO: Store in DB
-    async storeNewUser(newUserData: {name: string, email: string}) {
+    setNewUser(newUserData: {name: string, email: string}): void{
         this._user = {
+            userId: "",
             email: newUserData.email,
             name: newUserData.name,
-            test1: new Array<IRulitExercise>(),
-            test2: new Array<IRulitExercise>(),
+            shortMemoryTest: new Array<IRulitExercise>(),
+            longMemoryTest: new Array<IRulitExercise>(),
             stepErrors: new Array<number>(),
             nextTest: "learning"
         };
-        for (var i = 0; i < 15; i++) this._user.stepErrors.push(0);
         
-        this._user.userId = await this._dbService.saveRulitUserData(this._user);
+        for (var i = 0; i < 15; i++) this._user.stepErrors.push(0);
+
+        this._userDbRef = this._dbService.getNewRulitDocumentRef();
+        this._user.userId = this._userDbRef.id;
 
     }
 
@@ -87,7 +92,7 @@ export class RulitUserService {
     }
 
     saveTestData() {
-        this._dbService.updateRulitUserData(this._user);
+        this._dbService.saveRulitUserData(this._user);
     }
 
 }

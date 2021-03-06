@@ -12,7 +12,7 @@ export type TestName = "learning" | "short_memory_test" | "long_memory_test" | "
 
 const MAX_EXERCISES = 9;
 
-export class TestService {
+export class RulitTestService {
 
     private testName: TestName;
     
@@ -61,12 +61,12 @@ export class TestService {
                 let maxExercicesInArray: number;
 
                 if ( this.testName == "learning" || this.testName == "short_memory_test" ) {
-                    currentTestExercisesArray = this.userService.user.test1;
+                    currentTestExercisesArray = this.userService.user.shortMemoryTest;
                     // test1 has one more exercise (learning)
                     maxExercicesInArray = MAX_EXERCISES + 1;
                 } 
                 else if ( this.testName == "long_memory_test" ) {
-                    currentTestExercisesArray = this.userService.user.test2;
+                    currentTestExercisesArray = this.userService.user.longMemoryTest;
                     maxExercicesInArray = MAX_EXERCISES;
                 }
                 
