@@ -203,7 +203,7 @@ export class RulitTestService {
 
     private openAdjacentSnackBar() {
         const config = new MatSnackBarConfig();
-        config.panelClass = ["custom-snack-bar"];
+        config.panelClass = ["custom-rulit-snack-bar"];
         config.duration = 5000;
         this._snackBarRef = this._snackBar.open("Recuerde que tiene que seguir un camino.Solo puede continuar por los nodos adyacentes.", "Cerrar", config);
     }
@@ -215,7 +215,8 @@ export class RulitTestService {
     private openFinishTestDialog(theTitle: string, theMessage: string): MatDialogRef<FinishTestDialogComponent, any> {
         const config = new MatDialogConfig();
         config.data = { title: theTitle, message: theMessage };
-        config.panelClass = ["custom-dialog"];
+        config.panelClass = ["custom-rulit-dialog"];
+        config.disableClose = true;
         return this._dialog.open(FinishTestDialogComponent,config);
     }
 

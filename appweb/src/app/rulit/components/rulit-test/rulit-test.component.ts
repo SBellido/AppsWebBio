@@ -1,7 +1,8 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 import { fromEvent, interval, Observable, Subscription } from 'rxjs';
 import { map, take, tap } from "rxjs/operators";
@@ -41,7 +42,8 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         private router: Router,
         private userService: RulitUserService,
         private _dialog: MatDialog,
-        private _snackBar: MatSnackBar ) {
+        private _snackBar: MatSnackBar,
+        private _breakpointObserver: BreakpointObserver ) {
 
             let userIdParam = this.route.snapshot.paramMap.get('id');
 
@@ -54,25 +56,17 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         }
 
     ngOnInit(): void {
-
-        let screen = window.screen;
-        let orientationDialogRef = null;
-
-        if ( this.isScreenOrientationValid(screen.orientation) ) {
-            this.initTest(); 
-        } else {
-            orientationDialogRef = this.openScreenOrientationDialog();
-        }
         
-        this.orientationChange$ = fromEvent(window,"orientationchange").subscribe( () => {
-            if (this.isScreenOrientationValid(screen.orientation) && orientationDialogRef )
-            {
-                this.closeScreenOrientationDialog(orientationDialogRef);
-                if ( ! this.testService) this.initTest();
-            } 
-            else if ( ! orientationDialogRef || orientationDialogRef.getState() === 2 ) 
-            {
+        let orientationDialogRef: MatDialogRef<ScreenOrientationDialogComponent> = null;
+        
+        this.orientationChange$ = this._breakpointObserver.observe([
+            Breakpoints.HandsetPortrait
+        ]).subscribe( (result) => {
+            if ( result.matches ) {
                 orientationDialogRef = this.openScreenOrientationDialog();
+            } else {
+                if ( orientationDialogRef ) orientationDialogRef.close();
+                if ( ! this.testService ) this.initTest();
             }
         });
 
@@ -82,29 +76,11 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     private openScreenOrientationDialog(): MatDialogRef<ScreenOrientationDialogComponent, any> {
         this.metaviewport.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0";
-        // No aplica la clase custom (Fixearlo)
-        // const config = new MatDialogConfig();
-        // config.panelClass = ["custom-dialog"];
-        // return this._dialog.open(ScreenOrientationDialogComponent, config);
-        return this._dialog.open(ScreenOrientationDialogComponent);
-    }
-    
-    private closeScreenOrientationDialog(dialogRef: MatDialogRef<ScreenOrientationDialogComponent, any>): void {
-        dialogRef.close();
-    }
-    
-    // Checks if the mobile screen is in the correct position.
-    private isScreenOrientationValid(orientation : ScreenOrientation): boolean {
-
-        let orientationType = orientation.type;
-
-        if (orientationType === "landscape-primary" || orientationType === "landscape-secondary" ||
-            (screen.width >= MAX_MOBILE_SCREEN_WIDTH) && ( screen.orientation.type === "portrait-secondary" || screen.orientation.type === "portrait-primary" ) ) {
-            return true;
-        } 
-        
-        return false;
-        
+        // TODO: estilos
+        const config = new MatDialogConfig();
+        config.panelClass = ["custom-rulit-dialog"];
+        config.disableClose = true;
+        return this._dialog.open(ScreenOrientationDialogComponent, config);
     }
 
     private async initTest() {

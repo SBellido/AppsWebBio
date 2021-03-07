@@ -2,3 +2,19 @@ html, body { height: 100%; max-height: auto; }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+// Custom Rulit Snack
+
+snack-bar-container.custom-rulit-snack-bar {
+    background: #eeeeee;
+    color: #4a4067;
+}
+
+// Custom Rulit Dialog
+
+.custom-rulit-dialog .mat-dialog-title {
+    color: #e33b88;
+}
+
+.custom-rulit-dialog .mat-dialog-content {
+    color: #4a4067;
+}

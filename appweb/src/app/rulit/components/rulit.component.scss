@@ -2,6 +2,7 @@
 .container {
     background-color: #eeeeee;
     width: 100%;
+    min-height: 100%;
 }
 
 .container__component {
@@ -58,18 +59,5 @@ mat-card-actions {
 h1.countdown {
     font-size: 200px;
     color: #e33b88;    
-}
-
-// Snack
-
-::ng-deep snack-bar-container.custom-snack-bar {
-    background: #eeeeee;
-    color: #4a4067;
-}
-
-// Dialog
-
-::ng-deep mat-dialog-container.custom-dialog {
-    color: #4a4067;
 }
 
