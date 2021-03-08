@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone, OnD
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 
 import { fromEvent, interval, Observable, Subscription } from 'rxjs';
 import { map, take, tap } from "rxjs/operators";
@@ -25,8 +25,7 @@ const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
-    @ViewChild('canvas', { static: true }) 
-    private canvas: ElementRef<HTMLCanvasElement>;
+    @ViewChild('canvas', { static: true }) private canvas: ElementRef<HTMLCanvasElement>;
     private clickCanvas$: Observable<Event>;
     private orientationChange$: Subscription;
     private metaviewport: HTMLMetaElement = document.querySelector('meta[name="viewport"]');
@@ -43,7 +42,8 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         private userService: RulitUserService,
         private _dialog: MatDialog,
         private _snackBar: MatSnackBar,
-        private _breakpointObserver: BreakpointObserver ) {
+        private _breakpointObserver: BreakpointObserver,
+        private _mediaMatcher: MediaMatcher ) {
 
             let userIdParam = this.route.snapshot.paramMap.get('id');
 
@@ -158,18 +158,18 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     // Based on window size, sets the canvas used for the graph
     private setCanvasSize() {
         
-        let screenHeight = screen.height;
-        
-        if ( screenHeight >= MAX_CANVAS_HEIGHT ) {
+        const mediaQueryList = this._mediaMatcher.matchMedia(`(max-height: ${MAX_CANVAS_HEIGHT}px) and (orientation: landscape)`);
 
-            this.canvas.nativeElement.width = 672;
-            this.canvas.nativeElement.height = 480;
-
-        } else {
-
+        if ( mediaQueryList.matches ) {
+            // Has to do this compare because safari and chrome gives different results
+            let screenHeight = (window.screen.height < window.screen.width) ? window.screen.height: window.screen.width;
             this.canvas.nativeElement.width = (screenHeight * 0.9) * 1.4;
             this.canvas.nativeElement.height = screenHeight * 0.9;
-
+        }
+        else
+        {
+            this.canvas.nativeElement.width = 672;
+            this.canvas.nativeElement.height = 480;
         }
 
     }
