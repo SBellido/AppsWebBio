@@ -14,23 +14,6 @@ import { ScreenOrientationDialogComponent } from './components/rulit-test/dialog
 import { LongMemoryWellcomeDialogComponent } from './components/rulit-test/dialogs/long-memory-wellcome-dialog.component';
 import { FinishTestDialogComponent } from './components/rulit-test/dialogs/finish-test-dialog.component';
 
-
-// import { Graph } from './bits/Graph';
-
-// Este modulo se encarga de llevar adelante los test RULIT
-// 
-// Ensayo 1:
-//          - Mostrar instrucciones (instructions component)
-//          - Datos usuario
-//          - Aprendizaje
-//          - Test 1 (memoria a corto plazo)
-//
-// Ensayo 2: 
-//          - Buscar datos de usuario (segun url ej. /rulit/<<idUsuario>>)
-//          - Test 2 (memoria a largo plazo)
-//
-// Guardar resultados.
-
 @NgModule({
     declarations: [
         RulitInstructionsComponent,
@@ -48,9 +31,7 @@ import { FinishTestDialogComponent } from './components/rulit-test/dialogs/finis
         CommonModule
     ],
     exports: [],
-    entryComponents: [
-        ScreenOrientationDialogComponent
-    ],
+    entryComponents: [ ScreenOrientationDialogComponent ],
     providers: [ RulitUserService ]
 })
 

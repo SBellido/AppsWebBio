@@ -10,7 +10,8 @@ import { Vertex } from "./Vertex";
 
 export type TestName = "learning" | "short_memory_test" | "long_memory_test" | "no_next_test";
 
-const MAX_EXERCISES = 9;
+const SHORT_MEMORY_MAX_EXERCISES = 10;
+const LONG_MEMORY_MAX_EXERCISES = 1;
 
 export class RulitTestService {
 
@@ -62,12 +63,11 @@ export class RulitTestService {
 
                 if ( this.testName == "learning" || this.testName == "short_memory_test" ) {
                     currentTestExercisesArray = this.userService.user.shortMemoryTest;
-                    // test1 has one more exercise (learning)
-                    maxExercicesInArray = MAX_EXERCISES + 1;
+                    maxExercicesInArray = SHORT_MEMORY_MAX_EXERCISES;
                 } 
                 else if ( this.testName == "long_memory_test" ) {
                     currentTestExercisesArray = this.userService.user.longMemoryTest;
-                    maxExercicesInArray = MAX_EXERCISES;
+                    maxExercicesInArray = LONG_MEMORY_MAX_EXERCISES;
                 }
                 
                 currentTestExercisesArray.push(this.currentExercise.toDataExercise());
@@ -101,7 +101,6 @@ export class RulitTestService {
 
                     if ( this.testName == "learning" ) { 
                         this.userService.user.nextTest = "short_memory_test";
-                        console.log("Lerning exercise is over"); 
                     }
 
                 }
@@ -212,6 +211,7 @@ export class RulitTestService {
         if ( this._snackBarRef ) this._snackBarRef.dismiss();
     }
 
+    // Los estilos no estan aplicando, probar de llevar a rulit.component
     private openFinishTestDialog(theTitle: string, theMessage: string): MatDialogRef<FinishTestDialogComponent, any> {
         const config = new MatDialogConfig();
         config.data = { title: theTitle, message: theMessage };
