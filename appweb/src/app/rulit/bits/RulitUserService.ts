@@ -64,8 +64,9 @@ export class RulitUserService {
     }
 
     // Load user from db
-    async loadUserFromDB(userId: string): Promise<void> {
+    async loadUserFromDB(userId: string): Promise<boolean> {
         this._user = await this._dbService.getRulitUserData(userId);
+        return true;
     }
 
     getTotalCorrectExercises(exercisesArray: Array<IRulitExercise>, testName: TestName): number {

@@ -11,6 +11,8 @@ import { RulitUserFormComponent } from './components/rulit-user-form/rulit-user-
 import { MaterialModule } from '../material/material.module';
 import { CommonModule } from '@angular/common';
 import { ScreenOrientationDialogComponent } from './components/rulit-test/dialogs/orientation-dialog.component';
+import { LongMemoryWellcomeDialogComponent } from './components/rulit-test/dialogs/long-memory-wellcome-dialog.component';
+import { FinishTestDialogComponent } from './components/rulit-test/dialogs/finish-test-dialog.component';
 
 
 // import { Graph } from './bits/Graph';
@@ -34,7 +36,9 @@ import { ScreenOrientationDialogComponent } from './components/rulit-test/dialog
         RulitInstructionsComponent,
         RulitUserFormComponent,
         RulitTestComponent,
-        ScreenOrientationDialogComponent
+        ScreenOrientationDialogComponent,
+        FinishTestDialogComponent,
+        LongMemoryWellcomeDialogComponent
     ],
     imports: [
         SharedModule,

@@ -5,7 +5,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 // Custom Rulit Snack
 
 snack-bar-container.custom-rulit-snack-bar {
-    background: #eeeeee;
+    background-color: #eeeeee;
     color: #4a4067;
 }
 
@@ -17,4 +17,9 @@ snack-bar-container.custom-rulit-snack-bar {
 
 .custom-rulit-dialog .mat-dialog-content {
     color: #4a4067;
+}
+
+.custom-rulit-dialog .mat-button {
+    background-color: #e33b88;
+    color: #ffffff;
 }

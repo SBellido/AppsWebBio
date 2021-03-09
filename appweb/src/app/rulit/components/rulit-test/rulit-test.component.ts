@@ -13,6 +13,7 @@ import { RulitTestService } from 'src/app/rulit/bits/RulitTestService';
 import { GRAPH as GRAPH_DATA, SOLUTION } from "src/app/rulit/bits/graphs_available/Graph1_data_testing";
 import { RulitUserService } from 'src/app/rulit/bits/RulitUserService';
 import { ScreenOrientationDialogComponent } from './dialogs/orientation-dialog.component';
+import { LongMemoryWellcomeDialogComponent } from './dialogs/long-memory-wellcome-dialog.component';
 
 const MAX_CANVAS_HEIGHT = 480;
 const MAX_MOBILE_SCREEN_WIDTH = 768;
@@ -43,20 +44,17 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         private _dialog: MatDialog,
         private _snackBar: MatSnackBar,
         private _breakpointObserver: BreakpointObserver,
-        private _mediaMatcher: MediaMatcher ) {
+        private _mediaMatcher: MediaMatcher ) {}
 
+    async ngOnInit(): Promise<void> {
+        
+        // When user enters the URL to make the long term memory test.
+        //      - eg. /rulit/test/<<userId>>
+        if ( ! this.userService.user ) {
             let userIdParam = this.route.snapshot.paramMap.get('id');
-
-            // When user enters the URL to make the long term memory test.
-            //      - eg. /rulit/test/<<userId>>
-            if ( ! this.userService.user ) {
-                this.userService.loadUserFromDB(userIdParam);
-            }
-
+            await this.userService.loadUserFromDB(userIdParam);
         }
 
-    ngOnInit(): void {
-        
         let orientationDialogRef: MatDialogRef<ScreenOrientationDialogComponent> = null;
         
         this.orientationChange$ = this._breakpointObserver.observe([
@@ -72,18 +70,11 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     }
 
-    // Dialogs
-
-    private openScreenOrientationDialog(): MatDialogRef<ScreenOrientationDialogComponent, any> {
-        this.metaviewport.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0";
-        // TODO: estilos
-        const config = new MatDialogConfig();
-        config.panelClass = ["custom-rulit-dialog"];
-        config.disableClose = true;
-        return this._dialog.open(ScreenOrientationDialogComponent, config);
-    }
-
     private async initTest() {
+
+        if ( this.userService.user.nextTest === "long_memory_test") {
+            await this.openLongMemoryWellcomeDialog().afterClosed().toPromise();      
+        }
 
         await this.countdown();
 
@@ -156,7 +147,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
     
     // Based on window size, sets the canvas used for the graph
-    private setCanvasSize() {
+    private setCanvasSize(): void {
         
         const mediaQueryList = this._mediaMatcher.matchMedia(`(max-height: ${MAX_CANVAS_HEIGHT}px) and (orientation: landscape)`);
 
@@ -174,7 +165,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     }
 
-    private goNextExercise(){
+    private goNextExercise(): void {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate(['rulit/test',this.userService.user.userId]);
@@ -201,6 +192,28 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     ngOnDestroy(): void {
         this.metaviewport.content = 'width=device-width, initial-scale=1.0';
         this.orientationChange$.unsubscribe();
+    }
+
+    // Dialogs
+
+    private openScreenOrientationDialog(): MatDialogRef<ScreenOrientationDialogComponent, any> {
+        this.metaviewport.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0";
+        // TODO: estilos
+        const config = new MatDialogConfig();
+        config.panelClass = ["custom-rulit-dialog"];
+        config.disableClose = true;
+        return this._dialog.open(ScreenOrientationDialogComponent, config);
+    }
+    
+    private openLongMemoryWellcomeDialog(): MatDialogRef<LongMemoryWellcomeDialogComponent, any> {
+        const config = new MatDialogConfig();
+        config.panelClass = ["custom-rulit-dialog"];
+        config.maxWidth = "30rem";
+        config.data = { 
+            userName: this.userService.user.name,
+            message: "Hace un tiempo descubriste la ruta para atravesar este laberinto. Trata de recordarla debemos salir de aquí una vez más. Igual que antes te indicaremos si vas por el camino correcto."
+        }
+        return this._dialog.open(LongMemoryWellcomeDialogComponent, config);
     }
 
 }
