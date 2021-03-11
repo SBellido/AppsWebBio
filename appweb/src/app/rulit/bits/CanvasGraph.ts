@@ -21,7 +21,10 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
     private _canvas: ElementRef<HTMLCanvasElement>;
     private context: CanvasRenderingContext2D;
     
-    constructor(){
+    constructor(private _nodeRegularImg: HTMLImageElement,
+                private _nodeHoverImg: HTMLImageElement,
+                private _nodeStartImg: HTMLImageElement,
+                private _nodeEndImg: HTMLImageElement ){
         super();
     }
 
@@ -46,7 +49,13 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
         }
 
         // Draw nodes
-        this.nodes.forEach(node => node.draw(this.context));
+        this.nodes.forEach(node => {
+            let image = this._nodeRegularImg;
+            if (node.isHighlighted || node.isActive) image = this._nodeHoverImg;
+            if (node.isFirstNode) image = this._nodeStartImg;
+            if (node.isLastNode) image = this._nodeEndImg;
+            node.draw(this.context, image);
+        });
     }
 
     private drawEdgeBetweenNodes(theNode: Vertex, connectedNode: Vertex) {

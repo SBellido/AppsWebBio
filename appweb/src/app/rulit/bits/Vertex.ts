@@ -8,7 +8,7 @@ interface IVertex {
     isActive: boolean,
     isHighlighted: boolean,
     circle: Circle,
-    draw(ctx: CanvasRenderingContext2D): void,
+    draw(ctx: CanvasRenderingContext2D, nodeImage: HTMLImageElement): void,
     resetColor(): void
 }
 
@@ -23,8 +23,7 @@ export class Vertex implements IVertex {
                     private _isActive: boolean,
                     theX: number, 
                     theY: number,
-                    radius,
-                    private _nodeImage: HTMLImageElement ){
+                    radius ){
                     this._circle = new Circle(radius,theX,theY,COLOR_WHITE);
                     this._isHighlighted = false;
                     this.resetColor();
@@ -63,13 +62,13 @@ export class Vertex implements IVertex {
         return this._circle;
     }
 
-    draw(theContext: CanvasRenderingContext2D): void {
+    draw(theContext: CanvasRenderingContext2D, nodeImage: HTMLImageElement): void {
         
         this.circle.draw(theContext);
 
         theContext.beginPath();
         theContext.drawImage(
-            this._nodeImage,
+            nodeImage,
             this._circle.posX - this._circle.radius,
             this._circle.posY - this._circle.radius,
             this._circle.radius * 2,
