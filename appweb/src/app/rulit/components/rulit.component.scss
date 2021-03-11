@@ -61,3 +61,100 @@ h1.countdown {
     color: #e33b88;    
 }
 
+// instructions
+
+.container-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-height: 942px;
+}
+h1.title {
+    text-align: center; font-weight: 400; font-size: 1.8em;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #4A4067;
+}
+h1>span {
+    font-weight: 400;
+    margin-top: 12px; color: #e33b88;
+
+}
+
+.button-back {
+    color: #e33b88;
+    padding: 5px 40px 5px 15px;
+    border: 0.5px solid #e33b88;
+}
+
+.button-back:hover {
+    background-color: #e33b881b;
+}
+
+.icon-back {
+    background-color: #e33b88;
+    color: white;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+
+@media screen and (max-width: 1600px) {
+
+    h1.title {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .container {
+        min-height: 880px;
+    }
+
+}
+
+@media screen and (max-width: 1366px) {
+    .container {
+        min-height: 600px;
+    }
+
+    h1.title {
+        font-size: 1.8em;
+    }
+
+    h1>span {
+        font-weight: 400;
+        margin-top: 12px; color: #e33b88;
+
+    }
+
+    .button-back {
+        padding: 0px 20px 0px 10px;
+    }
+
+    .icon-back {
+        margin-right: 7px;
+    }
+
+    h1.title {
+        margin-bottom: 10px;
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        min-height: 620px;
+    }
+
+}
+
+@media screen and(max-width: 375px) {
+    h1.title {
+        margin-top: 10px;     
+        font-size: 1.5em;
+    }
+    
+}

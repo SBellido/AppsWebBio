@@ -9,8 +9,7 @@ export class CarouselComponent implements OnInit {
 
   images: string[] = [
     'assets/videos/instructionRulit_1.gif',
-    'assets/images/instruction_2.png',
-    'assets/images/instruction_3.png',
+    'assets/images/instructionRulit_2.png',
     'assets/images/instruction_4.png',
   ];
 

@@ -2,40 +2,38 @@
   <div class="swiper-wrapper">
     <div class="swiper-slide" *ngFor="let img of images">
       <img [src]="img" alt="imagen del carousel">
-      <div class="image" *ngIf="img == 'assets/images/instruction_1.png'">
+      <div class="image" *ngIf="img == 'assets/videos/instructionRulit_1.gif'">
         <div class="container-instructions">
           <div class="container-title-intruction">
-            <h3 class="intruction">Instrucción 1 de 4</h3>
+            <h3 class="intruction">Instrucción 1 de 3</h3>
           </div>
           <ul class="container-items">
-            <li>El objetivo es 
+            <li>Tu objetivo es
               <span class="instructions-text">
-                escribir todos los usos que se te ocurran
-              </span> para un objeto.
-            </li>
-            <li>Después de iniciar, escribí tus propuestas y 
+                encontrar un camino oculto tocando los circulos
+              </span> para descubrirlo              
+              <br> hasta llegar al final.
+              <br> Con cada  
               <span class="instructions-text">
-                presioná "Enter" al terminar cada una.
-              </span>
+                error volvés
+              </span> al punto anterior. 
             </li>
           </ul>
         </div>
       </div>
-      <div class="image" *ngIf="img == 'assets/images/instruction_2.png'">
+      <div class="image" *ngIf="img == 'assets/images/instructionRulit_2.png'">
         <div class="container-instructions">
           <div class="container-number">
-            <h3 class="intruction">Instrucción 2 de 4</h3>
+            <h3 class="intruction">Instrucción 2 de 3</h3>
           </div>
           <ul class="container-items">
-            <li>Usá tu imaginación para generar tus propuestas. 
+            <li>Una vez que 
               <span class="instructions-text">
-                No hay límites.
+                encuentres la salida,
+                <br>memoriza tu ruta.
               </span>
-            </li>
-            <li>Tu única limitación es el tiempo,
-              <span class="instructions-text">
-                vas a disponer de 5 minutos.
-              </span>
+              <br>Deberás esforzarte por recordarla 
+              <br>en los siguientes intentos.
             </li>
           </ul>
         </div>
@@ -59,7 +57,7 @@
           <div class="container-number">
             <h3 class="intruction">Instrucción 4 de 4</h3>
           </div>
-          <button routerLink="/personal-info" routerLinkActive="active"
+          <button routerLink="../user-form" routerLinkActive="active"
             class="button-go" mat-raised-button>
             COMENZAR
           </button>
