@@ -120,18 +120,20 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         
                         // Theres a node
                         if ( newNode ) {
-                            this.canvas.nativeElement.style.cursor = "pointer";
-                            this.testService.graph.highlightPathTo(newNode);
-                            this.testService.graph.draw();
-                        } 
-                        else 
+                            if ( this.testService.graph.isCurrentNodeNextTo(newNode) ) {
+                                this.canvas.nativeElement.style.cursor = "pointer";
+                                this.testService.graph.highlightNode(newNode);
+                                this.testService.graph.draw();    
+                            }
+                        }
+                        else
                         {
                             this.canvas.nativeElement.style.cursor = "default";
                             this.testService.graph.resetHighlights();
                             this.testService.graph.draw();
                         }
+                        
                     }
-
                 )}
             );
         }

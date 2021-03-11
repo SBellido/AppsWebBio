@@ -6,13 +6,14 @@ export const COLOR_WHITE = "#FFF";
 export const COLOR_GREEN = "#90C14B";
 export const COLOR_RED = "#E52F2D";
 export const COLOR_VIOLET = "#4A4067";
+export const COLOR_TRANSPARENT_VIOLET = "#9c97ab";
 
 
 interface ICanvasGraph {
     draw(): void,
     getNodeAtPosition(clientX: number,clientY: number ): Vertex | undefined,
     flickerNode(newNode: Vertex): void,
-    highlightPathTo(newNode: Vertex): void,
+    highlightNode(newNode: Vertex): void,
     resetHighlights(): void
 }
 
@@ -60,10 +61,17 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
 
     private drawEdgeBetweenNodes(theNode: Vertex, connectedNode: Vertex) {
         this.context.beginPath();
+        this.context.lineWidth = 3;
         this.context.moveTo(theNode.circle.posX, theNode.circle.posY);
         this.context.lineTo(connectedNode.circle.posX,connectedNode.circle.posY);
-        (theNode.isActive && connectedNode.isHighlighted) ? this.context.lineWidth = 3 : this.context.lineWidth = 1;
-        this.context.strokeStyle = COLOR_VIOLET;
+        if (theNode.isActive && connectedNode.isHighlighted ||
+            theNode.isHighlighted && connectedNode.isActive) {
+            this.context.strokeStyle = COLOR_VIOLET;
+        } 
+        else
+        {
+            this.context.strokeStyle = COLOR_TRANSPARENT_VIOLET;   
+        } 
         this.context.stroke();
         this.context.closePath();
         this.context.restore();
@@ -112,14 +120,8 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
         
     }
 
-    highlightPathTo(theNode: Vertex): void {
-        if (this.isCurrentNodeNextTo(theNode)) {
-            theNode.isHighlighted = true;
-        } 
-        else 
-        {
-            theNode.isHighlighted = false;
-        }
+    highlightNode(theNode: Vertex): void {
+        theNode.isHighlighted = true;
     }
 
     resetHighlights(): void {
