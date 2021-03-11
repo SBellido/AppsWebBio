@@ -1,15 +1,30 @@
 
+<section class="container">  
+   
 <section class="container">
-    
-    <app-header-rulit></app-header-rulit>
-
+    <app-header-creativity></app-header-creativity>
     <div class="container__component">
-        
-        <h1>Instrucciones</h1>
-
-        <a routerLink="../user-form">Next (To user form)</a>
-        <!-- <a [routerLink]="['../test', 1]">Next (To the test)</a> -->
-    
+        <div class="container-title">
+            <h1 class="title">Instrucciones de <br> 
+            <span>"Usos alternativos"</span></h1>
+        </div>
+       <div class="row">
+           <div class="col">
+            <app-carousel></app-carousel>
+           </div>
+       </div>
+        <div>
+            <button routerLink="/select-test" routerLinkActive="active"
+                class="button-back" mat-raised-button>
+                <span class="material-icons icon-back">
+                    <mat-icon>chevron_left</mat-icon>
+                </span>
+                REGRESAR
+            </button>
+        </div>
     </div>
-
 </section>
+
+    <a routerLink="../user-form">Next (To user form)</a>
+</section>
+

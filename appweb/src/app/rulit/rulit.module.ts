@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ScreenOrientationDialogComponent } from './components/rulit-test/dialogs/orientation-dialog.component';
 import { LongMemoryWellcomeDialogComponent } from './components/rulit-test/dialogs/long-memory-wellcome-dialog.component';
 import { FinishTestDialogComponent } from './components/rulit-test/dialogs/finish-test-dialog.component';
+import { CarouselComponent } from './components/rulit-instructions/components/carousel/carousel.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { FinishTestDialogComponent } from './components/rulit-test/dialogs/finis
         RulitTestComponent,
         ScreenOrientationDialogComponent,
         FinishTestDialogComponent,
-        LongMemoryWellcomeDialogComponent
+        LongMemoryWellcomeDialogComponent,
+        CarouselComponent
     ],
     imports: [
         SharedModule,
