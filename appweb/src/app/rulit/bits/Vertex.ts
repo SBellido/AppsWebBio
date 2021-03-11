@@ -1,5 +1,10 @@
 import { Circle } from "./Circle";
-import { COLOR_WHITE, COLOR_GREEN, COLOR_VIOLET } from "./CanvasGraph";
+import { 
+    COLOR_WHITE, 
+    COLOR_TRANSPARENT_WHITE,
+    COLOR_GREEN, 
+    COLOR_TRANSPARENT_GREEN,
+    COLOR_VIOLET } from "./CanvasGraph";
 
 interface IVertex {
     id: number,
@@ -24,7 +29,7 @@ export class Vertex implements IVertex {
                     theX: number, 
                     theY: number,
                     radius ){
-                    this._circle = new Circle(radius,theX,theY,COLOR_WHITE);
+                    this._circle = new Circle(radius,theX,theY,COLOR_TRANSPARENT_WHITE);
                     this._isHighlighted = false;
                     this.resetColor();
                 }
@@ -48,6 +53,7 @@ export class Vertex implements IVertex {
 
     set isHighlighted(e: boolean) {
         this._isHighlighted = e;
+        this.resetColor();
     }
 
     get isFirstNode(): boolean {
@@ -79,13 +85,16 @@ export class Vertex implements IVertex {
     }
 
     resetColor(): void{
-        this._circle.fill = COLOR_WHITE;
-        if ( this.isActive || this.isFirstNode || this.isLastNode )
-            this._circle.fill = COLOR_GREEN;
-        if ( this.isFirstNode || this.isLastNode )
-            this._circle.fill = COLOR_VIOLET;
-        if ( this.isActive )
-            this._circle.fill = COLOR_GREEN;
+        // Regular colors
+        this._circle.fill = COLOR_TRANSPARENT_WHITE;
+        if ( this.isFirstNode || this.isLastNode ) this._circle.fill = COLOR_TRANSPARENT_GREEN;
+        // Active or highlighted color
+        if ( this.isActive ) this._circle.fill = COLOR_GREEN;
+        if ( this.isHighlighted && ! this.isActive ) {
+            this._circle.fill = COLOR_WHITE;
+            if ( this.isFirstNode || this.isLastNode ) 
+                this._circle.fill = COLOR_GREEN;
+        }
     }
 
 }

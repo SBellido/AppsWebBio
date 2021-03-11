@@ -3,10 +3,12 @@ import { Graph } from "./Graph";
 import { Vertex } from "./Vertex";
 
 export const COLOR_WHITE = "#FFF";
+export const COLOR_TRANSPARENT_WHITE = "#F6F6F6";
 export const COLOR_GREEN = "#90C14B";
+export const COLOR_TRANSPARENT_GREEN = "#BED79A";
 export const COLOR_RED = "#E52F2D";
 export const COLOR_VIOLET = "#4A4067";
-export const COLOR_TRANSPARENT_VIOLET = "#9c97ab";
+export const COLOR_TRANSPARENT_VIOLET = "#9C97AB";
 
 
 interface ICanvasGraph {
