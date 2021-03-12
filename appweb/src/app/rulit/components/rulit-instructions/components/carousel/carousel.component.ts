@@ -8,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class CarouselComponent implements OnInit {
 
   images: string[] = [
-    'assets/videos/instructionRulit_1.gif',
-    'assets/images/instructionRulit_2.png',
-    'assets/images/instruction_4.png',
+    './assets/videos/instructionRulit_1.gif',
+    './assets/images/instructionRulit_2.png',
+    './assets/images/instruction_4.png',
   ];
 
   constructor() { }

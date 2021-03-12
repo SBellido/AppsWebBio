@@ -28,12 +28,12 @@ export class RulitUserFormComponent implements OnInit {
 
     private buildUserFormData(): FormGroup{
         const userFormFields = new FormGroup({
-            name: new FormControl('Nancy', [
+            name: new FormControl('', [
                 Validators.required,
                 Validators.minLength(4),
                 Validators.maxLength(30)]
             ),
-            email: new FormControl('email@ejemplo.com',[
+            email: new FormControl('',[
                 Validators.required,
                 Validators.email
             ])
@@ -51,10 +51,6 @@ export class RulitUserFormComponent implements OnInit {
 
     onSaveForm($event: any){
         if ( this.userFormData.valid ) {
-
-            // console.log("save form: ");
-            // console.log(this.userFormData.getRawValue());
-
             this.userService.setNewUser(this.userFormData.getRawValue());
             this.router.navigate(['rulit/test', this.userService.user.userId]);
         } else {
