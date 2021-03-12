@@ -15,7 +15,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from './../material/material.module';
 import { ReplaceNullWithTextPipe } from './pipes/replace-null-with-text.pipe';
 import { HeaderRulitComponent } from './components/header-rulit/header-rulit.component';
-
+import { HeaderQuestionRulitComponent } from './components/header-questionRulit/header-questionRulit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { HeaderRulitComponent } from './components/header-rulit/header-rulit.com
     HeaderAdminComponent,
     FooterComponent,
     ReplaceNullWithTextPipe,
-    HeaderRulitComponent
+    HeaderRulitComponent,
+    HeaderQuestionRulitComponent
   ],
   exports: [
     HeaderComponent,
@@ -38,7 +39,8 @@ import { HeaderRulitComponent } from './components/header-rulit/header-rulit.com
     HeaderAdminComponent,
     FooterComponent,
     ReplaceNullWithTextPipe,
-    HeaderRulitComponent
+    HeaderRulitComponent,
+    HeaderQuestionRulitComponent
   ],
   imports: [
     CommonModule,
