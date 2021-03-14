@@ -32,10 +32,9 @@ export class DataDbService {
 
     // get actual counter
     let prevCounter = await this.getCreativesMetadataCounter().ref.get();
-    // increment counter
-    let newCounter = prevCounter.data().count + 1;
-    // update tests counter
-    this.getCreativesMetadataCounter().update({ "count": newCounter });
+
+    // update and increment tests counter
+    this.getCreativesMetadataCounter().update( {"count": firestore.FieldValue.increment(1)} );
 
   }
 
