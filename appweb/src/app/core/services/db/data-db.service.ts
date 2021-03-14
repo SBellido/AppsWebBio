@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule, DocumentChangeAction, DocumentData, DocumentReference, QuerySnapshot } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule, DocumentChangeAction, DocumentData, DocumentReference, DocumentSnapshot, QuerySnapshot } from '@angular/fire/firestore';
 import { firestore } from 'firebase/app';
 
 import { CreativeUser } from './../../models/creative-user.interface';
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { registerLocaleData } from '@angular/common';
 import { IRulitUser } from 'src/app/rulit/bits/RulitUserService';
 import { AdminCreativityComponent } from 'src/app/admin/components/admin-creativity/admin-creativity.component';
+import { RulitInstructionsComponent } from 'src/app/rulit/components/rulit-instructions/rulit-instructions.component';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class DataDbService {
   constructor(private afs: AngularFirestore, private http: HttpClient) { 
     this.creativesCollectionRef = afs.collection<CreativeUser>('creatives-users', ref => ref.orderBy('dateStart', 'desc'));
     this.creativesMetadataRef = afs.collection('creatives-meta');
-    this.rulitUserCollectionRef = afs.collection('rulit-users');
+    this.rulitUserCollectionRef = afs.collection<IRulitUser>('rulit-users');
   } 
 
   async saveContact(newCreativeUser: any): Promise<void> {
@@ -69,6 +70,15 @@ export class DataDbService {
       });
     admin.downloadFile(this.creativesUsers);
     });
+  }
+
+  async getAllRulitUsersData(): Promise<Array<IRulitUser>> {
+    const snapshot = await this.rulitUserCollectionRef.ref.orderBy("timestamp", "desc").get();
+    let users = [];
+    snapshot.docs.forEach( (doc: DocumentData) => {
+      users.push(doc.data());
+    });
+    return users;
   }
 
   public getCreativesMetadataCounter(){
