@@ -15,14 +15,14 @@ export interface IRulitTestExercise extends IRulitExercise {
 
 export class ExerciseService implements IRulitTestExercise {
 
-    totalCorrectMoves: number;
+    totalMoves: number;
     totalIncorrectMoves: number;
     totalExerciseTime: number;
     steps: Array<IRulitStep>;
     currentStep: IRulitTestStep;
 
     constructor(){
-        this.totalCorrectMoves = 0;
+        this.totalMoves = 0;
         this.totalIncorrectMoves = 0;
         this.totalExerciseTime = 0;
         this.steps = new Array<IRulitStep>();
@@ -41,8 +41,6 @@ export class ExerciseService implements IRulitTestExercise {
         this.currentStep.elapsedTime += timeDiff.getSeconds() * 1000;
         this.currentStep.elapsedTime += timeDiff.getMilliseconds();
 
-        this.currentStep.correctMoves++;
-        this.totalCorrectMoves++;
         this.totalExerciseTime += this.currentStep.elapsedTime;
         
         let completeStep = this.toDataStep(this.currentStep);
@@ -58,7 +56,7 @@ export class ExerciseService implements IRulitTestExercise {
     toDataExercise(): IRulitExercise {
         
         const dataExercise: IRulitExercise = {
-            totalCorrectMoves: this.totalCorrectMoves,
+            totalMoves: 15 + this.totalIncorrectMoves,
             totalIncorrectMoves: this.totalIncorrectMoves,
             totalExerciseTime: this.totalExerciseTime,
             steps : this.steps
@@ -69,20 +67,18 @@ export class ExerciseService implements IRulitTestExercise {
 
     toDataStep(theStep: IRulitTestStep): IRulitStep {
         return {
-            correctMoves: theStep.correctMoves,
             incorrectMoves: theStep.incorrectMoves,
             elapsedTime: theStep.elapsedTime
         } as IRulitStep;
     }
 
-    private buildNewStep = () => {
+    private buildNewStep  = ():IRulitTestStep => {
         
         let currentTimeInMilliseconds = new Date().getTime();
         
         return {
             initialTime: currentTimeInMilliseconds,
             elapsedTime: 0,
-            correctMoves: 0,
             incorrectMoves: 0
         } as IRulitTestStep;
     }

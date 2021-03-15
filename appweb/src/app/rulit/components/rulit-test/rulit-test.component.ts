@@ -188,7 +188,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     ngAfterViewChecked(): void {
-        // scrool to the graph
+        // scroll to the graph
         if (this.testService)
             this.canvas.nativeElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     }

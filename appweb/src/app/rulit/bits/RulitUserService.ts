@@ -7,13 +7,12 @@ import { TestName } from "./RulitTestService";
 // Step stored in DB
 export interface IRulitStep {
     elapsedTime: number,
-    correctMoves: number,
     incorrectMoves: number
 }
 
 // Exercise stored in DB
 export interface IRulitExercise {
-    totalCorrectMoves: number,
+    totalMoves: number,
     totalIncorrectMoves: number,
     totalExerciseTime: number,
     steps: Array<IRulitStep>
@@ -24,8 +23,10 @@ export interface IRulitUser {
     userId: string,
     email: string,
     name: string,
+    graphId: number,
+    solutionId: number,
     shortMemoryTest: Array<IRulitExercise>,
-    longMemoryTest: Array<IRulitExercise>,
+    longMemoryTest: Array<IRulitExercise>, // TODO: change to a single exercise
     stepErrors: Array<number>,
     nextTest: TestName,
     timestamp?: any
@@ -36,6 +37,8 @@ export interface IRulitUser {
 })
 export class RulitUserService {
 
+    private _currentGraphId: number = 1;
+    private _currentSolutionId: number = 1;
     private _user: IRulitUser;
     private _userDbRef: DocumentReference;
 
@@ -45,11 +48,21 @@ export class RulitUserService {
         return this._user;
     }
 
+    set currentGraphId(graphId: number) {
+        this._currentGraphId = graphId;
+    }
+    
+    set currentSolutionId(solutionId: number) {
+        this._currentSolutionId = solutionId;
+    }
+
     setNewUser(newUserData: {name: string, email: string}): void{
         this._user = {
             userId: "",
             email: newUserData.email,
             name: newUserData.name,
+            graphId: this._currentGraphId,
+            solutionId: this._currentSolutionId,
             shortMemoryTest: new Array<IRulitExercise>(),
             longMemoryTest: new Array<IRulitExercise>(),
             stepErrors: new Array<number>(),
