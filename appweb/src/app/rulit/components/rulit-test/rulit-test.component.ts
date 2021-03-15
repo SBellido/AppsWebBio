@@ -55,6 +55,10 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
             await this.userService.loadUserFromDB(userIdParam);
         }
 
+        if ( this.userService.user.nextTest === "long_memory_test") {
+            await this.openLongMemoryWellcomeDialog().afterClosed().toPromise();      
+        }
+
         let orientationDialogRef: MatDialogRef<ScreenOrientationDialogComponent> = null;
         
         this.orientationChange$ = this._breakpointObserver.observe([
@@ -72,16 +76,14 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     private async initTest() {
 
-        if ( this.userService.user.nextTest === "long_memory_test") {
-            await this.openLongMemoryWellcomeDialog().afterClosed().toPromise();      
-        }
-
         await this.countdown();
 
         this.setCanvasSize();
         
+        // TODO: load graph data based on graphId in user service
         let theGraph = await buildGraph(GRAPH_DATA,this.canvas);
         
+        // TODO: load solution based on solutionId in user service
         // Copies solutions to a new array 
         let currentSolution = Object.assign([],SOLUTION);
         
@@ -112,7 +114,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         // On desktop screens, when mouse move:
         //      - set cursor to pointer if over a node
-        if (screen.width >= MAX_MOBILE_SCREEN_WIDTH){
+        if ( ! this._mediaMatcher.matchMedia(Breakpoints.Handset).matches ){
             fromEvent(this.canvas.nativeElement,"mousemove")
                 .subscribe( (event: MouseEvent ) => { this.ngZone.runOutsideAngular( () => { 
 
