@@ -6,7 +6,7 @@
     <div class="container__component">
 
         <!-- COUNTDOWN -->
-        <section *ngIf="! testStarted">
+        <section #countdown *ngIf="! testStarted">
             <h1 class="countdown">{{ countDown }}</h1> 
         </section>
 

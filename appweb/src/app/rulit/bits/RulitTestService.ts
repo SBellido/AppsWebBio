@@ -204,7 +204,7 @@ export class RulitTestService {
         const config = new MatSnackBarConfig();
         config.panelClass = ["custom-rulit-snack-bar"];
         config.duration = 5000;
-        this._snackBarRef = this._snackBar.open("Recuerde que tiene que seguir un camino.Solo puede continuar por los nodos adyacentes.", "Cerrar", config);
+        this._snackBarRef = this._snackBar.open("Recordá que siempre tenes que seguir un camino. Solo podés tocar los circulos conectados entre sí.", "Ok", config);
     }
     
     private closeAdjacentSnackBar() {

@@ -26,6 +26,7 @@ const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
+    @ViewChild('countdown') private _countdown: ElementRef<HTMLElement>;
     @ViewChild('canvas', { static: true }) private canvas: ElementRef<HTMLCanvasElement>;
     private clickCanvas$: Observable<Event>;
     private orientationChange$: Subscription;
@@ -56,7 +57,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         }
 
         if ( this.userService.user.nextTest === "long_memory_test") {
-            await this.openLongMemoryWellcomeDialog().afterClosed().toPromise();      
+            await this.openLongMemoryWellcomeDialog().afterClosed().toPromise();
         }
 
         let orientationDialogRef: MatDialogRef<ScreenOrientationDialogComponent> = null;
@@ -67,7 +68,9 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
             if ( result.matches ) {
                 orientationDialogRef = this.openScreenOrientationDialog();
             } else {
-                if ( orientationDialogRef ) orientationDialogRef.close();
+                if ( orientationDialogRef ) {
+                    orientationDialogRef.close();
+                }
                 if ( ! this.testService ) this.initTest();
             }
         });
@@ -189,8 +192,14 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     ngAfterViewChecked(): void {
         // scroll to the graph
-        if (this.testService)
-            this.canvas.nativeElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        if ( this.testService )
+            this.canvas.nativeElement.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+        if ( ! this.testService ) {
+            console.log("test");
+            console.log(this._countdown.nativeElement);
+            this._countdown.nativeElement.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+        }
+
     }
 
     ngOnDestroy(): void {
