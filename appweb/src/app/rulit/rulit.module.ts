@@ -14,6 +14,7 @@ import { ScreenOrientationDialogComponent } from './components/rulit-test/dialog
 import { LongMemoryWellcomeDialogComponent } from './components/rulit-test/dialogs/long-memory-wellcome-dialog.component';
 import { FinishTestDialogComponent } from './components/rulit-test/dialogs/finish-test-dialog.component';
 import { CarouselComponent } from './components/rulit-instructions/components/carousel/carousel.component';
+import { NotConnectedNodeDialogComponent } from './components/rulit-test/dialogs/not-connected-node-dialog.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { CarouselComponent } from './components/rulit-instructions/components/ca
         ScreenOrientationDialogComponent,
         FinishTestDialogComponent,
         LongMemoryWellcomeDialogComponent,
+        NotConnectedNodeDialogComponent,
         CarouselComponent
     ],
     imports: [

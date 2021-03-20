@@ -12,14 +12,46 @@ snack-bar-container.custom-rulit-snack-bar {
 // Custom Rulit Dialog
 
 .custom-rulit-dialog .mat-dialog-title {
-    color: #e33b88;
+    color: #312a45;
+    margin: 0 0 0.5rem;
+}
+
+.custom-rulit-dialog .dialog_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.custom-rulit-dialog .dialog_header .mat-button{
+    color: #E52F2D;
+    padding: 0;
+    min-width: 32px;
+}
+
+.custom-rulit-dialog .mat-dialog-title .material-icons {
+    color: #ffcf02;
+    vertical-align: text-bottom;
+    margin-right: 0.5rem;
+}
+
+.custom-rulit-dialog hr{
+    border: 1px solid #ffcf02;
 }
 
 .custom-rulit-dialog .mat-dialog-content {
-    color: #4a4067;
+    color: #312a45;
 }
 
-.custom-rulit-dialog .mat-button {
-    background-color: #e33b88;
-    color: #ffffff;
+.custom-rulit-dialog mat-dialog-actions .mat-button {
+    background-color: #76ad2e;
+    color: white;
+    font-size: medium;
+    font-weight: 500;
+    padding: 0.5rem 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.custom-rulit-dialog mat-dialog-actions .mat-button:hover {
+    color: white;
+    background-color: #76ad2ecc;
 }

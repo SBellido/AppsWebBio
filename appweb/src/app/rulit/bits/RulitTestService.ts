@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dial
 import { MatSnackBar, MatSnackBarRef, MatSnackBarConfig } from "@angular/material/snack-bar";
 import { Observable, Subject } from "rxjs";
 import { FinishTestDialogComponent } from "../components/rulit-test/dialogs/finish-test-dialog.component";
+import { NotConnectedNodeDialogComponent } from "../components/rulit-test/dialogs/not-connected-node-dialog.component";
 import { CanvasGraph } from "./CanvasGraph";
 import { ExerciseService, IRulitTestExercise } from "./ExerciseService";
 import { IRulitExercise, RulitUserService } from "./RulitUserService";
@@ -147,13 +148,14 @@ export class RulitTestService {
                             // Selected node flickers in red
                             this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
                         }
-                        this.closeAdjacentSnackBar();
+                        // this.closeAdjacentSnackBar();
                     } 
                     else
                     {
                         this.updateStepErrors();
                         this.currentExercise.addIncorrectMove();
-                        this.openAdjacentSnackBar();
+                        this.openNotConnectedNodeDialog();
+                        // this.openAdjacentSnackBar();
                     }
                     
                 }
@@ -200,12 +202,18 @@ export class RulitTestService {
         return this.solution[this.solution.length - 1] == theNode.id;
     }
 
-    private openAdjacentSnackBar() {
-        const config = new MatSnackBarConfig();
-        config.panelClass = ["custom-rulit-snack-bar"];
-        config.duration = 5000;
-        this._snackBarRef = this._snackBar.open("Recordá que siempre tenes que seguir un camino. Solo podés tocar los circulos conectados entre sí.", "Ok", config);
+    private openNotConnectedNodeDialog() {
+        const config = new MatDialogConfig();
+        config.panelClass = ["custom-rulit-dialog"];
+        this._dialog.open(NotConnectedNodeDialogComponent,config);
     }
+
+    // private openAdjacentSnackBar() {
+    //     const config = new MatSnackBarConfig();
+    //     config.panelClass = ["custom-rulit-snack-bar"];
+    //     config.duration = 5000;
+    //     this._snackBarRef = this._snackBar.open("Recordá que siempre tenes que seguir un camino. Solo podés tocar los circulos conectados entre sí.", "Ok", config);
+    // }
     
     private closeAdjacentSnackBar() {
         if ( this._snackBarRef ) this._snackBarRef.dismiss();

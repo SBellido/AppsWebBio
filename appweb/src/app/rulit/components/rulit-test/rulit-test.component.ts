@@ -195,8 +195,8 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         if ( this.testService )
             this.canvas.nativeElement.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
         if ( ! this.testService ) {
-            console.log("test");
-            console.log(this._countdown.nativeElement);
+            // console.log("test");
+            // console.log(this._countdown.nativeElement);
             this._countdown.nativeElement.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
         }
 
