@@ -1,7 +1,17 @@
-<h1 mat-dialog-title>Hola {{ data.userName }}</h1>
+<div class="dialog_header">
+  <h1 mat-dialog-title>
+    <span class="material-icons">
+      verified
+    </span>
+    Hola {{ data.userName }}</h1>
+</div>
+
+<hr/>
+
 <div mat-dialog-content>
   <p>{{ data.message }}</p>
 </div>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Ok</button>
+
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close>ENTENDIDO</button>
 </mat-dialog-actions>

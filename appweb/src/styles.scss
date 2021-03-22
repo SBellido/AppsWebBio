@@ -24,6 +24,7 @@ snack-bar-container.custom-rulit-snack-bar {
 
 .custom-rulit-dialog .dialog_header .mat-button{
     color: #E52F2D;
+    background-color: white;
     padding: 0;
     min-width: 32px;
 }
@@ -40,6 +41,7 @@ snack-bar-container.custom-rulit-snack-bar {
 
 .custom-rulit-dialog .mat-dialog-content {
     color: #312a45;
+    line-height: 1.4rem;
 }
 
 .custom-rulit-dialog mat-dialog-actions .mat-button {
@@ -54,4 +56,15 @@ snack-bar-container.custom-rulit-snack-bar {
 .custom-rulit-dialog mat-dialog-actions .mat-button:hover {
     color: white;
     background-color: #76ad2ecc;
+}
+
+.mat-dialog-content.orientation_content {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.mat-dialog-content .screen_rotation_icon {
+    font-size: 32px;
 }
