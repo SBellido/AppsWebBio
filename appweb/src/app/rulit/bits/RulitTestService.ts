@@ -92,7 +92,8 @@ export class RulitTestService {
                     if ( this.testName == "long_memory_test" ) {
                         this.userService.user.nextTest = "no_next_test";
                         this.isTestOver$.next(true);
-                        // TODO: Add a dialog   
+                        // TODO: Add a dialog
+                        this.openFinishTestDialog("Felicitaciones!","Completaste todas las pruebas.");
                         console.log("Long memory test is over"); 
                     }
 
@@ -106,7 +107,7 @@ export class RulitTestService {
 
                 }
 
-                console.log(this.userService.user);
+                // console.log(this.userService.user);
 
             }
 
@@ -219,7 +220,7 @@ export class RulitTestService {
         if ( this._snackBarRef ) this._snackBarRef.dismiss();
     }
 
-    // Los estilos no estan aplicando, probar de llevar a rulit.component
+    // 
     private openFinishTestDialog(theTitle: string, theMessage: string): MatDialogRef<FinishTestDialogComponent, any> {
         const config = new MatDialogConfig();
         config.data = { title: theTitle, message: theMessage };
