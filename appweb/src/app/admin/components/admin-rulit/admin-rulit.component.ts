@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import firebase from 'firebase';
 import { Parser, transforms } from 'json2csv';
 import { DataDbService } from 'src/app/core/services/db/data-db.service';
 
-
+const SEPARATOR = "_";
 
 @Component({
   selector: 'app-admin-rulit',
@@ -15,13 +16,13 @@ export class AdminRulitComponent{
   
   async getData() {
     let rulitUsers = await this.dbData.getAllRulitUsersData();
-    rulitUsers.map( (user) => {user.timestamp = user.timestamp.toDate().toLocaleString() });
-    console.log(rulitUsers);
+    rulitUsers.map( (user) => { user.timestamp = (user.timestamp as firebase.firestore.Timestamp).toDate().toLocaleDateString("es-AR") });
+    
     // CSV
-    const flatOptions = transforms.flatten({ objects: true, arrays: true, separator: "_" });
-    const json2csvParser = new Parser({ transforms: [ flatOptions ] });
+    const flatOptions = transforms.flatten({ objects: true, arrays: true, separator: SEPARATOR });
+    let fields = this.getFields();
+    const json2csvParser = new Parser({ fields: fields, transforms: [ flatOptions ] });
     const csv = json2csvParser.parse(rulitUsers);
-    // console.log(csv);
     
     // Download
     const blob = new Blob([csv], { type: 'text/csv' });
@@ -29,5 +30,60 @@ export class AdminRulitComponent{
     window.open(url);
   }
 
+  // Returns the column names of the csv in the correct order
+  getFields(): Array<string> {
+    const STEPS = 15;
+    const MAX_EXERCISES = 10;
+    // Set static fields
+    let fields = [
+      "userId",
+      "name",
+      "email",
+      "timestamp",
+      "graphId",
+      "solutionId",
+      "nextTest"
+    ];
+    
+    // Set stepErrors 
+    for (let i = 0; i < STEPS; i++) {
+      fields.push("stepErrors" + SEPARATOR + i);
+    }
+    
+    // Set ShortMemoryTest
+    for (let i = 0; i < MAX_EXERCISES; i++) {
+      let prefix = "shortMemoryTest" + SEPARATOR + i + SEPARATOR;
+      // Static exercise fields
+      fields.push(prefix + "totalExerciseTime");
+      fields.push(prefix + "totalIncorrectMoves");
+      fields.push(prefix + "totalMoves");
+      
+      prefix = prefix + "steps" + SEPARATOR;
+      for (let j = 0; j < STEPS; j++) {
+        fields.push(prefix + j + SEPARATOR + "elapsedTime");
+        fields.push(prefix + j + SEPARATOR + "incorrectMoves");
+      }
+
+    }
+    
+    // Set LongMemoryTest 
+    for (let i = 0; i < MAX_EXERCISES - 1 ; i++) {
+      let prefix = "longMemoryTest" + SEPARATOR + i + SEPARATOR;
+      // Static exercise fields
+      fields.push(prefix + "totalExerciseTime");
+      fields.push(prefix + "totalIncorrectMoves");
+      fields.push(prefix + "totalMoves");
+      
+      prefix = prefix + "steps" + SEPARATOR;
+      for (let j = 0; j < STEPS; j++) {
+        fields.push(prefix + j + SEPARATOR + "elapsedTime");
+        fields.push(prefix + j + SEPARATOR + "incorrectMoves");
+      }
+
+    }
+
+    return fields;
+
+  }
   
 }
