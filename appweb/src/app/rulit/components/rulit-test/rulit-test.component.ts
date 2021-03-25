@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 
 import { fromEvent, interval, Observable, Subscription } from 'rxjs';
@@ -43,7 +42,6 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         private router: Router,
         private userService: RulitUserService,
         private _dialog: MatDialog,
-        private _snackBar: MatSnackBar,
         private _breakpointObserver: BreakpointObserver,
         private _mediaMatcher: MediaMatcher ) {}
 
@@ -91,7 +89,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         let currentSolution = Object.assign([],SOLUTION);
         
         // Build the test 
-        this.testService = new RulitTestService(theGraph, currentSolution , this.ngZone, this.userService, this._snackBar, this._dialog); 
+        this.testService = new RulitTestService(theGraph, currentSolution , this.ngZone, this.userService, this._dialog); 
         
         this.clickCanvas$ = fromEvent(this.canvas.nativeElement,"click");
         

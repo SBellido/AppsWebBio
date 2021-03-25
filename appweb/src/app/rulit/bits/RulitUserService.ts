@@ -3,6 +3,12 @@ import { DocumentReference } from "@angular/fire/firestore";
 import { DataDbService } from "src/app/core/services/db/data-db.service";
 import { TestName } from "./RulitTestService";
 
+export interface IRulitConfig {
+    SHORT_MEMORY_MAX_EXERCISES: number,
+    SHORT_MEMORY_MAX_CORRECT_EXERCISES: number,
+    LONG_MEMORY_MAX_EXERCISES: number,
+    LONG_MEMORY_MAX_CORRECT_EXERCISES: number
+}
 
 // Step stored in DB
 export interface IRulitStep {
@@ -39,10 +45,13 @@ export class RulitUserService {
 
     private _currentGraphId: number = 1;
     private _currentSolutionId: number = 1;
+    private _rulitConfig: IRulitConfig;
     private _user: IRulitUser;
     private _userDbRef: DocumentReference;
 
-    constructor(private _dbService: DataDbService){}
+    constructor(private _dbService: DataDbService){
+        this.loadRulitConfig();
+    }
 
     get user(){
         return this._user;
@@ -82,6 +91,12 @@ export class RulitUserService {
         return true;
     }
 
+    // Load config from db
+    async loadRulitConfig(): Promise<boolean> {
+        this._rulitConfig = await this._dbService.getRulitConfig();
+        return true;
+    }
+
     getTotalCorrectExercises(exercisesArray: Array<IRulitExercise>, testName: TestName): number {
         
         // In this context _user.nextTest has the name of the current test
@@ -107,6 +122,20 @@ export class RulitUserService {
 
     saveTestData() {
         this._dbService.saveRulitUserData(this._user);
+    }
+
+    getMaxExercices(testName: TestName): number {
+        if ( testName === "short_memory_test" )
+            return this._rulitConfig.SHORT_MEMORY_MAX_EXERCISES;
+        if ( testName === "long_memory_test" )
+            return this._rulitConfig.LONG_MEMORY_MAX_EXERCISES;
+    }
+
+    getMaxCorrectExercices(testName: TestName): number {
+        if ( testName === "short_memory_test" )
+            return this._rulitConfig.SHORT_MEMORY_MAX_CORRECT_EXERCISES;
+        if ( testName === "long_memory_test" )
+            return this._rulitConfig.LONG_MEMORY_MAX_CORRECT_EXERCISES;
     }
 
 }

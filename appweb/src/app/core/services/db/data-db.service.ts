@@ -3,12 +3,11 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreModule, D
 import { firestore } from 'firebase/app';
 
 import { CreativeUser } from './../../models/creative-user.interface';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { registerLocaleData } from '@angular/common';
-import { IRulitUser } from 'src/app/rulit/bits/RulitUserService';
+import { IRulitConfig, IRulitUser } from 'src/app/rulit/bits/RulitUserService';
 import { AdminCreativityComponent } from 'src/app/admin/components/admin-creativity/admin-creativity.component';
-import { RulitInstructionsComponent } from 'src/app/rulit/components/rulit-instructions/rulit-instructions.component';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +18,22 @@ export class DataDbService {
   private creativesCollectionRef: AngularFirestoreCollection<CreativeUser>;
   private creativesMetadataRef: AngularFirestoreCollection;
   private rulitUserCollectionRef: AngularFirestoreCollection;
+  private rulitConfigRef: AngularFirestoreCollection;
   public creativesUsers = [];
 
   constructor(private afs: AngularFirestore, private http: HttpClient) { 
     this.creativesCollectionRef = afs.collection<CreativeUser>('creatives-users', ref => ref.orderBy('dateStart', 'desc'));
     this.creativesMetadataRef = afs.collection('creatives-meta');
     this.rulitUserCollectionRef = afs.collection<IRulitUser>('rulit-users');
+    this.rulitConfigRef = afs.collection("rulit-config");
   } 
 
+  // TODO: Theres no need for async
   async saveContact(newCreativeUser: any): Promise<void> {
     this.creativesCollectionRef.add(newCreativeUser);
 
     // get actual counter
-    let prevCounter = await this.getCreativesMetadataCounter().ref.get();
+    // let prevCounter = await this.getCreativesMetadataCounter().ref.get();
 
     // update and increment tests counter
     this.getCreativesMetadataCounter().update( {"count": firestore.FieldValue.increment(1)} );
@@ -97,6 +99,11 @@ export class DataDbService {
   async saveRulitUserData(testUser: IRulitUser): Promise<void> {
     testUser.timestamp = firestore.FieldValue.serverTimestamp();
     await this.rulitUserCollectionRef.doc(testUser.userId).set(testUser);
+  }
+
+  async getRulitConfig(): Promise<IRulitConfig> {
+    let cfg = await this.rulitConfigRef.doc<IRulitConfig>("config").get().toPromise();
+    return cfg.data();
   }
 
 }

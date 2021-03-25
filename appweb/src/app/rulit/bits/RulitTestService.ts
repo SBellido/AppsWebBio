@@ -1,6 +1,5 @@
 import { NgZone } from "@angular/core";
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
-import { MatSnackBar, MatSnackBarRef, MatSnackBarConfig } from "@angular/material/snack-bar";
 import { Observable, Subject } from "rxjs";
 import { FinishTestDialogComponent } from "../components/rulit-test/dialogs/finish-test-dialog.component";
 import { NotConnectedNodeDialogComponent } from "../components/rulit-test/dialogs/not-connected-node-dialog.component";
@@ -11,9 +10,6 @@ import { Vertex } from "./Vertex";
 
 export type TestName = "learning" | "short_memory_test" | "long_memory_test" | "no_next_test";
 
-const SHORT_MEMORY_MAX_EXERCISES = 10;
-const LONG_MEMORY_MAX_EXERCISES = 1;
-
 export class RulitTestService {
 
     private testName: TestName;
@@ -23,8 +19,6 @@ export class RulitTestService {
     private isTestOver$ = new Subject<boolean>();
     
     private newNodeChange$ = new Subject<Vertex>();
-    
-    private _snackBarRef: MatSnackBarRef<any>;
 
     // Test Service depends on:
     //      - Graph
@@ -36,12 +30,11 @@ export class RulitTestService {
         private solution: Array<number>, 
         private ngZone: NgZone,
         private userService: RulitUserService,
-        private _snackBar: MatSnackBar,
         private _dialog: MatDialog ) {
 
         // Set current test name
         this.testName = this.userService.user.nextTest;
-
+        
         //
         this.currentExercise = new ExerciseService();
 
@@ -60,29 +53,30 @@ export class RulitTestService {
             if ( theNode.isLastNode ) {
 
                 let currentTestExercisesArray: Array<IRulitExercise>;
-                let maxExercicesInArray: number;
+                const MAX_EXERCISES: number = this.userService.getMaxExercices(this.testName);
+                const MAX_CORRECT_EXERCISES: number = this.userService.getMaxCorrectExercices(this.testName);
 
                 if ( this.testName == "learning" || this.testName == "short_memory_test" ) {
                     currentTestExercisesArray = this.userService.user.shortMemoryTest;
-                    maxExercicesInArray = SHORT_MEMORY_MAX_EXERCISES;
+                    // maxExercicesInArray = 
                 } 
                 else if ( this.testName == "long_memory_test" ) {
                     currentTestExercisesArray = this.userService.user.longMemoryTest;
-                    maxExercicesInArray = LONG_MEMORY_MAX_EXERCISES;
+                    // maxExercicesInArray = 9;
                 }
                 
                 currentTestExercisesArray.push(this.currentExercise.toDataExercise());
                 
                 let correctExercisesInTest = this.userService.getTotalCorrectExercises(currentTestExercisesArray, this.testName);
                 
-                if ( correctExercisesInTest >=2 || currentTestExercisesArray.length == maxExercicesInArray ) { 
+                if ( correctExercisesInTest >= MAX_CORRECT_EXERCISES || currentTestExercisesArray.length == MAX_EXERCISES ) { 
                     
                     if ( this.testName == "short_memory_test" ) {
                         this.userService.user.nextTest = "long_memory_test";
                         
-                        if ( correctExercisesInTest >= 2 )
+                        if ( correctExercisesInTest >= MAX_CORRECT_EXERCISES )
                             this.openFinishTestDialog("Completaste la prueba","Perfecto has terminado el laberinto sin ayuda dos veces. Mañana nos encontramos nuevamente.");
-                        if ( currentTestExercisesArray.length == maxExercicesInArray )
+                        if ( currentTestExercisesArray.length == MAX_EXERCISES )
                             this.openFinishTestDialog("Completaste la prueba","Muchas gracias por participar, ya ha practicado suficiente. Mañana nos encontramos nuevamente.");
                          
                         this.isTestOver$.next(true);
@@ -92,7 +86,6 @@ export class RulitTestService {
                     if ( this.testName == "long_memory_test" ) {
                         this.userService.user.nextTest = "no_next_test";
                         this.isTestOver$.next(true);
-                        // TODO: Add a dialog
                         this.openFinishTestDialog("Felicitaciones!","Completaste todas las pruebas.");
                         console.log("Long memory test is over"); 
                     }
@@ -149,14 +142,14 @@ export class RulitTestService {
                             // Selected node flickers in red
                             this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
                         }
-                        // this.closeAdjacentSnackBar();
+
                     } 
                     else
                     {
                         this.updateStepErrors();
                         this.currentExercise.addIncorrectMove();
                         this.openNotConnectedNodeDialog();
-                        // this.openAdjacentSnackBar();
+
                     }
                     
                 }
@@ -209,17 +202,6 @@ export class RulitTestService {
         this._dialog.open(NotConnectedNodeDialogComponent,config);
     }
 
-    // private openAdjacentSnackBar() {
-    //     const config = new MatSnackBarConfig();
-    //     config.panelClass = ["custom-rulit-snack-bar"];
-    //     config.duration = 5000;
-    //     this._snackBarRef = this._snackBar.open("Recordá que siempre tenes que seguir un camino. Solo podés tocar los circulos conectados entre sí.", "Ok", config);
-    // }
-    
-    private closeAdjacentSnackBar() {
-        if ( this._snackBarRef ) this._snackBarRef.dismiss();
-    }
-
     // 
     private openFinishTestDialog(theTitle: string, theMessage: string): MatDialogRef<FinishTestDialogComponent, any> {
         const config = new MatDialogConfig();
@@ -227,6 +209,17 @@ export class RulitTestService {
         config.panelClass = ["custom-rulit-dialog"];
         config.disableClose = true;
         return this._dialog.open(FinishTestDialogComponent,config);
+    }
+
+    // TODO: complete and use this function
+    private testIsFinished(exercises: IRulitExercise[]): boolean {
+        
+        if ( this.testName === "short_memory_test" ){
+            if ( exercises.length >= this.userService.getMaxExercices(this.testName) ){
+                return true;
+            }
+        }
+
     }
 
 }
