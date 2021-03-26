@@ -58,17 +58,15 @@ export class RulitTestService {
 
                 if ( this.testName == "learning" || this.testName == "short_memory_test" ) {
                     currentTestExercisesArray = this.userService.user.shortMemoryTest;
-                    // maxExercicesInArray = 
                 } 
                 else if ( this.testName == "long_memory_test" ) {
                     currentTestExercisesArray = this.userService.user.longMemoryTest;
-                    // maxExercicesInArray = 9;
                 }
                 
                 currentTestExercisesArray.push(this.currentExercise.toDataExercise());
                 
-                let correctExercisesInTest = this.userService.getTotalCorrectExercises(currentTestExercisesArray, this.testName);
-                
+                let correctExercisesInTest = this.userService.getConsecutiveCorrectExercises(currentTestExercisesArray, this.testName);
+
                 if ( correctExercisesInTest >= MAX_CORRECT_EXERCISES || currentTestExercisesArray.length == MAX_EXERCISES ) { 
                     
                     if ( this.testName == "short_memory_test" ) {

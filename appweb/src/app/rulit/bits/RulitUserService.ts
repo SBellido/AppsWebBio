@@ -97,7 +97,7 @@ export class RulitUserService {
         return true;
     }
 
-    getTotalCorrectExercises(exercisesArray: Array<IRulitExercise>, testName: TestName): number {
+    getConsecutiveCorrectExercises(exercisesArray: Array<IRulitExercise>, testName: TestName): number {
         
         // In this context _user.nextTest has the name of the current test
 
@@ -114,7 +114,10 @@ export class RulitUserService {
 
         let exercisesWithoutMistakes = 0;
         exercises.forEach( (exercise) => {
-            if ( exercise.totalIncorrectMoves == 0 ) exercisesWithoutMistakes++; 
+            if ( exercise.totalIncorrectMoves == 0 ) 
+                exercisesWithoutMistakes++;
+            else 
+                exercisesWithoutMistakes = 0;
         });
         return exercisesWithoutMistakes;
 
