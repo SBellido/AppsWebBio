@@ -72,7 +72,7 @@ export class ExerciseService implements IRulitTestExercise {
         } as IRulitStep;
     }
 
-    private buildNewStep  = ():IRulitTestStep => {
+    private buildNewStep = ():IRulitTestStep => {
         
         let currentTimeInMilliseconds = new Date().getTime();
         

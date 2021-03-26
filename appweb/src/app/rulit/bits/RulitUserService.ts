@@ -32,7 +32,7 @@ export interface IRulitUser {
     graphId: number,
     solutionId: number,
     shortMemoryTest: Array<IRulitExercise>,
-    longMemoryTest: Array<IRulitExercise>, // TODO: change to a single exercise
+    longMemoryTest: Array<IRulitExercise>,
     stepErrors: Array<number>,
     nextTest: TestName,
     timestamp?: any

@@ -54,7 +54,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
             await this.userService.loadUserFromDB(userIdParam);
         }
 
-        if ( this.userService.user.nextTest === "long_memory_test") {
+        if ( this.userService.user.nextTest === "long_memory_test" && this.userService.user.longMemoryTest.length === 0 ) {
             await this.openLongMemoryWellcomeDialog().afterClosed().toPromise();
         }
 
