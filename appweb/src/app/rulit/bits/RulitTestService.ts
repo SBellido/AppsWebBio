@@ -5,8 +5,8 @@ import { FinishTestDialogComponent } from "../components/rulit-test/dialogs/fini
 import { NotConnectedNodeDialogComponent } from "../components/rulit-test/dialogs/not-connected-node-dialog.component";
 import { CanvasGraph } from "./CanvasGraph";
 import { ExerciseService, IRulitTestExercise } from "./ExerciseService";
+import { GraphNode } from "./GraphNode";
 import { IRulitExercise, RulitUserService } from "./RulitUserService";
-import { Vertex } from "./Vertex";
 
 export type TestName = "learning" | "short_memory_test" | "long_memory_test" | "no_next_test";
 
@@ -18,13 +18,8 @@ export class RulitTestService {
     private isExerciseOver$ = new Subject<boolean>();
     private isTestOver$ = new Subject<boolean>();
     
-    private newNodeChange$ = new Subject<Vertex>();
+    private newNodeChange$ = new Subject<GraphNode>();
 
-    // Test Service depends on:
-    //      - Graph
-    //      - Solution
-    //      - NgZone of the component
-    //      - User
     constructor(
         public graph: CanvasGraph, 
         private solution: Array<number>, 
@@ -42,7 +37,7 @@ export class RulitTestService {
         this.solution.reverse();
 
         // Observe when current node changes.
-        this.graph.currentNode$.subscribe( (theNode) => { 
+        this.graph.activeNode$.subscribe( (theNode) => { 
             
             // Remove the last element in solutions array.
             this.solution.pop();
@@ -111,22 +106,22 @@ export class RulitTestService {
                 if ( ! this.currentExercise.currentStep ) {
                     if ( newNode.isFirstNode ) {
                         this.currentExercise.initNewStep();
-                        this.graph.currentNode = newNode;
+                        this.graph.activeNode = newNode;
                     } 
                     else 
                     {
                         console.log("Must start form initial node"); // TODO
                     }
                 }
-                if ( this.currentExercise.currentStep && newNode !== this.graph.currentNode ) {
+                if ( this.currentExercise.currentStep && newNode !== this.graph.activeNode ) {
 
-                    if ( this.graph.isCurrentNodeNextTo(newNode) ) {
+                    if ( this.graph.isActiveNodeNextTo(newNode) ) {
                         if ( this.isSelectedNodeNextInsolution(newNode) ) {
                             // Update exercise by completing current step
                             this.currentExercise.completeCurrentStep();
                             
                             // Update current node in the graph
-                            this.graph.currentNode = newNode;
+                            this.graph.activeNode = newNode;
     
                             // Build a new step
                             this.currentExercise.initNewStep();
@@ -169,11 +164,11 @@ export class RulitTestService {
         return this.isTestOver$.asObservable();
     }
 
-    setCurrentNode(newNode: Vertex){
+    setCurrentNode(newNode: GraphNode){
         this.newNodeChange$.next(newNode);
     }
 
-    private get newNode$(): Observable<Vertex> {
+    private get newNode$(): Observable<GraphNode> {
         return this.newNodeChange$.asObservable();
     }
 
@@ -189,7 +184,7 @@ export class RulitTestService {
 
     }
     
-    private isSelectedNodeNextInsolution(theNode: Vertex): boolean {
+    private isSelectedNodeNextInsolution(theNode: GraphNode): boolean {
         // Compare the node to the last element in the array
         return this.solution[this.solution.length - 1] == theNode.id;
     }

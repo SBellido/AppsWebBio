@@ -12,11 +12,16 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'test/:id',
+        path: 'test/:userId',
         component: RulitTestComponent
     },
     {
         path: 'instrucciones',
+        component: RulitInstructionsComponent,
+        pathMatch: 'full',
+    },
+    {
+        path: 'instrucciones/:graphAndSolutionId',
         component: RulitInstructionsComponent
     },
     {

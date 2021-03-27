@@ -15,6 +15,7 @@ import { LongMemoryWellcomeDialogComponent } from './components/rulit-test/dialo
 import { FinishTestDialogComponent } from './components/rulit-test/dialogs/finish-test-dialog.component';
 import { CarouselComponent } from './components/rulit-instructions/components/carousel/carousel.component';
 import { NotConnectedNodeDialogComponent } from './components/rulit-test/dialogs/not-connected-node-dialog.component';
+import { RulitTestService2 } from './bits/RulitTestService2';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,7 @@ import { NotConnectedNodeDialogComponent } from './components/rulit-test/dialogs
         FinishTestDialogComponent,
         LongMemoryWellcomeDialogComponent,
         NotConnectedNodeDialogComponent,
-        CarouselComponent
+        CarouselComponent,
     ],
     imports: [
         SharedModule,
@@ -36,7 +37,7 @@ import { NotConnectedNodeDialogComponent } from './components/rulit-test/dialogs
     ],
     exports: [],
     entryComponents: [ ScreenOrientationDialogComponent ],
-    providers: [ RulitUserService ]
+    providers: [ RulitUserService, RulitTestService2 ]
 })
 
 export class RulitModule {}

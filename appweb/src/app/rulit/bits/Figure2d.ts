@@ -1,11 +1,14 @@
-interface IFigure2d {
-    posX: number,
-    posY: number,
-    fill,
-    draw(theContext: CanvasRenderingContext2D): void
+export interface IDrawable {
+    draw(ctx: CanvasRenderingContext2D, image?: HTMLImageElement): void;
 }
 
-export class Figure2d implements IFigure2d {
+export interface IFigure2d extends IDrawable {
+    posX: number,
+    posY: number,
+    fill
+}
+
+export class Figure2d implements IFigure2d, IDrawable {
 
     constructor (
         private _posX: number, 
@@ -41,7 +44,7 @@ export class Figure2d implements IFigure2d {
         return this._fill;
     }
     
-    draw (theContext: CanvasRenderingContext2D) {
+    draw (theContext: CanvasRenderingContext2D): void {
         theContext.fillStyle = this._fill;
     }
 

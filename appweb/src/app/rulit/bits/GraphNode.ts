@@ -5,19 +5,19 @@ import {
     COLOR_GREEN, 
     COLOR_TRANSPARENT_GREEN,
     COLOR_VIOLET } from "./CanvasGraph";
+import { IFigure2d } from "./Figure2d";
 
-interface IVertex {
+interface IGraphNode {
     id: number,
     isFirstNode: boolean,
     isLastNode: boolean,
     isActive: boolean,
     isHighlighted: boolean,
     circle: Circle,
-    draw(ctx: CanvasRenderingContext2D, nodeImage: HTMLImageElement): void,
     resetColor(): void
 }
 
-export class Vertex implements IVertex {
+export class GraphNode implements IGraphNode, IFigure2d {
 
     private _circle: Circle;
     private _isHighlighted: boolean;
@@ -28,11 +28,24 @@ export class Vertex implements IVertex {
                     private _isActive: boolean,
                     theX: number, 
                     theY: number,
-                    radius ){
+                    radius ) {
+                    
                     this._circle = new Circle(radius,theX,theY,COLOR_TRANSPARENT_WHITE);
                     this._isHighlighted = false;
                     this.resetColor();
                 }
+    
+    get posX(): number{
+        return this._circle.posX;
+    }
+
+    get posY(): number{
+        return this._circle.posY;
+    }
+
+    get fill(): any {
+        return this._circle.fill;
+    }
     
     get id(): number {
         return this._id;
@@ -70,7 +83,7 @@ export class Vertex implements IVertex {
 
     draw(theContext: CanvasRenderingContext2D, nodeImage: HTMLImageElement): void {
         
-        this.circle.draw(theContext);
+        this._circle.draw(theContext);
 
         theContext.beginPath();
         theContext.drawImage(

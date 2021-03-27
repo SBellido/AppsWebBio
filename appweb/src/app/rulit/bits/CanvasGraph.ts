@@ -1,6 +1,6 @@
 import { ElementRef } from "@angular/core";
 import { Graph } from "./Graph";
-import { Vertex } from "./Vertex";
+import { GraphNode } from './GraphNode';
 
 export const COLOR_WHITE = "#FFF";
 export const COLOR_TRANSPARENT_WHITE = "#F6F6F6";
@@ -13,16 +13,16 @@ export const COLOR_TRANSPARENT_VIOLET = "#9C97AB";
 
 interface ICanvasGraph {
     draw(): void,
-    getNodeAtPosition(clientX: number,clientY: number ): Vertex | undefined,
-    flickerNode(newNode: Vertex): void,
-    highlightNode(newNode: Vertex): void,
+    getNodeAtPosition(clientX: number,clientY: number ): GraphNode | undefined,
+    flickerNode(theNode: GraphNode): void,
+    highlightNode(theNode: GraphNode): void,
     resetHighlights(): void
 }
 
 export class CanvasGraph extends Graph implements ICanvasGraph {
 
     private _canvas: ElementRef<HTMLCanvasElement>;
-    private context: CanvasRenderingContext2D;
+    private _context: CanvasRenderingContext2D;
     
     constructor(private _nodeRegularImg: HTMLImageElement,
                 private _nodeHoverImg: HTMLImageElement,
@@ -33,7 +33,7 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
 
     set canvas(theCanvas: ElementRef<HTMLCanvasElement>){
         this._canvas = theCanvas;
-        this.context = this._canvas.nativeElement.getContext("2d");
+        this._context = this._canvas.nativeElement.getContext("2d");
     }
 
     // Draws edges first and then nodes
@@ -41,7 +41,7 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
 
         // Clear canvas
         let canvasRect = this._canvas.nativeElement.getBoundingClientRect();
-        this.context.clearRect(0, 0, canvasRect.width, canvasRect.height);
+        this._context.clearRect(0, 0, canvasRect.width, canvasRect.height);
 
         // Draw edges of each node
         for (const [theNode, edges] of this.adjList.entries()) {
@@ -57,30 +57,30 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
             if (node.isHighlighted || node.isActive) image = this._nodeHoverImg;
             if (node.isFirstNode) image = this._nodeStartImg;
             if (node.isLastNode) image = this._nodeEndImg;
-            node.draw(this.context, image);
+            node.draw(this._context, image);
         });
     }
 
-    private drawEdgeBetweenNodes(theNode: Vertex, connectedNode: Vertex) {
-        this.context.beginPath();
-        this.context.lineWidth = 3;
-        this.context.moveTo(theNode.circle.posX, theNode.circle.posY);
-        this.context.lineTo(connectedNode.circle.posX,connectedNode.circle.posY);
+    private drawEdgeBetweenNodes(theNode: GraphNode, connectedNode: GraphNode) {
+        this._context.beginPath();
+        this._context.lineWidth = 3;
+        this._context.moveTo(theNode.posX, theNode.posY);
+        this._context.lineTo(connectedNode.posX,connectedNode.posY);
         if (theNode.isActive && connectedNode.isHighlighted ||
             theNode.isHighlighted && connectedNode.isActive) {
-            this.context.strokeStyle = COLOR_VIOLET;
+            this._context.strokeStyle = COLOR_VIOLET;
         } 
         else
         {
-            this.context.strokeStyle = COLOR_TRANSPARENT_VIOLET;   
+            this._context.strokeStyle = COLOR_TRANSPARENT_VIOLET;   
         } 
-        this.context.stroke();
-        this.context.closePath();
-        this.context.restore();
+        this._context.stroke();
+        this._context.closePath();
+        this._context.restore();
     }
 
     // Searchs canvas for a node using event absolute coordinates
-    getNodeAtPosition( clientX: number, clientY: number ): Vertex | undefined {
+    getNodeAtPosition( clientX: number, clientY: number ): GraphNode | undefined {
         
         let canvasRect = this._canvas.nativeElement.getBoundingClientRect();
 
@@ -89,7 +89,7 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
             y: clientY - canvasRect.top
         }
 
-        let theNode: Vertex;
+        let theNode: GraphNode;
 
         this.nodes.forEach( node => {
             if ( node.circle.isPointInside(thePosition) ) theNode = node;
@@ -100,10 +100,10 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
     }
 
     // Node flickers in red when incorrect
-    flickerNode(newNode: Vertex): void {
+    flickerNode(newNode: GraphNode): void {
         
         let frame = 0;
-        this.currentNode.circle.fill = COLOR_WHITE;
+        this.activeNode.circle.fill = COLOR_WHITE;
         
         const i = setInterval( () => {
             (Math.abs(frame % 2) == 1) ? newNode.circle.fill = COLOR_RED : newNode.resetColor();
@@ -112,7 +112,7 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
             let requestId = requestAnimationFrame(() => this.flickerNode );
 
             if (frame >= 5) {
-                this.currentNode.resetColor();
+                this.activeNode.resetColor();
                 newNode.resetColor();
                 this.draw();
                 cancelAnimationFrame(requestId);
@@ -122,7 +122,7 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
         
     }
 
-    highlightNode(theNode: Vertex): void {
+    highlightNode(theNode: GraphNode): void {
         theNode.isHighlighted = true;
     }
 
