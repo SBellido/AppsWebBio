@@ -10,7 +10,7 @@ const NODE_END_IMAGE_URL = "./assets/images/rulit-node-end.svg"
 
 export const DEFAULT_GRAPH_SOLUTION = "19db35dd";
 
-export function getGraphAndSolutionFromId(theId: string): {graphData: Array<INodeData>, solutionData:Array<number>} {
+export function getGraphAndSolutionData(theId: string): {graphData: Array<INodeData>, solutionData:Array<number>} {
     // console.log(theId);
     if (theId === DEFAULT_GRAPH_SOLUTION) {
         // use a copy in each exercise

@@ -4,16 +4,16 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
 
 import { fromEvent, interval, Observable, Subscription } from 'rxjs';
-import { map, take, tap } from "rxjs/operators";
+import { filter, map, take, tap } from "rxjs/operators";
 
-import { buildGraph } from 'src/app/rulit/bits/GraphUtils';
-import { RulitTestService } from 'src/app/rulit/bits/RulitTestService';
+// import { RulitTestService } from 'src/app/rulit/bits/RulitTestService';
 
 // import { GRAPH as GRAPH_DATA, SOLUTION } from "src/app/rulit/bits/graphs_available/Graph1_data_testing";
 import { RulitUserService } from 'src/app/rulit/bits/RulitUserService';
 import { ScreenOrientationDialogComponent } from './dialogs/orientation-dialog.component';
 import { LongMemoryWellcomeDialogComponent } from './dialogs/long-memory-wellcome-dialog.component';
-import { RulitTestService2 } from '../../bits/RulitTestService2';
+import { RulitTestService } from '../../bits/RulitTestService';
+import { GraphNode } from '../../bits/GraphNode';
 
 const MAX_CANVAS_HEIGHT = 480;
 const MAX_MOBILE_SCREEN_WIDTH = 768;
@@ -35,14 +35,14 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     countDown: number = 3;
     testStarted: boolean = false;
 
-    private testService: RulitTestService;
+    // private testService: RulitTestService;
 
     constructor(
         private ngZone: NgZone,
         private route: ActivatedRoute,
         private router: Router,
         private userService: RulitUserService,
-        private _testService2: RulitTestService2,
+        private _testService: RulitTestService,
         private _dialog: MatDialog,
         private _breakpointObserver: BreakpointObserver,
         private _mediaMatcher: MediaMatcher ) {}
@@ -74,7 +74,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
                 if ( orientationDialogRef ) {
                     orientationDialogRef.close();
                 }
-                if ( ! this._testService2.isTesting ) this.initTest();
+                if ( ! this._testService.isTesting ) this.initTest();
                 // if ( ! this.testService ) this.initTest();
             }
         });
@@ -87,16 +87,48 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         this.setCanvasSize();
         
-        await this._testService2.initGraph(this.canvas);
+        await this._testService.initGraph(this.canvas);
         
-        this._testService2.graph.draw();
+        // Observers
+        this.clickCanvas$ = fromEvent(this.canvas.nativeElement,"click");
+        
+        // Handles user new click
+        this.clickCanvas$
+            .pipe( 
+                map( (ev: MouseEvent) => { 
+                    return this._testService.graph.getNodeAtPosition(ev.clientX,ev.clientY) 
+                }),
+                map( ( node: GraphNode ) => { 
+                    if (this._testService.isNodeNextInSolution(node))
+                        return node;
+                    else
+                        return false 
+                })
+            )
+            .subscribe( (node) => { 
+                if (node) {
+                    this._testService.setActiveNode(node);
+                    this._testService.graph.draw();
+                } 
+            });
+        
+        this._testService.startTest();
+
+        // Test starts with first node selected
+        this._testService.setActiveNode(this._testService.graph.firstNode);
+
+
+        // First Draw
+        this._testService.graph.draw();
+        
+        
         
         // TODO: load graph data based on graphId
-        // let theGraph = await buildGraph(GRAPH_DATA,this.canvas); [[hecho]]
+        // let theGraph = await buildGraph(GRAPH_DATA,this.canvas);     [[ HECHO ]]
         
         // TODO: load solution based on solutionId
         // Copies solutions to a new array 
-        // let currentSolution = Object.assign([],SOLUTION);
+        // let currentSolution = Object.assign([],SOLUTION);            [[ HECHO ]]
         
         // Build the test 
         // this.testService = new RulitTestService(theGraph, currentSolution , this.ngZone, this.userService, this._dialog); 
@@ -200,9 +232,9 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     ngAfterViewChecked(): void {
         // scroll to the graph
-        if ( this.testService )
+        if ( this.testStarted )
             this.canvas.nativeElement.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-        if ( ! this.testService ) {
+        if ( ! this.testStarted ) {
             // console.log("test");
             // console.log(this._countdown.nativeElement);
             this._countdown.nativeElement.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
