@@ -133,11 +133,14 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
                         this.userService.user.nextTest = "short_memory_test";
                 })
             )
-            .subscribe( () => {
-                this._testService.isTesting = false;
-                this.goNextExercise();
-                this.exerciseChange$.unsubscribe();
-            });
+            .subscribe({
+                next: () => {
+                    this._testService.isTesting = false;
+                    this.goNextExercise();
+                    this.exerciseChange$.unsubscribe();
+                }
+            }
+        );
 
         // When test is over go to next one
         this.testChange$ = this._testService.isTestOver$
