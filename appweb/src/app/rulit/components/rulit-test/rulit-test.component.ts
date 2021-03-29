@@ -14,6 +14,7 @@ import { ScreenOrientationDialogComponent } from './dialogs/orientation-dialog.c
 import { LongMemoryWellcomeDialogComponent } from './dialogs/long-memory-wellcome-dialog.component';
 import { RulitTestService } from '../../bits/RulitTestService';
 import { GraphNode } from '../../bits/GraphNode';
+import { NotConnectedNodeDialogComponent } from './dialogs/not-connected-node-dialog.component';
 
 const MAX_CANVAS_HEIGHT = 480;
 const MAX_MOBILE_SCREEN_WIDTH = 768;
@@ -96,27 +97,50 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.clickCanvas$
             .pipe( 
                 map( (ev: MouseEvent) => { 
-                    return this._testService.graph.getNodeAtPosition(ev.clientX,ev.clientY) 
+                    return this._testService.graph.getNodeAtPosition(ev.clientX,ev.clientY);
                 }),
-                map( ( node: GraphNode ) => { 
-                    if (this._testService.isNodeNextInSolution(node))
-                        return node;
+                filter ( (node: GraphNode | undefined ) => node !== undefined )
+            )
+            .subscribe({ 
+                next: (node) => { 
+                    if (this._testService.isNodeNextInSolution(node)) {
+                        this._testService.setActiveNode(node);
+                        this._testService.graph.draw();
+                    }
                     else
-                        return false 
+                    {
+                        this._testService.registerError(this.userService.user);
+                        if (this._testService.graph.isActiveNodeNextTo(node)) {
+                            this._testService.graph.flickerNode(node);
+                        }
+                        else
+                        {
+                            this.openNotConnectedNodeDialog();
+                        }
+                    }
+                }
+            }
+        );
+        
+        // When exercise is over go to next one
+        this._testService.isExerciseOver$
+            .pipe(
+                filter( (isExerciseOver) => isExerciseOver === true ),
+                tap( () => {
+                    if (this._testService.testName === "learning") 
+                        this.userService.user.nextTest = "short_memory_test";
                 })
             )
-            .subscribe( (node) => { 
-                if (node) {
-                    this._testService.setActiveNode(node);
-                    this._testService.graph.draw();
-                } 
+            .subscribe( () => {
+                this._testService.isTesting = false;
+                this.goNextExercise();
             });
         
-        this._testService.startTest();
+        // 
+        this._testService.startTest(this.userService);
 
         // Test starts with first node selected
         this._testService.setActiveNode(this._testService.graph.firstNode);
-
 
         // First Draw
         this._testService.graph.draw();
@@ -133,15 +157,15 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         // Build the test 
         // this.testService = new RulitTestService(theGraph, currentSolution , this.ngZone, this.userService, this._dialog); 
         
-        // this.clickCanvas$ = fromEvent(this.canvas.nativeElement,"click");
+        // this.clickCanvas$ = fromEvent(this.canvas.nativeElement,"click");    [[ HECHO ]]
         
         // Handles user new click
         // this.clickCanvas$.subscribe( ( event: MouseEvent ) => { 
-        //     this.testService.handleNewClick(event.clientX,event.clientY);
+        //     this.testService.handleNewClick(event.clientX,event.clientY);    [[ HECHO ]]
         // });
 
         // Draw canvas when current node changes
-        // this.testService.graph.activeNode$.subscribe( () => { 
+        // this.testService.graph.activeNode$.subscribe( () => {                [[ HECHO ]]
         //     this.testService.graph.draw(); 
         // });
 
@@ -219,7 +243,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     private countdown() {
-        
+
         let countdownStart = 3;
         
         return interval(1000).pipe(
@@ -267,6 +291,12 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
             message: "Hace un tiempo descubriste la ruta para atravesar este laberinto. Trata de recordarla debemos salir de aquí una vez más. Igual que antes te indicaremos si vas por el camino correcto."
         }
         return this._dialog.open(LongMemoryWellcomeDialogComponent, config);
+    }
+
+    private openNotConnectedNodeDialog() {
+        const config = new MatDialogConfig();
+        config.panelClass = ["custom-rulit-dialog"];
+        this._dialog.open(NotConnectedNodeDialogComponent,config);
     }
 
 }

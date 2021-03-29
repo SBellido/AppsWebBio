@@ -97,7 +97,7 @@ export class RulitUserService {
         return true;
     }
 
-    getConsecutiveCorrectExercises(exercisesArray: Array<IRulitExercise>, testName: TestName): number {
+    getConsecutiveCorrectExercises(testName: TestName): number {
         
         // In this context _user.nextTest has the name of the current test
 
@@ -107,10 +107,10 @@ export class RulitUserService {
         
         if ( testName == "short_memory_test" ) {
             // Exclude the "learning" exercise from the count.
-            exercises = Object.assign([],exercisesArray.slice(1,exercisesArray.length));
+            exercises = Object.assign([],this.user.shortMemoryTest.slice(1,this.user.shortMemoryTest.length));
         } 
         else if ( testName == "long_memory_test" )
-            exercises = exercisesArray;
+            exercises = this.user.longMemoryTest;
 
         let exercisesWithoutMistakes = 0;
         exercises.forEach( (exercise) => {
@@ -119,6 +119,7 @@ export class RulitUserService {
             else 
                 exercisesWithoutMistakes = 0;
         });
+        
         return exercisesWithoutMistakes;
 
     }
