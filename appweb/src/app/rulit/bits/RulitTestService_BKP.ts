@@ -216,3 +216,73 @@ export class RulitTestService {
     }
 
 }
+
+        // 
+        // From test component initTest() 
+        // 
+        
+        // TODO: load graph data based on graphId
+        // let theGraph = await buildGraph(GRAPH_DATA,this.canvas);     [[ HECHO ]]
+        
+        // TODO: load solution based on solutionId
+        // Copies solutions to a new array 
+        // let currentSolution = Object.assign([],SOLUTION);            [[ HECHO ]]
+        
+        // Build the test 
+        // this.testService = new RulitTestService(theGraph, currentSolution , this.ngZone, this.userService, this._dialog); 
+        
+        // this.clickCanvas$ = fromEvent(this.canvas.nativeElement,"click");    [[ HECHO ]]
+        
+        // Handles user new click
+        // this.clickCanvas$.subscribe( ( event: MouseEvent ) => { 
+        //     this.testService.handleNewClick(event.clientX,event.clientY);    [[ HECHO ]]
+        // });
+
+        // Draw canvas when current node changes
+        // this.testService.graph.activeNode$.subscribe( () => {                [[ HECHO ]]
+        //     this.testService.graph.draw(); 
+        // });
+
+        // When exercise is over go to next one
+        // this.testService.exerciseChange$.subscribe( (isExerciseOver) => {    [[ HECHO ]]
+        //     if (isExerciseOver) this.goNextExercise(); 
+        // });
+        
+        // When test is over
+        // this.testService.testChange$.subscribe( (isTestOver) => {
+        //     this.userService.saveTestData();
+        // });
+
+        // On desktop screens, when mouse move:
+        //      - set cursor to pointer if over a node
+        // if ( ! this._mediaMatcher.matchMedia(Breakpoints.Handset).matches ){
+        //     fromEvent(this.canvas.nativeElement,"mousemove")
+        //         .subscribe( (event: MouseEvent ) => { this.ngZone.runOutsideAngular( () => { 
+
+        //                 let newNode = this.testService.graph.getNodeAtPosition(event.clientX,event.clientY);
+        
+        //                 // Theres a node
+        //                 if ( newNode ) {
+        //                     if ( this.testService.graph.isActiveNodeNextTo(newNode) ) {
+        //                         this.canvas.nativeElement.style.cursor = "pointer";
+        //                         this.testService.graph.highlightNode(newNode);
+        //                         this.testService.graph.draw();    
+        //                     }
+        //                 }
+        //                 else
+        //                 {
+        //                     this.canvas.nativeElement.style.cursor = "default";
+        //                     this.testService.graph.resetHighlights();
+        //                     this.testService.graph.draw();
+        //                 }
+                        
+        //             }
+        //         )}
+        //     );
+        // }
+
+        // Test starts with first node selected
+        // this.testService.setCurrentNode(this.testService.graph.firstNode);
+
+        // First Draw
+        // this.testService.graph.draw();

@@ -15,6 +15,7 @@ import { LongMemoryWellcomeDialogComponent } from './dialogs/long-memory-wellcom
 import { RulitTestService } from '../../bits/RulitTestService';
 import { GraphNode } from '../../bits/GraphNode';
 import { NotConnectedNodeDialogComponent } from './dialogs/not-connected-node-dialog.component';
+import { FinishTestDialogComponent } from './dialogs/finish-test-dialog.component';
 
 const MAX_CANVAS_HEIGHT = 480;
 const MAX_MOBILE_SCREEN_WIDTH = 768;
@@ -31,6 +32,8 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     @ViewChild('canvas', { static: true }) private canvas: ElementRef<HTMLCanvasElement>;
     private clickCanvas$: Observable<Event>;
     private orientationChange$: Subscription;
+    private exerciseChange$: Subscription;
+    private testChange$: Subscription;
     private metaviewport: HTMLMetaElement = document.querySelector('meta[name="viewport"]');
     
     countDown: number = 3;
@@ -76,7 +79,6 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
                     orientationDialogRef.close();
                 }
                 if ( ! this._testService.isTesting ) this.initTest();
-                // if ( ! this.testService ) this.initTest();
             }
         });
 
@@ -123,7 +125,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         );
         
         // When exercise is over go to next one
-        this._testService.isExerciseOver$
+        this.exerciseChange$ = this._testService.isExerciseOver$
             .pipe(
                 filter( (isExerciseOver) => isExerciseOver === true ),
                 tap( () => {
@@ -134,7 +136,29 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
             .subscribe( () => {
                 this._testService.isTesting = false;
                 this.goNextExercise();
+                this.exerciseChange$.unsubscribe();
             });
+
+        // When test is over go to next one
+        this.testChange$ = this._testService.isTestOver$
+            .pipe( 
+                filter( (testOver) => testOver !== null ) )
+            .subscribe( { 
+                next: (testOver) => {
+                    if ( this._testService.testName === "short_memory_test" ) {
+                        this.userService.user.nextTest = "long_memory_test";
+                        if ( testOver === "MAX_CORRECT_EXERCISES" ) {
+                            this.openFinishTestDialog("Completaste la prueba","Perfecto has terminado el laberinto sin ayuda dos veces. Mañana nos encontramos nuevamente.");
+                        }
+                        else if ( testOver === "MAX_EXERCISES" ) {
+                            this.openFinishTestDialog("Completaste la prueba","Muchas gracias por participar, ya ha practicado suficiente. Mañana nos encontramos nuevamente.");
+                        }
+                    }
+                    this._testService.isTesting = false;
+                    this.userService.saveTestData();
+                }
+            }
+        );
         
         // 
         this._testService.startTest(this.userService);
@@ -144,74 +168,6 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         // First Draw
         this._testService.graph.draw();
-        
-        
-        
-        // TODO: load graph data based on graphId
-        // let theGraph = await buildGraph(GRAPH_DATA,this.canvas);     [[ HECHO ]]
-        
-        // TODO: load solution based on solutionId
-        // Copies solutions to a new array 
-        // let currentSolution = Object.assign([],SOLUTION);            [[ HECHO ]]
-        
-        // Build the test 
-        // this.testService = new RulitTestService(theGraph, currentSolution , this.ngZone, this.userService, this._dialog); 
-        
-        // this.clickCanvas$ = fromEvent(this.canvas.nativeElement,"click");    [[ HECHO ]]
-        
-        // Handles user new click
-        // this.clickCanvas$.subscribe( ( event: MouseEvent ) => { 
-        //     this.testService.handleNewClick(event.clientX,event.clientY);    [[ HECHO ]]
-        // });
-
-        // Draw canvas when current node changes
-        // this.testService.graph.activeNode$.subscribe( () => {                [[ HECHO ]]
-        //     this.testService.graph.draw(); 
-        // });
-
-        // When exercise is over go to next one
-        // this.testService.exerciseChange$.subscribe( (isExerciseOver) => {
-        //     if (isExerciseOver) this.goNextExercise(); 
-        // });
-        
-        // When test is over
-        // this.testService.testChange$.subscribe( (isTestOver) => {
-        //     this.userService.saveTestData();
-        // });
-
-        // On desktop screens, when mouse move:
-        //      - set cursor to pointer if over a node
-        // if ( ! this._mediaMatcher.matchMedia(Breakpoints.Handset).matches ){
-        //     fromEvent(this.canvas.nativeElement,"mousemove")
-        //         .subscribe( (event: MouseEvent ) => { this.ngZone.runOutsideAngular( () => { 
-
-        //                 let newNode = this.testService.graph.getNodeAtPosition(event.clientX,event.clientY);
-        
-        //                 // Theres a node
-        //                 if ( newNode ) {
-        //                     if ( this.testService.graph.isActiveNodeNextTo(newNode) ) {
-        //                         this.canvas.nativeElement.style.cursor = "pointer";
-        //                         this.testService.graph.highlightNode(newNode);
-        //                         this.testService.graph.draw();    
-        //                     }
-        //                 }
-        //                 else
-        //                 {
-        //                     this.canvas.nativeElement.style.cursor = "default";
-        //                     this.testService.graph.resetHighlights();
-        //                     this.testService.graph.draw();
-        //                 }
-                        
-        //             }
-        //         )}
-        //     );
-        // }
-
-        // Test starts with first node selected
-        // this.testService.setCurrentNode(this.testService.graph.firstNode);
-
-        // First Draw
-        // this.testService.graph.draw();
 
         this.testStarted = true;
 
@@ -269,6 +225,8 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     ngOnDestroy(): void {
         this.metaviewport.content = 'width=device-width, initial-scale=1.0';
         // this.orientationChange$.unsubscribe();
+        this.testChange$.unsubscribe();
+        this.exerciseChange$.unsubscribe();
     }
 
     // Dialogs
@@ -297,6 +255,15 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         const config = new MatDialogConfig();
         config.panelClass = ["custom-rulit-dialog"];
         this._dialog.open(NotConnectedNodeDialogComponent,config);
+    }
+
+    // 
+    private openFinishTestDialog(theTitle: string, theMessage: string): MatDialogRef<FinishTestDialogComponent, any> {
+        const config = new MatDialogConfig();
+        config.data = { title: theTitle, message: theMessage };
+        config.panelClass = ["custom-rulit-dialog"];
+        config.disableClose = true;
+        return this._dialog.open(FinishTestDialogComponent,config);
     }
 
 }
