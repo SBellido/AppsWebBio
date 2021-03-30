@@ -6,9 +6,6 @@ import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layo
 import { fromEvent, interval, Observable, Subscription } from 'rxjs';
 import { filter, map, take, tap } from "rxjs/operators";
 
-// import { RulitTestService } from 'src/app/rulit/bits/RulitTestService';
-
-// import { GRAPH as GRAPH_DATA, SOLUTION } from "src/app/rulit/bits/graphs_available/Graph1_data_testing";
 import { RulitUserService } from 'src/app/rulit/bits/RulitUserService';
 import { ScreenOrientationDialogComponent } from './dialogs/orientation-dialog.component';
 import { LongMemoryWellcomeDialogComponent } from './dialogs/long-memory-wellcome-dialog.component';
@@ -16,9 +13,6 @@ import { RulitTestService } from '../../bits/RulitTestService';
 import { GraphNode } from '../../bits/GraphNode';
 import { NotConnectedNodeDialogComponent } from './dialogs/not-connected-node-dialog.component';
 import { FinishTestDialogComponent } from './dialogs/finish-test-dialog.component';
-
-const MAX_CANVAS_HEIGHT = 480;
-const MAX_MOBILE_SCREEN_WIDTH = 768;
 
 @Component({
     selector: 'app-rulit-test',
@@ -38,8 +32,6 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     
     countDown: number = 3;
     testStarted: boolean = false;
-
-    // private testService: RulitTestService;
 
     constructor(
         private ngZone: NgZone,
@@ -64,23 +56,30 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         if ( this.userService.user.nextTest === "long_memory_test" && this.userService.user.longMemoryTest.length === 0 ) {
             await this.openLongMemoryWellcomeDialog().afterClosed().toPromise();
         }
-
-        // TODO: observe only for mobile devices using mediaMatcher
-        // Test inits if the mobile is landscape
-        let orientationDialogRef: MatDialogRef<ScreenOrientationDialogComponent> = null;
         
-        this.orientationChange$ = this._breakpointObserver.observe([
-            Breakpoints.HandsetPortrait
-        ]).subscribe( (result) => {
-            if ( result.matches ) {
-                orientationDialogRef = this.openScreenOrientationDialog();
-            } else {
-                if ( orientationDialogRef ) {
-                    orientationDialogRef.close();
+        // Test inits if the mobile is landscape or not in mobile
+        if ( this._mediaMatcher.matchMedia(Breakpoints.Handset).matches ){
+
+            let orientationDialogRef: MatDialogRef<ScreenOrientationDialogComponent> = null;
+            
+            this.orientationChange$ = this._breakpointObserver.observe([
+                Breakpoints.HandsetPortrait
+            ]).subscribe( (result) => {
+                if ( result.matches ) {
+                    orientationDialogRef = this.openScreenOrientationDialog();
+                } else {
+                    if ( orientationDialogRef ) {
+                        orientationDialogRef.close();
+                    }
+                    if ( ! this._testService.isTesting ) this.initTest();
                 }
-                if ( ! this._testService.isTesting ) this.initTest();
-            }
-        });
+            });
+
+        }
+        else // Not in mobile
+        {
+            if ( ! this._testService.isTesting ) this.initTest();
+        }
 
     }
 
@@ -90,7 +89,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         this.setCanvasSize();
         
-        await this._testService.initGraph(this.canvas);
+        await this._testService.initGraph(this.canvas, this.userService.user.graphAndSolutionCode);
         
         // Observers
         this.clickCanvas$ = fromEvent(this.canvas.nativeElement,"click");
@@ -123,6 +122,34 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
                 }
             }
         );
+
+        // On desktop screens, when mouse move:
+        //      - set cursor to pointer if over a node
+        if ( ! this._mediaMatcher.matchMedia(Breakpoints.Handset).matches ){
+            fromEvent(this.canvas.nativeElement,"mousemove")
+                .subscribe( (event: MouseEvent ) => { this.ngZone.runOutsideAngular( () => { 
+
+                        let newNode = this._testService.graph.getNodeAtPosition(event.clientX,event.clientY);
+        
+                        // Theres a node
+                        if ( newNode ) {
+                            if ( this._testService.graph.isActiveNodeNextTo(newNode) ) {
+                                this.canvas.nativeElement.style.cursor = "pointer";
+                                this._testService.graph.highlightNode(newNode);
+                                this._testService.graph.draw();    
+                            }
+                        }
+                        else
+                        {
+                            this.canvas.nativeElement.style.cursor = "default";
+                            this._testService.graph.resetHighlights();
+                            this._testService.graph.draw();
+                        }
+                        
+                    }
+                )}
+            );
+        }
         
         // When exercise is over go to next one
         this.exerciseChange$ = this._testService.isExerciseOver$
@@ -157,6 +184,11 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
                             this.openFinishTestDialog("Completaste la prueba","Muchas gracias por participar, ya ha practicado suficiente. Mañana nos encontramos nuevamente.");
                         }
                     }
+                    else if ( this._testService.testName === "long_memory_test" )
+                    {
+                        this.userService.user.nextTest = "no_next_test";
+                        this.openFinishTestDialog("Felicitaciones!","Completaste todas las pruebas.");
+                    }
                     this._testService.isTesting = false;
                     this.userService.saveTestData();
                 }
@@ -179,6 +211,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
     // Based on window size, sets the canvas used for the graph
     private setCanvasSize(): void {
         
+        const MAX_CANVAS_HEIGHT = 480;
         const mediaQueryList = this._mediaMatcher.matchMedia(`(max-height: ${MAX_CANVAS_HEIGHT}px) and (orientation: landscape)`);
 
         if ( mediaQueryList.matches ) {
@@ -217,17 +250,14 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         // scroll to the graph
         if ( this.testStarted )
             this.canvas.nativeElement.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-        if ( ! this.testStarted ) {
-            // console.log("test");
-            // console.log(this._countdown.nativeElement);
+        if ( ! this.testStarted )
             this._countdown.nativeElement.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-        }
-
     }
 
     ngOnDestroy(): void {
         this.metaviewport.content = 'width=device-width, initial-scale=1.0';
-        // this.orientationChange$.unsubscribe();
+        this._testService.isTesting = false;
+        if ( this.orientationChange$ ) this.orientationChange$.unsubscribe();
         this.testChange$.unsubscribe();
         this.exerciseChange$.unsubscribe();
     }

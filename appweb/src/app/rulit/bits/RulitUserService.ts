@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { DocumentReference } from "@angular/fire/firestore";
 import { DataDbService } from "src/app/core/services/db/data-db.service";
+import { DEFAULT_GRAPH_SOLUTION } from "./GraphUtils";
 import { TestName } from "./RulitTestService";
 
 export interface IRulitConfig {
@@ -29,8 +30,7 @@ export interface IRulitUser {
     userId: string,
     email: string,
     name: string,
-    graphId: number,
-    solutionId: number,
+    graphAndSolutionCode: string,
     shortMemoryTest: Array<IRulitExercise>,
     longMemoryTest: Array<IRulitExercise>,
     stepErrors: Array<number>,
@@ -43,8 +43,7 @@ export interface IRulitUser {
 })
 export class RulitUserService {
 
-    private _currentGraphId: number = 1;
-    private _currentSolutionId: number = 1;
+    private _graphAndSolutionCode: string = DEFAULT_GRAPH_SOLUTION;
     private _rulitConfig: IRulitConfig;
     private _user: IRulitUser;
     private _userDbRef: DocumentReference;
@@ -57,12 +56,8 @@ export class RulitUserService {
         return this._user;
     }
 
-    set currentGraphId(graphId: number) {
-        this._currentGraphId = graphId;
-    }
-    
-    set currentSolutionId(solutionId: number) {
-        this._currentSolutionId = solutionId;
+    set graphAndSolutionCode(code: string) {
+        this._graphAndSolutionCode = code;
     }
 
     setNewUser(newUserData: {name: string, email: string}): void{
@@ -70,8 +65,7 @@ export class RulitUserService {
             userId: "",
             email: newUserData.email,
             name: newUserData.name,
-            graphId: this._currentGraphId,
-            solutionId: this._currentSolutionId,
+            graphAndSolutionCode: this._graphAndSolutionCode,
             shortMemoryTest: new Array<IRulitExercise>(),
             longMemoryTest: new Array<IRulitExercise>(),
             stepErrors: new Array<number>(),

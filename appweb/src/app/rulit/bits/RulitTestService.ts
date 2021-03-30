@@ -4,18 +4,17 @@ import { filter, map, tap } from "rxjs/operators";
 import { CanvasGraph } from "./CanvasGraph";
 import { ExerciseService } from "./ExerciseService";
 import { GraphNode } from "./GraphNode";
-import { buildGraph, DEFAULT_GRAPH_SOLUTION, getGraphAndSolutionData } from "./GraphUtils";
+import { buildGraph, getGraphAndSolutionData } from "./GraphUtils";
 import { IRulitExercise, IRulitUser, RulitUserService } from "./RulitUserService";
 
 export type TestName = "learning" | "short_memory_test" | "long_memory_test" | "no_next_test";
 
 interface IRulitTestService {
     testName: TestName,
-    graphAndSolutionId: string,
     isTesting: boolean,
     isExerciseOver$: Observable<boolean>,
     isTestOver$: Observable<string | null>,
-    initGraph(canvas: ElementRef<HTMLCanvasElement>): Promise<void>,
+    initGraph(canvas: ElementRef<HTMLCanvasElement>, graphAndSolutionCode: string): Promise<void>,
     startTest(userService: RulitUserService): void,
     isNodeNextInSolution(theNode: GraphNode): boolean,
     setActiveNode(theNode): void,
@@ -32,7 +31,6 @@ export class RulitTestService implements IRulitTestService {
     graph: CanvasGraph;
     testName: TestName;
 
-    private _graphAndSolutionId: string = DEFAULT_GRAPH_SOLUTION;
     private _solution: Array<number>;
     private _currentExercise: ExerciseService;
     private _activeNodeChange$: Observable<GraphNode>;
@@ -44,14 +42,6 @@ export class RulitTestService implements IRulitTestService {
         this._isExerciseOver$ = new Subject<boolean>();
         this._isTestOver$ = new Subject<string | null>();
     }
-   
-    get graphAndSolutionId(): string {
-        return this._graphAndSolutionId;
-    }
-    
-    set graphAndSolutionId(theGraphAndSolutionId: string) {
-        this._graphAndSolutionId = theGraphAndSolutionId;
-    }
 
     get isExerciseOver$(): Observable<boolean>{
         return this._isExerciseOver$.asObservable();
@@ -61,8 +51,8 @@ export class RulitTestService implements IRulitTestService {
         return this._isTestOver$.asObservable();
     }
 
-    async initGraph(canvas: ElementRef<HTMLCanvasElement>): Promise<void> {
-        const {graphData,solutionData} = getGraphAndSolutionData(this._graphAndSolutionId);
+    async initGraph(canvas: ElementRef<HTMLCanvasElement>, graphAndSolutionCode: string): Promise<void> {
+        const {graphData,solutionData} = getGraphAndSolutionData(graphAndSolutionCode);
         this.graph = await buildGraph(graphData,canvas);
         this._solution = solutionData.reverse();
     }
@@ -82,7 +72,6 @@ export class RulitTestService implements IRulitTestService {
             )
             .subscribe({ 
                 next: (currentTestExercisesArray: Array<IRulitExercise>) => {
-                    console.log("test");
                     const testOver = this.isTestOver(userService, currentTestExercisesArray);
                     if (testOver) {
                         this._isTestOver$.next(testOver);
@@ -124,12 +113,11 @@ export class RulitTestService implements IRulitTestService {
         
         const correctExercisesInTest = userService.getConsecutiveCorrectExercises(this.testName);
         
-        if ( correctExercisesInTest >= MAX_CORRECT_EXERCISES ) {
+        if ( correctExercisesInTest >= MAX_CORRECT_EXERCISES )
             return "MAX_CORRECT_EXERCISES";
-        }
-        if ( currentTestExercisesArray.length == MAX_EXERCISES ) {
+
+        if ( currentTestExercisesArray.length == MAX_EXERCISES )
             return "MAX_EXERCISES";
-        }
 
         return null;
 

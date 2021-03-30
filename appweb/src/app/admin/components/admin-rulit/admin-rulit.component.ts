@@ -40,8 +40,7 @@ export class AdminRulitComponent{
       "name",
       "email",
       "timestamp",
-      "graphId",
-      "solutionId",
+      "graphAndSolutionCode",
       "nextTest"
     ];
     
