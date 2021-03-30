@@ -5,6 +5,7 @@ import { DEFAULT_GRAPH_SOLUTION } from "./GraphUtils";
 import { TestName } from "./RulitTestService";
 
 export interface IRulitConfig {
+    IS_TEST_OPEN: boolean,
     SHORT_MEMORY_MAX_EXERCISES: number,
     SHORT_MEMORY_MAX_CORRECT_EXERCISES: number,
     LONG_MEMORY_MAX_EXERCISES: number,
