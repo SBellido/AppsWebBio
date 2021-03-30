@@ -1,223 +1,146 @@
-import { NgZone } from "@angular/core";
-import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material/dialog";
+import { ElementRef, Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import { FinishTestDialogComponent } from "../components/rulit-test/dialogs/finish-test-dialog.component";
-import { NotConnectedNodeDialogComponent } from "../components/rulit-test/dialogs/not-connected-node-dialog.component";
+import { filter, map, tap } from "rxjs/operators";
 import { CanvasGraph } from "./CanvasGraph";
-import { ExerciseService, IRulitTestExercise } from "./ExerciseService";
-import { IRulitExercise, RulitUserService } from "./RulitUserService";
-import { Vertex } from "./Vertex";
+import { ExerciseService } from "./ExerciseService";
+import { GraphNode } from "./GraphNode";
+import { buildGraph, getGraphAndSolutionData } from "./GraphUtils";
+import { IRulitExercise, IRulitUser, RulitUserService } from "./RulitUserService";
 
 export type TestName = "learning" | "short_memory_test" | "long_memory_test" | "no_next_test";
 
-export class RulitTestService {
+interface IRulitTestService {
+    testName: TestName,
+    isTesting: boolean,
+    isExerciseOver$: Observable<boolean>,
+    isTestOver$: Observable<string | null>,
+    initGraph(canvas: ElementRef<HTMLCanvasElement>, graphAndSolutionCode: string): Promise<void>,
+    startTest(userService: RulitUserService): void,
+    isNodeNextInSolution(theNode: GraphNode): boolean,
+    setActiveNode(theNode): void,
+    registerError(user: IRulitUser),
+    getCurrentTestExercisesArray(userService: RulitUserService): Array<IRulitExercise>
+}
 
-    private testName: TestName;
+@Injectable({
+    providedIn: 'root'
+})
+export class RulitTestService implements IRulitTestService {
     
-    private currentExercise: IRulitTestExercise;
-    private isExerciseOver$ = new Subject<boolean>();
-    private isTestOver$ = new Subject<boolean>();
+    isTesting: boolean;
+    graph: CanvasGraph;
+    testName: TestName;
+
+    private _solution: Array<number>;
+    private _currentExercise: ExerciseService;
+    private _activeNodeChange$: Observable<GraphNode>;
+    private _isExerciseOver$: Subject<boolean>;
+    private _isTestOver$: Subject<string | null>;
+
+    constructor() {
+        this.isTesting = false;
+        this._isExerciseOver$ = new Subject<boolean>();
+        this._isTestOver$ = new Subject<string | null>();
+    }
+
+    get isExerciseOver$(): Observable<boolean>{
+        return this._isExerciseOver$.asObservable();
+    }
     
-    private newNodeChange$ = new Subject<Vertex>();
+    get isTestOver$(): Observable<string | null>{
+        return this._isTestOver$.asObservable();
+    }
 
-    // Test Service depends on:
-    //      - Graph
-    //      - Solution
-    //      - NgZone of the component
-    //      - User
-    constructor(
-        public graph: CanvasGraph, 
-        private solution: Array<number>, 
-        private ngZone: NgZone,
-        private userService: RulitUserService,
-        private _dialog: MatDialog ) {
+    async initGraph(canvas: ElementRef<HTMLCanvasElement>, graphAndSolutionCode: string): Promise<void> {
+        const {graphData,solutionData} = getGraphAndSolutionData(graphAndSolutionCode);
+        this.graph = await buildGraph(graphData,canvas);
+        this._solution = solutionData.reverse();
+    }
 
-        // Set current test name
-        this.testName = this.userService.user.nextTest;
+    startTest(userService: RulitUserService): void {
         
-        //
-        this.currentExercise = new ExerciseService();
+        this.testName = userService.user.nextTest;
+        this._currentExercise = new ExerciseService();
 
-        // Reverse solutions array to be used as a stack
-        this.solution.reverse();
-
-        // Observe when current node changes.
-        this.graph.currentNode$.subscribe( (theNode) => { 
-            
-            // Remove the last element in solutions array.
-            this.solution.pop();
-            
-            // When the node is the last in graph: 
-            //      - Check if test has finished
-            //      - or, go to the next exercise.
-            if ( theNode.isLastNode ) {
-
-                let currentTestExercisesArray: Array<IRulitExercise>;
-                const MAX_EXERCISES: number = this.userService.getMaxExercices(this.testName);
-                const MAX_CORRECT_EXERCISES: number = this.userService.getMaxCorrectExercices(this.testName);
-
-                if ( this.testName == "learning" || this.testName == "short_memory_test" ) {
-                    currentTestExercisesArray = this.userService.user.shortMemoryTest;
-                } 
-                else if ( this.testName == "long_memory_test" ) {
-                    currentTestExercisesArray = this.userService.user.longMemoryTest;
-                }
-                
-                currentTestExercisesArray.push(this.currentExercise.toDataExercise());
-                
-                let correctExercisesInTest = this.userService.getConsecutiveCorrectExercises(currentTestExercisesArray, this.testName);
-
-                if ( correctExercisesInTest >= MAX_CORRECT_EXERCISES || currentTestExercisesArray.length == MAX_EXERCISES ) { 
-                    
-                    if ( this.testName == "short_memory_test" ) {
-                        this.userService.user.nextTest = "long_memory_test";
-                        
-                        if ( correctExercisesInTest >= MAX_CORRECT_EXERCISES )
-                            this.openFinishTestDialog("Completaste la prueba","Perfecto has terminado el laberinto sin ayuda dos veces. Mañana nos encontramos nuevamente.");
-                        if ( currentTestExercisesArray.length == MAX_EXERCISES )
-                            this.openFinishTestDialog("Completaste la prueba","Muchas gracias por participar, ya ha practicado suficiente. Mañana nos encontramos nuevamente.");
-                         
-                        this.isTestOver$.next(true);
-                        console.log("Short memory test is over");
+        // 
+        this._activeNodeChange$ = this.graph.activeNode$;
+        this._activeNodeChange$
+            .pipe(
+                filter( (theNode) => theNode.isLastNode ),
+                map( () => { return this.getCurrentTestExercisesArray(userService) }),
+                tap( (currentTestExercisesArray) => { this.saveCurrentExercise(currentTestExercisesArray) } ),
+            )
+            .subscribe({ 
+                next: (currentTestExercisesArray: Array<IRulitExercise>) => {
+                    const testOver = this.isTestOver(userService, currentTestExercisesArray);
+                    if (testOver) {
+                        this._isTestOver$.next(testOver);
                     }
-                    
-                    if ( this.testName == "long_memory_test" ) {
-                        this.userService.user.nextTest = "no_next_test";
-                        this.isTestOver$.next(true);
-                        this.openFinishTestDialog("Felicitaciones!","Completaste todas las pruebas.");
-                        console.log("Long memory test is over"); 
-                    }
-
-                } else {
-
-                    this.isExerciseOver$.next(true); 
-
-                    if ( this.testName == "learning" ) { 
-                        this.userService.user.nextTest = "short_memory_test";
-                    }
-
-                }
-
-                // console.log(this.userService.user);
-
-            }
-
-        });
-
-        // When theres a new clicked node
-        this.newNode$.subscribe({ 
-            next: (newNode) => { 
-                // Can be the first move in the exercise
-                if ( ! this.currentExercise.currentStep ) {
-                    if ( newNode.isFirstNode ) {
-                        this.currentExercise.initNewStep();
-                        this.graph.currentNode = newNode;
-                    } 
-                    else 
-                    {
-                        console.log("Must start form initial node"); // TODO
-                    }
-                }
-                if ( this.currentExercise.currentStep && newNode !== this.graph.currentNode ) {
-
-                    if ( this.graph.isCurrentNodeNextTo(newNode) ) {
-                        if ( this.isSelectedNodeNextInsolution(newNode) ) {
-                            // Update exercise by completing current step
-                            this.currentExercise.completeCurrentStep();
-                            
-                            // Update current node in the graph
-                            this.graph.currentNode = newNode;
-    
-                            // Build a new step
-                            this.currentExercise.initNewStep();
-                        } 
-                        else 
-                        {
-                            // Update step and exercise variables
-                            this.updateStepErrors();
-                            this.currentExercise.addIncorrectMove();
-    
-                            // Selected node flickers in red
-                            this.ngZone.runOutsideAngular( () => { this.graph.flickerNode(newNode); } );
-                        }
-
-                    } 
                     else
                     {
-                        this.updateStepErrors();
-                        this.currentExercise.addIncorrectMove();
-                        this.openNotConnectedNodeDialog();
-
+                        this._isExerciseOver$.next(true);
                     }
-                    
-                }
+                } 
             }
-        });
+        );
 
+        this.isTesting = true;
     }
     
-    private updateStepErrors(): void {
-        const stepIndex = this.currentExercise.steps.length;
-        this.userService.user.stepErrors[stepIndex] += 1;
+    private saveCurrentExercise(currentTestExercisesArray: Array<IRulitExercise>): void {
+        currentTestExercisesArray.push(this._currentExercise.toDataExercise());
     }
 
-    get exerciseChange$(): Observable<boolean> {
-        return this.isExerciseOver$.asObservable();
-    }
-    
-    get testChange$(): Observable<boolean> {
-        return this.isTestOver$.asObservable();
-    }
-
-    setCurrentNode(newNode: Vertex){
-        this.newNodeChange$.next(newNode);
-    }
-
-    private get newNode$(): Observable<Vertex> {
-        return this.newNodeChange$.asObservable();
-    }
-
-    // Handles user click:
-    //      - Searchs for a node in clicked area.
-    //      - Emits the new node change.
-    handleNewClick(clientX: number, clientY: number ): void {
+    getCurrentTestExercisesArray(userService: RulitUserService): Array<IRulitExercise> {
         
-        let newNode = this.graph.getNodeAtPosition(clientX,clientY);
-
-        // Theres a node clicked
-        if ( newNode ) this.setCurrentNode(newNode);
-
-    }
-    
-    private isSelectedNodeNextInsolution(theNode: Vertex): boolean {
-        // Compare the node to the last element in the array
-        return this.solution[this.solution.length - 1] == theNode.id;
-    }
-
-    private openNotConnectedNodeDialog() {
-        const config = new MatDialogConfig();
-        config.panelClass = ["custom-rulit-dialog"];
-        this._dialog.open(NotConnectedNodeDialogComponent,config);
-    }
-
-    // 
-    private openFinishTestDialog(theTitle: string, theMessage: string): MatDialogRef<FinishTestDialogComponent, any> {
-        const config = new MatDialogConfig();
-        config.data = { title: theTitle, message: theMessage };
-        config.panelClass = ["custom-rulit-dialog"];
-        config.disableClose = true;
-        return this._dialog.open(FinishTestDialogComponent,config);
-    }
-
-    // TODO: complete and use this function
-    private testIsFinished(exercises: IRulitExercise[]): boolean {
+        let currentTestExercisesArray: Array<IRulitExercise>;
         
-        if ( this.testName === "short_memory_test" ){
-            if ( exercises.length >= this.userService.getMaxExercices(this.testName) ){
-                return true;
-            }
+        if ( this.testName == "learning" || this.testName == "short_memory_test" ) {
+            currentTestExercisesArray = userService.user.shortMemoryTest;
+        }
+        else if ( this.testName == "long_memory_test" ) {
+            currentTestExercisesArray = userService.user.longMemoryTest;
         }
 
+        return currentTestExercisesArray;
+
+    }
+
+    private isTestOver(userService: RulitUserService, currentTestExercisesArray: Array<IRulitExercise>): string | null {
+        
+        const MAX_EXERCISES: number = userService.getMaxExercices(this.testName);
+        const MAX_CORRECT_EXERCISES: number = userService.getMaxCorrectExercices(this.testName);
+        
+        const correctExercisesInTest = userService.getConsecutiveCorrectExercises(this.testName);
+        
+        if ( correctExercisesInTest >= MAX_CORRECT_EXERCISES )
+            return "MAX_CORRECT_EXERCISES";
+
+        if ( currentTestExercisesArray.length == MAX_EXERCISES )
+            return "MAX_EXERCISES";
+
+        return null;
+
+    }
+
+    isNodeNextInSolution(theNode: GraphNode): boolean {
+        // Compare the node to the last element in the array
+        return this._solution[this._solution.length - 1] == theNode.id;
+    }
+
+    setActiveNode(theNode: GraphNode): void {
+        if ( this._currentExercise.currentStep )
+            this._currentExercise.completeCurrentStep();
+        
+        this._solution.pop();
+        this._currentExercise.initNewStep();
+        this.graph.activeNode = theNode;
+    }
+
+    registerError(user: IRulitUser) {
+        this._currentExercise.addIncorrectMove();
+        const stepIndex = this._currentExercise.steps.length;
+        user.stepErrors[stepIndex] += 1;
     }
 
 }

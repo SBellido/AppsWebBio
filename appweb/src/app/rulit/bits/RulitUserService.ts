@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
 import { DocumentReference } from "@angular/fire/firestore";
 import { DataDbService } from "src/app/core/services/db/data-db.service";
+import { DEFAULT_GRAPH_SOLUTION } from "./GraphUtils";
 import { TestName } from "./RulitTestService";
 
 export interface IRulitConfig {
+    IS_TEST_OPEN: boolean,
     SHORT_MEMORY_MAX_EXERCISES: number,
     SHORT_MEMORY_MAX_CORRECT_EXERCISES: number,
     LONG_MEMORY_MAX_EXERCISES: number,
@@ -29,8 +31,7 @@ export interface IRulitUser {
     userId: string,
     email: string,
     name: string,
-    graphId: number,
-    solutionId: number,
+    graphAndSolutionCode: string,
     shortMemoryTest: Array<IRulitExercise>,
     longMemoryTest: Array<IRulitExercise>,
     stepErrors: Array<number>,
@@ -43,8 +44,7 @@ export interface IRulitUser {
 })
 export class RulitUserService {
 
-    private _currentGraphId: number = 1;
-    private _currentSolutionId: number = 1;
+    private _graphAndSolutionCode: string = DEFAULT_GRAPH_SOLUTION;
     private _rulitConfig: IRulitConfig;
     private _user: IRulitUser;
     private _userDbRef: DocumentReference;
@@ -57,12 +57,8 @@ export class RulitUserService {
         return this._user;
     }
 
-    set currentGraphId(graphId: number) {
-        this._currentGraphId = graphId;
-    }
-    
-    set currentSolutionId(solutionId: number) {
-        this._currentSolutionId = solutionId;
+    set graphAndSolutionCode(code: string) {
+        this._graphAndSolutionCode = code;
     }
 
     setNewUser(newUserData: {name: string, email: string}): void{
@@ -70,8 +66,7 @@ export class RulitUserService {
             userId: "",
             email: newUserData.email,
             name: newUserData.name,
-            graphId: this._currentGraphId,
-            solutionId: this._currentSolutionId,
+            graphAndSolutionCode: this._graphAndSolutionCode,
             shortMemoryTest: new Array<IRulitExercise>(),
             longMemoryTest: new Array<IRulitExercise>(),
             stepErrors: new Array<number>(),
@@ -97,7 +92,7 @@ export class RulitUserService {
         return true;
     }
 
-    getConsecutiveCorrectExercises(exercisesArray: Array<IRulitExercise>, testName: TestName): number {
+    getConsecutiveCorrectExercises(testName: TestName): number {
         
         // In this context _user.nextTest has the name of the current test
 
@@ -107,10 +102,10 @@ export class RulitUserService {
         
         if ( testName == "short_memory_test" ) {
             // Exclude the "learning" exercise from the count.
-            exercises = Object.assign([],exercisesArray.slice(1,exercisesArray.length));
+            exercises = Object.assign([],this.user.shortMemoryTest.slice(1,this.user.shortMemoryTest.length));
         } 
         else if ( testName == "long_memory_test" )
-            exercises = exercisesArray;
+            exercises = this.user.longMemoryTest;
 
         let exercisesWithoutMistakes = 0;
         exercises.forEach( (exercise) => {
@@ -119,6 +114,7 @@ export class RulitUserService {
             else 
                 exercisesWithoutMistakes = 0;
         });
+        
         return exercisesWithoutMistakes;
 
     }

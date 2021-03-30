@@ -1,15 +1,11 @@
-import { Figure2d } from "./Figure2d";
+import { Figure2d, IFigure2d } from "./Figure2d";
 
-interface ICircle {
-    posX: number,
-    posY: number,
+interface ICircle extends IFigure2d {
     radius: number,
-    fill,
-    draw(theContext: CanvasRenderingContext2D): void,
     isPointInside(thePoint: { x: number, y: number}): boolean
 }
 
-export class Circle extends Figure2d implements ICircle{
+export class Circle extends Figure2d implements ICircle {
 
     constructor(private _radius: number, theX: number, theY: number, theFill){
         super(theX,theY,theFill);

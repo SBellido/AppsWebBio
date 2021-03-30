@@ -1,79 +1,79 @@
 import { Observable, Subject } from 'rxjs';
-import { Vertex } from './Vertex';
+import { GraphNode } from './GraphNode';
 
 // Coordinates types for a 13 rows x 18 columns grid
 type GraphRowNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 ;
 type GraphColumnNumber =  1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18;
 
 // Graph nodes fields
-export interface IGraphNode {
-    id: number,
-    isFirstNode: boolean,
-    isLastNode: boolean,
-    edges: Array<number>,
-    row: GraphRowNumber,
-    column: GraphColumnNumber
-}
+// export interface IGraphNode {
+//     id: number,
+//     isFirstNode: boolean,
+//     isLastNode: boolean,
+//     edges: Array<number>,
+//     row: GraphRowNumber,
+//     column: GraphColumnNumber
+// }
 
 // Graph
 interface IGraph {
-    nodes: Array<Vertex>,
-    adjList: Map<Vertex,Array<number>>,
-    currentNode: Vertex,
-    currentNode$: Observable<Vertex>,
-    firstNode: Vertex,
-    addVertex(theVertex: Vertex, edges: Array<number>): void | boolean,
-    isCurrentNodeNextTo(theNode: Vertex): boolean,
-    getNodeById(theNodeId: number): Vertex | undefined
+    nodes: Array<GraphNode>,
+    adjList: Map<GraphNode,Array<number>>,
+    activeNode: GraphNode,
+    activeNode$: Observable<GraphNode>,
+    firstNode: GraphNode,
+    addNode(theNode: GraphNode, edges: Array<number>): void | boolean,
+    isActiveNodeNextTo(theNode: GraphNode): boolean,
+    getNodeById(theNodeId: number): GraphNode | undefined
 }
 
 
 export class Graph implements IGraph {
     
-    private _adjList: Map<Vertex,Array<number>>;
-    private _currentNode: Vertex;
-    private currentNodeChange$ = new Subject<Vertex>();
+    private _adjList: Map<GraphNode,Array<number>>;
+    private _activeNode: GraphNode;
+    private _activeNodeChange$ = new Subject<GraphNode>();
     
     constructor(){
-        this._adjList = new Map<Vertex,Array<number>>();
+        this._adjList = new Map<GraphNode,Array<number>>();
 
-        this.currentNode$.subscribe( (theNode) => { this._currentNode = theNode } );
+        this._activeNodeChange$.subscribe( (theNode) => { this._activeNode = theNode } );
     }
 
-    addVertex(theVertex: Vertex, edges: Array<number>) {
-        this._adjList.set(theVertex,edges);
+    addNode(theNode: GraphNode, edges: Array<number>) {
+        this._adjList.set(theNode,edges);
     }
 
     // Returns all nodes in an array
-    get nodes(): Array<Vertex> {
+    get nodes(): Array<GraphNode> {
         return Array.from(this._adjList.keys());
     }
 
     // Returns the comple adjacency list
-    get adjList(): Map<Vertex,Array<number>>{
+    get adjList(): Map<GraphNode,Array<number>>{
         return this._adjList;
     }
 
     // Return the current active node
-    get currentNode(): Vertex {
-        return this._currentNode;
+    get activeNode(): GraphNode {
+        return this._activeNode;
     }
 
     //
-    get currentNode$(){
-        return this.currentNodeChange$.asObservable();
+    get activeNode$(){
+        return this._activeNodeChange$.asObservable();
     }
 
     // Set the current active node
-    set currentNode( theNode: Vertex ) {
+    set activeNode( theNode: GraphNode ) {
         // Set active flag to false for all nodes
         this.nodes.map( node => node.id == theNode.id ? node.isActive = true : node.isActive = false);
         // Set current node
-        this.currentNodeChange$.next(theNode);
+        this._activeNodeChange$.next(theNode);
     }
 
-    get firstNode(): Vertex{
-        let node: Vertex;
+    get firstNode(): GraphNode{
+        let node: GraphNode;
         this.nodes.forEach( n => {
             if (n.isFirstNode) node = n;
         })
@@ -81,12 +81,12 @@ export class Graph implements IGraph {
     };
 
     // Searchs for a node using an id as key
-    getNodeById(theNodeId: number): Vertex | undefined {
+    getNodeById(theNodeId: number): GraphNode | undefined {
         return this.nodes.find( node => theNodeId == node.id );
     }
 
-    isCurrentNodeNextTo(theNode: Vertex): boolean {
-        return this._adjList.get(this._currentNode).includes(theNode.id);
+    isActiveNodeNextTo(theNode: GraphNode): boolean {
+        return this._adjList.get(this._activeNode).includes(theNode.id);
     }
 
 }
