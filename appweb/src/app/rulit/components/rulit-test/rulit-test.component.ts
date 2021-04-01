@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints, BreakpointState, MediaMatcher } from '@angular/cdk/layout';
 
 import { fromEvent, interval, Observable, Subscription } from 'rxjs';
 import { filter, map, take, tap } from "rxjs/operators";
@@ -58,20 +58,27 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         }
         
         // Test inits if the mobile is landscape or not in mobile
-        if ( this._mediaMatcher.matchMedia(Breakpoints.Handset).matches ){
-
+        if ( this._mediaMatcher.matchMedia(Breakpoints.Handset).matches ) {
+            
             let orientationDialogRef: MatDialogRef<ScreenOrientationDialogComponent> = null;
             
-            this.orientationChange$ = this._breakpointObserver.observe([
-                Breakpoints.HandsetPortrait
-            ]).subscribe( (result) => {
+            this.orientationChange$ = this._breakpointObserver.observe(
+                Breakpoints.HandsetLandscape
+            ).subscribe( (result: BreakpointState) => {
                 if ( result.matches ) {
-                    orientationDialogRef = this.openScreenOrientationDialog();
-                } else {
                     if ( orientationDialogRef ) {
                         orientationDialogRef.close();
                     }
-                    if ( ! this._testService.isTesting ) this.initTest();
+                    if (! this.testStarted && this._breakpointObserver.isMatched(Breakpoints.HandsetLandscape) ) {
+                        this.testStarted = true;
+                        this.initTest();
+                    }
+                    // alert(this._testService.isTesting);
+                    // if ( ! this._testService.isTesting ) this.initTest();
+                } 
+                else
+                {
+                    orientationDialogRef = this.openScreenOrientationDialog();
                 }
             });
 
@@ -178,16 +185,16 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
                     if ( this._testService.testName === "short_memory_test" ) {
                         this.userService.user.nextTest = "long_memory_test";
                         if ( testOver === "MAX_CORRECT_EXERCISES" ) {
-                            this.openFinishTestDialog("Completaste la prueba","Perfecto has terminado el laberinto sin ayuda dos veces. Mañana nos encontramos nuevamente.");
+                            this.openFinishTestDialog("Completaste la prueba","Perfecto encontraste el final del camino oculto. En unos dias te enviaremos un e-mail para completar la prueba.");
                         }
                         else if ( testOver === "MAX_EXERCISES" ) {
-                            this.openFinishTestDialog("Completaste la prueba","Muchas gracias por participar, ya ha practicado suficiente. Mañana nos encontramos nuevamente.");
+                            this.openFinishTestDialog("Completaste la prueba","Muchas gracias por participar, ya practicaste suficiente. En unos dias te enviaremos un e-mail para completar la prueba.");
                         }
                     }
                     else if ( this._testService.testName === "long_memory_test" )
                     {
                         this.userService.user.nextTest = "no_next_test";
-                        this.openFinishTestDialog("Felicitaciones!","Completaste todas las pruebas.");
+                        this.openFinishTestDialog("¡Felicitaciones!","Completaste todas las pruebas. ¡Has hecho un gran aporte a la ciencia!");
                     }
                     this._testService.isTesting = false;
                     this.userService.saveTestData();
@@ -279,7 +286,7 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
         config.maxWidth = "30rem";
         config.data = { 
             userName: this.userService.user.name,
-            message: "Hace un tiempo descubriste la ruta para atravesar este laberinto. Trata de recordarla debemos salir de aquí una vez más. Igual que antes te indicaremos si vas por el camino correcto."
+            message: "Hace unos dias encontraste el final del camino oculto. Trata de recordarlo para hallarlo nuevamente, el camino oculto es el mismo. "
         }
         return this._dialog.open(LongMemoryWellcomeDialogComponent, config);
     }
