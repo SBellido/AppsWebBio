@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { HeaderQuestionRulitComponent } from './header-questionRulit.component';
 
@@ -6,7 +6,7 @@ describe('HeaderQuestionRulitComponent', () => {
   let component: HeaderQuestionRulitComponent;
   let fixture: ComponentFixture<HeaderQuestionRulitComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HeaderQuestionRulitComponent ]
     })

@@ -75,8 +75,9 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     // estrategia de precarga, ayuda al navegador con la carga de archivos js 
-    preloadingStrategy: PreloadAllModules
-  }
+    preloadingStrategy: PreloadAllModules,
+    relativeLinkResolution: 'legacy'
+}
   )],
   exports: [RouterModule]
 })
