@@ -60,7 +60,11 @@ export class RulitUserService {
     set graphAndSolutionCode(code: string) {
         this._graphAndSolutionCode = code;
     }
-
+    
+    get graphAndSolutionCode(): string {
+        return this._graphAndSolutionCode;
+    }
+    
     setNewUser(newUserData: {name: string, email: string}): void{
         this._user = {
             userId: "",
