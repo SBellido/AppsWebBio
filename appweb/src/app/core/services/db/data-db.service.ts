@@ -74,7 +74,7 @@ export class DataDbService {
   }
 
   async getAllRulitUsersData(): Promise<Array<IRulitUser>> {
-    const snapshot = await this.rulitUserCollectionRef.ref.orderBy("timestamp", "desc").get();
+    const snapshot = await this.rulitUserCollectionRef.ref.orderBy("trainingDate", "desc").get();
     let users = [];
     snapshot.docs.forEach( (doc: DocumentData) => {
       users.push(doc.data());
@@ -97,7 +97,13 @@ export class DataDbService {
   }
   
   async saveRulitUserData(testUser: IRulitUser): Promise<void> {
-    testUser.timestamp = firestore.FieldValue.serverTimestamp();
+    
+    if ( testUser.nextTest === "long_memory_test" )
+      testUser.trainingDate = firestore.FieldValue.serverTimestamp();
+    
+    if ( testUser.nextTest === "no_next_test" )
+      testUser.testDate = firestore.FieldValue.serverTimestamp();
+
     await this.rulitUserCollectionRef.doc(testUser.userId).set(testUser);
   }
 

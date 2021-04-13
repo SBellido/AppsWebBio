@@ -16,7 +16,13 @@ export class AdminRulitComponent{
   
   async getData() {
     let rulitUsers = await this.dbData.getAllRulitUsersData();
-    rulitUsers.map( (user) => { user.timestamp = (user.timestamp as firebase.firestore.Timestamp).toDate().toLocaleDateString("es-AR") });
+    console.log(rulitUsers.length);
+    rulitUsers.map( (user) => { 
+      if ( user.trainingDate )
+        user.trainingDate = (user.trainingDate as firebase.firestore.Timestamp).toDate().toLocaleString("es-AR")
+      if ( user.testDate )
+        user.testDate = (user.testDate as firebase.firestore.Timestamp).toDate().toLocaleString("es-AR");
+    });
     
     // CSV
     const flatOptions = transforms.flatten({ objects: true, arrays: true, separator: SEPARATOR });
@@ -39,9 +45,10 @@ export class AdminRulitComponent{
       "userId",
       "name",
       "email",
-      "timestamp",
-      "graphAndSolutionCode",
-      "nextTest"
+      "trainingDate",
+      "testDate",
+      "nextTest",
+      "graphAndSolutionCode"
     ];
     
     // Set stepErrors 

@@ -36,7 +36,8 @@ export interface IRulitUser {
     longMemoryTest: Array<IRulitExercise>,
     stepErrors: Array<number>,
     nextTest: TestName,
-    timestamp?: any
+    trainingDate: any,
+    testDate: any
 }
 
 @Injectable({
@@ -74,7 +75,9 @@ export class RulitUserService {
             shortMemoryTest: new Array<IRulitExercise>(),
             longMemoryTest: new Array<IRulitExercise>(),
             stepErrors: new Array<number>(),
-            nextTest: "learning"
+            nextTest: "learning",
+            trainingDate: null,
+            testDate: null
         };
         
         for (var i = 0; i < 15; i++) this._user.stepErrors.push(0);
