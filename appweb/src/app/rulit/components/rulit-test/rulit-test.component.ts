@@ -107,7 +107,8 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
                 map( (ev: MouseEvent) => { 
                     return this._testService.graph.getNodeAtPosition(ev.clientX,ev.clientY);
                 }),
-                filter ( (node: GraphNode | undefined ) => node !== undefined )
+                filter ( (node: GraphNode | undefined ) => node !== undefined ),
+                filter( (node: GraphNode) => node != this._testService.graph.activeNode )
             )
             .subscribe({ 
                 next: (node) => { 
