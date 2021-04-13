@@ -23,7 +23,6 @@ export class RulitUserFormComponent implements OnInit {
     }
     
     ngOnInit(): void {
-        console.log(this.userService.graphAndSolutionCode);
     }
 
     private buildUserFormData(): FormGroup{

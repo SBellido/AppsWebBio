@@ -73,8 +73,6 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
                         this.testStarted = true;
                         this.initTest();
                     }
-                    // alert(this._testService.isTesting);
-                    // if ( ! this._testService.isTesting ) this.initTest();
                 } 
                 else
                 {
@@ -216,20 +214,17 @@ export class RulitTestComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     }
     
-    // Based on window size, sets the canvas used for the graph
+    // Sets the canvas used for the graph based on window size
     private setCanvasSize(): void {
-        
-        const MAX_CANVAS_HEIGHT = 480;
-        const mediaQueryList = this._mediaMatcher.matchMedia(`(max-height: ${MAX_CANVAS_HEIGHT}px) and (orientation: landscape)`);
 
-        if ( mediaQueryList.matches ) {
-            // Has to do this compare because safari and chrome gives different results
-            let screenHeight = (window.screen.height < window.screen.width) ? window.screen.height: window.screen.width;
+        // Has to do this compare because safari and chrome gives different results
+        const screenHeight = (window.screen.height < window.screen.width) ? window.screen.height: window.screen.width;
+
+        if ( this._mediaMatcher.matchMedia( Breakpoints.Handset ).matches ) {
             this.canvas.nativeElement.width = (screenHeight * 0.9) * 1.4;
             this.canvas.nativeElement.height = screenHeight * 0.9;
         }
-        else
-        {
+        else {
             this.canvas.nativeElement.width = 672;
             this.canvas.nativeElement.height = 480;
         }
