@@ -28,7 +28,7 @@
     "flexboxgrid": "^6.3.1",
     "ngx-filesaver": "^11.0.0",
     "rxjs": "~6.5.4",
-    "swiper": "^5.4.5",
+    "swiper": "^6.5.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
