@@ -25,11 +25,13 @@ import { EncodeGoogleFormsComponent } from './google-forms-component/encode-goog
 import { ByPassSecurityPipe } from './google-forms-component/by-pass-security.pipe';
 import { EncodeAudioListComponent } from './audios-component/audios-list-component/audio-list.component';
 import { EncodeAbandonedComponent } from './abandoned-component/encode-abandoned.component';
+import { EncodeDisabledComponent } from './disabled-component/encode-disabled.component';
 
 @NgModule({
     declarations: [
         EncodeAboutComponent,
         EncodeAbandonedComponent,
+        EncodeDisabledComponent,
         EncodeWellcomeComponent,
         EncodeMicTestComponent,
         AudioRecorderComponent,

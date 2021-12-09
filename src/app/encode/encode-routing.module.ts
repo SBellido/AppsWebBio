@@ -16,6 +16,7 @@ import { EncodeEndComponent } from './end-component/encode-end.component';
 import { ExitGuard } from './exit.guard';
 import { EncodeGoogleFormsComponent } from './google-forms-component/encode-google-forms.component';
 import { EncodeAbandonedGuard } from './encode-abandoned.guard';
+import { EncodeDisabledComponent } from './disabled-component/encode-disabled.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
     {
         path: 'abandono',
         component: EncodeAbandonedComponent
+    },
+    {
+        path: 'deshabilitado',
+        component: EncodeDisabledComponent
     },
     {
         path: ':userId',

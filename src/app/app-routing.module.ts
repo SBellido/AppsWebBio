@@ -69,6 +69,11 @@ const routes: Routes = [
     .then(m => m.EncodeModule)
   },
   {
+    path: 'encode/dayTwo',
+    loadChildren: () => import('./encode/dayTwo/encode.module')
+    .then(m => m.EncodeDayTwoModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./page-not-found/page-not-found.module')
       .then(m => m.PageNotFoundModule)
