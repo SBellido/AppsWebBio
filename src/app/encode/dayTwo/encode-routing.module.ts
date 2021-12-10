@@ -4,15 +4,16 @@ import { EncodeWellcomeComponent } from './wellcome-component/encode-wellcome.co
 import { EncodeAuthGuard } from "../encode-auth.guard";
 import { ExitGuard } from '../exit.guard';
 import { EncodeAbandonedGuard } from '../encode-abandoned.guard';
+import { EncodeDayTwoGuard } from './encode-day-two.guard';
 
 
 const routes: Routes = [
     {
         path: ':userId',
-        canActivate: [ EncodeAuthGuard, EncodeAbandonedGuard ], 
+        canActivate: [ EncodeAuthGuard, EncodeAbandonedGuard, EncodeDayTwoGuard ], 
         children: [
             {
-                path: 'bienvenido',
+                path: '',
                 component: EncodeWellcomeComponent
             }
         ]

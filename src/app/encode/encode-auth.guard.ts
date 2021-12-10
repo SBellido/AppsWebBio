@@ -38,8 +38,6 @@ export class EncodeAuthGuard implements CanActivate {
     }
 
     // Redirect to the home page
-    console.log(userId);
-    console.log("funciona");
     return this._router.parseUrl('/');
   }
   
