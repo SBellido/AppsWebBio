@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { EncodeUserService } from './services/EncodeUserService';
+import { IEncodeUser } from "./models/IEncodeUser";
 
 @Injectable({
   providedIn: 'root'
 })
-export class EncodeAbandonedGuard implements CanActivate {
+export class EncodeDaysGuard implements CanActivate {
   
   constructor(private _userService: EncodeUserService, private _router: Router) {}
 
@@ -17,13 +18,7 @@ export class EncodeAbandonedGuard implements CanActivate {
   
   private async checkAbandoned(route: ActivatedRouteSnapshot): Promise<boolean | UrlTree> {
     const userId: string = route.paramMap.get('userId');
-    await this._userService.loadUser(userId);
-    
-    if (this._userService.user.abandonedByUser)
-    {
-      // Redirect to the abandoned component
-      return this._router.parseUrl('/encode/abandono');
-    }
+
 
     return true;
   }
