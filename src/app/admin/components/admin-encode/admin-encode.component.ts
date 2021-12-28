@@ -128,19 +128,9 @@ export class AdminEncodeComponent implements OnInit{
       "healthInfo_sleepDisorders",
       "healthInfo_takesCronicMedicine",
       "dayOne_somnolenceDegree",
-<<<<<<< HEAD
       "link_audios"
     ];
 
-=======
-      "dayOne_audios_0_downloadURL",
-      "googleFormsResponses_0_preFilledURL"
-    ];
-
-    // Set stepErrors 
-
-
->>>>>>> 402746d50d5f1d953cfea764e9826be0a04ce2d9
     return fields;
 
   }
