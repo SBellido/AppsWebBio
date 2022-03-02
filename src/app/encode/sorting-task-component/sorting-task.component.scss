@@ -1,0 +1,27 @@
+.main-app-section > * {
+    max-width: 80%;
+}
+
+#task-breafing {
+    display: flex;
+    flex-flow: column;
+    grid-row-gap: 32px;
+    row-gap: 32px;
+    max-width: 64rem;
+    line-height: 1.32rem;
+}
+
+button {
+    align-self: center;
+}
+
+.finish-task-button {
+    margin-top: 64px;
+}
+
+#screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap:16px;
+  }
+  

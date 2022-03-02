@@ -63,3 +63,7 @@ export const PERPETRATOR_2_ID = "PERP_2";
 export const ABSENT_SUSPECT_ID = "0";
 export const ROOM_1_TITLE = "Ronda 1 de 2";
 export const ROOM_2_TITLE = "Ronda 2 de 2";
+
+// Sorting task
+export const MAX_TIMELINE_SCREENSHOTS = 12;
+export const HAS_CURSOR_CLASS = 'hasCursor';

@@ -1,0 +1,51 @@
+<section class="container">
+    <app-header-encode></app-header-encode>
+    <section class="main-app-section">
+        
+        <div *ngIf="isTaskRunning == true; then sortingTaskTemplate else taskBreafingTemplate">
+            <!-- template will replace this div -->
+        </div>
+
+        <ng-template #taskBreafingTemplate>
+            <h1 class="title">Tarea de Ordenamiento</h1>     
+
+            <div id="task-breafing">
+                <p>Ahora te voy a pedir que ordenes temporalmente, de manera cronológica las imágenes que seleccionaste.</p>
+                <button mat-raised-button
+                    color="primary" 
+                    aria-label="continuar"
+                    (click)="startTask()">
+                    Continuar
+                </button>
+            </div>
+        </ng-template>
+
+        <ng-template #sortingTaskTemplate>
+            <h1 class="title">Ordená temporalmente las imágenes</h1>
+            
+            <!-- Screenshots Grid -->
+            <div id="screenshots-grid">
+                <app-grid-image *ngFor="let screenshot of lineup" 
+                    [screenshot]="screenshot"
+                    [timeline$]="timeline$"
+                    (addScreenshotToTimelineEvent)="onAddScreenshotToTimelineEvent($event)">
+                </app-grid-image>
+            </div>
+            <!-- Timeline -->
+            <app-timeline [timeline$]="timeline$"
+                (removeScreenshotFromTimelineEvent)="onRemoveScreenshotFromTimelineEvent($event)">
+            </app-timeline>
+
+            <button mat-raised-button 
+                class="finish-task-button"
+                color="primary" 
+                aria-label="finalizar"
+                (click)="finishTask()"
+                [disabled]="!isTimelineCompleted">
+                Finalizar
+            </button>
+
+        </ng-template>
+        
+    </section>
+</section>
