@@ -19,7 +19,7 @@
 
 // desarrollo
 export const environment = {
-  production: false,
+  production: true,
   firebaseConfig : {
     apiKey: "AIzaSyB9UAEpvxmQs7zRVT7GeMPE7mjX_997bCE",
     authDomain: "investigar-664cd.firebaseapp.com",
