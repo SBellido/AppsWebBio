@@ -47,6 +47,8 @@ export class AdminEncodeUserComponent implements OnInit {
         userSubject.unsubscribe();
       } ))
       .subscribe();
+
+
   }
 
   public applyPerpetratorCondition(): void {
