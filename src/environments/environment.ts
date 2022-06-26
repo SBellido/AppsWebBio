@@ -4,7 +4,7 @@
 
 // producción
 // export const environment = {
-//   production: false,
+//   production: true,
 //   firebaseConfig : {
 //     apiKey: 'AIzaSyAzvJ5tF7OHEBGcTv9oB0B3Q2hlG8o2cVQ',
 //     authDomain: 'investigapp-ec690.firebaseapp.com',
