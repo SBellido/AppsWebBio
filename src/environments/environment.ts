@@ -21,7 +21,7 @@
 export const environment = {
   production: true,
   firebaseConfig : {
-    apiKey: "AIzaSyB9UAEpvxmQs7zRVT7GeMPE7mjX_997bCE",
+    apiKey: "AIzaSyCVKjFRAXxpL7Kp5i2FolKL48plyZVi8rw",
     authDomain: "investigar-664cd.firebaseapp.com",
     databaseURL: "https://investigar-664cd.firebaseio.com",
     projectId: "investigar-664cd",
